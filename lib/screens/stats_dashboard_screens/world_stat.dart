@@ -39,7 +39,7 @@ class _WorldStatScreenState extends State<WorldStatScreen> {
     future=loadPreferences();
     _controller = new PageController(initialPage: selectedBottomBarIndex);
     pages=[
-      // GlobalStatScreen(controller: _controller,),
+      GlobalStatScreen(controller: _controller,),
       CountriesScreen(),
       // DefaultCountryScreen(controller: _controller),
       // CreditsScreen(controller: _controller,),

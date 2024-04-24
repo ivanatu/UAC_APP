@@ -41,7 +41,7 @@ class MythsScreen extends StatelessWidget {
     {
       "myth": "You can get HIV from a mosquito bite.",
       "desc":
-          "SARS-CoV-2 disease CANNOT be transmitted through mosquito bites.",
+          "HIV CANNOT be transmitted through mosquito bites.",
       "imgPath": "assets/myths/package.png",
     },
     {
