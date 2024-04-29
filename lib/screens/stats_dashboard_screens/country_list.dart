@@ -13,7 +13,7 @@ class CountriesScreen extends StatefulWidget {
 class _CountriesScreenState extends State<CountriesScreen> {
   List<SummaryEachCountry> countries = []; // Initialize with an empty list
   String searchValue = '';
-  Color themeColor;
+  Color? themeColor;
 
   void getCountriesList() {
     final districts = [
@@ -89,7 +89,7 @@ class _CountriesScreenState extends State<CountriesScreen> {
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey[200],
+                  color: Colors.grey.shade200,
                   offset: Offset(0, 0.8),
                 )
               ],
@@ -111,7 +111,7 @@ class _CountriesScreenState extends State<CountriesScreen> {
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
                   borderSide: BorderSide(
-                    color: themeColor,
+                    color: themeColor!,
                     width: 1.4,
                     style: BorderStyle.solid,
                   ),
@@ -119,7 +119,7 @@ class _CountriesScreenState extends State<CountriesScreen> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
                   borderSide: BorderSide(
-                    color: themeColor,
+                    color: themeColor!,
                     width: 1.4,
                     style: BorderStyle.solid,
                   ),

@@ -8,7 +8,7 @@ import 'InfoDetails.dart';
 class NewsTile extends StatelessWidget {
   final Map<String, dynamic> article;
 
-  const NewsTile({this.article});
+  const NewsTile({required this.article});
 
   @override
   Widget build(BuildContext context) {

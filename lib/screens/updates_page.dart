@@ -14,7 +14,8 @@ class UpdatesScreen extends StatefulWidget {
   final imgPath;
   final Color color;
 
-  UpdatesScreen({Key key, this.imgPath, this.color}) : super(key: key);
+  UpdatesScreen({Key? key, this.imgPath, required this.color})
+      : super(key: key);
 
   @override
   _UpdatesScreenState createState() => _UpdatesScreenState();
@@ -25,7 +26,7 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
   ApiClient _client = ApiClient();
 
   String url = "$BASE_URL/aids_info?fields=*.*";
-  Future<dynamic> _newsFuture;
+  var _newsFuture;
 
   getNews() async {
     var data;
@@ -90,7 +91,7 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                 refresh();
               });
             },
-            icon:  Icon(
+            icon: Icon(
               Icons.refresh,
               color: Colors.teal[800],
               size: 26,
@@ -277,9 +278,9 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                                 ),
                               ),
                             ],
-                            onChanged: (String newValue) {
+                            onChanged: (newValue) {
                               setState(() {
-                                dropDownValue = newValue;
+                                dropDownValue = newValue ?? "";
                                 _newsFuture = getNews();
                               });
                             },

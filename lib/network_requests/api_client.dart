@@ -3,7 +3,7 @@ import 'dart:io';
 import 'api_service.dart';
 import 'package:http/http.dart' as http;
 import 'exceptions.dart';
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
 class ApiClient {
   ApiService _apiService = ApiService();
@@ -31,20 +31,21 @@ class ApiClient {
     }
   }
 
-  getStatsResponse(StateLocation stateLocation,{String code="",bool yesterday=false}) async {
-    String endpoint=_getStatsEndpoint(location: stateLocation,code: code,yesterday: yesterday);
-    String url=_apiService.statsUrl+endpoint;
-    try{
+  getStatsResponse(StateLocation stateLocation,
+      {String code = "", bool yesterday = false}) async {
+    String endpoint = _getStatsEndpoint(
+        location: stateLocation, code: code, yesterday: yesterday);
+    String url = _apiService.statsUrl + endpoint;
+    try {
       var response = await http.get(Uri.parse(url));
-      if(response.statusCode==200){
+      if (response.statusCode == 200) {
         // ignore: non_constant_identifier_names
-        var Json=json.decode(response.body);
-        if(stateLocation==StateLocation.TOP_FIVE){
-          return Json.sublist(0,6);
+        var Json = json.decode(response.body);
+        if (stateLocation == StateLocation.TOP_FIVE) {
+          return Json.sublist(0, 6);
         }
         return Json;
-      }
-      else{
+      } else {
         throw FetchDataException("Failed to load stats");
       }
     } on SocketException {
@@ -52,16 +53,19 @@ class ApiClient {
     }
   }
 
-  _getStatsEndpoint({@required String code,bool yesterday,@required StateLocation location}) {
+  _getStatsEndpoint(
+      {required String code,
+      bool yesterday = false,
+      required StateLocation location}) {
     if (location == StateLocation.GLOBAL) return "all?yesterday=$yesterday";
     String endpoint = "countries";
 
     if (location == StateLocation.SPECIFIC) {
       endpoint += "/" + code + "?strict=false&";
-    } else if(location==StateLocation.TOP_FIVE){
-      endpoint+="?sort=cases&";
-    } else if(location==StateLocation.ALL){
-      endpoint+="?";
+    } else if (location == StateLocation.TOP_FIVE) {
+      endpoint += "?sort=cases&";
+    } else if (location == StateLocation.ALL) {
+      endpoint += "?";
     }
     return endpoint + "allowNull=false&yesterday=$yesterday";
   }

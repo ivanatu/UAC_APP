@@ -1,6 +1,6 @@
 import 'package:aids_awareness_app/values/default_country_data.dart';
 import '../../widgets/stats_widgets/country_card_details.dart';
-import '../../network_requests/exceptions.dart';
+// import '../../network_requests/exceptions.dart';
 import '../../widgets/skeletons/country_stat_skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -9,7 +9,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 // ignore: must_be_immutable
 class CountryStatWidget extends StatefulWidget {
   final color, countryName, countryCode, isIncreasing, totalCases;
-  Function onBackArrow;
+  VoidCallback? onBackArrow;
   final int todayCases;
   final int newDeaths;
   final int critical;
@@ -19,22 +19,21 @@ class CountryStatWidget extends StatefulWidget {
   final int testsConducted;
 
   CountryStatWidget({
-    Key key,
+    super.key,
     this.color,
     this.onBackArrow,
     this.countryName,
     this.countryCode,
-    // this.flagPath,
     this.isIncreasing,
     this.totalCases,
-    this.todayCases,
-    this.newDeaths,
-    this.critical,
-    this.active,
-    this.totalDeaths,
-    this.totalRecovered,
-    this.testsConducted,
-  }) : super(key: key);
+    this.todayCases = 0,
+    this.newDeaths = 0,
+    this.critical = 0,
+    this.active = 0,
+    this.totalDeaths = 0,
+    this.totalRecovered = 0,
+    this.testsConducted = 0,
+  });
 
   @override
   _CountryStatWidgetState createState() => _CountryStatWidgetState();
@@ -42,10 +41,10 @@ class CountryStatWidget extends StatefulWidget {
 
 class _CountryStatWidgetState extends State<CountryStatWidget>
     with TickerProviderStateMixin {
-  AnimationController _controller1, _controller2;
-  Duration textScaleDuration;
-  final formatter = new NumberFormat("#,###");
-  int selectedIndex;
+  AnimationController? _controller1, _controller2;
+  Duration? textScaleDuration;
+  final formatter = NumberFormat("#,###");
+  int selectedIndex = -1;
 
   @override
   void initState() {
@@ -54,23 +53,23 @@ class _CountryStatWidgetState extends State<CountryStatWidget>
     textScaleDuration = Duration(milliseconds: 200);
     _controller1 = AnimationController(
       vsync: this,
-      duration: textScaleDuration,
+      duration: textScaleDuration!,
       lowerBound: 0.7,
       upperBound: 1,
     );
     _controller2 = AnimationController(
       vsync: this,
-      duration: textScaleDuration,
+      duration: textScaleDuration!,
       lowerBound: 0.7,
       upperBound: 1,
     );
-    _controller1.forward();
+    _controller1?.forward();
   }
 
   @override
   void dispose() {
-    _controller1.dispose();
-    _controller2.dispose();
+    _controller1?.dispose();
+    _controller2?.dispose();
     super.dispose();
   }
 
@@ -95,9 +94,7 @@ class _CountryStatWidgetState extends State<CountryStatWidget>
                     children: <Widget>[
                       //Back Button
                       InkWell(
-                        onTap: () {
-                          widget.onBackArrow();
-                        },
+                        onTap: widget.onBackArrow,
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.transparent,
@@ -238,7 +235,7 @@ class _CountryStatWidgetState extends State<CountryStatWidget>
   }
 
   Widget _buildCasesText() {
-    if (widget.todayCases != null) {
+    if (widget.todayCases > 0) {
       return AutoSizeText(
         formatter.format(widget.todayCases),
         style: TextStyle(
@@ -275,6 +272,7 @@ class _CountryStatWidgetState extends State<CountryStatWidget>
       return CountryCardDetails(
         countryName: widget.countryName,
         countryCode: widget.countryCode,
+        color: Theme.of(context).primaryColor,
         // flagPath: widget.flagPath,
         isIncreasing: widget.isIncreasing,
         totalCases: widget.totalCases,

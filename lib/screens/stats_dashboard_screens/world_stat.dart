@@ -17,17 +17,17 @@ class WorldStatScreen extends StatefulWidget {
 }
 
 class _WorldStatScreenState extends State<WorldStatScreen> {
-  PageController _controller;
+  PageController? _controller;
   int selectedBottomBarIndex = 0;
-  List<Widget> pages;
-  List<BarItem> barItems;
-  Future<bool> future;
+  List<Widget> pages = [];
+  List<BarItem> barItems = [];
+  Future<bool> future = Future.value(false);
 
-  Future<bool> loadPreferences() async{
-    SharedPreferences prefs=await SharedPreferences.getInstance();
-    var jsonString=prefs.getString('defaultCountry');
-    if(jsonString!=null){
-      defaultCountry=DefaultCountry().fromJson(json.decode(jsonString));
+  Future<bool> loadPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var jsonString = prefs.getString('defaultCountry');
+    if (jsonString != null) {
+      defaultCountry = DefaultCountry().fromJson(json.decode(jsonString));
       return true;
     }
     return false;
@@ -36,10 +36,12 @@ class _WorldStatScreenState extends State<WorldStatScreen> {
   @override
   void initState() {
     super.initState();
-    future=loadPreferences();
-    _controller = new PageController(initialPage: selectedBottomBarIndex);
-    pages=[
-      GlobalStatScreen(controller: _controller,),
+    future = loadPreferences();
+    _controller = PageController(initialPage: selectedBottomBarIndex);
+    pages = [
+      GlobalStatScreen(
+        controller: _controller!,
+      ),
       CountriesScreen(),
       // DefaultCountryScreen(controller: _controller),
       // CreditsScreen(controller: _controller,),
@@ -50,7 +52,7 @@ class _WorldStatScreenState extends State<WorldStatScreen> {
         iconSize: 24,
         text: "Overview",
         textSize: 18,
-        color: Colors.purpleAccent[700],
+        color: Colors.purpleAccent.shade700,
       ),
       BarItem(
         icon: Icons.search,
@@ -78,14 +80,18 @@ class _WorldStatScreenState extends State<WorldStatScreen> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
-  Color getScaffoldColor(){
-    if(selectedBottomBarIndex==0) return Colors.grey[100];
-    else if(selectedBottomBarIndex==1 || selectedBottomBarIndex==3) return Colors.white;
-    return defaultCountry.countryName==null?Colors.white:Colors.transparent;
+  Color getScaffoldColor() {
+    if (selectedBottomBarIndex == 0)
+      return Colors.grey.shade100;
+    else if (selectedBottomBarIndex == 1 || selectedBottomBarIndex == 3)
+      return Colors.white;
+    return defaultCountry.countryName.isEmpty
+        ? Colors.white
+        : Colors.transparent;
   }
 
   @override
@@ -96,8 +102,8 @@ class _WorldStatScreenState extends State<WorldStatScreen> {
       body: SafeArea(
         child: FutureBuilder<bool>(
           future: future,
-          builder:(context,snapshot) {
-            if(snapshot.hasData){
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
               return PageView.builder(
                 itemCount: 2,
                 physics: BouncingScrollPhysics(),
@@ -121,7 +127,7 @@ class _WorldStatScreenState extends State<WorldStatScreen> {
       ),
       bottomNavigationBar: AnimatedBottomBar(
         onItemTap: (index) {
-          _controller.animateToPage(index,
+          _controller?.animateToPage(index,
               duration: Duration(milliseconds: 150), curve: Curves.easeInOut);
         },
         barItems: barItems,

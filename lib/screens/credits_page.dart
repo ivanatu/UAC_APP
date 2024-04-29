@@ -6,7 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 class CreditsScreen extends StatelessWidget {
   final PageController controller;
 
-  const CreditsScreen({Key key, this.controller}) : super(key: key);
+  const CreditsScreen({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

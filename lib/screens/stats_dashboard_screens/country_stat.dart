@@ -12,21 +12,20 @@ class CountryStatScreen extends StatefulWidget {
   final int testsConducted;
 
   const CountryStatScreen(
-      {Key key,
+      {super.key,
       this.color,
       this.countryName,
       this.countryCode,
       // this.flagPath,
       this.isIncreasing,
       this.totalCases,
-      this.todayCases,
-      this.newDeaths,
-      this.critical,
-      this.active,
-      this.totalDeaths,
-      this.totalRecovered,
-      this.testsConducted})
-      : super(key: key);
+      this.todayCases =0,
+      this.newDeaths = 0,
+      this.critical = 0,
+      this.active = 0,
+      this.totalDeaths = 0,
+      this.totalRecovered = 0,
+      this.testsConducted = 0});
 
   @override
   _CountryStatScreenState createState() => _CountryStatScreenState();

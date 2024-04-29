@@ -8,7 +8,7 @@ class PrecautionsScreen extends StatefulWidget {
   final imgPath;
   final Color color;
 
-  PrecautionsScreen({this.imgPath, this.color});
+  PrecautionsScreen({this.imgPath, required this.color});
 
   @override
   _PrecautionsScreenState createState() => _PrecautionsScreenState();

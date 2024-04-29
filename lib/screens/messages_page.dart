@@ -8,7 +8,7 @@ class MessagesScreen extends StatefulWidget {
   final imgPath;
   final Color color;
 
-  MessagesScreen({this.imgPath, this.color});
+  MessagesScreen({this.imgPath, required this.color});
 
   @override
   _MessagesScreenState createState() => _MessagesScreenState();

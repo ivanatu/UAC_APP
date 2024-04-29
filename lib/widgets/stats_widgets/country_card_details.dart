@@ -1,10 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flushbar/flushbar.dart';
+import 'package:another_flushbar/flushbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../values/default_country_data.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'cases_progress_bars.dart';
+// import 'cases_progress_bars.dart';
 import 'new_case_boxes.dart';
 import 'dart:convert';
 
@@ -22,19 +22,19 @@ class CountryCardDetails extends StatefulWidget {
   final int testsConducted;
 
   CountryCardDetails(
-      {this.color,
-      this.totalCases,
-      this.countryName,
-      this.countryCode,
-      // this.flagPath,
-      this.isIncreasing,
-      this.todayCases,
-      this.newDeaths,
-      this.critical,
-      this.active,
-      this.totalDeaths,
-      this.totalRecovered,
-      this.testsConducted});
+      {required this.color,
+      required this.totalCases,
+      required this.countryName,
+      required this.countryCode,
+      // required this.flagPath,
+      required this.isIncreasing,
+      required this.todayCases,
+      required this.newDeaths,
+      required this.critical,
+      required this.active,
+      required this.totalDeaths,
+      required this.totalRecovered,
+      required this.testsConducted});
 
   @override
   _CountryCardDetailsState createState() => _CountryCardDetailsState();
@@ -42,10 +42,10 @@ class CountryCardDetails extends StatefulWidget {
 
 class _CountryCardDetailsState extends State<CountryCardDetails>
     with TickerProviderStateMixin {
-  AnimationController _controller1, _controller2;
-  Duration textScaleDuration;
-  final formatter = new NumberFormat("#,###");
-  int selectedIndex;
+  AnimationController? _controller1, _controller2;
+  Duration? textScaleDuration;
+  final formatter = NumberFormat("#,###");
+  int selectedIndex = -1;
 
   @override
   void initState() {
@@ -54,21 +54,21 @@ class _CountryCardDetailsState extends State<CountryCardDetails>
     textScaleDuration = Duration(milliseconds: 200);
     _controller1 = AnimationController(
         vsync: this,
-        duration: textScaleDuration,
+        duration: textScaleDuration!,
         lowerBound: 0.7,
         upperBound: 1);
     _controller2 = AnimationController(
         vsync: this,
-        duration: textScaleDuration,
+        duration: textScaleDuration!,
         lowerBound: 0.7,
         upperBound: 1);
-    _controller1.forward();
+    _controller1?.forward();
   }
 
   @override
   void dispose() {
-    _controller1.dispose();
-    _controller2.dispose();
+    _controller1?.dispose();
+    _controller2?.dispose();
     super.dispose();
   }
 
@@ -82,13 +82,13 @@ class _CountryCardDetailsState extends State<CountryCardDetails>
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ScaleTransition(
-              scale: _controller1,
+              scale: _controller1!,
               child: GestureDetector(
                 onTap: () {
                   setState(() {
                     selectedIndex = 0;
-                    _controller2.reverse();
-                    _controller1.forward();
+                    _controller2?.reverse();
+                    _controller1?.forward();
                   });
                 },
                 child: AutoSizeText(
@@ -106,13 +106,13 @@ class _CountryCardDetailsState extends State<CountryCardDetails>
             ),
             SizedBox(width: 5),
             ScaleTransition(
-              scale: _controller2,
+              scale: _controller2!,
               child: GestureDetector(
                 onTap: () {
                   setState(() {
                     selectedIndex = 1;
-                    _controller1.reverse();
-                    _controller2.forward();
+                    _controller1?.reverse();
+                    _controller2?.forward();
                   });
                 },
                 child: AutoSizeText(
@@ -149,6 +149,7 @@ class _CountryCardDetailsState extends State<CountryCardDetails>
                 deaths: widget.totalDeaths,
                 tested: widget.testsConducted,
                 totalCases: widget.totalCases,
+                recovered: widget.totalRecovered,
                 today: false,
               ),
 

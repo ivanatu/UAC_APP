@@ -12,11 +12,11 @@ class AnimatedBottomBar extends StatefulWidget {
   final ValueChanged<int> onItemTap;
 
   AnimatedBottomBar(
-      {this.barItems,
+      {required this.barItems,
       this.animationDuration = const Duration(milliseconds: 500),
-      this.elevation,
-      this.onItemTap,
-      this.currBarItem});
+      required this.elevation,
+      required this.onItemTap,
+      required this.currBarItem});
 
   @override
   _AnimatedBottomBarState createState() => _AnimatedBottomBarState();
@@ -88,13 +88,13 @@ class AnimatedBarItem extends StatefulWidget {
   final ValueChanged<int> onItemTap;
 
   AnimatedBarItem(
-      {this.isSelected,
-      this.thisItemIndex,
-      this.barItem,
-      this.currBarItem,
-      this.animationDuration,
-      this.elevation,
-      this.onItemTap});
+      {required this.isSelected,
+      required this.thisItemIndex,
+      required this.barItem,
+      required this.currBarItem,
+      required this.animationDuration,
+      required this.elevation,
+      required this.onItemTap});
   @override
   _AnimatedBarItemState createState() => _AnimatedBarItemState();
 }

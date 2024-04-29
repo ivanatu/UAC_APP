@@ -5,5 +5,5 @@ class ItemColorData{
   final Color lineColor;
   final Color gradientColor;
 
-  ItemColorData({this.backgroundColor, this.lineColor, this.gradientColor});
+  ItemColorData({required this.backgroundColor, required this.lineColor, required this.gradientColor});
 }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ImageCarousel extends StatefulWidget {
   final height;
 
-  const ImageCarousel({Key key, this.height}) : super(key: key);
+  const ImageCarousel({super.key, required this.height});
 
   @override
   _ImageCarouselState createState() => _ImageCarouselState();

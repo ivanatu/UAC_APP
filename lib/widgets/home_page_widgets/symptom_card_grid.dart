@@ -91,7 +91,7 @@ class _SymptomCardGridState extends State<SymptomCardGrid> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       Image(
-                        image: AssetImage(symptoms[index]["imgPath"]),
+                        image: AssetImage(symptoms[index]["imgPath"]!),
                         height: constraint.maxHeight * 0.46,
                       ),
                       SizedBox(

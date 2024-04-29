@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class AffectedAreasContainer extends StatelessWidget {
-  const AffectedAreasContainer();
+  const AffectedAreasContainer({super.key});
 
   @override
   Widget build(BuildContext context) {

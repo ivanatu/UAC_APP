@@ -7,7 +7,7 @@ import 'country_list_item.dart';
 class CountriesGrid extends StatefulWidget {
   List<SummaryEachCountry> list;
 
-  CountriesGrid({this.list});
+  CountriesGrid({required this.list});
 
   @override
   _CountriesGridState createState() => _CountriesGridState();

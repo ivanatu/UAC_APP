@@ -7,7 +7,7 @@ class NewsListLoader extends StatefulWidget {
 
 class _NewsListLoaderState extends State<NewsListLoader>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  AnimationController? _controller;
 
   @override
   void initState() {
@@ -16,22 +16,22 @@ class _NewsListLoaderState extends State<NewsListLoader>
         vsync: this, duration: Duration(milliseconds: 700), lowerBound: 0.5)
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed)
-          _controller.reverse();
-        else if (status == AnimationStatus.dismissed) _controller.forward();
+          _controller?.reverse();
+        else if (status == AnimationStatus.dismissed) _controller?.forward();
       });
-    _controller.forward();
+    _controller?.forward();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return FadeTransition(
-      opacity: _controller,
+      opacity: _controller!,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[

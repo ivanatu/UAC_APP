@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -8,9 +6,9 @@ class MyWebView extends StatefulWidget {
   final String selectedUrl;
 
   MyWebView({
-    Key key,
-    @required this.selectedUrl,
-  }) : super(key: key);
+    super.key,
+    required this.selectedUrl,
+  });
 
   @override
   _MyWebViewState createState() => _MyWebViewState();
@@ -18,7 +16,7 @@ class MyWebView extends StatefulWidget {
 
 class _MyWebViewState extends State<MyWebView> {
   bool _loaded = false;
-  String error="";
+  String error = "";
 
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
@@ -57,39 +55,42 @@ class _MyWebViewState extends State<MyWebView> {
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
                   )
                 : Container(),
-            error!="" 
-            ? Expanded(
-                child: Align(
-                alignment: Alignment.center,
-                child: const Text("HTTP 404 Error: Failed to load resource",style: TextStyle(color: Colors.grey,fontSize: 30),),
-                ),
-            ) 
-            :Flexible(
-              fit: FlexFit.loose,
-              child: Container(),
-              // WebView(
-              //   initialUrl: widget.selectedUrl,
-              //   javascriptMode: JavascriptMode.unrestricted,
-              //   onWebViewCreated: (WebViewController webviewcontroller) {
-              //     _controller.complete(webviewcontroller);
-              //   },
-              //   onPageFinished: (url){
-              //     setState(() {
-              //       _loaded=true;
-              //     });
-              //   },
-              //   onWebResourceError: (err){
-              //     setState(() {
-              //       error=err.description;
-              //     });
-              //   },
-              //   gestureRecognizers: Set()
-              //     ..add(
-              //       Factory<VerticalDragGestureRecognizer>(
-              //           () => VerticalDragGestureRecognizer()),
-              //     ),
-              // ),
-            ),
+            error != ""
+                ? Expanded(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: const Text(
+                        "HTTP 404 Error: Failed to load resource",
+                        style: TextStyle(color: Colors.grey, fontSize: 30),
+                      ),
+                    ),
+                  )
+                : Flexible(
+                    fit: FlexFit.loose,
+                    child: Container(),
+                    // WebView(
+                    //   initialUrl: widget.selectedUrl,
+                    //   javascriptMode: JavascriptMode.unrestricted,
+                    //   onWebViewCreated: (WebViewController webviewcontroller) {
+                    //     _controller.complete(webviewcontroller);
+                    //   },
+                    //   onPageFinished: (url){
+                    //     setState(() {
+                    //       _loaded=true;
+                    //     });
+                    //   },
+                    //   onWebResourceError: (err){
+                    //     setState(() {
+                    //       error=err.description;
+                    //     });
+                    //   },
+                    //   gestureRecognizers: Set()
+                    //     ..add(
+                    //       Factory<VerticalDragGestureRecognizer>(
+                    //           () => VerticalDragGestureRecognizer()),
+                    //     ),
+                    // ),
+                  ),
           ],
         ),
       ),

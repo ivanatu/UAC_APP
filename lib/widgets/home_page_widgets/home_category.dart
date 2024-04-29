@@ -17,17 +17,17 @@ class CategoryTab extends StatelessWidget {
   final AutoSizeGroup titleGrp, descGrp;
 
   const CategoryTab(
-      {this.imgPath,
-      this.tabName,
-      this.color,
-      this.tabDesc,
+      {required this.imgPath,
+      required this.tabName,
+      required this.color,
+      required this.tabDesc,
       this.imgHeight = 150.0,
       this.imgLeft = 15.0,
       this.imgBottom = -8.0,
-      this.titleGrp,
-      this.descGrp});
+      required this.titleGrp,
+      required this.descGrp});
 
-  Function getPage(tabName, context) {
+  VoidCallback getPage(tabName, context) {
     switch (tabName) {
       case ("Symptoms"):
         return () => Navigator.of(context).push(MaterialPageRoute(

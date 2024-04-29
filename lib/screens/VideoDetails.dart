@@ -6,7 +6,7 @@ class VideoDetails extends StatelessWidget {
   final String description;
   final String vidId;
 
-  const VideoDetails({this.title, this.description, this.vidId});
+  const VideoDetails({super.key,this.title = "", this.description = "", this.vidId = ""});
 
   YoutubePlayerController genController(String vidId) {
     return YoutubePlayerController(

@@ -8,7 +8,7 @@ class SymptomsScreen extends StatefulWidget {
   final imgPath;
   final Color color;
 
-  SymptomsScreen({this.color, this.imgPath});
+  SymptomsScreen({required this.color, this.imgPath});
 
   @override
   _SymptomsScreenState createState() => _SymptomsScreenState();

@@ -12,17 +12,17 @@ class SummaryEachCountry {
   final int testsConducted;
 
   SummaryEachCountry(
-      {this.country,
-      this.code,
-      this.todayCases,
-      this.totalCases,
-      this.active,
-      this.newDeaths,
-      this.totalDeaths,
-      this.totalRecovered,
-      this.isIncreasing,
-      this.critical,
-      this.testsConducted});
+      { this.country = "",
+       this.code = "",
+       this.todayCases = 0,
+       this.totalCases = 0,
+       this.active = 0,
+       this.newDeaths = 0,
+       this.totalDeaths = 0,
+       this.totalRecovered = 0,
+       this.isIncreasing = false,
+       this.critical = 0,
+       this.testsConducted = 0});
 
   SummaryEachCountry formMap(List<String> data) {
     return SummaryEachCountry(

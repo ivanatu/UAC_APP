@@ -7,7 +7,7 @@ class TopCountryList extends StatelessWidget {
   final List<SummaryEachCountry> topSixList;
   final double height = 180;
 
-  const TopCountryList({Key key, this.topSixList}) : super(key: key);
+  const TopCountryList({super.key,required this.topSixList});
 
   @override
   Widget build(BuildContext context) {

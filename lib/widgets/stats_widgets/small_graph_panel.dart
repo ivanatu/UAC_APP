@@ -14,16 +14,16 @@ class SmallGraphPanel extends StatelessWidget {
   final titleGrp, numGrp;
 
   const SmallGraphPanel({
-    @required this.label,
-    @required this.icon,
-    @required this.value,
-    @required this.startColor,
-    @required this.fontColor,
-    @required this.iconColor,
-    @required this.lineColor,
-    @required this.isIncreasing,
-    @required this.titleGrp,
-    @required this.numGrp,
+    required this.label,
+    required this.icon,
+    required this.value,
+    required this.startColor,
+    required this.fontColor,
+    required this.iconColor,
+    required this.lineColor,
+    required this.isIncreasing,
+    required this.titleGrp,
+    required this.numGrp,
   });
   @override
   Widget build(BuildContext context) {

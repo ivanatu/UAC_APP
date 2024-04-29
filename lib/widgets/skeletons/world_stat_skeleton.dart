@@ -5,30 +5,33 @@ class WorldStatLoader extends StatefulWidget {
   _WorldStatLoaderState createState() => _WorldStatLoaderState();
 }
 
-class _WorldStatLoaderState extends State<WorldStatLoader> with SingleTickerProviderStateMixin{
-  AnimationController _controller;
+class _WorldStatLoaderState extends State<WorldStatLoader>
+    with SingleTickerProviderStateMixin {
+  AnimationController? _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller=AnimationController(vsync: this,duration: Duration(milliseconds: 700),lowerBound: 0.5)
-    ..addStatusListener((status) {
-      if(status==AnimationStatus.completed) _controller.reverse();
-      else if(status==AnimationStatus.dismissed) _controller.forward();
-    });
-    _controller.forward();
+    _controller = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 700), lowerBound: 0.5)
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed)
+          _controller?.reverse();
+        else if (status == AnimationStatus.dismissed) _controller?.forward();
+      });
+    _controller?.forward();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return FadeTransition(
-      opacity: _controller,
+      opacity: _controller!,
       child: ListView(
         shrinkWrap: true,
         physics: BouncingScrollPhysics(),
@@ -87,7 +90,8 @@ class _WorldStatLoaderState extends State<WorldStatLoader> with SingleTickerProv
                 child: Column(
                   children: <Widget>[
                     Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 7),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 18, vertical: 7),
                       decoration: BoxDecoration(
                         color: Colors.grey,
                         borderRadius: BorderRadius.circular(10),
@@ -96,7 +100,8 @@ class _WorldStatLoaderState extends State<WorldStatLoader> with SingleTickerProv
                       width: double.infinity,
                     ),
                     Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 7),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 18, vertical: 7),
                       decoration: BoxDecoration(
                         color: Colors.grey,
                         borderRadius: BorderRadius.circular(10),
@@ -105,7 +110,8 @@ class _WorldStatLoaderState extends State<WorldStatLoader> with SingleTickerProv
                       width: double.infinity,
                     ),
                     Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 7),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 18, vertical: 7),
                       decoration: BoxDecoration(
                         color: Colors.grey,
                         borderRadius: BorderRadius.circular(10),
@@ -114,7 +120,8 @@ class _WorldStatLoaderState extends State<WorldStatLoader> with SingleTickerProv
                       width: double.infinity,
                     ),
                     Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 7),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 18, vertical: 7),
                       decoration: BoxDecoration(
                         color: Colors.grey,
                         borderRadius: BorderRadius.circular(10),
@@ -123,7 +130,8 @@ class _WorldStatLoaderState extends State<WorldStatLoader> with SingleTickerProv
                       width: double.infinity,
                     ),
                     Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 7),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 18, vertical: 7),
                       decoration: BoxDecoration(
                         color: Colors.grey,
                         borderRadius: BorderRadius.circular(10),
@@ -132,7 +140,8 @@ class _WorldStatLoaderState extends State<WorldStatLoader> with SingleTickerProv
                       width: double.infinity,
                     ),
                     Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 7),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 18, vertical: 7),
                       decoration: BoxDecoration(
                         color: Colors.grey,
                         borderRadius: BorderRadius.circular(10),
@@ -314,7 +323,8 @@ class _WorldStatLoaderState extends State<WorldStatLoader> with SingleTickerProv
                 ),
                 height: 225,
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 25),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 30, horizontal: 25),
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16.0),

@@ -8,15 +8,15 @@ class NewCaseBoxes extends StatelessWidget {
   final formatter = NumberFormat("#,###");
 
   NewCaseBoxes({
-    Key key,
-    this.color,
-    this.affected,
-    this.deaths,
-    this.recovered,
-    this.tested,
-    this.today,
-    this.totalCases,
-  }) : super(key: key);
+    super.key,
+    required this.color,
+    required this.affected,
+    required this.deaths,
+    required this.recovered,
+    required this.tested,
+    required this.today,
+    required this.totalCases,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 class GlobalStatScreen extends StatefulWidget {
   final PageController controller;
 
-  const GlobalStatScreen({Key key, this.controller}) : super(key: key);
+  const GlobalStatScreen({super.key, required this.controller});
 
   @override
   _GlobalStatScreenState createState() => _GlobalStatScreenState();
@@ -23,9 +23,10 @@ class GlobalStatScreen extends StatefulWidget {
 
 class _GlobalStatScreenState extends State<GlobalStatScreen> {
   ApiClient _client = ApiClient();
-  Map<String, dynamic> globalData;
-  Future<Map<String, dynamic>> _globalFuture;
-  Future<dynamic> _topSixFuture;
+  Map<String, dynamic> globalData = {};
+  Future<Map<String, dynamic>> _globalFuture =
+      {} as Future<Map<String, dynamic>>;
+  Future<dynamic>? _topSixFuture;
 
   Future<dynamic> getTopSix() async {
     List<SummaryEachCountry> listTopSix = [];
@@ -40,7 +41,7 @@ class _GlobalStatScreenState extends State<GlobalStatScreen> {
     var pakStats;
     try {
       pakStats =
-      await _client.getStatsResponse(StateLocation.SPECIFIC, code: "PK");
+          await _client.getStatsResponse(StateLocation.SPECIFIC, code: "PK");
     } on FetchDataException catch (fde) {
       return fde;
     }
@@ -113,7 +114,7 @@ class _GlobalStatScreenState extends State<GlobalStatScreen> {
               ),
             );
           } else {
-            globalData = snapshot.data;
+            globalData = snapshot.data ?? {};
 
             //Actual Body
             return ListView(
@@ -143,7 +144,9 @@ class _GlobalStatScreenState extends State<GlobalStatScreen> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width > 360.0
                             ? 55.0
-                            : MediaQuery.of(context).size.width > 340.0? 40 :30,
+                            : MediaQuery.of(context).size.width > 340.0
+                                ? 40
+                                : 30,
                       ),
 
                       //Text
@@ -207,10 +210,10 @@ class _GlobalStatScreenState extends State<GlobalStatScreen> {
                             AutoSizeText(
                               "All Districts",
                               style: TextStyle(
-                                  fontFamily: "Montserrat",
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
+                                fontFamily: "Montserrat",
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
                               ),
                               maxFontSize: 18,
                             ),
@@ -249,9 +252,7 @@ class _GlobalStatScreenState extends State<GlobalStatScreen> {
                       Expanded(
                         child: FutureBuilder<dynamic>(
                           future: getTopCountriesList(),
-                          builder: (context,
-                              AsyncSnapshot<dynamic>
-                                  snapshot) {
+                          builder: (context, AsyncSnapshot<dynamic> snapshot) {
                             if (snapshot.hasError) {
                               return Container(
                                 margin: const EdgeInsets.symmetric(

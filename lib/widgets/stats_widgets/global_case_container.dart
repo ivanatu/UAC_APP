@@ -9,22 +9,22 @@ import 'small_graph_panel.dart';
 class GlobalCaseContainer extends StatefulWidget {
   Map<String, dynamic> globalData;
 
-  GlobalCaseContainer({this.globalData});
+  GlobalCaseContainer({required this.globalData});
 
   @override
   _GlobalCaseContainerState createState() => _GlobalCaseContainerState();
 }
 
 class _GlobalCaseContainerState extends State<GlobalCaseContainer> {
-  CaseType _caseType;
-  Color radialStartClr,
+  CaseType? _caseType;
+  Color? radialStartClr,
       radialEndClr,
       radialBgClr,
       panelStartClr,
       panelFontClr,
       panelIconClr,
       panelLineClr;
-  double progress;
+  double? progress;
   Duration caseTypeDuration = Duration(milliseconds: 400);
   Curve caseTypeCurve = Curves.ease;
 
@@ -255,9 +255,9 @@ class _GlobalCaseContainerState extends State<GlobalCaseContainer> {
                     padding: const EdgeInsets.only(top: 10.0),
                     child: RadialProgress(
                       progressValue: progress,
-                      startClr: radialStartClr,
-                      endClr: radialEndClr,
-                      bgClr: radialBgClr,
+                      startClr: radialStartClr!,
+                      endClr: radialEndClr!,
+                      bgClr: radialBgClr!,
                     ),
                   ),
 
@@ -271,10 +271,10 @@ class _GlobalCaseContainerState extends State<GlobalCaseContainer> {
                           label: "Confirmed",
                           value: 20000 + 0.0,
                           icon: Icons.arrow_drop_up,
-                          fontColor: panelFontClr,
-                          iconColor: panelIconClr,
-                          startColor: panelStartClr,
-                          lineColor: panelLineClr,
+                          fontColor: panelFontClr!,
+                          iconColor: panelIconClr!,
+                          startColor: panelStartClr!,
+                          lineColor: panelLineClr!,
                           isIncreasing: true,
                           numGrp: caseNumGrp,
                           titleGrp: caseTypeGrp,
@@ -297,10 +297,10 @@ class _GlobalCaseContainerState extends State<GlobalCaseContainer> {
                                   ? widget.globalData["deaths"] + 0.0
                                   : widget.globalData["recovered"] + 0.0,
                           icon: Icons.arrow_drop_up,
-                          fontColor: panelFontClr,
-                          iconColor: panelIconClr,
-                          startColor: panelStartClr,
-                          lineColor: panelLineClr,
+                          fontColor: panelFontClr!,
+                          iconColor: panelIconClr!,
+                          startColor: panelStartClr!,
+                          lineColor: panelLineClr!,
                           isIncreasing: true,
                           numGrp: caseNumGrp,
                           titleGrp: caseTypeGrp,
@@ -323,10 +323,10 @@ class _GlobalCaseContainerState extends State<GlobalCaseContainer> {
                                           "recoveredPerOneMillion"] +
                                       0.0,
                           icon: Icons.arrow_drop_up,
-                          fontColor: panelFontClr,
-                          iconColor: panelIconClr,
-                          startColor: panelStartClr,
-                          lineColor: panelLineClr,
+                          fontColor: panelFontClr!,
+                          iconColor: panelIconClr!,
+                          startColor: panelStartClr!,
+                          lineColor: panelLineClr!,
                           isIncreasing: true,
                           numGrp: caseNumGrp,
                           titleGrp: caseTypeGrp,

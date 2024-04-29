@@ -5,9 +5,9 @@ import 'package:intl/intl.dart';
 // ignore: must_be_immutable
 class CaseBars extends StatefulWidget {
   final color;
-  int totalActive,totalDeaths,totalRecovered,totalCases;
+  final int totalActive,totalDeaths,totalRecovered,totalCases;
 
-  CaseBars({Key key, this.color,this.totalActive,this.totalDeaths,this.totalRecovered,this.totalCases}) : super(key: key);
+  CaseBars({super.key, required this.color,required this.totalActive,required this.totalDeaths,required this.totalRecovered,required this.totalCases});
 
   @override
   _CaseBarsState createState() => _CaseBarsState();
@@ -15,13 +15,12 @@ class CaseBars extends StatefulWidget {
 
 class _CaseBarsState extends State<CaseBars> {
   Duration _progressDuration=Duration(milliseconds: 300);
-  final formatter = new NumberFormat("#,###");
+  final formatter = NumberFormat("#,###");
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-
         AutoSizeText(
           "Overall Statistics",
           style: TextStyle(

@@ -89,7 +89,7 @@ class _PrecautionCardGridState extends State<PrecautionCardGrid> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       Image(
-                        image: AssetImage(preventions[index]["imgPath"]),
+                        image: AssetImage(preventions[index]["imgPath"]!),
                         height: constraint.maxHeight * 0.46,
                       ),
                       SizedBox(

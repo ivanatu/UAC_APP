@@ -7,7 +7,7 @@ class CurvePainter extends StatefulWidget {
   final Color color;
   final bool isIncreasing;
 
-  CurvePainter({this.size, this.duration, this.color, this.isIncreasing});
+  CurvePainter({required this.size, required this.duration, required this.color, required this.isIncreasing});
 
   @override
   _CurvePainterState createState() => _CurvePainterState();
@@ -15,33 +15,33 @@ class CurvePainter extends StatefulWidget {
 
 class _CurvePainterState extends State<CurvePainter>
     with TickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> _widthAnimation;
-  Animation<double> _curveAnimation;
+  AnimationController? _controller;
+  Animation<double>? _widthAnimation;
+  Animation<double>? _curveAnimation;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(duration: widget.duration, vsync: this);
     _widthAnimation = Tween<double>(begin: 0, end: widget.size.width).animate(
-        CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn));
+        CurvedAnimation(parent: _controller!, curve: Curves.fastOutSlowIn));
     _curveAnimation = Tween<double>(begin: 0, end: 2 * pi).animate(
-        CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn));
-    _controller.forward();
+        CurvedAnimation(parent: _controller!, curve: Curves.fastOutSlowIn));
+    _controller?.forward();
   }
 
   @override
   void didUpdateWidget(CurvePainter oldWidget) {
     super.didUpdateWidget(oldWidget);
     if(oldWidget.color!=widget.color){
-      _controller.reset();
-      _controller.forward();
+      _controller?.reset();
+      _controller?.forward();
     }
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
@@ -63,14 +63,14 @@ class _CurvePainterState extends State<CurvePainter>
           Transform.rotate(
             angle: widget.isIncreasing ? -pi / 5 : pi / 4,
             child: AnimatedBuilder(
-              animation: _widthAnimation,
+              animation: _widthAnimation!,
               builder: (ct, _) {
                 return AnimatedBuilder(
-                  animation: _curveAnimation,
+                  animation: _curveAnimation!,
                   builder: (ctx, _) {
                     return CustomPaint(
-                      size: Size(_widthAnimation.value, widget.size.height),
-                      painter: MyPainter(_curveAnimation.value, widget.color),
+                      size: Size(_widthAnimation!.value, widget.size.height),
+                      painter: MyPainter(_curveAnimation!.value, widget.color),
                     );
                   },
                 );

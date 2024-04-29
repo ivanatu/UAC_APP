@@ -37,7 +37,7 @@ class VirusDetailsScreen extends StatelessWidget {
   static AutoSizeGroup titleGrp = AutoSizeGroup();
   static AutoSizeGroup descGrp = AutoSizeGroup();
 
-  const VirusDetailsScreen({Key key, this.imgPath, this.color})
+  const VirusDetailsScreen({Key? key, this.imgPath, required this.color})
       : super(key: key);
 
   @override

@@ -24,20 +24,20 @@ class CountryListItem extends StatelessWidget {
   final int testsConducted;
 
   const CountryListItem(
-      {this.height,
-      this.countryName,
-      this.countryCode,
-      this.itemColorData,
-      // this.flagPath,
+      {required this.height,
+      required this.countryName,
+      required this.countryCode,
+      required this.itemColorData,
+      // required this.flagPath,
       this.isIncreasing = false,
-      this.value,
-      this.todayCases,
-      this.newDeaths,
-      this.critical,
-      this.active,
-      this.totalDeaths,
-      this.totalRecovered,
-      this.testsConducted});
+      required this.value,
+      required this.todayCases,
+      required this.newDeaths,
+      required this.critical,
+      required this.active,
+      required this.totalDeaths,
+      required this.totalRecovered,
+      required this.testsConducted});
 
   @override
   Widget build(BuildContext context) {
@@ -204,7 +204,7 @@ class CustomLinePainter extends CustomPainter {
   final Color color;
   final double lineWidth;
 
-  CustomLinePainter({this.color, this.lineWidth});
+  CustomLinePainter({required this.color, required this.lineWidth});
 
   @override
   void paint(Canvas canvas, Size size) {

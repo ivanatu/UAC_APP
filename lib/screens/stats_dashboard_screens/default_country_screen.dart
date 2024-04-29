@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 class DefaultCountryScreen extends StatefulWidget {
   final PageController controller;
 
-  DefaultCountryScreen({Key key, this.controller}) : super(key: key);
+  DefaultCountryScreen({super.key,required this.controller});
 
   @override
   _DefaultCountryScreenState createState() => _DefaultCountryScreenState();

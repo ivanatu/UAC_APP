@@ -8,8 +8,7 @@ class RadialProgress extends StatefulWidget {
   final Color startClr, endClr, bgClr;
 
   RadialProgress(
-      {Key key, this.progressValue, this.startClr, this.endClr, this.bgClr})
-      : super(key: key);
+      {super.key, this.progressValue,required this.startClr, required this.endClr, required this.bgClr});
 
   @override
   _RadialProgressState createState() => _RadialProgressState();
@@ -17,8 +16,8 @@ class RadialProgress extends StatefulWidget {
 
 class _RadialProgressState extends State<RadialProgress>
     with TickerProviderStateMixin {
-  AnimationController _radialController;
-  Animation<double> _radialAnimation;
+  AnimationController? _radialController;
+  Animation<double>? _radialAnimation;
   double progressDegrees = 0;
   final Duration fadeInDuration = Duration(milliseconds: 500);
   final Duration fillDuration = Duration(milliseconds: 1000);
@@ -29,11 +28,11 @@ class _RadialProgressState extends State<RadialProgress>
     _radialController =
         AnimationController(vsync: this, duration: fillDuration); //1.5s
     _radialAnimation = Tween(begin: 0.0, end: 360.0).animate(
-        CurvedAnimation(parent: _radialController, curve: Curves.fastOutSlowIn))
+        CurvedAnimation(parent: _radialController!, curve: Curves.fastOutSlowIn))
       ..addListener(() {
-        progressDegrees = widget.progressValue * _radialAnimation.value;
+        progressDegrees = widget.progressValue * _radialAnimation?.value;
       });
-    _radialController.forward();
+    _radialController?.forward();
   }
 
   @override
@@ -42,14 +41,14 @@ class _RadialProgressState extends State<RadialProgress>
     if (oldWidget.startClr != widget.startClr ||
         oldWidget.endClr != widget.endClr ||
         oldWidget.bgClr != widget.bgClr) {
-      _radialController.reset();
-      _radialController.forward();
+      _radialController?.reset();
+      _radialController?.forward();
     }
   }
 
   @override
   void dispose() {
-    _radialController.dispose();
+    _radialController?.dispose();
     super.dispose();
   }
 
@@ -74,7 +73,7 @@ class _RadialProgressState extends State<RadialProgress>
           ),
         ),
       ),
-      animation: _radialAnimation,
+      animation: _radialAnimation!,
       builder: (context, child) => Container(
         width: MediaQuery.of(context).size.width>340?168:143,
         height: MediaQuery.of(context).size.width>340?168:143,
@@ -134,7 +133,7 @@ class RadialPainter extends CustomPainter {
   final double degrees;
   final Color startClr, endClr, bgClr;
 
-  RadialPainter({this.degrees, this.startClr, this.endClr, this.bgClr});
+  RadialPainter({required this.degrees, required this.startClr,required this.endClr,required this.bgClr});
 
   @override
   void paint(Canvas canvas, Size size) {

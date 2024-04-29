@@ -40,8 +40,7 @@ class MythsScreen extends StatelessWidget {
     },
     {
       "myth": "You can get HIV from a mosquito bite.",
-      "desc":
-          "HIV CANNOT be transmitted through mosquito bites.",
+      "desc": "HIV CANNOT be transmitted through mosquito bites.",
       "imgPath": "assets/myths/package.png",
     },
     {
@@ -58,7 +57,7 @@ class MythsScreen extends StatelessWidget {
     },
   ];
 
-  MythsScreen({Key key, this.imgPath, this.color}) : super(key: key);
+  MythsScreen({Key? key, this.imgPath, required this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -234,9 +233,9 @@ class MythsScreen extends StatelessWidget {
                             dotWidth: 11,
                             spacing: 12.0,
                             strokeWidth: 1.2,
-                            dotColor: Colors.grey[400],
+                            dotColor: Colors.grey.shade400,
                             paintStyle: PaintingStyle.stroke,
-                            activeDotColor: Colors.redAccent[700]),
+                            activeDotColor: Colors.redAccent.shade700,),
                       ),
                     )
                   ],
