@@ -43,10 +43,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   percent_indicator: ^4.2.3
   awesome_circular_chart: ^1.0.0
-
-
-dependency_overrides:
-  flutter_inappwebview: ^5.4.3+8
+  flutter_inappwebview: ^6.0.0
 
 
 dev_dependencies:

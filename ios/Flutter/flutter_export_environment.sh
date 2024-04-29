@@ -1,9 +1,9 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=D:\Programs\flutter_windows_3.3.4-stable\flutter"
-export "FLUTTER_APPLICATION_PATH=D:\UAC\APPS\aids-awareness-app"
+export "FLUTTER_ROOT=/Users/malticard/flutter"
+export "FLUTTER_APPLICATION_PATH=/Users/malticard/projects/uac"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
-export "FLUTTER_TARGET=lib\main.dart"
+export "FLUTTER_TARGET=lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=1.0.0"
 export "FLUTTER_BUILD_NUMBER=1"
