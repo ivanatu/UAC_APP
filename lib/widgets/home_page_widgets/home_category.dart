@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 import '../../screens/myths_page.dart';
 import '../../screens/precautions_page.dart';
-import '../../screens/messages_page.dart';
+import '../../screens/messages/messages_page.dart';
 import '../../screens/symptoms_page.dart';
 import '../../screens/updates_page.dart';
 import '../../screens/virus_details_page.dart';

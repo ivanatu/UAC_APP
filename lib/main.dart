@@ -1,22 +1,22 @@
-import './screens/Splash.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import "/exports/exports.dart";
+
+
+var navigatorKey = GlobalKey<NavigatorState>();
+BuildContext context = navigatorKey.currentState!.context;
 
 void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    theme: ThemeData(
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: Color.fromARGB(255, 4, 37, 182),
-      ),
-      useMaterial3: true,
-      fontFamily: 'Montserrat',
-    ),
-    home: Splash(),
-  ));
-  SystemChrome.setPreferredOrientations([
+  // system ui settings
+   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge, overlays: []);
+
+  runApp(MaterialApp(
+    navigatorKey:navigatorKey!,
+    debugShowCheckedModeBanner: false,
+    theme:Themes.lightTheme,
+    initialRoute:Routes.splash,
+  ));
+ 
 }
