@@ -21,6 +21,5 @@ export "/screens/onboarding/onboard_screen.dart";
 export "/screens/home/home_screen.dart";
 
 // widgets
-export '/widgets/widgets/CustomButton.dart';
-export '/widgets/widgets/CommonTextField.dart';
-export '/widgets/widgets/ProfileWidget.dart';
+export '../widgets/widgets/custom_button.dart';
+export '/widgets/widgets/tap_effect.dart';

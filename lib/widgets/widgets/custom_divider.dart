@@ -1,4 +1,4 @@
-import '../exports/exports.dart';
+import '/exports/exports.dart';
 
 class CustomDivider extends StatelessWidget {
   final String text;
