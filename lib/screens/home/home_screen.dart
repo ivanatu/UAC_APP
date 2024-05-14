@@ -1,6 +1,6 @@
 import '../../widgets/home_page_widgets/home_categories.dart';
 import "/exports/exports.dart";
-
+import "./widgets/health_tip_widget.dart";
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -19,14 +19,15 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 TextSpan(
                   text: "\n  Good morning",
-                  style: Theme.of(context).textTheme.headlineLarge!.apply(
+                  style: Theme.of(context).textTheme.headlineMedium!.apply(
                         fontWeightDelta: 10,
                       ),
                 ),
               ],
             ),
           ),
-          // home categories
+          // health tip of the day
+          HealthTipWidget(),
         ],
       ),
     );

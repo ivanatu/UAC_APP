@@ -24,8 +24,7 @@ class GlobalStatScreen extends StatefulWidget {
 class _GlobalStatScreenState extends State<GlobalStatScreen> {
   ApiClient _client = ApiClient();
   Map<String, dynamic> globalData = {};
-  Future<Map<String, dynamic>> _globalFuture =
-      {} as Future<Map<String, dynamic>>;
+
   Future<dynamic>? _topSixFuture;
 
   Future<dynamic> getTopSix() async {
@@ -63,14 +62,14 @@ class _GlobalStatScreenState extends State<GlobalStatScreen> {
   @override
   void initState() {
     super.initState();
-    _globalFuture = getGlobalData();
+
     // _topSixFuture = getTopSix();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, dynamic>>(
-      future: _globalFuture,
+      future: getGlobalData(),
       builder: (context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
         if (snapshot.hasError) {
           //error container
