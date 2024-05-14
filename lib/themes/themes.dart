@@ -11,6 +11,7 @@ class Themes {
   static ThemeData lightTheme = ThemeData(
     drawerTheme: drawerTheme,
     textTheme: textTheme.apply(
+      fontFamily: "Montserrat",
       displayColor: Colors.black,
       bodyColor: Colors.black,
       decorationColor: Colors.black,
@@ -27,6 +28,7 @@ class Themes {
   static ThemeData darkTheme = ThemeData(
     drawerTheme: drawerTheme,
     textTheme: textTheme.apply(
+      fontFamily: "Montserrat",
       displayColor: Colors.grey.shade300,
       bodyColor: Colors.grey.shade300,
       decorationColor: Colors.grey.shade300,

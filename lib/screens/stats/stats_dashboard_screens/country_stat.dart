@@ -1,4 +1,4 @@
-import '../../widgets/stats_widgets/country_stat_widget.dart';
+import '../../../widgets/stats_widgets/country_stat_widget.dart';
 import 'package:flutter/material.dart';
 
 class CountryStatScreen extends StatefulWidget {
@@ -19,7 +19,7 @@ class CountryStatScreen extends StatefulWidget {
       // this.flagPath,
       this.isIncreasing,
       this.totalCases,
-      this.todayCases =0,
+      this.todayCases = 0,
       this.newDeaths = 0,
       this.critical = 0,
       this.active = 0,

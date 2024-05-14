@@ -1,6 +1,5 @@
 import '../../widgets/home_page_widgets/home_categories.dart';
-import 'package:flutter/material.dart';
-import 'package:auto_size_text/auto_size_text.dart';
+import "/exports/exports.dart";
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -11,42 +10,25 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        //TODO: Add a drawer window
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        // leading: IconButton(
-        //   onPressed: () {},
-        //   icon: const Icon(
-        //     Icons.menu,
-        //     color: Colors.black,
-        //   ),
-        // ),
-        actions: <Widget>[
-          // IconButton(
-          //   onPressed: () {},
-          //   icon: const Icon(
-          //     Icons.info_outline,
-          //     color: Colors.black,
-          //   ),
-          // )
-        ],
-        centerTitle: true,
-        title: AutoSizeText(
-          "UAC APP",
-          style: TextStyle(
-            fontSize: 20,
-            fontFamily: "Montserrat",
-            color: Colors.black87,
-            fontWeight: FontWeight.w600,
+      // backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.01),
+      body: ListView(
+        padding: const EdgeInsets.all(8.0),
+        children: [
+          Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(
+                  text: "\n  Good morning",
+                  style: Theme.of(context).textTheme.headlineLarge!.apply(
+                        fontWeightDelta: 10,
+                      ),
+                ),
+              ],
+            ),
           ),
-          minFontSize: 14,
-          stepGranularity: 2,
-          maxLines: 1,
-        ),
+          // home categories
+        ],
       ),
-      body: HomeCategories(),
     );
   }
 }

@@ -7,9 +7,9 @@ class Routes {
   static String home = "/home";
   // routes merger
   static Map<String, Widget Function(BuildContext context)> routes = {
-    splash:(context) => SplashScreen(),
-    onboard:(context) => OnBoardingScreen(),
-    home:(context) => HomeScreen(),
+    splash: (context) => SplashScreen(),
+    onboard: (context) => OnBoardingScreen(),
+    home: (context) => HomeScreen(),
   };
   // routes methods
   static void pop() {
@@ -41,8 +41,8 @@ class Routes {
   static void animateToPage(Widget page, {type = 'fade'}) {
     Navigator.of(context).push(
       PageRouteBuilder(
-        transitionDuration: const Duration(milliseconds: 600),
-        reverseTransitionDuration: const Duration(milliseconds: 400),
+        transitionDuration: const Duration(milliseconds: 900),
+        reverseTransitionDuration: const Duration(milliseconds: 900),
         pageBuilder: (context, animation, secondaryAnimation) => type == 'slide'
             ? SlideTransition(
                 position: animation.drive(Tween<Offset>(

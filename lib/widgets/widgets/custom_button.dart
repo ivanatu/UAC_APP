@@ -8,8 +8,10 @@ class CustomButton extends StatelessWidget {
   final Color? textColor;
   final double opacity;
   final double? width;
-  final FontWeight? fontWeight;
+  final int fontWeight;
   final VoidCallback onPress;
+  final double fontSize;
+  
   const CustomButton(
       {super.key,
       this.text = '',
@@ -17,7 +19,8 @@ class CustomButton extends StatelessWidget {
       this.buttonHeight = 50,
       this.buttonRadius = 20,
       this.buttonColor,
-      this.fontWeight,
+      this.fontSize = 2,
+      this.fontWeight = 1,
       this.opacity = 0.12,
       this.textColor,
       this.width});
@@ -39,8 +42,7 @@ class CustomButton extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .bodyMedium!
-           
-                .apply(color: textColor ?? primaryColor),
+                .apply(color: textColor ?? primaryColor,fontSizeDelta: fontSize,fontWeightDelta: fontWeight,),
             textAlign: TextAlign.center,
           ),
         ),

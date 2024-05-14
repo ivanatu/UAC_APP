@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/stats_widgets/countries_grid.dart';
-import '../../widgets/skeletons/country_list_skeleton.dart';
-import '../../models/summary_each_country.dart';
+import '../../../widgets/stats_widgets/countries_grid.dart';
+import '../../../widgets/skeletons/country_list_skeleton.dart';
+import '../../../models/summary_each_country.dart';
 
 class CountriesScreen extends StatefulWidget {
   @override
@@ -74,7 +74,6 @@ class _CountriesScreenState extends State<CountriesScreen> {
               "Search Any Region",
               style: TextStyle(
                 fontSize: 20,
-                fontFamily: "Montserrat",
                 fontWeight: FontWeight.w600,
                 color: Color(0xFF424242),
               ),

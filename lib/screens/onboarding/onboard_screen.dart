@@ -15,32 +15,48 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final pageController = PageController();
   Timer? _timer;
   int page = 0;
+  List<Map<String, String>> _onboardingData = [
+    {
+      'title': 'Welcome to the HIV Awareness App',
+      'subtitle': 'Learn about HIV/AIDS and how to prevent it.',
+      'image': 'assets/svgs/learn_about_hiv.svg',
+    },
+    {
+      'title': 'Find Testing Centers Nearby',
+      'subtitle': 'Locate clinics for HIV testing and counseling.',
+      'image': 'assets/svgs/locate.svg',
+    },
+    {
+      'title': 'Connect with Support Groups',
+      'subtitle': 'Join communities for HIV awareness and support.',
+      'image': 'assets/svgs/community.svg',
+    },
+  ];
   @override
   void initState() {
     super.initState();
 // controlling the sliding animation
+  }
 
-    _timer = Timer.periodic(const Duration(milliseconds: 2300), (timer) {
-      if (mounted) {
+  void nextPage() {
+    if (mounted) {
+      setState(() {
+        page += 1;
+      });
+
+      if (page >= 3) {
         setState(() {
-          page += 1;
+          page = -1;
         });
-
-        if (page >= 3) {
-          setState(() {
-            page = -1;
-          });
-        } else {
-          pageController.animateToPage(
-            page,
-            duration: const Duration(milliseconds: 800),
-            curve: Curves.decelerate,
-          );
-        }
       } else {
-        timer.cancel();
+        pageController.animateToPage(
+          page,
+          duration: const Duration(milliseconds: 800),
+          curve: Curves.decelerate,
+        );
       }
-    });
+    }
+    print(page);
   }
 
   @override
@@ -55,81 +71,73 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(left: 18.0, right: 18.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(28.0),
-              child: FittedBox(
-                fit: BoxFit.cover,
-                child: Image.asset(
-                  "assets/images/ball.png",
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.width / 1.2,
-                  scale: 1,
-                ),
+            Positioned(
+              top: 40,
+              left: 10,
+              child: Image.asset(
+                "lib/images/img.png",
+                width: 80,
+                height: 80,
               ),
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Welcome ",
-                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                            fontSize: 30, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
                 SizedBox(
-                  height: 200,
-                  child: PageView(
+                  height: MediaQuery.of(context).size.width,
+                  child: PageView.builder(
                     controller: pageController,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.all(10),
-                        child: Text(
-                          "Don't miss a goal!, Get live match notifications and match results from your favorite teams. ",
-                          textAlign: TextAlign.justify,
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelMedium!
-                              .copyWith(fontSize: 17),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.all(10),
-                        child: Text(
-                          "Don't miss a goal!, Get live match notifications and match results from your favorite teams. ",
-                          textAlign: TextAlign.justify,
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelMedium!
-                              .copyWith(fontSize: 17),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.all(10),
-                        child: Text(
-                          "Don't miss a goal!, Get live match notifications and match results from your favorite teams. ",
-                          textAlign: TextAlign.justify,
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelMedium!
-                              .copyWith(fontSize: 17),
-                        ),
-                      ),
-                    ],
+                    itemCount: _onboardingData.length,
+                    onPageChanged: (index) {
+                      setState(() {
+                        page = index;
+                      });
+                    },
+                    itemBuilder: (context, index) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            _onboardingData[index]['image']!,
+                            height: 310,
+                            fit: BoxFit.cover,
+                          ),
+                          const SizedBox.square(
+                            dimension: 20,
+                          ),
+                          Text(
+                            _onboardingData[index]['title']!,
+                            style:
+                                Theme.of(context).textTheme.titleLarge!.apply(
+                                      fontWeightDelta: 3,
+                                    ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox.square(dimension: 5),
+                          Text(
+                            _onboardingData[index]['subtitle']!,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ),
+                const SizedBox.square(dimension: 20),
                 SmoothPageIndicator(
                   controller: pageController,
-                  count: 3,
+                  onDotClicked: (index) {
+                    pageController.animateToPage(
+                      index,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeIn,
+                    );
+                  },
+                  count: _onboardingData.length,
                   effect: WormEffect(
                     dotHeight: 12,
                     dotWidth: 12,
@@ -137,18 +145,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     activeDotColor: primaryColor,
                     type: WormType.normal,
                   ),
-                )
+                ),
+                const SizedBox.square(dimension: 10),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(65, 5, 65, 5),
+                  child: CustomButton(
+                    text: page == 2 ? "Get Started" : "Next",
+                    textColor: Colors.white,
+                    opacity: 1,
+                    fontSize: 3,
+                    onPress: page >= 2 ? () => Routes.replacePage(const IndexScreen(),) : () => nextPage(),
+                  ),
+                ),
               ],
-            ),
-            const SizedBox.square(dimension: 20),
-            CustomButton(
-              text: "Get Started",
-              textColor: Colors.white,
-              opacity: 1,
-              onPress: () {},
-            ),
-            const SizedBox.square(
-              dimension: 10,
             ),
           ],
         ),

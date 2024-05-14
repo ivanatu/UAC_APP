@@ -1,3 +1,3 @@
 import "/exports/exports.dart";
 
-Color primaryColor = Color.fromARGB(255, 4, 37, 182);
+Color primaryColor = Color.fromARGB(255, 13, 95, 172);

@@ -11,8 +11,8 @@ class IndexScreen extends StatefulWidget {
 }
 
 class _IndexScreenState extends State<IndexScreen> {
-  String _currentVersion = '';
-  String _latestVersion = '';
+  // String _currentVersion = '';
+  // String _latestVersion = '';
   // Future<void> _checkForUpdates() async {
   //   // Retrieve the current version of the app
   //   PackageInfo packageInfo = await PackageInfo.fromPlatform();
@@ -51,7 +51,7 @@ class _IndexScreenState extends State<IndexScreen> {
     {"label": "Home", "icon": "home.svg", "un": "home_un.svg"},
     {"label": "News", "icon": "livescore.svg", "un": "livescore_un.svg"},
     {"label": "Stats", "icon": "stats.svg", "un": "stats_un.svg"},
-    {"label": "Chat", "icon": "chat.svg", "un": "un_chat.svg"},
+    {"label": "Chat", "icon": "chat.svg", "un": "chat_un.svg"},
   ];
   // page controller
   final PageController pageController = PageController();
@@ -59,9 +59,9 @@ class _IndexScreenState extends State<IndexScreen> {
   // pages to render
   List<Widget> pages = [
     HomeScreen(),
-    HomeScreen(),
-    HomeScreen(),
-    HomeScreen(),
+    NewsPage(),
+    StatsPage(),
+    ChatScreen(),
   ];
   @override
   Widget build(BuildContext context) {

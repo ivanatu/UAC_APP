@@ -1,8 +1,6 @@
-import 'package:auto_size_text/auto_size_text.dart';
-
-import '../../screens/stats_dashboard_screens/country_stat.dart';
+import "/exports/exports.dart";
+import '../../screens/stats/stats_dashboard_screens/country_stat.dart';
 import '../../models/item_color_data.dart';
-import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:intl/intl.dart';
 
@@ -145,7 +143,6 @@ class CountryListItem extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             SizedBox(width: 6),
-
                             //Number
                             LimitedBox(
                               maxHeight: constraint.maxHeight * 0.13,

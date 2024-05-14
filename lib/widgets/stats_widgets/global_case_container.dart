@@ -1,7 +1,5 @@
-import 'package:auto_size_text/auto_size_text.dart';
-
-import '../../screens/stats_dashboard_screens/world_stat.dart';
-import 'package:flutter/material.dart';
+import '/exports/exports.dart';
+import '../../screens/stats/stats_dashboard_screens/world_stat.dart';
 import 'radial_progress.dart';
 import 'small_graph_panel.dart';
 
