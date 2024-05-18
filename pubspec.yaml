@@ -47,6 +47,9 @@ dependencies:
   provider: ^6.1.2
   flutter_svg: ^2.0.10+1
   community_charts_flutter: ^1.0.2
+  fl_chart: ^0.68.0
+  animations: ^2.0.11
+  pie_chart: ^5.4.0
 
 
 dev_dependencies:
@@ -169,6 +172,7 @@ flutter:
      - assets/stats/
      - assets/launcher/
      - lib/images/
+     - assets/imgs/
   fonts:
      - family: Montserrat
        fonts:

@@ -20,7 +20,7 @@ class CategoryTab extends StatelessWidget {
       required this.tabName,
       required this.color,
       required this.tabDesc,
-      this.imgHeight = 150.0,
+      this.imgHeight = 100.0,
       this.imgLeft = 15.0,
       this.imgBottom = -8.0,
       required this.titleGrp,
@@ -69,68 +69,75 @@ class CategoryTab extends StatelessWidget {
     return InkWell(
       onTap: getPage(tabName, context),
       child: Container(
-        margin: const EdgeInsets.fromLTRB(20, 0, 20, 15),
-        height: 142,
-        child: Stack(
+        margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+        height: 100,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(
+            width: 1,
+            color: color.withAlpha(40),
+          ),
+          color: color.withOpacity(0.13),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            //Title Container
-            Positioned.fill(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  padding: const EdgeInsets.only(left: 150, right: 20),
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: color.withOpacity(0.13),
-                  ),
-                  height: 125,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      AutoSizeText(
-                        "$tabName",
-                        style: TextStyle(
-                          color: color,
-                          fontFamily: "Montserrat",
-                          fontSize: 23,
-                          fontWeight: FontWeight.w700,
-                        ),
-                        stepGranularity: 1,
-                        maxFontSize: 23,
-                        maxLines: 1,
-                        group: titleGrp,
-                      ),
-                      AutoSizeText(
-                        "$tabDesc",
-                        style: TextStyle(
-                          color: color,
-                          fontFamily: "Montserrat",
-                          fontSize: 19,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        stepGranularity: 1,
-                        maxFontSize: 19,
-                        maxLines: 3,
-                        group: descGrp,
-                      ),
-                    ],
-                  ),
+            Container(
+              width: imgHeight * 0.5,
+              height: imgHeight * 0.5,
+              margin: EdgeInsets.fromLTRB(15, 20, 5, 10),
+              child: Hero(
+                tag: imgPath,
+                child: Image.asset(
+                  imgPath,
+                  // fit: BoxFit.cover,
                 ),
               ),
             ),
-
-            Positioned(
-              left: imgLeft,
-              bottom: imgBottom,
-              child: Container(
-                height: imgHeight,
-                child: Hero(
-                    tag: imgPath, child: Image(image: AssetImage(imgPath))),
+            Space(),
+            Center(
+              child: AutoSizeText.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "$tabName\n",
+                      style: TextStyle(
+                        color: color,
+                        fontFamily: "Montserrat",
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    TextSpan(
+                      text: "$tabDesc",
+                      style: TextStyle(
+                        color: color,
+                        fontFamily: "Montserrat",
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+                stepGranularity: 1,
+                maxFontSize: 23,
+                maxLines: 3,
+                group: titleGrp,
               ),
             ),
+            // AutoSizeText(
+            //   "$tabDesc",
+            //   style: TextStyle(
+            //     color: color,
+            //     fontFamily: "Montserrat",
+            //     fontSize: 15,
+            //     fontWeight: FontWeight.w500,
+            //   ),
+            //   stepGranularity: 1,
+            //   maxFontSize: 19,
+            //   maxLines: 3,
+            //   group: descGrp,
+            // ),
           ],
         ),
       ),

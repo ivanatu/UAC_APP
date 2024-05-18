@@ -25,8 +25,6 @@ class _GlobalStatScreenState extends State<GlobalStatScreen> {
   ApiClient _client = ApiClient();
   Map<String, dynamic> globalData = {};
 
-  Future<dynamic>? _topSixFuture;
-
   Future<dynamic> getTopSix() async {
     List<SummaryEachCountry> listTopSix = [];
     List<dynamic> json;

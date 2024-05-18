@@ -17,7 +17,7 @@ class DefaultCountryScreen extends StatefulWidget {
 class _DefaultCountryScreenState extends State<DefaultCountryScreen> {
   @override
   Widget build(BuildContext context) {
-    if (defaultCountry.countryName == null) {
+    if (defaultCountry.countryName.isEmpty) {
       return Padding(
         padding: const EdgeInsets.fromLTRB(15, 350, 15, 0),
         child: Column(

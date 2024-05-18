@@ -1,7 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
 import '/exports/exports.dart';
-// import 'package:package_info_plus/package_info_plus.dart';
 
 class IndexScreen extends StatefulWidget {
   const IndexScreen({super.key});
@@ -50,6 +49,7 @@ class _IndexScreenState extends State<IndexScreen> {
   List<Map<String, dynamic>> bottomNavs = [
     {"label": "Home", "icon": "home.svg", "un": "home_un.svg"},
     {"label": "News", "icon": "livescore.svg", "un": "livescore_un.svg"},
+    {"label": "Messages", "icon": "livescore.svg", "un": "livescore_un.svg"},
     {"label": "Stats", "icon": "stats.svg", "un": "stats_un.svg"},
     {"label": "Chat", "icon": "chat.svg", "un": "chat_un.svg"},
   ];
@@ -59,6 +59,7 @@ class _IndexScreenState extends State<IndexScreen> {
   // pages to render
   List<Widget> pages = [
     HomeScreen(),
+    NewsPage(),
     NewsPage(),
     StatsPage(),
     ChatScreen(),

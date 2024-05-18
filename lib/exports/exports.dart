@@ -6,7 +6,7 @@ export 'package:http/http.dart';
 export 'package:flutter/services.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:auto_size_text/auto_size_text.dart';
-
+export 'package:fl_chart/fl_chart.dart';
 // routes
 export "/routes/routes.dart";
 
@@ -31,3 +31,4 @@ export "/screens/index.dart";
 // widgets
 export '../widgets/widgets/custom_button.dart';
 export '/widgets/widgets/tap_effect.dart';
+export '/widgets/widgets/space.dart';

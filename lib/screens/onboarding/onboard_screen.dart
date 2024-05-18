@@ -76,10 +76,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             Positioned(
               top: 40,
               left: 10,
-              child: Image.asset(
-                "lib/images/img.png",
-                width: 80,
-                height: 80,
+              child: Hero(
+                tag: "lib/images/img.png",
+                child: Image.asset(
+                  "lib/images/img.png",
+                  width: 80,
+                  height: 80,
+                ),
               ),
             ),
             Column(
@@ -90,6 +93,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   height: MediaQuery.of(context).size.width,
                   child: PageView.builder(
                     controller: pageController,
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: _onboardingData.length,
                     onPageChanged: (index) {
                       setState(() {
@@ -100,10 +104,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SvgPicture.asset(
-                            _onboardingData[index]['image']!,
-                            height: 310,
-                            fit: BoxFit.cover,
+                          Flexible(
+                            child: SvgPicture.asset(
+                              _onboardingData[index]['image']!,
+                              height: 310,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                           const SizedBox.square(
                             dimension: 20,
@@ -112,7 +118,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             _onboardingData[index]['title']!,
                             style:
                                 Theme.of(context).textTheme.titleLarge!.apply(
-                                      fontWeightDelta: 3,
+                                      fontWeightDelta: 8,
+                                      fontSizeDelta: 5,
                                     ),
                             textAlign: TextAlign.center,
                           ),
@@ -154,7 +161,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     textColor: Colors.white,
                     opacity: 1,
                     fontSize: 3,
-                    onPress: page >= 2 ? () => Routes.replacePage(const IndexScreen(),) : () => nextPage(),
+                    onPress: page >= 2
+                        ? () => Routes.replacePage(
+                              const IndexScreen(),
+                            )
+                        : () => nextPage(),
                   ),
                 ),
               ],

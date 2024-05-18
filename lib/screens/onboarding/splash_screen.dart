@@ -24,7 +24,9 @@ class _SplashScreenState extends State<SplashScreen>
     );
     _animationController?.forward();
     Future.delayed(Duration(seconds: 3), () {
-      Routes.animateToPage(const OnBoardingScreen(),);
+      Routes.animateToPage(
+        const OnBoardingScreen(),
+      );
     });
   }
 
@@ -44,8 +46,11 @@ class _SplashScreenState extends State<SplashScreen>
           children: [
             AspectRatio(
               aspectRatio: 1.5,
-              child: Image.asset(
-                "lib/images/img.png",
+              child: Hero(
+                tag: "lib/images/img.png",
+                child: Image.asset(
+                  "lib/images/img.png",
+                ),
               ),
             ),
             SizedBox(
