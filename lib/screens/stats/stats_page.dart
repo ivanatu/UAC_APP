@@ -1,3 +1,5 @@
+import "dart:math";
+
 import "package:aids_awareness_app/screens/stats/pie_chart.dart";
 
 import "/exports/exports.dart";
@@ -72,23 +74,17 @@ class _StatsPageState extends State<StatsPage> {
         Space(
           space: 0.05,
         ),
-        FittedBox(
-          child: SizedBox(
-            height: 140,
-            child: PieChartWidget(
-              data: List.generate(
-                3,
-                (index) => PieChartSectionData(
-                  color: Colors.blue,
-                  value: 40,
-                  title: '40%',
-                  radius: 120,
-                  titleStyle: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
+        SizedBox(
+          height: 140,
+          child: PieChartWidget(
+            data: List.generate(
+              3,
+              (index) => PieChartSectionData(
+                // color: Theme.of(context).primaryColor,
+                value: Random(index).nextDouble(),
+                title: '40%',
+                radius: 30,
+                titleStyle: Theme.of(context).textTheme.bodyLarge,
               ),
             ),
           ),
