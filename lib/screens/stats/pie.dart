@@ -17,32 +17,34 @@ class PieChartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(1, 10, 5, 1),
+      padding: const EdgeInsets.fromLTRB(1, 5, 5, 1),
       child: PieChart(
         dataMap: dataMap,
         animationDuration: Duration(
-          milliseconds: 800,
+          milliseconds: 500,
         ),
-        chartLegendSpacing: 30,
+        chartLegendSpacing: 50,
         chartRadius: MediaQuery.of(context).size.width / 3.2,
         colorList: colorList,
         initialAngleInDegree: 0,
         chartType: ChartType.ring,
-        ringStrokeWidth: 60,
+        ringStrokeWidth: 100,
         centerText: "",
         legendOptions: LegendOptions(
           showLegendsInRow: false,
           legendPosition: LegendPosition.bottom,
           showLegends: true,
           legendShape: BoxShape.circle,
-          legendTextStyle: Theme.of(context).textTheme.bodyMedium!,
+          legendTextStyle: Theme.of(context).textTheme.bodyLarge!.apply(
+                fontWeightDelta: 2,
+              ),
         ),
         chartValuesOptions: ChartValuesOptions(
           showChartValueBackground: true,
           showChartValues: false,
           showChartValuesInPercentage: true,
           showChartValuesOutside: true,
-          decimalPlaces: 1,
+          decimalPlaces: 3,
         ),
       ),
     );

@@ -38,6 +38,21 @@ class Routes {
     Navigator.of(context).pushNamedAndRemoveUntil(route, (route) => false);
   }
 
+  static Widget animateTo(
+      {required Widget closedWidget,
+      required Widget openWidget,
+      Duration duration = const Duration(milliseconds: 500)}) {
+    return OpenContainer(
+        closedElevation: 0,
+        openElevation: 0,
+        closedColor: Colors.transparent,
+        openColor: Colors.transparent,
+        transitionDuration: duration,
+        transitionType: ContainerTransitionType.fade,
+        closedBuilder: (context, fn) => closedWidget,
+        openBuilder: (context, fn) => openWidget);
+  }
+
   static void animateToPage(Widget page, {type = 'fade'}) {
     Navigator.of(context).push(
       PageRouteBuilder(

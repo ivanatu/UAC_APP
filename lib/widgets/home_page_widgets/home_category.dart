@@ -11,8 +11,9 @@ import '../../screens/video.dart';
 
 // ignore: must_be_immutable
 class CategoryTab extends StatelessWidget {
-  final imgPath, tabName, tabDesc, imgHeight, imgLeft, imgBottom;
+  final imgPath, tabName, imgHeight, imgLeft, imgBottom;
   final Color color;
+  final String tabDesc;
   final AutoSizeGroup titleGrp, descGrp;
 
   const CategoryTab(
@@ -36,10 +37,10 @@ class CategoryTab extends StatelessWidget {
         return () => Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
                 PrecautionsScreen(color: color, imgPath: imgPath)));
-      case ("HIV Messages"):
-        return () => Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) =>
-                MessagesScreen(color: color, imgPath: imgPath)));
+      // case ("HIV Messages"):
+      //   return () => Navigator.of(context).push(MaterialPageRoute(
+      //       builder: (context) =>
+      //           MessagesScreen(color: color, imgPath: imgPath)));
       case ("Myths"):
         return () => Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => MythsScreen(color: color, imgPath: imgPath)));
@@ -109,7 +110,7 @@ class CategoryTab extends StatelessWidget {
                       ),
                     ),
                     TextSpan(
-                      text: "$tabDesc",
+                      text: tabDesc,
                       style: TextStyle(
                         color: color,
                         fontFamily: "Montserrat",

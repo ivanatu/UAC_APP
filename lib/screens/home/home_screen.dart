@@ -39,15 +39,15 @@ class _HomeScreenState extends State<HomeScreen> {
       "tabDesc": "Get rid of false assumptions",
       "color": Colors.redAccent[700],
     },
-    {
-      "imgPath": "assets/messages/android-message-icon-8.png",
-      "imgHeight": 120.0,
-      "imgLeft": 15.0,
-      "imgBottom": 2.0,
-      "tabName": "HIV Messages",
-      "tabDesc": "Messages for the community",
-      "color": Colors.lightGreen[700],
-    },
+    // {
+    //   "imgPath": "assets/messages/android-message-icon-8.png",
+    //   "imgHeight": 120.0,
+    //   "imgLeft": 15.0,
+    //   "imgBottom": 2.0,
+    //   "tabName": "HIV Messages",
+    //   "tabDesc": "Messages for the community",
+    //   "color": Colors.lightGreen[700],
+    // },
     // {
     //   "imgLeft": 5.0,
     //   "imgBottom": 19.0,
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
       "imgPath": "assets/updates/updates.png",
       "tabName": "Updates",
       "imgHeight": 146.0,
-      "tabDesc": "View the latest news related to the virus",
+      "tabDesc": "View the latest news related to\n the virus",
       "color": Colors.greenAccent[700],
     },
     {
@@ -72,13 +72,18 @@ class _HomeScreenState extends State<HomeScreen> {
       "imgPath": "assets/updates/play-button.png",
       "tabName": "Video Updates",
       "imgHeight": 110.0,
-      "tabDesc": "Watch informative videos about HIV/AIDS",
+      "tabDesc": "Watch informative videos\n about HIV/AIDS",
       "color": Colors.teal[800],
     },
   ];
 
   @override
   Widget build(BuildContext context) {
+    //
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+    ));
     return Scaffold(
       body: ListView(
         padding: const EdgeInsets.all(8.0),

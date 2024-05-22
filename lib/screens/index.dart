@@ -49,7 +49,7 @@ class _IndexScreenState extends State<IndexScreen> {
   List<Map<String, dynamic>> bottomNavs = [
     {"label": "Home", "icon": "home.svg", "un": "home_un.svg"},
     {"label": "News", "icon": "livescore.svg", "un": "livescore_un.svg"},
-    {"label": "Messages", "icon": "livescore.svg", "un": "livescore_un.svg"},
+    {"label": "Messages", "icon": "message.svg", "un": "message_un.svg"},
     {"label": "Stats", "icon": "stats.svg", "un": "stats_un.svg"},
     {"label": "Chat", "icon": "chat.svg", "un": "chat_un.svg"},
   ];
@@ -60,7 +60,7 @@ class _IndexScreenState extends State<IndexScreen> {
   List<Widget> pages = [
     HomeScreen(),
     NewsPage(),
-    NewsPage(),
+    MessagesScreen(),
     StatsPage(),
     ChatScreen(),
   ];

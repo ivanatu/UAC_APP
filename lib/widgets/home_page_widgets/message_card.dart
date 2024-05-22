@@ -1,3 +1,5 @@
+import 'package:aids_awareness_app/routes/routes.dart';
+import 'package:aids_awareness_app/widgets/home_page_widgets/message_details.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
@@ -173,40 +175,38 @@ class _MessageCardState extends State<MessageCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 360.0,
-      child: GridView.builder(
-        physics: BouncingScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 20.0),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisSpacing: 16.0,
-          mainAxisSpacing: 15.0,
-          crossAxisCount: 2,
-          childAspectRatio: 0.70,
-        ),
-        scrollDirection: Axis.vertical,
-        itemCount: messages.length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              setState(() {
-                selectedIndex = index;
-              });
-            },
-            child: Material(
-              borderRadius: BorderRadius.circular(15.0),
-              elevation: 5,
-              child: AnimatedContainer(
-                curve: Curves.fastOutSlowIn,
-                duration: Duration(milliseconds: 650),
-                decoration: BoxDecoration(
-                  color:
-                      index == selectedIndex ? Colors.teal[50] : Colors.white,
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                padding: const EdgeInsets.fromLTRB(14, 20, 14, 0),
-                child: LayoutBuilder(
-                  builder: (ctx, constraint) => Column(
+    return GridView.builder(
+      physics: BouncingScrollPhysics(),
+      padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 20.0),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisSpacing: 10.0,
+        mainAxisSpacing: 10.0,
+        crossAxisCount: 3,
+        childAspectRatio: 0.9680,
+      ),
+      scrollDirection: Axis.vertical,
+      itemCount: messages.length,
+      itemBuilder: (context, index) {
+        return Routes.animateTo(
+          openWidget: MessageDetails(
+            message: messages[index],
+          ),
+          closedWidget: Material(
+            borderRadius: BorderRadius.circular(15.0),
+            child: AnimatedContainer(
+              curve: Curves.fastOutSlowIn,
+              duration: Duration(milliseconds: 650),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                // color:
+                //     index == selectedIndex ? Colors.teal[50] : Colors.white,
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              padding: const EdgeInsets.fromLTRB(14, 20, 14, 0),
+              child: LayoutBuilder(
+                builder: (ctx, constraint) => SizedBox(
+                  height: constraint.maxHeight / 6.5,
+                  child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
@@ -215,56 +215,31 @@ class _MessageCardState extends State<MessageCard> {
                         height: constraint.maxHeight * 0.46,
                       ),
                       SizedBox(
-                        height: 8,
+                        height: 5,
                       ),
-                      LimitedBox(
-                        maxHeight: constraint.maxHeight * 0.1,
-                        child: AutoSizeText(
-                          "${messages[index]["prevention"]}",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: "Montserrat",
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          maxFontSize: 14,
-                          maxLines: 1,
-                          minFontSize: 11,
-                          stepGranularity: 1,
-                          group: titleGrp,
-                        ),
+                      AutoSizeText(
+                        "${messages[index]["prevention"]}",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                              fontSize: 13,
+                              fontFamily: "Montserrat",
+                              color: Colors.black,
+                              fontWeight: FontWeight.w800,
+                            ),
+                        maxFontSize: 13,
+                        maxLines: 1,
+                        minFontSize: 4,
+                        stepGranularity: 1,
+                        group: titleGrp,
                       ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      LimitedBox(
-                        maxHeight: constraint.maxHeight * 0.30,
-                        child: AutoSizeText(
-                          "${messages[index]['desc']}",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: "Montserrat",
-                            color: Colors.black26,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          maxFontSize: 12,
-                          minFontSize: 9,
-                          group: descGrp,
-                          stepGranularity: 1,
-                          maxLines: 4,
-                        ),
-                      ),
-                      SizedBox(height: 5),
                     ],
                   ),
                 ),
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

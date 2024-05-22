@@ -1,13 +1,10 @@
-import "dart:math";
-
-import "package:aids_awareness_app/screens/stats/pie_chart.dart";
+import "package:aids_awareness_app/screens/stats/widgets/progress_95.dart";
+import "package:aids_awareness_app/screens/stats/widgets/stat_widget.dart";
 
 import "/exports/exports.dart";
-import "bar_graph_widget.dart";
-import "pie.dart";
+import "antiretroviral_chart.dart";
+import "testing_and_treatment_cascade.dart";
 
-// // import '../../widgets/home_page_widgets/home_categories.dart';
-// import "./antiretroviral_chart.dart";
 class StatsPage extends StatefulWidget {
   const StatsPage({super.key});
 
@@ -37,58 +34,28 @@ class _StatsPageState extends State<StatsPage> {
         Space(
           space: 0.043,
         ),
-        Text(
-          "Antiretroviral Therapy",
-          style: Theme.of(context)
-              .textTheme
-              .bodyLarge!
-              .apply(fontWeightDelta: 2, fontSizeDelta: 3),
+        StatWidget(
+          nextPage: AntiretroviralTherapyChart(),
+          title: "Antiretroviral Therapy ",
+          icon: Icons.bar_chart_rounded,
+          color: Colors.red,
         ),
         Space(
-          space: 0.1,
-        ),
-        BarChartWidget(),
-        Space(
-          space: 0.051,
-        ),
-        Text(
-          "HIV Testing and Treatment Cascade",
-          style: Theme.of(context).textTheme.bodyLarge!.apply(
-                fontWeightDelta: 2,
-                fontSizeDelta: 2,
-              ),
-        ),
-        // pie chart
-        SizedBox(
-          height: 280,
-          child: PieChartPage(),
-        ),
-
-        Text(
-          "Progress on 95-95-95",
-          style: Theme.of(context).textTheme.bodyLarge!.apply(
-                fontWeightDelta: 2,
-                fontSizeDelta: 2,
-              ),
-        ),
-        Space(
-          space: 0.05,
-        ),
-        SizedBox(
-          height: 140,
-          child: PieChartWidget(
-            data: List.generate(
-              3,
-              (index) => PieChartSectionData(
-                // color: Theme.of(context).primaryColor,
-                value: Random(index).nextDouble(),
-                title: '40%',
-                radius: 30,
-                titleStyle: Theme.of(context).textTheme.bodyLarge,
-              ),
+            // space: 0.051,
             ),
-          ),
-        )
+        StatWidget(
+          nextPage: HIVTestingAndTreatmentCascade(),
+          title: "HIV Testing & Treatment",
+          icon: Icons.pie_chart_rounded,
+          color: Colors.blue,
+        ),
+        Space(),
+        StatWidget(
+          nextPage: ProgressOn95(),
+          title: "Progress on 95-95-95",
+          icon: Icons.pie_chart_rounded,
+          color: Colors.green,
+        ),
       ],
     );
   }

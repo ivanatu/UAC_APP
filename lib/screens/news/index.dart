@@ -10,19 +10,42 @@ class NewsPage extends StatefulWidget {
 class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
-    return ListView(children: [
-      Text.rich(
-        TextSpan(
-          children: [
-            TextSpan(
-              text: "\n  News",
-              style: Theme.of(context).textTheme.headlineLarge!.apply(
-                    fontWeightDelta: 10,
-                  ),
-            ),
-          ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text.rich(
+          TextSpan(
+            children: [
+              TextSpan(
+                text: "\n  News",
+                style: Theme.of(context).textTheme.headlineLarge!.apply(
+                      fontWeightDelta: 10,
+                    ),
+              ),
+            ],
+          ),
         ),
-      ),
-    ]);
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              AspectRatio(
+                aspectRatio: 1.85,
+                child: SvgPicture.asset(
+                  "assets/svgs/nodata.svg",
+                ),
+              ),
+              Text(
+                "No news available",
+                style: Theme.of(context).textTheme.bodyLarge!.apply(
+                      fontWeightDelta: 2,
+                    ),
+              ),
+            ],
+          ),
+        )
+      ],
+    );
   }
 }

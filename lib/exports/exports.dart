@@ -7,6 +7,8 @@ export 'package:flutter/services.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:auto_size_text/auto_size_text.dart';
 export 'package:fl_chart/fl_chart.dart';
+export 'package:animations/animations.dart';
+// export 'package:pie_chart/pie_chart.dart';
 // routes
 export "/routes/routes.dart";
 
