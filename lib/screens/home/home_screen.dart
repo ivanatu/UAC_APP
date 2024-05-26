@@ -85,68 +85,70 @@ class _HomeScreenState extends State<HomeScreen> {
       statusBarIconBrightness: Brightness.light,
     ));
     return Scaffold(
-      body: ListView(
-        padding: const EdgeInsets.all(8.0),
-        children: [
-          Space(
-            space: 0.07,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "\n\t  Good morning",
-                      style: Theme.of(context).textTheme.titleMedium!.apply(
-                            fontWeightDelta: 2,
-                          ),
-                    ),
-                    TextSpan(
-                      text: "\n  Welcome to UAC",
-                      style: Theme.of(context).textTheme.titleLarge!.apply(
-                            fontWeightDelta: 3,
-                          ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Hero(
-                  tag: "lib/images/img.png",
-                  child: Image.asset(
-                    "lib/images/img.png",
-                    width: 50,
-                    height: 50,
+      body: BottomTopMoveAnimationView(
+        child: ListView(
+          padding: const EdgeInsets.all(8.0),
+          children: [
+            Space(
+              space: 0.07,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "\n\t  Good morning",
+                        style: Theme.of(context).textTheme.titleMedium!.apply(
+                              fontWeightDelta: 2,
+                            ),
+                      ),
+                      TextSpan(
+                        text: "\n  Welcome to UAC",
+                        style: Theme.of(context).textTheme.titleLarge!.apply(
+                              fontWeightDelta: 3,
+                            ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-            ],
-          ),
-          Space(
-            space: 0.057,
-          ),
-          // health tip of the day
-          HealthTipWidget(),
-          //
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Hero(
+                    tag: "lib/images/img.png",
+                    child: Image.asset(
+                      "lib/images/img.png",
+                      width: 50,
+                      height: 50,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Space(
+              space: 0.057,
+            ),
+            // health tip of the day
+            HealthTipWidget(),
+            //
 
-          ...List.generate(categoryData.length, (index) {
-            var cat = categoryData[index];
-            return CategoryTab(
-              titleGrp: titleGrp,
-              descGrp: descGrp,
-              imgPath: cat["imgPath"],
-              imgBottom: cat["imgBottom"],
-              imgHeight: cat["imgHeight"],
-              imgLeft: cat["imgLeft"],
-              tabDesc: cat["tabDesc"],
-              tabName: cat["tabName"],
-              color: cat["color"],
-            );
-          })
-        ],
+            ...List.generate(categoryData.length, (index) {
+              var cat = categoryData[index];
+              return CategoryTab(
+                titleGrp: titleGrp,
+                descGrp: descGrp,
+                imgPath: cat["imgPath"],
+                imgBottom: cat["imgBottom"],
+                imgHeight: cat["imgHeight"],
+                imgLeft: cat["imgLeft"],
+                tabDesc: cat["tabDesc"],
+                tabName: cat["tabName"],
+                color: cat["color"],
+              );
+            })
+          ],
+        ),
       ),
     );
   }

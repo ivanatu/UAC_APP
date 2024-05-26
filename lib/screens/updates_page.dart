@@ -1,3 +1,4 @@
+import 'package:aids_awareness_app/widgets/custom_dropdown.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:aids_awareness_app/utils/app_globals.dart';
 import 'package:http/http.dart' as http;
@@ -23,7 +24,7 @@ class UpdatesScreen extends StatefulWidget {
 
 class _UpdatesScreenState extends State<UpdatesScreen> {
   String dropDownValue = "publishedAt";
-  ApiClient _client = ApiClient();
+  // ApiClient _client = ApiClient();
 
   String url = "$BASE_URL/aids_info?fields=*.*";
   var _newsFuture;
@@ -62,7 +63,7 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
         title: AutoSizeText(
           "AIDS Info",
           style: TextStyle(
-            color: Colors.teal[800],
+            // color: Colors.teal[800],
             fontFamily: "Montserrat",
             fontSize: 20,
             fontWeight: FontWeight.w600,
@@ -93,7 +94,7 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
             },
             icon: Icon(
               Icons.refresh,
-              color: Colors.teal[800],
+              // color: Colors.teal[800],
               size: 26,
             ),
           ),
@@ -107,16 +108,16 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
             builder: (ctx, constraint) => Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                //Carousel
+                // //Carousel
                 ImageCarousel(
                   height: constraint.maxHeight * 0.26,
                 ),
 
                 //Divider
                 Divider(
-                  color: Colors.teal[800],
+                  color: Theme.of(context).primaryColor,
                   height: 25,
-                  thickness: 2,
+                  thickness: 1.2,
                 ),
 
                 //Sorting + drop down
@@ -136,7 +137,7 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                           style: TextStyle(
                             fontFamily: "Montserrat",
                             fontSize: 18,
-                            color: Colors.teal[800],
+                            // color: Colors.teal[800],
                             fontWeight: FontWeight.w600,
                           ),
                           stepGranularity: 2,
@@ -148,9 +149,8 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                     ),
 
                     SizedBox(
-                        width:
-                            MediaQuery.of(context).size.width > 340.0 ? 10 : 7),
-
+                      width: MediaQuery.of(context).size.width > 340.0 ? 10 : 7,
+                    ),
                     Expanded(
                         child: const Icon(
                       Icons.filter_list,
@@ -158,142 +158,22 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                     )),
 
                     SizedBox(width: 10),
-
-                    //DropDown
-                    Container(
-                      width: constraint.maxWidth * 0.63,
-                      padding: const EdgeInsets.only(left: 15, right: 10),
-                      decoration: BoxDecoration(
-                        color: Colors.teal[800],
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      height: 50,
-                      child: Center(
-                        child: Theme(
-                          data: ThemeData(
-                            canvasColor: Colors.teal[800],
-                          ),
-                          child: DropdownButton<String>(
-                            isExpanded: true,
-                            itemHeight: 50,
-                            value: dropDownValue,
-                            underline: Container(
-                              height: 0,
-                            ),
-                            elevation: 20,
-                            iconSize: 28,
-                            icon: const Icon(
-                              Icons.expand_more,
-                              color: Colors.white,
-                            ),
-                            items: <DropdownMenuItem<String>>[
-                              const DropdownMenuItem(
-                                value: "publishedAt",
-                                child: SizedBox(
-                                  width: 55,
-                                  child: AutoSizeText(
-                                    "Latest",
-                                    style: TextStyle(
-                                      fontFamily: "Montserrat",
-                                      fontSize: 17,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    stepGranularity: 1,
-                                    maxFontSize: 17,
-                                    maxLines: 1,
-                                  ),
-                                ),
-                              ),
-                              const DropdownMenuItem(
-                                value: "popular",
-                                child: SizedBox(
-                                  width: 68,
-                                  child: AutoSizeText(
-                                    "Popular",
-                                    style: TextStyle(
-                                      fontFamily: "Montserrat",
-                                      fontSize: 17,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    stepGranularity: 1,
-                                    maxFontSize: 17,
-                                    maxLines: 1,
-                                  ),
-                                ),
-                              ),
-                              const DropdownMenuItem(
-                                value: "Last Week",
-                                child: SizedBox(
-                                  width: 90,
-                                  child: AutoSizeText(
-                                    "Last Week",
-                                    style: TextStyle(
-                                      fontFamily: "Montserrat",
-                                      fontSize: 17,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    stepGranularity: 1,
-                                    maxFontSize: 17,
-                                    maxLines: 1,
-                                  ),
-                                ),
-                              ),
-                              const DropdownMenuItem(
-                                value: "Last 15",
-                                child: SizedBox(
-                                  width: 99,
-                                  child: AutoSizeText(
-                                    "Last 15 days",
-                                    style: TextStyle(
-                                      fontFamily: "Montserrat",
-                                      fontSize: 17,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    stepGranularity: 1,
-                                    maxFontSize: 17,
-                                    maxLines: 1,
-                                  ),
-                                ),
-                              ),
-                              const DropdownMenuItem(
-                                value: "Last Month",
-                                child: SizedBox(
-                                  width: 97,
-                                  child: AutoSizeText(
-                                    "Last Month",
-                                    style: TextStyle(
-                                      fontFamily: "Montserrat",
-                                      fontSize: 17,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    stepGranularity: 1,
-                                    maxFontSize: 17,
-                                    maxLines: 1,
-                                  ),
-                                ),
-                              ),
-                            ],
-                            onChanged: (newValue) {
-                              setState(() {
-                                dropDownValue = newValue ?? "";
-                                _newsFuture = getNews();
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
+                    // custom drop down
+                    CustomDropdown(
+                        value: dropDownValue,
+                        onChanged: (newValue) {
+                          setState(() {
+                            dropDownValue = newValue ?? "";
+                            _newsFuture = getNews();
+                          });
+                        },
+                        constraint: constraint)
                   ],
                 ),
 
                 //Divider
                 Divider(
-                  color: Colors.teal[800],
+                  color: Theme.of(context).primaryColor,
                   height: 25,
                   thickness: 2,
                 ),

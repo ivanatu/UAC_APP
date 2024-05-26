@@ -2,6 +2,8 @@
 
 import 'dart:async';
 
+import 'package:aids_awareness_app/services/storage_service.dart';
+
 import '/exports/exports.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -162,9 +164,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     opacity: 1,
                     fontSize: 3,
                     onPress: page >= 2
-                        ? () => Routes.replacePage(
+                        ? () async {
+                            StorageService.saveData('new_user', 1);
+                            Routes.replacePage(
                               const IndexScreen(),
-                            )
+                            );
+                          }
                         : () => nextPage(),
                   ),
                 ),

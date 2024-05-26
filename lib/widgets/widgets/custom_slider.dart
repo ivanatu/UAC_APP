@@ -5,14 +5,12 @@ import '/exports/exports.dart';
 class CustomSlider extends StatefulWidget {
   final int initialPage;
   final List<dynamic> items;
-  final Duration slideDuration;
   final CustomOptions options;
   final ValueChanged<int>? onPageChanged;
   const CustomSlider({
     super.key,
     this.initialPage = 0,
     required this.items,
-    this.slideDuration = const Duration(seconds: 5),
     this.options = const CustomOptions(),
     this.onPageChanged,
   });
@@ -22,22 +20,29 @@ class CustomSlider extends StatefulWidget {
 }
 
 class _CustomSliderState extends State<CustomSlider> {
-  PageController? pageController;
-
+  final pageController = PageController();
   Timer? timer;
+  int page = 0;
   @override
   void initState() {
     super.initState();
-    pageController = PageController(initialPage: widget.options.initialPage);
-
     timer = Timer.periodic(widget.options.slideDuration, (timer) {
-      if (pageController?.page == widget.items.length - 1) {
-        pageController?.jumpToPage(0);
-      } else {
-        pageController?.nextPage(
-          duration: Duration(milliseconds: 500),
-          curve: widget.options.curves,
-        );
+      if (mounted) {
+        setState(() {
+          page += 1;
+        });
+
+        if (page >= (widget.items.length - 1)) {
+          setState(() {
+            page = -1;
+          });
+        } else {
+          pageController.animateToPage(
+            page,
+            duration: const Duration(milliseconds: 800),
+            curve: Curves.decelerate,
+          );
+        }
       }
     });
   }
@@ -50,25 +55,31 @@ class _CustomSliderState extends State<CustomSlider> {
 
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
-      itemCount: widget.items.length,
-      onPageChanged: widget.onPageChanged,
-      itemBuilder: (context, index) {
-        return Container(
-          height: widget.options.height,
-          margin: widget.options.margin,
-          decoration: BoxDecoration(
-            color: widget.options.color,
-            borderRadius: widget.options.borderRadius,
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage(
-                widget.items.elementAt(index),
+    return Flexible(
+      child: SizedBox(
+        height: widget.options.height,
+        child: PageView.builder(
+          controller: pageController,
+          itemCount: widget.items.length,
+          onPageChanged: widget.onPageChanged,
+          itemBuilder: (context, index) {
+            return Container(
+              height: widget.options.height,
+              margin: widget.options.margin,
+              decoration: BoxDecoration(
+                color: widget.options.color,
+                borderRadius: widget.options.borderRadius,
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(
+                    widget.items.elementAt(index),
+                  ),
+                ),
               ),
-            ),
-          ),
-        );
-      },
+            );
+          },
+        ),
+      ),
     );
   }
 }
@@ -89,7 +100,7 @@ class CustomOptions {
     this.borderRadius = BorderRadius.zero,
     this.margin = const EdgeInsets.all(10),
     this.color = Colors.white,
-    this.slideDuration = const Duration(seconds: 5),
+    this.slideDuration = const Duration(seconds: 1),
     this.curves = Curves.easeIn,
     this.viewportFraction = 1.2,
   });

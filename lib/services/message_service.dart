@@ -4,18 +4,18 @@ import '/exports/exports.dart';
 class MessageService {
   Future<List<Datum>> getMessages() async {
     try {
-      var request = Request(
-        'GET',
+      var response = await Client().get(
         Uri.parse(Apis.messages),
       );
-      StreamedResponse response = await request.send();
       if (response.statusCode == 200) {
-        String? responseString = await response.stream.bytesToString();
+        String responseString = await response.body;
+        print(responseString);
         return messagesModelFromJson(responseString).data;
       } else {
         return Future.error(response.reasonPhrase ?? "");
       }
-    } catch (e) {
+    } on Exception catch (e, x) {
+      print(x.toString());
       return Future.error(e.toString());
     }
   }

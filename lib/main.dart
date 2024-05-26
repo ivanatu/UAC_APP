@@ -1,3 +1,5 @@
+import "package:aids_awareness_app/services/storage_service.dart";
+
 import "/exports/exports.dart";
 
 var navigatorKey = GlobalKey<NavigatorState>();
@@ -5,6 +7,7 @@ BuildContext context = navigatorKey.currentState!.context;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  //
   // system ui settings
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

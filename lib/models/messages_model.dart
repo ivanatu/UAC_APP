@@ -1,3 +1,8 @@
+// To parse this JSON data, do
+//
+//     final messagesModel = messagesModelFromJson(jsonString);
+
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
 MessagesModel messagesModelFromJson(String str) =>
@@ -47,8 +52,7 @@ class Datum {
 
 class DatumAttributes {
   final String title;
-  final List<Content> content;
-  final dynamic description;
+  final String content;
   final DateTime createdAt;
   final DateTime updatedAt;
   final DateTime publishedAt;
@@ -59,7 +63,6 @@ class DatumAttributes {
   DatumAttributes({
     required this.title,
     required this.content,
-    required this.description,
     required this.createdAt,
     required this.updatedAt,
     required this.publishedAt,
@@ -71,9 +74,7 @@ class DatumAttributes {
   factory DatumAttributes.fromJson(Map<String, dynamic> json) =>
       DatumAttributes(
         title: json["title"],
-        content:
-            List<Content>.from(json["content"].map((x) => Content.fromJson(x))),
-        description: json["description"],
+        content: json["content"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         publishedAt: DateTime.parse(json["publishedAt"]),
@@ -84,8 +85,7 @@ class DatumAttributes {
 
   Map<String, dynamic> toJson() => {
         "title": title,
-        "content": List<dynamic>.from(content.map((x) => x.toJson())),
-        "description": description,
+        "content": content,
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
         "publishedAt": publishedAt.toIso8601String(),
@@ -94,59 +94,6 @@ class DatumAttributes {
         "localizations": localizations.toJson(),
       };
 }
-
-class Content {
-  final ContentType type;
-  final List<Child> children;
-
-  Content({
-    required this.type,
-    required this.children,
-  });
-
-  factory Content.fromJson(Map<String, dynamic> json) => Content(
-        type: contentTypeValues.map[json["type"]]!,
-        children:
-            List<Child>.from(json["children"].map((x) => Child.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "type": contentTypeValues.reverse[type],
-        "children": List<dynamic>.from(children.map((x) => x.toJson())),
-      };
-}
-
-class Child {
-  final ChildType type;
-  final String text;
-  final bool bold;
-
-  Child({
-    required this.type,
-    required this.text,
-    required this.bold,
-  });
-
-  factory Child.fromJson(Map<String, dynamic> json) => Child(
-        type: childTypeValues.map[json["type"]]!,
-        text: json["text"],
-        bold: json["bold"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "type": childTypeValues.reverse[type],
-        "text": text,
-        "bold": bold,
-      };
-}
-
-enum ChildType { TEXT }
-
-final childTypeValues = EnumValues({"text": ChildType.TEXT});
-
-enum ContentType { PARAGRAPH }
-
-final contentTypeValues = EnumValues({"paragraph": ContentType.PARAGRAPH});
 
 class Image {
   final Data data;
@@ -281,7 +228,7 @@ class Formats {
         thumbnail: Medium.fromJson(json["thumbnail"]),
         small: Medium.fromJson(json["small"]),
         medium: Medium.fromJson(json["medium"]),
-        large: Medium.fromJson(json["large"]),
+        large: Medium.fromJson(json["large"] ?? {}),
       );
 
   Map<String, dynamic> toJson() => {
@@ -300,7 +247,7 @@ class Medium {
   final dynamic path;
   final int width;
   final int height;
-  final double size;
+  // final double size;
   final int sizeInBytes;
   final String url;
 
@@ -312,22 +259,22 @@ class Medium {
     required this.path,
     required this.width,
     required this.height,
-    required this.size,
+    // required this.size,
     required this.sizeInBytes,
     required this.url,
   });
 
   factory Medium.fromJson(Map<String, dynamic> json) => Medium(
-        name: json["name"],
-        hash: json["hash"],
-        ext: extValues.map[json["ext"]]!,
-        mime: mimeValues.map[json["mime"]]!,
-        path: json["path"],
-        width: json["width"],
-        height: json["height"],
-        size: json["size"]?.toDouble(),
-        sizeInBytes: json["sizeInBytes"],
-        url: json["url"],
+        name: json["name"] ?? "",
+        hash: json["hash"] ?? "",
+        ext: extValues.map[json["ext"]] ?? Ext.PNG,
+        mime: mimeValues.map[json["mime"]] ?? Mime.IMAGE_PNG,
+        path: json["path"] ?? "",
+        width: json["width"] ?? 0,
+        height: json["height"] ?? 0,
+        // size: (json["size"]).toDouble() ?? 0.0,
+        sizeInBytes: json["sizeInBytes"] ?? 0,
+        url: json["url"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -338,7 +285,7 @@ class Medium {
         "path": path,
         "width": width,
         "height": height,
-        "size": size,
+        // "size": size,
         "sizeInBytes": sizeInBytes,
         "url": url,
       };

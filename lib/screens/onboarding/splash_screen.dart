@@ -1,3 +1,4 @@
+import '../../services/storage_service.dart';
 import '/exports/exports.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -23,10 +24,18 @@ class _SplashScreenState extends State<SplashScreen>
       curve: Curves.easeInOut,
     );
     _animationController?.forward();
-    Future.delayed(Duration(seconds: 3), () {
-      Routes.animateToPage(
-        const OnBoardingScreen(),
-      );
+    Future.delayed(Duration(seconds: 3), () async {
+      int? user = await StorageService.getData('new_user');
+      if (user == null) {
+        Routes.replacePage(
+          const OnBoardingScreen(),
+        );
+        // await StorageService.setData('new_user', 1);
+      } else {
+        Routes.replacePage(
+          IndexScreen(),
+        );
+      }
     });
   }
 

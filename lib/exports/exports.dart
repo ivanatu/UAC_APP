@@ -35,7 +35,7 @@ export "/screens/index.dart";
 export '../widgets/widgets/custom_button.dart';
 export '/widgets/widgets/tap_effect.dart';
 export '/widgets/widgets/space.dart';
-
+export '/widgets/bottom_up_animation.dart';
 // apis
 export '/apis/index.dart';
 

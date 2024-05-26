@@ -24,8 +24,9 @@ class _ImageCarouselState extends State<ImageCarousel> {
       ],
       options: CustomOptions(
         initialPage: 0,
-        curves: Curves.fastOutSlowIn,
-        viewportFraction: 1.2,
+        curves: Curves.linearToEaseOut,
+        slideDuration: Duration(seconds: 5),
+        // viewportFraction: 1.2,
         height: widget.height,
       ),
     );
