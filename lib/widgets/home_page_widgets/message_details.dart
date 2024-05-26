@@ -1,9 +1,11 @@
 // import 'package:aids_awareness_app/models/message_model.dart';
 
+import '/models/messages_model.dart';
+
 import '/exports/exports.dart';
 
 class MessageDetails extends StatefulWidget {
-  final Map<String, dynamic> message;
+  final Datum message;
   const MessageDetails({super.key, required this.message});
 
   @override
@@ -16,7 +18,7 @@ class _MessageDetailsState extends State<MessageDetails> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.message['prevention'],
+          widget.message.attributes.title,
           style: Theme.of(context).textTheme.titleLarge!.copyWith(
                 fontFamily: "Montserrat",
                 fontWeight: FontWeight.bold,
@@ -29,16 +31,17 @@ class _MessageDetailsState extends State<MessageDetails> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
-              children: [
-                Text(
-                  widget.message['desc'],
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        fontFamily: "Montserrat",
-                        color: Colors.black,
-                      ),
-                ),
-              ],
-            ),
+                children: List.generate(
+                    widget.message.attributes.content.length, (i) {
+              return Text(
+                widget.message.attributes.content[i].children.single.text,
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      fontFamily: "Montserrat",
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+              );
+            })),
           ),
         ]),
       ),

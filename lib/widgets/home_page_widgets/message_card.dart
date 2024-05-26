@@ -1,7 +1,5 @@
-import 'package:aids_awareness_app/routes/routes.dart';
-import 'package:aids_awareness_app/widgets/home_page_widgets/message_details.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
+import '/exports/exports.dart';
+import '/widgets/home_page_widgets/message_details.dart';
 
 class MessageCard extends StatefulWidget {
   @override
@@ -171,75 +169,80 @@ class _MessageCardState extends State<MessageCard> {
   ];
 
   static AutoSizeGroup titleGrp = AutoSizeGroup();
-  static AutoSizeGroup descGrp = AutoSizeGroup();
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      physics: BouncingScrollPhysics(),
-      padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 20.0),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisSpacing: 10.0,
-        mainAxisSpacing: 10.0,
-        crossAxisCount: 3,
-        childAspectRatio: 0.9680,
-      ),
-      scrollDirection: Axis.vertical,
-      itemCount: messages.length,
-      itemBuilder: (context, index) {
-        return Routes.animateTo(
-          openWidget: MessageDetails(
-            message: messages[index],
-          ),
-          closedWidget: Material(
-            borderRadius: BorderRadius.circular(15.0),
-            child: AnimatedContainer(
-              curve: Curves.fastOutSlowIn,
-              duration: Duration(milliseconds: 650),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                // color:
-                //     index == selectedIndex ? Colors.teal[50] : Colors.white,
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              padding: const EdgeInsets.fromLTRB(14, 20, 14, 0),
-              child: LayoutBuilder(
-                builder: (ctx, constraint) => SizedBox(
-                  height: constraint.maxHeight / 6.5,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Image(
-                        image: AssetImage(messages[index]["imgPath"]!),
-                        height: constraint.maxHeight * 0.46,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      AutoSizeText(
-                        "${messages[index]["prevention"]}",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              fontSize: 13,
-                              fontFamily: "Montserrat",
-                              color: Colors.black,
-                              fontWeight: FontWeight.w800,
-                            ),
-                        maxFontSize: 13,
-                        maxLines: 1,
-                        minFontSize: 4,
-                        stepGranularity: 1,
-                        group: titleGrp,
-                      ),
-                    ],
+    return Consumer<DataController>(builder: (context, controller, ch) {
+      return GridView.builder(
+        physics: BouncingScrollPhysics(),
+        padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 20.0),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisSpacing: 10.0,
+          mainAxisSpacing: 10.0,
+          crossAxisCount: 3,
+          childAspectRatio: 0.9680,
+        ),
+        scrollDirection: Axis.vertical,
+        itemCount: controller.items.length,
+        itemBuilder: (context, index) {
+          return Routes.animateTo(
+            openWidget: MessageDetails(
+              message: controller.items[index],
+            ),
+            closedWidget: Material(
+              borderRadius: BorderRadius.circular(15.0),
+              child: AnimatedContainer(
+                curve: Curves.fastOutSlowIn,
+                duration: Duration(milliseconds: 650),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  // color:
+                  //     index == selectedIndex ? Colors.teal[50] : Colors.white,
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                padding: const EdgeInsets.fromLTRB(14, 20, 14, 0),
+                child: LayoutBuilder(
+                  builder: (ctx, constraint) => SizedBox(
+                    height: constraint.maxHeight / 6.5,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        Image(
+                          image: NetworkImage(
+                            controller.items[index].attributes.image.data
+                                .attributes.url,
+                          ),
+                          height: constraint.maxHeight * 0.46,
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        AutoSizeText(
+                          "${messages[index]["prevention"]}",
+                          textAlign: TextAlign.center,
+                          style:
+                              Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    fontSize: 13,
+                                    fontFamily: "Montserrat",
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                          maxFontSize: 13,
+                          maxLines: 1,
+                          minFontSize: 4,
+                          stepGranularity: 1,
+                          group: titleGrp,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        );
-      },
-    );
+          );
+        },
+      );
+    });
   }
 }
