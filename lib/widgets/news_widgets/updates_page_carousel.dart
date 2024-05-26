@@ -1,5 +1,5 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart';
+import '../widgets/custom_slider.dart';
+import '/exports/exports.dart';
 
 class ImageCarousel extends StatefulWidget {
   final height;
@@ -13,7 +13,7 @@ class ImageCarousel extends StatefulWidget {
 class _ImageCarouselState extends State<ImageCarousel> {
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
+    return CustomSlider(
       items: [
         "assets/updates/news1.png",
         "assets/updates/news2.png",
@@ -21,26 +21,11 @@ class _ImageCarouselState extends State<ImageCarousel> {
         "assets/updates/news5.png",
         "assets/updates/news6.png",
         "assets/updates/news7.png"
-      ]
-          .map(
-            (imgPath) => Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                image: DecorationImage(
-                  fit: BoxFit.contain,
-                  image: AssetImage(imgPath),
-                ),
-              ),
-            ),
-          )
-          .toList(),
-      options: CarouselOptions(
+      ],
+      options: CustomOptions(
         initialPage: 0,
-        autoPlay: true,
-        pauseAutoPlayOnTouch: true,
-        autoPlayCurve: Curves.fastOutSlowIn,
+        curves: Curves.fastOutSlowIn,
         viewportFraction: 1.2,
-        enableInfiniteScroll: true,
         height: widget.height,
       ),
     );
