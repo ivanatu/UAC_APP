@@ -15,16 +15,19 @@ class CustomDropdown extends StatelessWidget {
     return //DropDown
         Container(
       width: constraint.maxWidth * 0.63,
-      padding: const EdgeInsets.only(left: 15, right: 10),
+      padding: const EdgeInsets.only(left: 10, right: 10),
       decoration: BoxDecoration(
-        color: Colors.teal[800],
+        // border: Border.all(
+        color: Theme.of(context).primaryColor,
+        //   width: 1.2,
+        // ),
         borderRadius: BorderRadius.circular(10),
       ),
-      height: 50,
+      height: 40,
       child: Center(
         child: Theme(
           data: ThemeData(
-            canvasColor: Colors.teal[800],
+            canvasColor: Theme.of(context).primaryColor,
           ),
           child: DropdownButton<String>(
             isExpanded: true,
@@ -40,7 +43,7 @@ class CustomDropdown extends StatelessWidget {
               color: Colors.white,
             ),
             items: <DropdownMenuItem<String>>[
-              const DropdownMenuItem(
+              DropdownMenuItem(
                 value: "publishedAt",
                 child: SizedBox(
                   width: 55,

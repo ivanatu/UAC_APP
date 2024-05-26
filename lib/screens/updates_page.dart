@@ -1,15 +1,10 @@
-import 'package:aids_awareness_app/widgets/custom_dropdown.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:aids_awareness_app/utils/app_globals.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-
+import '../services/update_service.dart';
+import '/widgets/custom_dropdown.dart';
 import '../widgets/news_widgets/news_tile.dart';
 import '../widgets/news_widgets/updates_page_carousel.dart';
-import '../network_requests/api_client.dart';
 import '../network_requests/exceptions.dart';
 import '../widgets/skeletons/news_list_skeleton.dart';
-import 'package:flutter/material.dart';
+import '/exports/exports.dart';
 
 class UpdatesScreen extends StatefulWidget {
   final imgPath;
@@ -24,27 +19,13 @@ class UpdatesScreen extends StatefulWidget {
 
 class _UpdatesScreenState extends State<UpdatesScreen> {
   String dropDownValue = "publishedAt";
-  // ApiClient _client = ApiClient();
 
-  String url = "$BASE_URL/aids_info?fields=*.*";
   var _newsFuture;
-
-  getNews() async {
-    var data;
-    try {
-      final response = await http.get(Uri.parse(url));
-      data = json.decode(response.body);
-    } on FetchDataException catch (fde) {
-      return fde;
-    }
-    var articles = data['data'];
-    return articles;
-  }
 
   refresh() async {
     await Future.delayed(Duration(milliseconds: 800), () {
       setState(() {
-        _newsFuture = getNews();
+        _newsFuture = UpdateService.getNews();
       });
     });
   }
@@ -52,13 +33,12 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
   @override
   void initState() {
     super.initState();
-    _newsFuture = getNews();
+    _newsFuture = UpdateService.getNews();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: AutoSizeText(
           "AIDS Info",
@@ -72,14 +52,6 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
           maxFontSize: 20,
           minFontSize: 14,
           maxLines: 1,
-        ),
-        leading: IconButton(
-          onPressed: () => Navigator.of(context).pop(),
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-            size: 26,
-          ),
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -100,24 +72,17 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
           ),
         ],
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
+      body: BottomTopMoveAnimationView(
+        // height: MediaQuery.of(context).size.height,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
           child: LayoutBuilder(
             builder: (ctx, constraint) => Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                // //Carousel
+                //Carousel
                 ImageCarousel(
                   height: constraint.maxHeight * 0.26,
-                ),
-
-                //Divider
-                Divider(
-                  color: Theme.of(context).primaryColor,
-                  height: 25,
-                  thickness: 1.2,
                 ),
 
                 //Sorting + drop down
@@ -131,7 +96,7 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                           ? EdgeInsets.only(left: 20)
                           : EdgeInsets.only(left: 0),
                       child: LimitedBox(
-                        maxWidth: 68,
+                        maxWidth: 60,
                         child: AutoSizeText(
                           "Sort By",
                           style: TextStyle(
@@ -154,82 +119,68 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                     Expanded(
                         child: const Icon(
                       Icons.filter_list,
-                      size: 26,
+                      size: 20,
                     )),
 
                     SizedBox(width: 10),
                     // custom drop down
                     CustomDropdown(
-                        value: dropDownValue,
-                        onChanged: (newValue) {
-                          setState(() {
-                            dropDownValue = newValue ?? "";
-                            _newsFuture = getNews();
-                          });
-                        },
-                        constraint: constraint)
+                      value: dropDownValue,
+                      onChanged: (newValue) {
+                        setState(() {
+                          dropDownValue = newValue ?? "";
+                          _newsFuture = UpdateService.getNews();
+                        });
+                      },
+                      constraint: constraint,
+                    )
                   ],
                 ),
 
                 //Divider
                 Divider(
                   color: Theme.of(context).primaryColor,
-                  height: 25,
-                  thickness: 2,
+                  height: 15,
+                  thickness: 1.2,
                 ),
 
                 //News tiles
-                Expanded(
-                  child: FutureBuilder<dynamic>(
-                    future: _newsFuture,
-                    builder: (context, snapshot) {
-                      if (snapshot.data == null ||
-                          snapshot.connectionState != ConnectionState.done) {
-                        return NewsListLoader();
-                      } else if (snapshot.data is FetchDataException) {
-                        return Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: Colors.grey[300],
-                            borderRadius: BorderRadius.circular(8),
+                FutureBuilder<dynamic>(
+                  future: _newsFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.data == null ||
+                        snapshot.connectionState != ConnectionState.done) {
+                      return NewsListLoader();
+                    } else if (snapshot.data is FetchDataException) {
+                      return Center(
+                        child: AutoSizeText(
+                          snapshot.data.toString(),
+                          style: TextStyle(
+                            fontFamily: "Montserrat",
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
                           ),
-                          child: Center(
-                            child: AutoSizeText(
-                              snapshot.data.toString(),
-                              style: TextStyle(
-                                fontFamily: "Montserrat",
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
-                              ),
-                              maxFontSize: 16,
-                              stepGranularity: 2,
-                            ),
-                          ),
-                        );
-                      } else {
-                        return ListView.separated(
-                          physics: BouncingScrollPhysics(),
+                          maxFontSize: 16,
+                          stepGranularity: 2,
+                        ),
+                      );
+                    } else {
+                      return Flexible(
+                        flex: 3,
+                        child: ListView.builder(
+                          physics: PageScrollPhysics(),
                           itemCount: snapshot.data.length,
-                          separatorBuilder: (context, index) {
-                            return Divider(
-                              height: (snapshot.data is FetchDataException)
-                                  ? 20
-                                  : 40,
-                              color: Colors.teal[800],
-                              thickness: 2,
+                          itemBuilder: (context, index) {
+                            return NewsTile(
+                              article: snapshot.data[index],
                             );
                           },
-                          itemBuilder: (context, index) {
-                            return NewsTile(article: snapshot.data[index]);
-                          },
-                        );
-                      }
-                    },
-                  ),
+                        ),
+                      );
+                    }
+                  },
                 ),
-
-                SizedBox(height: 10),
               ],
             ),
           ),

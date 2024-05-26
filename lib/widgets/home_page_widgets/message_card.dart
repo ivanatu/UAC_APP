@@ -194,58 +194,58 @@ class _MessageCardState extends State<MessageCard> {
                   openWidget: MessageDetails(
                     message: controller.items[index],
                   ),
-                  closedWidget: Hero(
-                    tag: Apis.url +
-                        controller
-                            .items[index].attributes.image.data.attributes.url,
-                    child: Material(
-                      borderRadius: BorderRadius.circular(15.0),
-                      child: AnimatedContainer(
-                        curve: Curves.fastOutSlowIn,
-                        duration: Duration(milliseconds: 650),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          // color:
-                          //     index == selectedIndex ? Colors.teal[50] : Colors.white,
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        padding: const EdgeInsets.fromLTRB(14, 20, 14, 0),
-                        child: LayoutBuilder(
-                          builder: (ctx, constraint) => SizedBox(
-                            height: constraint.maxHeight / 3.5,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: <Widget>[
-                                Image.network(
+                  closedWidget: Material(
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: AnimatedContainer(
+                      curve: Curves.fastOutSlowIn,
+                      duration: Duration(milliseconds: 650),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        // color:
+                        //     index == selectedIndex ? Colors.teal[50] : Colors.white,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      padding: const EdgeInsets.fromLTRB(14, 20, 14, 0),
+                      child: LayoutBuilder(
+                        builder: (ctx, constraint) => SizedBox(
+                          height: constraint.maxHeight / 3.5,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              Hero(
+                                tag: Apis.url +
+                                    controller.items[index].attributes.image
+                                        .data.attributes.url,
+                                child: Image.network(
                                   Apis.url +
                                       controller.items[index].attributes.image
                                           .data.attributes.url,
                                   height: constraint.maxHeight * 0.746,
                                 ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                AutoSizeText(
-                                  controller.items[index].attributes.title,
-                                  textAlign: TextAlign.center,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .copyWith(
-                                        fontSize: 13,
-                                        fontFamily: "Montserrat",
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w800,
-                                      ),
-                                  maxFontSize: 13,
-                                  maxLines: 1,
-                                  minFontSize: 4,
-                                  stepGranularity: 1,
-                                  group: titleGrp,
-                                ),
-                              ],
-                            ),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              AutoSizeText(
+                                controller.items[index].attributes.title,
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                      fontSize: 13,
+                                      fontFamily: "Montserrat",
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                maxFontSize: 13,
+                                maxLines: 1,
+                                minFontSize: 4,
+                                stepGranularity: 1,
+                                group: titleGrp,
+                              ),
+                            ],
                           ),
                         ),
                       ),
