@@ -14,20 +14,15 @@ class _VideoState extends State<Video> {
   bool isLoading = true;
   final link = "$BASE_URL/aids_awareness_videos";
   List<dynamic> collectedData = [];
-
   Future<void> fetchData() async {
     final result = await http.get(Uri.parse(link));
-
     if (result.statusCode == 200) {
       final content = jsonDecode(result.body);
-
       final data = content["data"];
-
       setState(() {
         collectedData = data;
       });
     }
-
     setState(() {
       isLoading = false;
     });
@@ -43,80 +38,94 @@ class _VideoState extends State<Video> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-              onPressed: () => Navigator.of(context).pop(),
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.black,
-                size: 28,
-              )),
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
+      backgroundColor: Colors.grey.shade200,
+      appBar: AppBar(
+        title: const Text(
+          "AIDS Awareness Videos",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
         ),
-        body: Container(
-            margin: const EdgeInsets.all(10.0),
-            child: isLoading
-                ? const Center(
-                    child: SpinKitFadingCircle(
-                      color: Colors.black,
-                      size: 30.0,
-                    ),
-                  )
-                : ListView.separated(
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const Divider(),
-                    itemCount: collectedData.length,
-                    itemBuilder: (context, index) {
-                      final data = collectedData[index];
-                      return buildVid(
-                          data['title'],
-                          data['description'],
-                          data['video_url'].substring(
-                              data['video_url'].lastIndexOf("/") + 1));
-                    },
-                  )));
+        centerTitle: true,
+        elevation: 0,
+      ),
+      body: Container(
+        child: isLoading
+            ? const Center(
+                child: SpinKitFadingCircle(
+                  color: Colors.black,
+                  size: 30.0,
+                ),
+              )
+            : Scrollbar(
+                thickness: 5,
+                child: ListView.builder(
+                  padding: const EdgeInsets.all(10.0),
+                  itemCount: collectedData.length,
+                  itemBuilder: (context, index) {
+                    final data = collectedData[index];
+                    return buildVid(
+                        data['title'],
+                        data['description'],
+                        data['video_url']
+                            .substring(data['video_url'].lastIndexOf("/") + 1));
+                  },
+                ),
+              ),
+      ),
+    );
   }
 
   Widget buildVid(String title, String description, String vidId) {
     return Card(
-      elevation: 3,
+      elevation: 0,
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+        side: BorderSide(color: Colors.grey.shade300, width: 1),
+      ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          YoutubePlayer(
-            controller: genController(vidId),
-            liveUIColor: Colors.blue,
+          ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+            ),
+            child: Hero(
+              tag: vidId,
+              child: YoutubePlayer(
+                controller: genController(vidId),
+                liveUIColor: Colors.blue,
+              ),
+            ),
           ),
           const SizedBox(
             height: 10,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Center(
-              child: Text(
-                title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "Montserrat",
-                ),
+            child: Text(
+              title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+                fontFamily: "Montserrat",
               ),
             ),
-          ),
-          SizedBox(
-            height: 10,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
               description,
-              maxLines: 1,
+              maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
-                fontSize: 12,
+                fontSize: 14,
                 fontFamily: "Montserrat",
               ),
             ),
@@ -124,19 +133,22 @@ class _VideoState extends State<Video> {
           SizedBox(
             height: 10,
           ),
-          ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(
-                    Colors.black), // Set the background color
-              ),
+          Center(
+            child: TextButton.icon(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
+                Navigator.of(context).push(
+                  MaterialPageRoute(
                     builder: (context) => VideoDetails(
-                        title: title, description: description, vidId: vidId)));
+                      title: title,
+                      description: description,
+                      vidId: vidId,
+                    ),
+                  ),
+                );
               },
-              child: const Text("Watch Video Details")),
-          SizedBox(
-            height: 10,
+              label: Icon(Icons.open_in_new),
+              icon: Text("View Details"),
+            ),
           ),
         ],
       ),

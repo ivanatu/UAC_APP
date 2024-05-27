@@ -54,7 +54,7 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
           maxLines: 1,
         ),
         centerTitle: true,
-        backgroundColor: Colors.transparent,
+        // backgroundColor: Colors.transparent,
         elevation: 0,
         actions: <Widget>[
           IconButton(
@@ -87,7 +87,7 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
 
                 //Sorting + drop down
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     //Sort by
@@ -116,7 +116,7 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width > 340.0 ? 10 : 7,
                     ),
-                    Expanded(
+                    Flexible(
                         child: const Icon(
                       Icons.filter_list,
                       size: 20,

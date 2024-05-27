@@ -18,16 +18,16 @@ class _PrecautionsScreenState extends State<PrecautionsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.grey.shade200,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () => Navigator.of(context).pop(),
-            icon: Icon(
-              Icons.arrow_back,
-              color: widget.color,
-              size: 28,
-            )),
+        // leading: IconButton(
+        //     onPressed: () => Navigator.of(context).pop(),
+        //     icon: Icon(
+        //       Icons.arrow_back,
+        //       color: widget.color,
+        //       size: 28,
+        //     )),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -40,11 +40,11 @@ class _PrecautionsScreenState extends State<PrecautionsScreen> {
               bottomRight: Radius.circular(25),
             ),
             child: Container(
-              height: 220,
+              height: 200,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(25.0),
-                    bottomRight: Radius.circular(25.0),
+                    bottomLeft: Radius.circular(10.0),
+                    bottomRight: Radius.circular(10.0),
                   ),
                   color: widget.color.withOpacity(0.2)),
               width: MediaQuery.of(context).size.width,

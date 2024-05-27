@@ -14,8 +14,8 @@ class CustomDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return //DropDown
         Container(
-      width: constraint.maxWidth * 0.63,
-      padding: const EdgeInsets.only(left: 10, right: 10),
+      width: constraint.maxWidth * 0.43,
+      padding: const EdgeInsets.fromLTRB(10, 2, 10, 2),
       decoration: BoxDecoration(
         // border: Border.all(
         color: Theme.of(context).primaryColor,

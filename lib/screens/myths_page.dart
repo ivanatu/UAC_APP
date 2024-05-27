@@ -1,3 +1,5 @@
+import 'package:aids_awareness_app/exports/exports.dart';
+import 'package:aids_awareness_app/screens/myth_details_page.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -79,7 +81,7 @@ class MythsScreen extends StatelessWidget {
         children: <Widget>[
           //Cover Image Container
           Container(
-            height: 230,
+            height: 200,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(25.0),
@@ -115,7 +117,7 @@ class MythsScreen extends StatelessWidget {
                     ),
                   ),
 
-                  //Image
+                  //         //Image
                   Positioned.fill(
                     bottom: -17.0,
                     child: Align(
@@ -140,105 +142,76 @@ class MythsScreen extends StatelessWidget {
           ),
 
           //Myth card
-          Flexible(
-            fit: FlexFit.loose,
+          Expanded(
             child: Container(
-              padding: const EdgeInsets.fromLTRB(16, 20, 16, 15),
-              width: MediaQuery.of(context).size.width > 360.0
-                  ? MediaQuery.of(context).size.width - 31.0
-                  : MediaQuery.of(context).size.width,
-              child: Material(
-                borderRadius: BorderRadius.circular(15.0),
-                elevation: 5,
-                child: Column(
-                  children: <Widget>[
-                    //Details
-                    Flexible(
-                      fit: FlexFit.loose,
-                      child: PageView.builder(
-                          controller: controller,
-                          physics: BouncingScrollPhysics(),
-                          itemCount: myths.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin: const EdgeInsets.fromLTRB(23, 35, 23, 15),
-                              child: LayoutBuilder(
-                                builder: (ctx, constraint) => Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: <Widget>[
-                                    LimitedBox(
-                                      maxHeight: constraint.maxHeight * 0.27,
-                                      child: Image(
-                                        image: AssetImage(
-                                            "${myths[index]["imgPath"]}"),
-                                        height: 100.0,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: constraint.maxHeight * 0.11,
-                                    ),
-                                    LimitedBox(
-                                      maxHeight: constraint.maxHeight * 0.17,
-                                      child: AutoSizeText(
-                                        "${myths[index]["myth"]}",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 19,
-                                          height: 1.1,
-                                          fontFamily: "Montserrat",
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                        maxFontSize: 20,
-                                        stepGranularity: 2,
-                                        maxLines: 3,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 13,
-                                    ),
-                                    LimitedBox(
-                                      maxHeight: constraint.maxHeight * 0.45,
-                                      child: AutoSizeText(
-                                        "${myths[index]['desc']}",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 16.5,
-                                          height: 1.4,
-                                          fontFamily: "Montserrat",
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                        maxFontSize: 16.5,
-                                        stepGranularity: 1.5,
-                                        maxLines: 6,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          }),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              width: MediaQuery.of(context).size.width,
+              child: GridView.builder(
+                controller: controller,
+                physics: PageScrollPhysics(),
+                itemCount: myths.length,
+                itemBuilder: (context, index) {
+                  return Routes.animateTo(
+                    openWidget: MythDetailsPage(
+                      tag: "$index",
+                      myth: "${myths[index]['desc']}",
+                      img: '${myths[index]["imgPath"]}',
+                      title: '${myths[index]["myth"]}',
                     ),
-
-                    //Dot Indicator
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 25),
-                      child: SmoothPageIndicator(
-                        controller: controller,
-                        count: myths.length,
-                        effect: WormEffect(
-                            dotHeight: 11,
-                            dotWidth: 11,
-                            spacing: 12.0,
-                            strokeWidth: 1.2,
-                            dotColor: Colors.grey.shade400,
-                            paintStyle: PaintingStyle.stroke,
-                            activeDotColor: Colors.redAccent.shade700,),
+                    closedWidget: Container(
+                      margin: const EdgeInsets.fromLTRB(2, 0, 3, 0),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade50,
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(
+                          color: Colors.grey.shade300,
+                        ),
                       ),
-                    )
-                  ],
+                      child: LayoutBuilder(
+                        builder: (ctx, constraint) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                              child: Image.asset(
+                                "${myths[index]["imgPath"]}",
+                                height: constraint.maxHeight * 0.5,
+                              ),
+                            ),
+                            SizedBox(
+                              height: constraint.maxHeight * 0.11,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                              child: AutoSizeText(
+                                "${myths[index]["myth"]}",
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  height: 1.1,
+                                  fontFamily: "Montserrat",
+                                  // color: Colors.black,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                maxFontSize: 20,
+                                stepGranularity: 2,
+                                maxLines: 2,
+                              ),
+                            ),
+                            // SizedBox(
+                            //   height: 13,
+                            // ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
                 ),
               ),
             ),

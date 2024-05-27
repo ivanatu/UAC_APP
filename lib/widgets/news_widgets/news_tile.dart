@@ -13,7 +13,9 @@ class NewsTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Routes.animateToPage(InfoDetails(article: article));
+        Routes.animateToPage(
+          InfoDetails(article: article),
+        );
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
