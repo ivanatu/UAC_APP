@@ -201,6 +201,10 @@ class _MessageCardState extends State<MessageCard> {
                       duration: Duration(milliseconds: 650),
                       decoration: BoxDecoration(
                         color: Colors.white,
+                        border: Border.all(
+                          color: Colors.grey.shade200,
+                          width: 1.8,
+                        ),
                         // color:
                         //     index == selectedIndex ? Colors.teal[50] : Colors.white,
                         borderRadius: BorderRadius.circular(10.0),

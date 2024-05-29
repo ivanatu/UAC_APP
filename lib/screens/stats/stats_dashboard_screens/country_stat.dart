@@ -1,5 +1,5 @@
 import '../../../widgets/stats_widgets/country_stat_widget.dart';
-import 'package:flutter/material.dart';
+import '/exports/exports.dart';
 
 class CountryStatScreen extends StatefulWidget {
   final color, countryName, countryCode, isIncreasing, totalCases;
@@ -35,26 +35,36 @@ class _CountryStatScreenState extends State<CountryStatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      body: SafeArea(
-        child: CountryStatWidget(
-          color: widget.color,
-          onBackArrow: () {
-            Navigator.of(context).pop();
-          },
-          countryCode: widget.countryCode,
-          countryName: widget.countryName,
-          totalCases: widget.totalCases,
-          // flagPath: widget.flagPath,
-          isIncreasing: widget.isIncreasing,
-          active: widget.active,
-          critical: widget.critical,
-          newDeaths: widget.newDeaths,
-          testsConducted: widget.testsConducted,
-          todayCases: widget.todayCases,
-          totalDeaths: widget.totalDeaths,
-          totalRecovered: widget.totalRecovered,
+      appBar: AppBar(
+        backgroundColor: widget.color,
+        leading: BackButton(
+          color: Colors.white,
         ),
+        title: Text(
+          widget.countryName,
+          style: TextStyle(
+            fontFamily: "Montserrat",
+            color: Colors.white,
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      body: CountryStatWidget(
+        color: widget.color,
+        onBackArrow: () => Routes.pop(),
+        countryCode: widget.countryCode,
+        countryName: widget.countryName,
+        totalCases: widget.totalCases,
+        // flagPath: widget.flagPath,
+        isIncreasing: widget.isIncreasing,
+        active: widget.active,
+        critical: widget.critical,
+        newDeaths: widget.newDeaths,
+        testsConducted: widget.testsConducted,
+        todayCases: widget.todayCases,
+        totalDeaths: widget.totalDeaths,
+        totalRecovered: widget.totalRecovered,
       ),
     );
   }

@@ -1,9 +1,7 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
-
-import '../../../widgets/stats_widgets/countries_grid.dart';
-import '../../../widgets/skeletons/country_list_skeleton.dart';
-import '../../../models/summary_each_country.dart';
+import '/widgets/stats_widgets/countries_grid.dart';
+import '/widgets/skeletons/country_list_skeleton.dart';
+import '/models/summary_each_country.dart';
+import '/exports/exports.dart';
 
 class CountriesScreen extends StatefulWidget {
   @override
@@ -64,88 +62,76 @@ class _CountriesScreenState extends State<CountriesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _clearFocus(context),
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 15, bottom: 20),
-            child: AutoSizeText(
-              "Search Any Region",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF424242),
-              ),
-              stepGranularity: 1,
-              maxFontSize: 20,
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+        title: Text(
+          "Uganda Regions",
+          style: TextStyle(
+            fontFamily: "Montserrat",
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
           ),
-
-          //Search Bar
-          Container(
-            decoration: BoxDecoration(
+        ),
+      ),
+      body: GestureDetector(
+        onTap: () => _clearFocus(context),
+        child: Column(
+          children: <Widget>[
+            //Search Bar
+            Card(
+              elevation: 0,
               color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.shade200,
-                  offset: Offset(0, 0.8),
-                )
-              ],
-            ),
-            padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
-            child: TextFormField(
-              cursorColor: themeColor,
-              style: TextStyle(
-                color: themeColor,
-                fontFamily: "Montserrat",
-                fontWeight: FontWeight.normal,
-                fontSize: MediaQuery.of(context).size.width < 360.0 ? 16 : 18,
-              ),
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: 17,
-                ),
-                hintText: "Region Name",
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide(
-                    color: themeColor!,
-                    width: 1.4,
-                    style: BorderStyle.solid,
+              margin: const EdgeInsets.fromLTRB(15, 10, 15, 15),
+              child: SizedBox(
+                height: 50,
+                child: TextFormField(
+                  cursorColor: themeColor,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(10),
+                    hintText: "Search Any Region",
+                    hintStyle: TextStyle(
+                      color: Colors.grey.shade400,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(
+                        color: Colors.grey.shade300,
+                        width: 1.3,
+                        style: BorderStyle.solid,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(
+                        color: Colors.grey.shade300,
+                        width: 1.3,
+                        style: BorderStyle.solid,
+                      ),
+                    ),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.grey.shade400,
+                    ),
                   ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide(
-                    color: themeColor!,
-                    width: 1.4,
-                    style: BorderStyle.solid,
-                  ),
-                ),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: themeColor,
-                  size: 21,
+                  onChanged: (String val) {
+                    setState(() {
+                      searchValue = val;
+                    });
+                  },
                 ),
               ),
-              onChanged: (String val) {
-                setState(() {
-                  searchValue = val;
-                });
-              },
             ),
-          ),
-
-          //Countries Grid
-          Expanded(
-            child: countries.isEmpty
-                ? CountryListLoader()
-                : CountriesGrid(
-                    list: getFilteredCountries(),
-                  ),
-          ),
-        ],
+            //Countries Grid
+            Expanded(
+              child: countries.isEmpty
+                  ? CountryListLoader()
+                  : CountriesGrid(
+                      list: getFilteredCountries(),
+                    ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -88,100 +88,78 @@ class _CountryStatWidgetState extends State<CountryStatWidget>
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   //Flag and Name and More
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      //Back Button
-                      InkWell(
-                        onTap: widget.onBackArrow,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(
-                              color: Color(0x99FFFFFF),
-                              width: 1.8,
-                            ),
-                          ),
-                          margin: const EdgeInsets.only(left: 20),
-                          padding: const EdgeInsets.all(7),
-                          child: const Icon(
-                            Icons.arrow_back_ios,
-                            color: Color(0x99FFFFFF),
-                            size: 21,
-                          ),
-                        ),
-                      ),
+                  // Row(
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: <Widget>[
+                  //     //Name and flag
+                  //     Flexible(
+                  //       fit: FlexFit.loose,
+                  //       child: Row(
+                  //         mainAxisAlignment: MainAxisAlignment.center,
+                  //         children: <Widget>[
+                  //           //Flag
+                  //           Flexible(
+                  //             fit: FlexFit.loose,
+                  //             child: Padding(
+                  //               padding: const EdgeInsets.only(top: 4.5),
+                  //               child: Container(
+                  //                 decoration: BoxDecoration(
+                  //                   color: Color(0xFFFA90A0),
+                  //                   shape: BoxShape.circle,
+                  //                 ),
+                  //                 padding: const EdgeInsets.all(4),
+                  //                 // child: Image.asset(
+                  //                 //   widget.flagPath,
+                  //                 //   width: 32,
+                  //                 // ),
+                  //               ),
+                  //             ),
+                  //           ),
 
-                      //Name and flag
-                      Flexible(
-                        fit: FlexFit.loose,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            //Flag
-                            Flexible(
-                              fit: FlexFit.loose,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 4.5),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFFA90A0),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  padding: const EdgeInsets.all(4),
-                                  // child: Image.asset(
-                                  //   widget.flagPath,
-                                  //   width: 32,
-                                  // ),
-                                ),
-                              ),
-                            ),
+                  //           SizedBox(width: 10),
 
-                            SizedBox(width: 10),
+                  //           //Country Name
+                  //           Flexible(
+                  //             flex: 2,
+                  //             fit: FlexFit.loose,
+                  //             child: Padding(
+                  //               padding: const EdgeInsets.only(top: 6, left: 4),
+                  //               child: AutoSizeText(
+                  //                 widget.countryName,
+                  //                 style: TextStyle(
+                  //                   fontFamily: "Montserrat",
+                  //                   color: Colors.white,
+                  //                   fontSize: 22,
+                  //                   fontWeight: FontWeight.w600,
+                  //                 ),
+                  //                 maxFontSize: 22,
+                  //                 textAlign: TextAlign.center,
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
 
-                            //Country Name
-                            Flexible(
-                              flex: 2,
-                              fit: FlexFit.loose,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 6, left: 4),
-                                child: AutoSizeText(
-                                  widget.countryName,
-                                  style: TextStyle(
-                                    fontFamily: "Montserrat",
-                                    color: Colors.white,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                  maxFontSize: 22,
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                  //     //More Icon
+                  //     Padding(
+                  //       padding: const EdgeInsets.only(right: 13, top: 3),
+                  //       child: InkWell(
+                  //         child: const Icon(
+                  //           Icons.more_horiz,
+                  //           color: Colors.white60,
+                  //           size: 30,
+                  //         ),
+                  //         onTap: () {},
+                  //       ),
+                  //     )
+                  //   ],
+                  // ),
 
-                      //More Icon
-                      Padding(
-                        padding: const EdgeInsets.only(right: 13, top: 3),
-                        child: InkWell(
-                          child: const Icon(
-                            Icons.more_horiz,
-                            color: Colors.white60,
-                            size: 30,
-                          ),
-                          onTap: () {},
-                        ),
-                      )
-                    ],
-                  ),
-
-                  SizedBox(
-                    height: 25,
-                  ),
+                  // SizedBox(
+                  //   height: 25,
+                  // ),
 
                   //Number of Cases
                   Padding(
@@ -214,7 +192,7 @@ class _CountryStatWidgetState extends State<CountryStatWidget>
 
           //White Details Card
           Positioned(
-            top: 150,
+            top: 80,
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height - 150,

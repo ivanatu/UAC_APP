@@ -5,16 +5,71 @@ class AntiretroviralTherapyChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.red.shade50,
       appBar: AppBar(
-        title: Text("Antiretroviral Therapy"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            BarChartWidget(),
-          ],
+        backgroundColor: Colors.red,
+        leading: BackButton(
+          color: Colors.white,
         ),
+        title: Text(
+          "Antiretroviral Therapy",
+          style: Theme.of(context).textTheme.bodyLarge!.apply(
+                fontWeightDelta: 2,
+                fontSizeFactor: 1.2,
+                color: Colors.white,
+                fontFamily: 'Montserrat',
+              ),
+        ),
+      ),
+      body: Stack(
+        children: [
+          Container(
+            height: 30,
+            decoration: BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(2, 40, 2, 10),
+            child: Column(
+              children: [
+                BarChartWidget(
+                  data: [
+                    {
+                      'name': 'Adults & Children',
+                      'value': 84.0,
+                      'color': Colors.blue.shade900,
+                    },
+                    {
+                      'name': 'Adults 15+',
+                      'value': 85.0,
+                      'color': Colors.blue.shade700,
+                    },
+                    {
+                      'name': 'Women 15+',
+                      'value': 88.0,
+                      'color': Colors.blue.shade500,
+                    },
+                    {
+                      'name': 'Men 15+',
+                      'value': 80.0,
+                      'color': Colors.blue.shade400,
+                    },
+                    {
+                      'name': 'Children 0-14',
+                      'value': 72.0,
+                      'color': Colors.blue.shade300,
+                    },
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

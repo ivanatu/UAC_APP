@@ -21,14 +21,14 @@ class PieWidget extends StatelessWidget {
       child: pie.PieChart(
         dataMap: dataMap,
         animationDuration: Duration(
-          milliseconds: 500,
+          milliseconds: 2500,
         ),
-        chartLegendSpacing: 50,
-        chartRadius: MediaQuery.of(context).size.width / 3.5,
+        chartLegendSpacing: 10,
+        chartRadius: MediaQuery.of(context).size.width / 2,
         colorList: colorList,
         initialAngleInDegree: 0,
-        chartType: pie.ChartType.ring,
-        ringStrokeWidth: 50,
+        chartType: pie.ChartType.disc,
+        ringStrokeWidth: 5,
         centerText: text,
         legendOptions: pie.LegendOptions(
           showLegendsInRow: false,

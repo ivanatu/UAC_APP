@@ -8,11 +8,8 @@ class PieChartPage extends StatelessWidget {
     "PLHIV who have suppressed viral loads": 20,
   };
 
-  final colorList = <Color>[
-    Colors.green,
-    Colors.yellow,
-    Colors.deepOrange,
-  ];
+  final colorList =
+      List.generate(3, (index) => Colors.primaries[(index * 4) % 10]);
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +21,10 @@ class PieChartPage extends StatelessWidget {
           milliseconds: 500,
         ),
         chartLegendSpacing: 50,
-        chartRadius: MediaQuery.of(context).size.width / 3.2,
+        chartRadius: MediaQuery.of(context).size.width / 1.2,
         colorList: colorList,
         initialAngleInDegree: 0,
-        chartType: ChartType.ring,
+        chartType: ChartType.disc,
         ringStrokeWidth: 100,
         centerText: "",
         legendOptions: LegendOptions(
@@ -35,8 +32,9 @@ class PieChartPage extends StatelessWidget {
           legendPosition: LegendPosition.bottom,
           showLegends: true,
           legendShape: BoxShape.circle,
-          legendTextStyle: Theme.of(context).textTheme.bodyLarge!.apply(
+          legendTextStyle: Theme.of(context).textTheme.labelLarge!.apply(
                 fontWeightDelta: 2,
+                fontFamily: 'Montserrat',
               ),
         ),
         chartValuesOptions: ChartValuesOptions(

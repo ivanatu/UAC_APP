@@ -15,37 +15,37 @@ class _MessagesScreenState extends State<MessagesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.grey.shade50,
       body: BottomTopMoveAnimationView(
         child: Stack(
           children: [
-            //Background Image
-            Positioned.fill(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                  decoration: BoxDecoration(
-                    // color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(30),
-                      bottomRight: Radius.circular(30),
-                    ),
-                    image: DecorationImage(
-                      image: AssetImage("assets/imgs/hiv.png"),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 40, sigmaY: 50),
-                    child: Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      color: Colors.black12,
-                    ),
-                  )),
-            ),
-            //
+            // //Background Image
+            // Positioned.fill(
+            //   top: 0,
+            //   left: 0,
+            //   right: 0,
+            //   child: Container(
+            //       decoration: BoxDecoration(
+            //         // color: Colors.white,
+            //         borderRadius: BorderRadius.only(
+            //           bottomLeft: Radius.circular(30),
+            //           bottomRight: Radius.circular(30),
+            //         ),
+            //         image: DecorationImage(
+            //           image: AssetImage("assets/imgs/hiv.png"),
+            //           fit: BoxFit.fill,
+            //         ),
+            //       ),
+            //       child: BackdropFilter(
+            //         filter: ImageFilter.blur(sigmaX: 40, sigmaY: 50),
+            //         child: Container(
+            //           width: double.infinity,
+            //           height: double.infinity,
+            //           color: Colors.black12,
+            //         ),
+            //       )),
+            // ),
+            // //
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

@@ -18,7 +18,7 @@ class StatWidget extends StatelessWidget {
       closedWidget: Card(
         elevation: 0,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(15, 18, 15, 18),
+          padding: const EdgeInsets.fromLTRB(10, 12, 10, 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -39,7 +39,8 @@ class StatWidget extends StatelessWidget {
                     maxFontSize: 18,
                     minFontSize: 10,
                     style: Theme.of(context).textTheme.bodyLarge!.apply(
-                          fontWeightDelta: 1,
+                          fontWeightDelta: 2,
+                          fontFamily: 'Montserrat',
                           color: Colors.grey.shade800,
                         ),
                   ),

@@ -14,18 +14,26 @@ class _ChatScreenState extends State<ChatScreen> {
       body: SafeArea(
         child: ListView(
           children: <Widget>[
-              Text.rich(
-            TextSpan(
-              children: [
-                TextSpan(
-                  text: "\n  Chat",
-                  style: Theme.of(context).textTheme.headlineLarge!.apply(
-                        fontWeightDelta: 10,
-                      ),
-                ),
-              ],
+            Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: "\n  Chat",
+                    style: Theme.of(context).textTheme.headlineLarge!.apply(
+                          fontWeightDelta: 10,
+                        ),
+                  ),
+                ],
+              ),
             ),
-          ),
+            Center(
+              child: Text(
+                "Chat Not available",
+                style: Theme.of(context).textTheme.bodyLarge!.apply(
+                      fontWeightDelta: 2,
+                    ),
+              ),
+            )
           ],
         ),
       ),
