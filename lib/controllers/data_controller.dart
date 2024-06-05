@@ -1,4 +1,4 @@
-import 'package:aids_awareness_app/services/update_service.dart';
+import '/services/update_service.dart';
 
 import '/services/message_service.dart';
 import '/models/messages_model.dart';
