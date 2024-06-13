@@ -20,13 +20,13 @@ class _StatsPageState extends State<StatsPage> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.fromLTRB(7, 20, 7, 10),
+      padding: EdgeInsets.fromLTRB(7, 0, 7, 10),
       children: [
         Text.rich(
           TextSpan(
             children: [
               TextSpan(
-                text: "\nStats",
+                text: " Stats",
                 style: Theme.of(context).textTheme.headlineLarge!.apply(
                       fontWeightDelta: 10,
                       fontFamily: 'Montserrat',

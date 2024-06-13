@@ -1,4 +1,5 @@
 // import '../../widgets/home_page_widgets/home_categories.dart';
+import "../../controllers/drawer_controller.dart";
 import "/exports/exports.dart";
 import "./widgets/health_tip_widget.dart";
 import '/widgets/home_page_widgets/home_category.dart';
@@ -79,37 +80,82 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String greet() {
+      // Get the current hour
+      DateTime now = DateTime.now();
+      int currentHour = now.hour;
+
+      // Determine the greeting based on the hour
+      String greeting;
+      if (currentHour >= 5 && currentHour < 12) {
+        greeting = 'Good morning!';
+      } else if (currentHour >= 12 && currentHour < 17) {
+        greeting = 'Good afternoon!';
+      } else {
+        greeting = 'Good evening!';
+      }
+      return greeting;
+    }
+
     //
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.light,
-    ));
+    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    //   statusBarColor: Colors.transparent,
+    //   statusBarIconBrightness: Brightness.light,
+    // ));
     return Scaffold(
       body: BottomTopMoveAnimationView(
         child: ListView(
           padding: const EdgeInsets.all(8.0),
           children: [
-            Space(
-              space: 0.07,
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                    onTap: () {
+                      Provider.of<ZDrawerController>(context, listen: false)
+                          .toggleDrawerSelected();
+                    },
+                    child: SvgPicture.asset(
+                      "assets/svgs/drawer.svg",
+                      // color: Theme.of(context).primaryColor,
+                      width: 30,
+                    ),
+                  ),
+                ),
+                AnimatedTextKit(
+                  animatedTexts: [
+                    TypewriterAnimatedText(
+                      greet(),
+                      textStyle: Theme.of(context).textTheme.bodyLarge!.apply(
+                            fontWeightDelta: 1,
+                          ),
+                      speed: const Duration(milliseconds: 300),
+                    ),
+                    TypewriterAnimatedText(
+                      "Welcome to UAC",
+                      textStyle: Theme.of(context).textTheme.bodyLarge!.apply(
+                            fontWeightDelta: 4,
+                          ),
+                      speed: const Duration(milliseconds: 300),
+                    ),
+                  ],
+                  totalRepeatCount: 4,
+                  pause: const Duration(milliseconds: 400),
+                  // displayFullTextOnTap: true,
+                  // stopPauseOnTap: true,
+                ),
                 Text.rich(
                   TextSpan(
                     children: [
-                      TextSpan(
-                        text: "\n\t  Good morning",
-                        style: Theme.of(context).textTheme.titleMedium!.apply(
-                              fontWeightDelta: 2,
-                            ),
-                      ),
-                      TextSpan(
-                        text: "\n  Welcome to UAC",
-                        style: Theme.of(context).textTheme.titleLarge!.apply(
-                              fontWeightDelta: 3,
-                            ),
-                      ),
+                      TextSpan(),
+                      // TextSpan(
+                      //   text: "\n  Welcome to UAC",
+                      //   style: Theme.of(context).textTheme.titleMedium!.apply(
+                      //         fontWeightDelta: 2,
+                      //       ),
+                      // ),
                     ],
                   ),
                 ),
@@ -130,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
               space: 0.057,
             ),
             // health tip of the day
-            HealthTipWidget(),
+            // HealthTipWidget(),
             //
 
             ...List.generate(categoryData.length, (index) {

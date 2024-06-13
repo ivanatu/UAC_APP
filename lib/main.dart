@@ -1,6 +1,6 @@
-import "package:aids_awareness_app/services/storage_service.dart";
-
+import "controllers/faqa_controller.dart";
 import "/exports/exports.dart";
+import "controllers/drawer_controller.dart";
 
 var navigatorKey = GlobalKey<NavigatorState>();
 BuildContext context = navigatorKey.currentState!.context;
@@ -28,6 +28,12 @@ void main() {
       providers: [
         ChangeNotifierProvider(
           create: (context) => DataController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ZDrawerController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => FaqaController(),
         ),
       ],
       child: MaterialApp(

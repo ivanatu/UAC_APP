@@ -1,5 +1,9 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:aids_awareness_app/controllers/drawer_controller.dart';
+import 'package:aids_awareness_app/screens/drawer_screen.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+
 import '/exports/exports.dart';
 
 class IndexScreen extends StatefulWidget {
@@ -55,7 +59,7 @@ class _IndexScreenState extends State<IndexScreen> {
   ];
   // page controller
   final PageController pageController = PageController();
-
+  final ZoomDrawerController zoomDrawerController = ZoomDrawerController();
   // pages to render
   List<Widget> pages = [
     HomeScreen(),
@@ -66,39 +70,64 @@ class _IndexScreenState extends State<IndexScreen> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: pages.length,
-        controller: pageController,
-        itemBuilder: (context, page) => pages[page],
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.light,
+        statusBarBrightness: Brightness.light,
+        systemNavigationBarColor: Colors.white,
+        systemNavigationBarIconBrightness: Brightness.dark,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (index) {
-          setState(() {
-            selected = index;
-          });
-          pageController.animateToPage(
-            index,
-            duration: const Duration(milliseconds: 700),
-            curve: Curves.ease,
-          );
-        },
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: primaryColor,
-        selectedIconTheme: const IconThemeData(size: 30),
-        currentIndex: selected,
-        items: List.generate(
-          bottomNavs.length,
-          (index) => BottomNavigationBarItem(
-            label: bottomNavs[index]['label'],
-            icon: SvgPicture.asset(
-              "$ext${selected == index ? bottomNavs[index]['icon'] : bottomNavs[index]['un']}",
-              color: selected == index ? primaryColor : Colors.grey.shade400,
+    );
+    return ZoomDrawer(
+      menuBackgroundColor: Theme.of(context).primaryColor,
+      // style: DrawerStyle.style2,
+      controller: Provider.of<ZDrawerController>(context).controller,
+      menuScreen: DrawerScreen(),
+      mainScreen: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 0,
+          forceMaterialTransparency: true,
+          // backgroundColor: Colors.red,
+          elevation: 0,
+        ),
+        body: PageView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: pages.length,
+          controller: pageController,
+          itemBuilder: (context, page) => pages[page],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: (index) {
+            setState(() {
+              selected = index;
+            });
+            pageController.animateToPage(
+              index,
+              duration: const Duration(milliseconds: 700),
+              curve: Curves.ease,
+            );
+          },
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: primaryColor,
+          selectedIconTheme: const IconThemeData(size: 30),
+          currentIndex: selected,
+          items: List.generate(
+            bottomNavs.length,
+            (index) => BottomNavigationBarItem(
+              label: bottomNavs[index]['label'],
+              icon: SvgPicture.asset(
+                "$ext${selected == index ? bottomNavs[index]['icon'] : bottomNavs[index]['un']}",
+                color: selected == index ? primaryColor : Colors.grey.shade400,
+              ),
             ),
           ),
         ),
       ),
+      borderRadius: 24.0,
+      showShadow: true,
+      angle: .0,
+      drawerShadowsBackgroundColor: Colors.grey.shade300,
+      slideWidth: MediaQuery.of(context).size.width * .75,
     );
   }
 }

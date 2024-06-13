@@ -5,4 +5,5 @@ class Apis {
   static String regions = "${url}/api/regions?populate=*";
   static String cases = "${url}/api/new-hiv-infections";
   static String newz = "${url}/api/newzs?populate=*";
+  static String faqs = "${url}/api/faqzs";
 }

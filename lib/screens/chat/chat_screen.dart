@@ -18,7 +18,7 @@ class _ChatScreenState extends State<ChatScreen> {
               TextSpan(
                 children: [
                   TextSpan(
-                    text: "\n  Chat",
+                    text: "  Chat",
                     style: Theme.of(context).textTheme.headlineLarge!.apply(
                           fontWeightDelta: 10,
                         ),

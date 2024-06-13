@@ -22,15 +22,6 @@ class _BottomTopMoveAnimationViewState extends State<BottomTopMoveAnimationView>
     )..forward();
   }
 
-  // dispose off controller
-  @override
-  void dispose() {
-    super.dispose();
-    if (animationController != null && animationController!.isCompleted) {
-      animationController!.dispose();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
