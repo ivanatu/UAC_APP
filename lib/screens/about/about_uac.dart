@@ -30,9 +30,9 @@ class _AboutUacState extends State<AboutUac> {
                     child: Hero(
                       tag: "side_image",
                       child: Image.asset(
-                        "lib/images/img.png",
-                        width: 200,
-                        height: 200,
+                        "assets/imgs/uac.png",
+                        width: double.infinity,
+                        height: MediaQuery.of(context).size.width * 0.15,
                       ),
                     ),
                   ),
@@ -191,7 +191,7 @@ class _AboutUacState extends State<AboutUac> {
                   ),
                 ),
                 Text(
-                  "\nUAC | All rights reserved | version 1.0.0",
+                  "\nUAC | All rights reserved | version 1.0.3",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.labelLarge!.apply(
                         fontFamily: 'Montserrat',
