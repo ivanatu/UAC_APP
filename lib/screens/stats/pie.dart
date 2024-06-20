@@ -37,12 +37,14 @@ class PieChartPage extends StatelessWidget {
                 fontFamily: 'Montserrat',
               ),
         ),
+        // ringStrokeWidth: 150,
         chartValuesOptions: ChartValuesOptions(
           showChartValueBackground: true,
-          showChartValues: false,
+          chartValueBackgroundColor: Colors.grey.shade100,
+          showChartValues: true,
           showChartValuesInPercentage: true,
-          showChartValuesOutside: true,
-          decimalPlaces: 3,
+          showChartValuesOutside: false,
+          decimalPlaces: 1,
         ),
       ),
     );

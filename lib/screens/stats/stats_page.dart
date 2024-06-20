@@ -71,7 +71,7 @@ class _StatsPageState extends State<StatsPage> {
         ),
         StatWidget(
           nextPage: NewCasesPage(),
-          title: "New Cases stats",
+          title: "HIV AIDS Burden",
           icon: Icons.pie_chart_rounded,
           color: Colors.blue,
         ),

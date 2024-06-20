@@ -42,27 +42,27 @@ class AntiretroviralTherapyChart extends StatelessWidget {
                     {
                       'name': 'Adults & Children',
                       'value': 84.0,
-                      'color': Colors.blue.shade900,
+                      'color': Colors.red.shade900,
                     },
                     {
                       'name': 'Adults 15+',
                       'value': 85.0,
-                      'color': Colors.blue.shade700,
+                      'color': Colors.red.shade700,
                     },
                     {
                       'name': 'Women 15+',
                       'value': 88.0,
-                      'color': Colors.blue.shade500,
+                      'color': Colors.red.shade500,
                     },
                     {
                       'name': 'Men 15+',
                       'value': 80.0,
-                      'color': Colors.blue.shade400,
+                      'color': Colors.red.shade400,
                     },
                     {
                       'name': 'Children 0-14',
                       'value': 72.0,
-                      'color': Colors.blue.shade300,
+                      'color': Colors.red.shade300,
                     },
                   ],
                 ),

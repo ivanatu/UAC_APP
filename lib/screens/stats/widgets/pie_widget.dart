@@ -41,10 +41,10 @@ class PieWidget extends StatelessWidget {
         ),
         chartValuesOptions: pie.ChartValuesOptions(
           showChartValueBackground: true,
-          showChartValues: false,
+          showChartValues: true,
           showChartValuesInPercentage: true,
-          showChartValuesOutside: true,
-          decimalPlaces: 3,
+          showChartValuesOutside: false,
+          decimalPlaces: 0,
         ),
       ),
     );

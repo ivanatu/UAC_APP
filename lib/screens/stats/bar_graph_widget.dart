@@ -18,11 +18,20 @@ class BarChartWidget extends StatelessWidget {
         child: BarChart(
           BarChartData(
             alignment: alignment,
-            maxY: 100,
+            maxY: 150,
             barTouchData: BarTouchData(
               touchTooltipData: BarTouchTooltipData(
+                tooltipMargin: -70,
+                getTooltipColor: (group) => Colors.transparent,
                 getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                  return null;
+                  return BarTooltipItem(
+                    rod.toY.toString(),
+                    Theme.of(context).textTheme.labelLarge!.apply(
+                          fontWeightDelta: 2,
+                          color: Colors.white,
+                          fontFamily: 'Montserrat',
+                        ),
+                  );
                 },
               ),
             ),
@@ -94,17 +103,35 @@ class BarChartWidget extends StatelessWidget {
                   showTitles: true,
                   getTitlesWidget: (value, x) {
                     if (value == 0) {
-                      return Text('0');
+                      return Text(
+                        '0',
+                        style: TextStyle(fontSize: 012),
+                      );
                     } else if (value == 20) {
-                      return Text('20');
+                      return Text(
+                        '20',
+                        style: TextStyle(fontSize: 012),
+                      );
                     } else if (value == 40) {
-                      return Text('40');
+                      return Text(
+                        '40',
+                        style: TextStyle(fontSize: 012),
+                      );
                     } else if (value == 60) {
-                      return Text('60');
+                      return Text(
+                        '60',
+                        style: TextStyle(fontSize: 012),
+                      );
                     } else if (value == 80) {
-                      return Text('80');
+                      return Text(
+                        '80',
+                        style: TextStyle(fontSize: 012),
+                      );
                     } else if (value == 100) {
-                      return Text('100');
+                      return Text(
+                        '100',
+                        style: TextStyle(fontSize: 012),
+                      );
                     } else {
                       return Text('');
                     }
@@ -123,7 +150,7 @@ class BarChartWidget extends StatelessWidget {
               ),
             ),
             borderData: FlBorderData(
-              show: false,
+              show: true,
             ),
             barGroups: getData(data),
           ),
@@ -137,17 +164,17 @@ class BarChartWidget extends StatelessWidget {
       data.length,
       (i) => BarChartGroupData(
         x: i,
-        barsSpace: 5,
+        barsSpace: 2,
         barRods: [
           BarChartRodData(
-            width: 31.5,
+            width: 61.5,
             borderRadius: BorderRadius.zero,
             toY: data[i]['value'],
             fromY: 0,
             color: data[i]['color'],
           )
         ],
-        showingTooltipIndicators: [0, 7],
+        showingTooltipIndicators: [0, 8],
       ),
     );
   }

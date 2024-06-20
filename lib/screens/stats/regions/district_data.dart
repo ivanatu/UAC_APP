@@ -75,6 +75,14 @@ class _DistrictDataState extends State<DistrictData> {
                   return p.PieChart(
                     dataMap: _generateMap(data),
                     colorList: _generateColorList(data.length),
+                    ringStrokeWidth: 150,
+                    chartValuesOptions: p.ChartValuesOptions(
+                      showChartValueBackground: true,
+                      showChartValues: true,
+                      showChartValuesInPercentage: true,
+                      showChartValuesOutside: false,
+                      decimalPlaces: 1,
+                    ),
                   );
                 }
                 return Center(

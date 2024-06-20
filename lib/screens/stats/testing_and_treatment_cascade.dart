@@ -1,4 +1,4 @@
-import 'package:aids_awareness_app/screens/stats/pie.dart';
+import '/screens/stats/pie.dart';
 
 import '/exports/exports.dart';
 

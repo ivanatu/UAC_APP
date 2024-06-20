@@ -9,7 +9,7 @@ class MessageService {
       );
       if (response.statusCode == 200) {
         String responseString = await response.body;
-        print(responseString);
+
         return messagesModelFromJson(responseString).data;
       } else {
         return Future.error(response.reasonPhrase ?? "");

@@ -10,7 +10,7 @@ class NewzService {
       );
 
       StreamedResponse response = await request.send();
-
+// print(response);
       if (response.statusCode == 200) {
         String? result = (await response.stream.bytesToString());
         return newsModelFromJson(result).data;

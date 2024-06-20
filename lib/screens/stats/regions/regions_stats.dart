@@ -82,30 +82,33 @@ class _RegionsStatsState extends State<RegionsStats> {
                     );
                   } else {
                     // pie chart to visualize the data
-                    return PieChart(
-                      dataMap: _generateDataMap(snapshot.data),
-                      colorList: _generateColorList(snapshot.data!.length),
-                      chartRadius: constraints.maxWidth * 0.8,
-                      animationDuration: Duration(
-                        milliseconds: 2500,
-                      ),
-                      chartLegendSpacing: constraints.maxWidth * 0.065,
-                      initialAngleInDegree: 0,
-                      chartType: ChartType.disc,
-                      ringStrokeWidth: 150,
-                      chartValuesOptions: ChartValuesOptions(
-                        showChartValueBackground: true,
-                        showChartValues: true,
-                        showChartValuesInPercentage: true,
-                        showChartValuesOutside: true,
-                        decimalPlaces: 1,
-                      ),
-                      legendOptions: LegendOptions(
-                        showLegends: true,
-                        legendPosition: LegendPosition.bottom,
-                        legendShape: BoxShape.circle,
-                        legendTextStyle: TextStyle(
-                          fontWeight: FontWeight.bold,
+                    return Padding(
+                      padding: const EdgeInsets.fromLTRB(8, 15, 8, 10),
+                      child: PieChart(
+                        dataMap: _generateDataMap(snapshot.data),
+                        colorList: _generateColorList(snapshot.data!.length),
+                        chartRadius: constraints.maxWidth * 0.75,
+                        animationDuration: Duration(
+                          milliseconds: 2500,
+                        ),
+                        chartLegendSpacing: constraints.maxWidth * 0.065,
+                        initialAngleInDegree: 0,
+                        chartType: ChartType.disc,
+                        ringStrokeWidth: 120,
+                        chartValuesOptions: ChartValuesOptions(
+                          showChartValueBackground: true,
+                          showChartValues: true,
+                          showChartValuesInPercentage: true,
+                          showChartValuesOutside: false,
+                          decimalPlaces: 1,
+                        ),
+                        legendOptions: LegendOptions(
+                          showLegends: true,
+                          legendPosition: LegendPosition.bottom,
+                          legendShape: BoxShape.circle,
+                          legendTextStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     );

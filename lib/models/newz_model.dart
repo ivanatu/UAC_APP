@@ -1,3 +1,8 @@
+// To parse this JSON data, do
+//
+//     final newsModel = newsModelFromJson(jsonString);
+
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
 NewsModel newsModelFromJson(String str) => NewsModel.fromJson(json.decode(str));
@@ -51,6 +56,7 @@ class DatumAttributes {
   final DateTime updatedAt;
   final DateTime publishedAt;
   final Image image;
+  final Image pdf;
 
   DatumAttributes({
     required this.title,
@@ -59,6 +65,7 @@ class DatumAttributes {
     required this.updatedAt,
     required this.publishedAt,
     required this.image,
+    required this.pdf,
   });
 
   factory DatumAttributes.fromJson(Map<String, dynamic> json) =>
@@ -69,6 +76,7 @@ class DatumAttributes {
         updatedAt: DateTime.parse(json["updatedAt"]),
         publishedAt: DateTime.parse(json["publishedAt"]),
         image: Image.fromJson(json["image"]),
+        pdf: Image.fromJson(json["pdf"] ?? {}),
       );
 
   Map<String, dynamic> toJson() => {
@@ -78,6 +86,7 @@ class DatumAttributes {
         "updatedAt": updatedAt.toIso8601String(),
         "publishedAt": publishedAt.toIso8601String(),
         "image": image.toJson(),
+        "pdf": pdf.toJson(),
       };
 }
 
@@ -89,7 +98,7 @@ class Image {
   });
 
   factory Image.fromJson(Map<String, dynamic> json) => Image(
-        data: Data.fromJson(json["data"]),
+        data: Data.fromJson(json["data"] ?? {}),
       );
 
   Map<String, dynamic> toJson() => {
@@ -108,7 +117,7 @@ class Data {
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["id"],
-        attributes: DataAttributes.fromJson(json["attributes"]),
+        attributes: DataAttributes.fromJson(json["attributes"] ?? {}),
       );
 
   Map<String, dynamic> toJson() => {
@@ -123,7 +132,7 @@ class DataAttributes {
   final dynamic caption;
   final int width;
   final int height;
-  final Formats formats;
+  // final Formats formats;
   final String hash;
   final String ext;
   final String mime;
@@ -141,7 +150,7 @@ class DataAttributes {
     required this.caption,
     required this.width,
     required this.height,
-    required this.formats,
+    // required this.formats,
     required this.hash,
     required this.ext,
     required this.mime,
@@ -155,19 +164,19 @@ class DataAttributes {
   });
 
   factory DataAttributes.fromJson(Map<String, dynamic> json) => DataAttributes(
-        name: json["name"],
-        alternativeText: json["alternativeText"],
-        caption: json["caption"],
-        width: json["width"],
-        height: json["height"],
-        formats: Formats.fromJson(json["formats"]),
-        hash: json["hash"],
-        ext: json["ext"],
-        mime: json["mime"],
+        name: json["name"] ?? "",
+        alternativeText: json["alternativeText"] ?? "",
+        caption: json["caption"] ?? "",
+        width: json["width"] ?? 0,
+        height: json["height"] ?? 0,
+        // formats: Formats.fromJson(json["formats"] ?? {}),
+        hash: json["hash"] ?? "",
+        ext: json["ext"] ?? "",
+        mime: json["mime"] ?? "",
         size: json["size"]?.toDouble(),
-        url: json["url"],
-        previewUrl: json["previewUrl"],
-        provider: json["provider"],
+        url: json["url"] ?? "",
+        previewUrl: json["previewUrl"] ?? "",
+        provider: json["provider"] ?? "",
         providerMetadata: json["provider_metadata"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
@@ -179,7 +188,7 @@ class DataAttributes {
         "caption": caption,
         "width": width,
         "height": height,
-        "formats": formats.toJson(),
+        // "formats": formats.toJson(),
         "hash": hash,
         "ext": ext,
         "mime": mime,
@@ -203,8 +212,8 @@ class Formats {
   });
 
   factory Formats.fromJson(Map<String, dynamic> json) => Formats(
-        thumbnail: Small.fromJson(json["thumbnail"]),
-        small: Small.fromJson(json["small"]),
+        thumbnail: Small.fromJson(json["thumbnail"] ?? {}),
+        small: Small.fromJson(json["small"] ?? {}),
       );
 
   Map<String, dynamic> toJson() => {
@@ -239,16 +248,16 @@ class Small {
   });
 
   factory Small.fromJson(Map<String, dynamic> json) => Small(
-        name: json["name"],
-        hash: json["hash"],
-        ext: json["ext"],
-        mime: json["mime"],
-        path: json["path"],
-        width: json["width"],
-        height: json["height"],
+        name: json["name"] ?? "",
+        hash: json["hash"] ?? "",
+        ext: json["ext"] ?? "",
+        mime: json["mime"] ?? "",
+        path: json["path"] ?? "",
+        width: json["width"] ?? 0,
+        height: json["height"] ?? 0,
         size: json["size"]?.toDouble(),
-        sizeInBytes: json["sizeInBytes"],
-        url: json["url"],
+        sizeInBytes: json["sizeInBytes"] ?? 0,
+        url: json["url"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
