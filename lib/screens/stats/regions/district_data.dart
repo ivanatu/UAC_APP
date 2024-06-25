@@ -29,7 +29,7 @@ class _DistrictDataState extends State<DistrictData> {
           color: Colors.white,
         ),
         title: Text(
-          'District Data',
+          'District Data in (%)',
           style: Theme.of(context).textTheme.titleLarge!.apply(
                 fontWeightDelta: 3,
                 color: Colors.white,
@@ -75,13 +75,20 @@ class _DistrictDataState extends State<DistrictData> {
                   return p.PieChart(
                     dataMap: _generateMap(data),
                     colorList: _generateColorList(data.length),
-                    ringStrokeWidth: 150,
+                    chartType: p.ChartType.disc,
+                    ringStrokeWidth: 120,
+                    legendOptions: p.LegendOptions(
+                      showLegends: true,
+                      // legendPosition: p.LegendPosition.bottom,
+                      legendShape: BoxShape.circle,
+                      // legendTextStyle: Theme.of(context).textTheme.bodyLarge,
+                    ),
                     chartValuesOptions: p.ChartValuesOptions(
                       showChartValueBackground: true,
                       showChartValues: true,
-                      showChartValuesInPercentage: true,
+                      showChartValuesInPercentage: false,
                       showChartValuesOutside: false,
-                      decimalPlaces: 1,
+                      decimalPlaces: 2,
                     ),
                   );
                 }

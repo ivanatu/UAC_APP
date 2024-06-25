@@ -1,6 +1,7 @@
 import "controllers/faqa_controller.dart";
 import "/exports/exports.dart";
 import "controllers/drawer_controller.dart";
+import "controllers/progress_95_controller.dart";
 
 var navigatorKey = GlobalKey<NavigatorState>();
 BuildContext context = navigatorKey.currentState!.context;
@@ -34,6 +35,9 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (context) => FaqaController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => Progress95Controller(),
         ),
       ],
       child: MaterialApp(

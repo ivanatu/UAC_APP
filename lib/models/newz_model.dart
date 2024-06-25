@@ -70,12 +70,12 @@ class DatumAttributes {
 
   factory DatumAttributes.fromJson(Map<String, dynamic> json) =>
       DatumAttributes(
-        title: json["title"],
-        content: json["content"],
+        title: json["title"] ?? "",
+        content: json["content"] ?? "",
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         publishedAt: DateTime.parse(json["publishedAt"]),
-        image: Image.fromJson(json["image"]),
+        image: Image.fromJson(json["image"] ?? {}),
         pdf: Image.fromJson(json["pdf"] ?? {}),
       );
 

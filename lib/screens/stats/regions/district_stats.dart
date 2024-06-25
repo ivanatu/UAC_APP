@@ -39,78 +39,82 @@ class _DistrictStatsState extends State<DistrictStats> {
                 ),
               ),
             ),
-            FutureBuilder(
-              future: RegionService().getRegions(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return GridView.builder(
-                    padding: EdgeInsets.fromLTRB(10, 30, 5, 10),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                    ),
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      Color color = Colors
-                          .primaries[(index * 7) % Colors.primaries.length];
-                      return Routes.animateTo(
-                        openWidget: DistrictData(
-                          index: index,
-                          color: color,
-                          region: snapshot.data![index],
-                        ),
-                        closedWidget: Card(
-                          elevation: 0,
-                          color: Colors
-                              .primaries[(index * 7) % Colors.primaries.length]
-                              .shade50,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              side: BorderSide(
-                                color: Colors.primaries[
-                                    (index * 7) % Colors.primaries.length],
-                                width: 1,
-                              )),
-                          child: GridTile(
-                            child: Center(
-                              child: Icon(
-                                Icons.pie_chart_rounded,
-                                size: 50,
-                                color: Colors.primaries[
-                                    (index * 7) % Colors.primaries.length],
-                              ),
-                            ),
-                            footer: Padding(
-                              padding: const EdgeInsets.all(8.0),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 40.0),
+              child: FutureBuilder(
+                future: RegionService().getRegions(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return GridView.builder(
+                      padding: EdgeInsets.fromLTRB(10, 30, 5, 10),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                      ),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        Color color = Colors
+                            .primaries[(index * 7) % Colors.primaries.length];
+                        return Routes.animateTo(
+                          openWidget: DistrictData(
+                            index: index,
+                            color: color,
+                            region: snapshot.data![index],
+                          ),
+                          closedWidget: Card(
+                            elevation: 0,
+                            color: Colors
+                                .primaries[
+                                    (index * 7) % Colors.primaries.length]
+                                .shade50,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                side: BorderSide(
+                                  color: Colors.primaries[
+                                      (index * 7) % Colors.primaries.length],
+                                  width: 1,
+                                )),
+                            child: GridTile(
                               child: Center(
-                                child: Text(
-                                  snapshot.data![index].attributes.title,
-                                  style: TextStyle(
-                                    color: Colors.primaries[
-                                        (index * 7) % Colors.primaries.length],
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 15,
+                                child: Icon(
+                                  Icons.pie_chart_rounded,
+                                  size: 50,
+                                  color: Colors.primaries[
+                                      (index * 7) % Colors.primaries.length],
+                                ),
+                              ),
+                              footer: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: Text(
+                                    snapshot.data![index].attributes.title,
+                                    style: TextStyle(
+                                      color: Colors.primaries[(index * 7) %
+                                          Colors.primaries.length],
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Montserrat',
+                                      fontSize: 15,
+                                    ),
                                   ),
                                 ),
                               ),
+                              // onTap: () {},
                             ),
-                            // onTap: () {},
                           ),
-                        ),
-                      );
-                    },
-                  );
-                } else if (snapshot.hasError) {
+                        );
+                      },
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text('Error: ${snapshot.error}'),
+                    );
+                  }
                   return Center(
-                    child: Text('Error: ${snapshot.error}'),
+                    child: CircularProgressIndicator(),
                   );
-                }
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
+                },
+              ),
             ),
           ],
         );

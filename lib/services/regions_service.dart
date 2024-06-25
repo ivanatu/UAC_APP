@@ -2,7 +2,7 @@ import '../models/regions_model.dart';
 import '/exports/exports.dart';
 
 class RegionService {
-  // function to retrieve regions
+  // function to retrieve regions p3aCe@RPC
   Future<List<Datum>> getRegions() async {
     try {
       var response = await Client().get(
@@ -10,6 +10,7 @@ class RegionService {
       );
       if (response.statusCode == 200) {
         String result = response.body;
+        // debugPrint(result);
         return regionModelFromJson(result).data;
       } else {
         return Future.error(response.reasonPhrase ?? "");

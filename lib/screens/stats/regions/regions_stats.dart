@@ -1,3 +1,5 @@
+import 'package:aids_awareness_app/screens/stats/widgets/pie_widget.dart';
+
 import "../../../models/regions_model.dart";
 import "../../../services/regions_service.dart";
 import 'package:flutter/material.dart';
@@ -20,7 +22,12 @@ class _RegionsStatsState extends State<RegionsStats> {
       appBar: AppBar(
         backgroundColor: Colors.orange,
         title: Text(
-          "Regions Stats",
+          "Regions Stats in (%)",
+          style: Theme.of(context).textTheme.titleLarge!.apply(
+                fontWeightDelta: 3,
+                // color: Colors.white,
+                fontFamily: 'Montserrat',
+              ),
         ),
       ),
       body: Stack(
@@ -83,35 +90,14 @@ class _RegionsStatsState extends State<RegionsStats> {
                   } else {
                     // pie chart to visualize the data
                     return Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 15, 8, 10),
-                      child: PieChart(
-                        dataMap: _generateDataMap(snapshot.data),
-                        colorList: _generateColorList(snapshot.data!.length),
-                        chartRadius: constraints.maxWidth * 0.75,
-                        animationDuration: Duration(
-                          milliseconds: 2500,
-                        ),
-                        chartLegendSpacing: constraints.maxWidth * 0.065,
-                        initialAngleInDegree: 0,
-                        chartType: ChartType.disc,
-                        ringStrokeWidth: 120,
-                        chartValuesOptions: ChartValuesOptions(
-                          showChartValueBackground: true,
-                          showChartValues: true,
-                          showChartValuesInPercentage: true,
-                          showChartValuesOutside: false,
-                          decimalPlaces: 1,
-                        ),
-                        legendOptions: LegendOptions(
-                          showLegends: true,
-                          legendPosition: LegendPosition.bottom,
-                          legendShape: BoxShape.circle,
-                          legendTextStyle: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    );
+                        padding: const EdgeInsets.fromLTRB(8, 15, 8, 10),
+                        child: PieWidget(
+                          dataMap: _generateDataMap(snapshot.data),
+                          colorList: _generateColorList(snapshot.data!.length),
+                          position: LegendPosition.bottom,
+                          showPercentage: false,
+                          dps: 2,
+                        ));
                   }
                 },
               );

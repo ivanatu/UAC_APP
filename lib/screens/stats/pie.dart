@@ -3,9 +3,9 @@ import 'package:pie_chart/pie_chart.dart';
 
 class PieChartPage extends StatelessWidget {
   final dataMap = <String, double>{
-    "PLHIV who know their status": 35.47,
-    "PLHIV who are on ART": 33.22,
-    "PLHIV who have suppressed viral loads": 20,
+    "PLHIV who know their status": 1289028,
+    "PLHIV who are on ART": 1210906,
+    "PLHIV who have suppressed viral loads": 1134636,
   };
 
   final colorList =
@@ -42,7 +42,7 @@ class PieChartPage extends StatelessWidget {
           showChartValueBackground: true,
           chartValueBackgroundColor: Colors.grey.shade100,
           showChartValues: true,
-          showChartValuesInPercentage: true,
+          // showChartValuesInPercentage: e,
           showChartValuesOutside: false,
           decimalPlaces: 1,
         ),

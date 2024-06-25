@@ -5,6 +5,9 @@ class PieWidget extends StatelessWidget {
   final Map<String, double> dataMap;
   final List<Color> colorList;
   final String text;
+  final double radius;
+  final bool showPercentage;
+  final int dps;
   final pie.LegendPosition position;
   const PieWidget({
     super.key,
@@ -12,6 +15,9 @@ class PieWidget extends StatelessWidget {
     required this.dataMap,
     required this.colorList,
     required this.position,
+    this.radius = 120,
+    this.dps = 0,
+    this.showPercentage = true,
   });
 
   @override
@@ -24,7 +30,7 @@ class PieWidget extends StatelessWidget {
           milliseconds: 2500,
         ),
         chartLegendSpacing: 10,
-        chartRadius: MediaQuery.of(context).size.width / 2,
+        chartRadius: MediaQuery.of(context).size.width,
         colorList: colorList,
         initialAngleInDegree: 0,
         chartType: pie.ChartType.disc,
@@ -42,9 +48,9 @@ class PieWidget extends StatelessWidget {
         chartValuesOptions: pie.ChartValuesOptions(
           showChartValueBackground: true,
           showChartValues: true,
-          showChartValuesInPercentage: true,
+          showChartValuesInPercentage: showPercentage,
           showChartValuesOutside: false,
-          decimalPlaces: 0,
+          decimalPlaces: dps,
         ),
       ),
     );
