@@ -28,17 +28,21 @@ class _StoriesDetailsState extends State<StoriesDetails> {
             padding: const EdgeInsets.all(0.0),
             child: Column(
               children: [
-                Hero(
-                  tag: widget.title,
-                  child: Text(
-                    widget.title,
-                    style: Theme.of(context).textTheme.titleLarge,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Hero(
+                    tag: widget.title,
+                    child: Text(
+                      widget.title,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
                   ),
                 ),
-                Hero(
-                    tag: widget.image,
-                    child: Image.network(Apis.url + widget.image)),
-                Text(widget.description),
+                Hero(tag: widget.image, child: Image.network(widget.image)),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(widget.description),
+                ),
               ],
             ),
           )
