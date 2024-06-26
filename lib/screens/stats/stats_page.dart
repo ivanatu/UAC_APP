@@ -59,13 +59,13 @@ class _StatsPageState extends State<StatsPage> {
         ),
         StatWidget(
           nextPage: RegionsStats(),
-          title: "Reginal stats",
+          title: "Reginal Prevalence Rate",
           icon: Icons.pie_chart_rounded,
           color: Colors.orange,
         ),
         StatWidget(
           nextPage: DistrictStats(),
-          title: "District stats",
+          title: "District Prevalence Rate (15-49)",
           icon: Icons.pie_chart_rounded,
           color: Colors.cyan,
         ),

@@ -22,7 +22,7 @@ class _RegionsStatsState extends State<RegionsStats> {
       appBar: AppBar(
         backgroundColor: Colors.orange,
         title: Text(
-          "Regions Stats in (%)",
+          "Regional Prevalence Rates (%)",
           style: Theme.of(context).textTheme.titleLarge!.apply(
                 fontWeightDelta: 3,
                 // color: Colors.white,

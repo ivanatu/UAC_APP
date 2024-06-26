@@ -29,7 +29,7 @@ class _DistrictDataState extends State<DistrictData> {
           color: Colors.white,
         ),
         title: Text(
-          'District Data in (%)',
+          'Prevalence rate (15-49)',
           style: Theme.of(context).textTheme.titleLarge!.apply(
                 fontWeightDelta: 3,
                 color: Colors.white,
