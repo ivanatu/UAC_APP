@@ -1,10 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
+import '/models/aids_info_model.dart';
+import '/exports/exports.dart';
 
 class InfoDetails extends StatelessWidget {
-  final dynamic article;
+  final Datum article;
 
-  const InfoDetails({this.article});
+  const InfoDetails({required this.article});
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +26,9 @@ class InfoDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Hero(
-            tag: article['photo']['data']['full_url'],
+            tag: Apis.url + article.attributes.image.data.attributes.url,
             child: Image.network(
-              article['photo']['data']['full_url'],
+              Apis.url + article.attributes.image.data.attributes.url,
               errorBuilder: (context, url, error) => const Icon(Icons.error),
             ),
           ),
@@ -36,7 +36,7 @@ class InfoDetails extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              article['title'],
+              article.attributes.title,
               style: const TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
@@ -55,7 +55,7 @@ class InfoDetails extends StatelessWidget {
           const SizedBox(height: 16.0),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(article['description'],
+            child: Text(article.attributes.description,
                 style: TextStyle(
                   fontFamily: "Montserrat",
                 )),

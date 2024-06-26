@@ -42,4 +42,14 @@ export '/widgets/bottom_up_animation.dart';
 export '/apis/index.dart';
 
 // controllers
+
+// ------------- controllers ----------------------
 export "/controllers/data_controller.dart";
+export "/controllers/precaution_controller.dart";
+export "/controllers/myth_controller.dart";
+export "/controllers/aids_info_controller.dart";
+export "/controllers/video_updates_controller.dart";
+export "/controllers/faqa_controller.dart";
+export "/controllers/drawer_controller.dart";
+export "/controllers/progress_95_controller.dart";
+// --------------- end of controllers --------------

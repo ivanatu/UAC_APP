@@ -1,13 +1,4 @@
-// ------------- controllers ----------------------
-import "/controllers/precaution_controller.dart";
-import "/controllers/myth_controller.dart";
-import "/controllers/aids_info_controller.dart";
-import "/controllers/video_updates_controller.dart";
-import "controllers/faqa_controller.dart";
-// --------------- end of controllers --------------
 import "/exports/exports.dart";
-import "controllers/drawer_controller.dart";
-import "controllers/progress_95_controller.dart";
 
 var navigatorKey = GlobalKey<NavigatorState>();
 BuildContext context = navigatorKey.currentState!.context;

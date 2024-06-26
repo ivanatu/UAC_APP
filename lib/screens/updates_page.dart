@@ -22,18 +22,18 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
 
   var _newsFuture;
 
-  refresh() async {
-    await Future.delayed(Duration(milliseconds: 800), () {
-      setState(() {
-        _newsFuture = UpdateService.getNews();
-      });
-    });
-  }
+  // refresh() async {
+  //   await Future.delayed(Duration(milliseconds: 800), () {
+  //     setState(() {
+  //       _newsFuture = UpdateService.getNews();
+  //     });
+  //   });
+  // }
 
   @override
   void initState() {
     super.initState();
-    _newsFuture = UpdateService.getNews();
+    // _newsFuture = UpdateService.getNews();
   }
 
   @override
@@ -56,21 +56,6 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
         centerTitle: true,
         // backgroundColor: Colors.transparent,
         elevation: 0,
-        actions: <Widget>[
-          IconButton(
-            onPressed: () {
-              setState(() {
-                _newsFuture = null;
-                refresh();
-              });
-            },
-            icon: Icon(
-              Icons.refresh,
-              // color: Colors.teal[800],
-              size: 26,
-            ),
-          ),
-        ],
       ),
       body: BottomTopMoveAnimationView(
         // height: MediaQuery.of(context).size.height,
@@ -116,24 +101,24 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width > 340.0 ? 10 : 7,
                     ),
-                    Flexible(
-                        child: const Icon(
-                      Icons.filter_list,
-                      size: 20,
-                    )),
+                    // Flexible(
+                    //     child: const Icon(
+                    //   Icons.filter_list,
+                    //   size: 20,
+                    // )),
 
                     SizedBox(width: 10),
                     // custom drop down
-                    CustomDropdown(
-                      value: dropDownValue,
-                      onChanged: (newValue) {
-                        setState(() {
-                          dropDownValue = newValue ?? "";
-                          _newsFuture = UpdateService.getNews();
-                        });
-                      },
-                      constraint: constraint,
-                    )
+                    // CustomDropdown(
+                    //   value: dropDownValue,
+                    //   onChanged: (newValue) {
+                    //     setState(() {
+                    //       dropDownValue = newValue ?? "";
+                    //       _newsFuture = UpdateService.getNews();
+                    //     });
+                    //   },
+                    //   constraint: constraint,
+                    // )
                   ],
                 ),
 
@@ -145,42 +130,28 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                 ),
 
                 //News tiles
-                FutureBuilder<dynamic>(
-                  future: _newsFuture,
-                  builder: (context, snapshot) {
-                    if (snapshot.data == null ||
-                        snapshot.connectionState != ConnectionState.done) {
-                      return NewsListLoader();
-                    } else if (snapshot.data is FetchDataException) {
-                      return Center(
-                        child: AutoSizeText(
-                          snapshot.data.toString(),
-                          style: TextStyle(
-                            fontFamily: "Montserrat",
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
+                Consumer<AidsInfoController>(
+                    builder: (context, aidsController, xx) {
+                  aidsController.getAidsInfoList();
+                  return aidsController.isLoading
+                      ? Center(
+                          child: NewsListLoader(),
+                        )
+                      : Flexible(
+                          flex: 3,
+                          child: ListView.builder(
+                            physics: PageScrollPhysics(),
+                            itemCount: aidsController.aidsInfoList.length,
+                            itemBuilder: (context, index) {
+                              var data =
+                                  aidsController.aidsInfoList.elementAt(index);
+                              return NewsTile(
+                                article: data,
+                              );
+                            },
                           ),
-                          maxFontSize: 16,
-                          stepGranularity: 2,
-                        ),
-                      );
-                    } else {
-                      return Flexible(
-                        flex: 3,
-                        child: ListView.builder(
-                          physics: PageScrollPhysics(),
-                          itemCount: snapshot.data.length,
-                          itemBuilder: (context, index) {
-                            return NewsTile(
-                              article: snapshot.data[index],
-                            );
-                          },
-                        ),
-                      );
-                    }
-                  },
-                ),
+                        );
+                }),
               ],
             ),
           ),

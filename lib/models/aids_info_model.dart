@@ -51,7 +51,7 @@ class DatumAttributes {
   final DateTime createdAt;
   final DateTime updatedAt;
   final DateTime publishedAt;
-  final Image image;
+  final AImage image;
 
   DatumAttributes({
     required this.title,
@@ -69,7 +69,7 @@ class DatumAttributes {
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         publishedAt: DateTime.parse(json["publishedAt"]),
-        image: Image.fromJson(json["image"]),
+        image: AImage.fromJson(json["image"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -82,14 +82,14 @@ class DatumAttributes {
       };
 }
 
-class Image {
+class AImage {
   final Data data;
 
-  Image({
+  AImage({
     required this.data,
   });
 
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
+  factory AImage.fromJson(Map<String, dynamic> json) => AImage(
         data: Data.fromJson(json["data"]),
       );
 

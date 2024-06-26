@@ -14,50 +14,50 @@ class MythsScreen extends StatelessWidget {
 
   final Color color;
 
-  List<Map<String, String>> myths = [
-    {
-      "myth":
-          "HIV can be spread through tears, sweat, mosquitoes, pools, or casual contact.",
-      "desc":
-          "HIV is only transmitted through infected blood, semen, vaginal fluids, and breast milk.",
-      "imgPath": "assets/myths/mosquito.png",
-    },
-    {
-      "myth": "HIV is a death sentence.",
-      "desc":
-          "HIV is an easily treatable, long-term medical condition. A person living with HIV can lead a long and healthy life if they take their medication consistently.",
-      "imgPath": "assets/myths/hot.png",
-    },
-    {
-      "myth": "I am on PrEP. I don’t need to use condoms.",
-      "desc":
-          "PrEP is a pill that reduces the risk of getting HIV, but it does not protect against other sexually transmitted infections (STIs) or pregnancy. Condoms are still recommended to prevent STIs and pregnancy.",
-      "imgPath": "assets/myths/garlic.png",
-    },
-    {
-      "myth": "You can get HIV from a toilet seat.",
-      "desc":
-          "HIV cannot be transmitted through contact with toilet seats or other surfaces.",
-      "imgPath": "assets/myths/antibiotics.png",
-    },
-    {
-      "myth": "You can get HIV from a mosquito bite.",
-      "desc": "HIV CANNOT be transmitted through mosquito bites.",
-      "imgPath": "assets/myths/package.png",
-    },
-    {
-      "myth": "You can get HIV from a blood transfusion.",
-      "desc":
-          "Blood transfusions in the United States are very safe. All donated blood is tested for HIV and other viruses before it is used.",
-      "imgPath": "assets/myths/bloodTransfusion.png",
-    },
-    {
-      "myth":
-          "You can get HIV from sharing a drinking glass or eating utensils with someone who has HIV.",
-      "desc": "HIV is not spread through saliva.",
-      "imgPath": "assets/myths/ages.png",
-    },
-  ];
+  // List<Map<String, String>> myths = [
+  //   {
+  //     "myth":
+  //         "HIV can be spread through tears, sweat, mosquitoes, pools, or casual contact.",
+  //     "desc":
+  //         "HIV is only transmitted through infected blood, semen, vaginal fluids, and breast milk.",
+  //     "imgPath": "assets/myths/mosquito.png",
+  //   },
+  //   {
+  //     "myth": "HIV is a death sentence.",
+  //     "desc":
+  //         "HIV is an easily treatable, long-term medical condition. A person living with HIV can lead a long and healthy life if they take their medication consistently.",
+  //     "imgPath": "assets/myths/hot.png",
+  //   },
+  //   {
+  //     "myth": "I am on PrEP. I don’t need to use condoms.",
+  //     "desc":
+  //         "PrEP is a pill that reduces the risk of getting HIV, but it does not protect against other sexually transmitted infections (STIs) or pregnancy. Condoms are still recommended to prevent STIs and pregnancy.",
+  //     "imgPath": "assets/myths/garlic.png",
+  //   },
+  //   {
+  //     "myth": "You can get HIV from a toilet seat.",
+  //     "desc":
+  //         "HIV cannot be transmitted through contact with toilet seats or other surfaces.",
+  //     "imgPath": "assets/myths/antibiotics.png",
+  //   },
+  //   {
+  //     "myth": "You can get HIV from a mosquito bite.",
+  //     "desc": "HIV CANNOT be transmitted through mosquito bites.",
+  //     "imgPath": "assets/myths/package.png",
+  //   },
+  //   {
+  //     "myth": "You can get HIV from a blood transfusion.",
+  //     "desc":
+  //         "Blood transfusions in the United States are very safe. All donated blood is tested for HIV and other viruses before it is used.",
+  //     "imgPath": "assets/myths/bloodTransfusion.png",
+  //   },
+  //   {
+  //     "myth":
+  //         "You can get HIV from sharing a drinking glass or eating utensils with someone who has HIV.",
+  //     "desc": "HIV is not spread through saliva.",
+  //     "imgPath": "assets/myths/ages.png",
+  //   },
+  // ];
 
   MythsScreen({Key? key, this.imgPath, required this.color}) : super(key: key);
 
@@ -146,74 +146,88 @@ class MythsScreen extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               width: MediaQuery.of(context).size.width,
-              child: GridView.builder(
-                controller: controller,
-                physics: PageScrollPhysics(),
-                itemCount: myths.length,
-                itemBuilder: (context, index) {
-                  return Routes.animateTo(
-                    openWidget: MythDetailsPage(
-                      tag: "$index",
-                      myth: "${myths[index]['desc']}",
-                      img: '${myths[index]["imgPath"]}',
-                      title: '${myths[index]["myth"]}',
-                    ),
-                    closedWidget: Container(
-                      margin: const EdgeInsets.fromLTRB(2, 0, 3, 0),
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade50,
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(
-                          color: Colors.grey.shade300,
-                        ),
-                      ),
-                      child: LayoutBuilder(
-                        builder: (ctx, constraint) => Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                              child: Image.asset(
-                                "${myths[index]["imgPath"]}",
-                                height: constraint.maxHeight * 0.5,
-                              ),
-                            ),
-                            SizedBox(
-                              height: constraint.maxHeight * 0.11,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                              child: AutoSizeText(
-                                "${myths[index]["myth"]}",
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  height: 1.1,
-                                  fontFamily: "Montserrat",
-                                  // color: Colors.black,
-                                  fontWeight: FontWeight.w600,
+              child: Consumer<MythController>(
+                  builder: (context, mythController, x) {
+                mythController.getMythList();
+                return mythController.isLoading
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : GridView.builder(
+                        controller: controller,
+                        physics: PageScrollPhysics(),
+                        itemCount: mythController.mythList.length,
+                        itemBuilder: (context, index) {
+                          var data = mythController.mythList.elementAt(index);
+                          return Routes.animateTo(
+                            openWidget: MythDetailsPage(
+                                tag: "$index",
+                                myth: data.attributes.myth,
+                                img: Apis.url +
+                                    data.attributes.image.data.attributes.url,
+                                facts: data.attributes.facts),
+                            closedWidget: Container(
+                              margin: const EdgeInsets.fromLTRB(2, 0, 3, 0),
+                              decoration: BoxDecoration(
+                                color: Colors.grey.shade50,
+                                borderRadius: BorderRadius.circular(15),
+                                border: Border.all(
+                                  color: Colors.grey.shade300,
                                 ),
-                                maxFontSize: 20,
-                                stepGranularity: 2,
-                                maxLines: 2,
+                              ),
+                              child: LayoutBuilder(
+                                builder: (ctx, constraint) => Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 20, 0, 0),
+                                      child: Image.network(
+                                        Apis.url +
+                                            data.attributes.image.data
+                                                .attributes.url,
+                                        height: constraint.maxHeight * 0.5,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: constraint.maxHeight * 0.11,
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                      child: AutoSizeText(
+                                        data.attributes.myth,
+                                        textAlign: TextAlign.center,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          height: 1.1,
+                                          fontFamily: "Montserrat",
+                                          // color: Colors.black,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        maxFontSize: 20,
+                                        stepGranularity: 2,
+                                        maxLines: 2,
+                                      ),
+                                    ),
+                                    // SizedBox(
+                                    //   height: 13,
+                                    // ),
+                                  ],
+                                ),
                               ),
                             ),
-                            // SizedBox(
-                            //   height: 13,
-                            // ),
-                          ],
+                          );
+                        },
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10,
                         ),
-                      ),
-                    ),
-                  );
-                },
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                ),
-              ),
+                      );
+              }),
             ),
           ),
 

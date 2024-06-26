@@ -3,14 +3,14 @@ import '/exports/exports.dart';
 class MythDetailsPage extends StatefulWidget {
   final String tag;
   final String myth;
-  final String title;
+  final String facts;
   final String img;
   const MythDetailsPage(
       {super.key,
       required this.tag,
       required this.myth,
       required this.img,
-      required this.title});
+      required this.facts});
 
   @override
   State<MythDetailsPage> createState() => _MythDetailsPageState();
@@ -38,7 +38,7 @@ class _MythDetailsPageState extends State<MythDetailsPage> {
           children: [
             Hero(
               tag: widget.tag,
-              child: Image.asset(
+              child: Image.network(
                 widget.img,
                 height: 300,
                 width: double.infinity,
@@ -62,7 +62,7 @@ class _MythDetailsPageState extends State<MythDetailsPage> {
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: AutoSizeText(
-                  widget.title,
+                  widget.myth,
                   textAlign: TextAlign.left,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -93,7 +93,7 @@ class _MythDetailsPageState extends State<MythDetailsPage> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: AutoSizeText(
-                  widget.myth,
+                  widget.facts,
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontSize: 16.5,

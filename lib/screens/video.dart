@@ -1,3 +1,4 @@
+import 'package:aids_awareness_app/exports/exports.dart';
 import 'package:aids_awareness_app/utils/app_globals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -11,28 +12,9 @@ class Video extends StatefulWidget {
 }
 
 class _VideoState extends State<Video> {
-  bool isLoading = true;
-  final link = "$BASE_URL/aids_awareness_videos";
-  List<dynamic> collectedData = [];
-  Future<void> fetchData() async {
-    final result = await http.get(Uri.parse(link));
-    if (result.statusCode == 200) {
-      final content = jsonDecode(result.body);
-      final data = content["data"];
-      setState(() {
-        collectedData = data;
-      });
-    }
-    setState(() {
-      isLoading = false;
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-
-    fetchData();
   }
 
   @override
@@ -51,30 +33,35 @@ class _VideoState extends State<Video> {
         centerTitle: true,
         elevation: 0,
       ),
-      body: Container(
-        child: isLoading
-            ? const Center(
-                child: SpinKitFadingCircle(
-                  color: Colors.black,
-                  size: 30.0,
+      body: Consumer<VideoUpdatesController>(
+          builder: (context, videoController, x) {
+        videoController.getVideoUpdatesList();
+        return Container(
+          child: videoController.isLoading
+              ? const Center(
+                  child: SpinKitFadingCircle(
+                    color: Colors.black,
+                    size: 30.0,
+                  ),
+                )
+              : Scrollbar(
+                  thickness: 5,
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(10.0),
+                    itemCount: videoController.videoUpdatesList.length,
+                    itemBuilder: (context, index) {
+                      final data = videoController.videoUpdatesList[index];
+                      return buildVid(
+                        data.attributes.title,
+                        data.attributes.description,
+                        data.attributes.videoLink.substring(
+                            data.attributes.videoLink.lastIndexOf("/") + 1),
+                      );
+                    },
+                  ),
                 ),
-              )
-            : Scrollbar(
-                thickness: 5,
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(10.0),
-                  itemCount: collectedData.length,
-                  itemBuilder: (context, index) {
-                    final data = collectedData[index];
-                    return buildVid(
-                        data['title'],
-                        data['description'],
-                        data['video_url']
-                            .substring(data['video_url'].lastIndexOf("/") + 1));
-                  },
-                ),
-              ),
-      ),
+        );
+      }),
     );
   }
 
@@ -161,6 +148,7 @@ class _VideoState extends State<Video> {
       flags: const YoutubePlayerFlags(
         autoPlay: false,
         mute: false,
+        showLiveFullscreenButton: false,
       ),
     );
   }
