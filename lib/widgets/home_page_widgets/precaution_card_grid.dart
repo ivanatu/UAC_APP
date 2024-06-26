@@ -1,6 +1,4 @@
-import 'package:aids_awareness_app/exports/exports.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
+import '/exports/exports.dart';
 
 class PrecautionCardGrid extends StatefulWidget {
   @override
@@ -9,46 +7,8 @@ class PrecautionCardGrid extends StatefulWidget {
 
 class _PrecautionCardGridState extends State<PrecautionCardGrid> {
   int selectedIndex = 0;
-  // final List<Map<String, String>> preventions = const [
-  //   {
-  //     "prevention": "Abstinence",
-  //     "desc":
-  //         "Abstinence means not having sex. It is the most effective way to prevent HIV and other sexually transmitted infections (STIs)",
-  //     "imgPath": "assets/prevention/stop.png",
-  //   },
-  //   {
-  //     "prevention": "Never sharing needles",
-  //     "desc":
-  //         "Never sharing needles means not sharing needles with anyone. This is important because HIV can be spread through the sharing of needles or other injection equipment",
-  //     "imgPath": "assets/prevention/neddles.png",
-  //   },
-  //   {
-  //     "prevention": "HIV medicines",
-  //     "desc":
-  //         "Taking advantage of HIV prevention medicines such as pre-exposure prophylaxis (PrEP) and post-exposure prophylaxis (PEP)12",
-  //     "imgPath": "assets/prevention/coughCover.png",
-  //   },
-  //   {
-  //     "prevention": "Barrier methods for STIs",
-  //     "desc":
-  //         "Practice safe sex by using a barrier method during sex. Condoms provide a type of barrier method to prevent the transmission of HIV and other STIs3",
-  //     "imgPath": "assets/prevention/sanitizer.png",
-  //   },
-  //   // {
-  //   //   "prevention": "No Face Touching",
-  //   //   "desc": "Don't touch your eyes, nose or mouth often and with unwashed hands.",
-  //   //   "imgPath": "assets/prevention/touch.png",
-  //   // },
-  //   // {
-  //   //   "prevention": "Social Distancing",
-  //   //   "desc":
-  //   //   "Keep 7m distance from other people. Stay at home and avoid gatherings.",
-  //   //   "imgPath": "assets/prevention/socialDistance.png",
-  //   // },
-  // ];
 
   static AutoSizeGroup titleGrp = AutoSizeGroup();
-  static AutoSizeGroup descGrp = AutoSizeGroup();
 
   @override
   Widget build(BuildContext context) {

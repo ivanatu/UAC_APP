@@ -1,8 +1,5 @@
-import 'package:aids_awareness_app/exports/exports.dart';
-import 'package:aids_awareness_app/screens/myth_details_page.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '/exports/exports.dart';
+import '/screens/myth_details_page.dart';
 
 // ignore: must_be_immutable
 class MythsScreen extends StatelessWidget {
@@ -13,51 +10,6 @@ class MythsScreen extends StatelessWidget {
   final imgPath;
 
   final Color color;
-
-  // List<Map<String, String>> myths = [
-  //   {
-  //     "myth":
-  //         "HIV can be spread through tears, sweat, mosquitoes, pools, or casual contact.",
-  //     "desc":
-  //         "HIV is only transmitted through infected blood, semen, vaginal fluids, and breast milk.",
-  //     "imgPath": "assets/myths/mosquito.png",
-  //   },
-  //   {
-  //     "myth": "HIV is a death sentence.",
-  //     "desc":
-  //         "HIV is an easily treatable, long-term medical condition. A person living with HIV can lead a long and healthy life if they take their medication consistently.",
-  //     "imgPath": "assets/myths/hot.png",
-  //   },
-  //   {
-  //     "myth": "I am on PrEP. I don’t need to use condoms.",
-  //     "desc":
-  //         "PrEP is a pill that reduces the risk of getting HIV, but it does not protect against other sexually transmitted infections (STIs) or pregnancy. Condoms are still recommended to prevent STIs and pregnancy.",
-  //     "imgPath": "assets/myths/garlic.png",
-  //   },
-  //   {
-  //     "myth": "You can get HIV from a toilet seat.",
-  //     "desc":
-  //         "HIV cannot be transmitted through contact with toilet seats or other surfaces.",
-  //     "imgPath": "assets/myths/antibiotics.png",
-  //   },
-  //   {
-  //     "myth": "You can get HIV from a mosquito bite.",
-  //     "desc": "HIV CANNOT be transmitted through mosquito bites.",
-  //     "imgPath": "assets/myths/package.png",
-  //   },
-  //   {
-  //     "myth": "You can get HIV from a blood transfusion.",
-  //     "desc":
-  //         "Blood transfusions in the United States are very safe. All donated blood is tested for HIV and other viruses before it is used.",
-  //     "imgPath": "assets/myths/bloodTransfusion.png",
-  //   },
-  //   {
-  //     "myth":
-  //         "You can get HIV from sharing a drinking glass or eating utensils with someone who has HIV.",
-  //     "desc": "HIV is not spread through saliva.",
-  //     "imgPath": "assets/myths/ages.png",
-  //   },
-  // ];
 
   MythsScreen({Key? key, this.imgPath, required this.color}) : super(key: key);
 
