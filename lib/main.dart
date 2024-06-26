@@ -48,6 +48,9 @@ void main() {
         ChangeNotifierProvider(
           create: (context) => PrecautionController(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => StoriesController(),
+        ),
       ],
       child: MaterialApp(
         navigatorKey: navigatorKey,

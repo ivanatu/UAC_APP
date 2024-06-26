@@ -165,8 +165,6 @@ flutter:
      - assets/
      - assets/svgs/
      - assets/bottom_navs/
-     - assets/prevention/
-     - assets/myths/
      - assets/updates/
      - assets/stats/
      - lib/images/

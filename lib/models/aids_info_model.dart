@@ -124,7 +124,7 @@ class DataAttributes {
   final dynamic caption;
   final int width;
   final int height;
-  final Formats formats;
+  // final Formats formats;
   final String hash;
   final String ext;
   final String mime;
@@ -142,7 +142,7 @@ class DataAttributes {
     required this.caption,
     required this.width,
     required this.height,
-    required this.formats,
+    // required this.formats,
     required this.hash,
     required this.ext,
     required this.mime,
@@ -161,7 +161,7 @@ class DataAttributes {
         caption: json["caption"],
         width: json["width"],
         height: json["height"],
-        formats: Formats.fromJson(json["formats"]),
+        // formats: Formats.fromJson(json["formats"]),
         hash: json["hash"],
         ext: json["ext"],
         mime: json["mime"],
@@ -180,7 +180,7 @@ class DataAttributes {
         "caption": caption,
         "width": width,
         "height": height,
-        "formats": formats.toJson(),
+        // "formats": formats.toJson(),
         "hash": hash,
         "ext": ext,
         "mime": mime,

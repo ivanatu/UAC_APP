@@ -1,22 +1,20 @@
 import 'dart:convert';
 
-PrecautionModel precautionModelFromJson(String str) =>
-    PrecautionModel.fromJson(json.decode(str));
+StoriesModel storiesModelFromJson(String str) =>
+    StoriesModel.fromJson(json.decode(str));
 
-String precautionModelToJson(PrecautionModel data) =>
-    json.encode(data.toJson());
+String storiesModelToJson(StoriesModel data) => json.encode(data.toJson());
 
-class PrecautionModel {
+class StoriesModel {
   final List<Datum> data;
   final Meta meta;
 
-  PrecautionModel({
+  StoriesModel({
     required this.data,
     required this.meta,
   });
 
-  factory PrecautionModel.fromJson(Map<String, dynamic> json) =>
-      PrecautionModel(
+  factory StoriesModel.fromJson(Map<String, dynamic> json) => StoriesModel(
         data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
         meta: Meta.fromJson(json["meta"]),
       );
@@ -48,47 +46,39 @@ class Datum {
 }
 
 class DatumAttributes {
+  final String title;
+  final String description;
   final DateTime createdAt;
   final DateTime updatedAt;
   final DateTime publishedAt;
-  final String locale;
-  final String shortMessage;
-  final String description;
   final Image image;
-  final Localizations localizations;
 
   DatumAttributes({
+    required this.title,
+    required this.description,
     required this.createdAt,
     required this.updatedAt,
     required this.publishedAt,
-    required this.locale,
-    required this.shortMessage,
-    required this.description,
     required this.image,
-    required this.localizations,
   });
 
   factory DatumAttributes.fromJson(Map<String, dynamic> json) =>
       DatumAttributes(
+        title: json["title"],
+        description: json["description"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         publishedAt: DateTime.parse(json["publishedAt"]),
-        locale: json["locale"],
-        shortMessage: json["short_message"],
-        description: json["description"],
         image: Image.fromJson(json["image"]),
-        localizations: Localizations.fromJson(json["localizations"]),
       );
 
   Map<String, dynamic> toJson() => {
+        "title": title,
+        "description": description,
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
         "publishedAt": publishedAt.toIso8601String(),
-        "locale": locale,
-        "short_message": shortMessage,
-        "description": description,
         "image": image.toJson(),
-        "localizations": localizations.toJson(),
       };
 }
 
@@ -134,7 +124,6 @@ class DataAttributes {
   final dynamic caption;
   final int width;
   final int height;
-  // final Formats formats;
   final String hash;
   final String ext;
   final String mime;
@@ -152,7 +141,6 @@ class DataAttributes {
     required this.caption,
     required this.width,
     required this.height,
-    // required this.formats,
     required this.hash,
     required this.ext,
     required this.mime,
@@ -171,7 +159,6 @@ class DataAttributes {
         caption: json["caption"],
         width: json["width"],
         height: json["height"],
-        // formats: Formats.fromJson(json["formats"]),
         hash: json["hash"],
         ext: json["ext"],
         mime: json["mime"],
@@ -190,7 +177,6 @@ class DataAttributes {
         "caption": caption,
         "width": width,
         "height": height,
-        // "formats": formats.toJson(),
         "hash": hash,
         "ext": ext,
         "mime": mime,
@@ -201,94 +187,6 @@ class DataAttributes {
         "provider_metadata": providerMetadata,
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
-      };
-}
-
-class Formats {
-  final Thumbnail thumbnail;
-  final Thumbnail small;
-
-  Formats({
-    required this.thumbnail,
-    required this.small,
-  });
-
-  factory Formats.fromJson(Map<String, dynamic> json) => Formats(
-        thumbnail: Thumbnail.fromJson(json["thumbnail"]),
-        small: Thumbnail.fromJson(json["small"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "thumbnail": thumbnail.toJson(),
-        "small": small.toJson(),
-      };
-}
-
-class Thumbnail {
-  final String name;
-  final String hash;
-  final String ext;
-  final String mime;
-  final dynamic path;
-  final int width;
-  final int height;
-  final double size;
-  final int sizeInBytes;
-  final String url;
-
-  Thumbnail({
-    required this.name,
-    required this.hash,
-    required this.ext,
-    required this.mime,
-    required this.path,
-    required this.width,
-    required this.height,
-    required this.size,
-    required this.sizeInBytes,
-    required this.url,
-  });
-
-  factory Thumbnail.fromJson(Map<String, dynamic> json) => Thumbnail(
-        name: json["name"],
-        hash: json["hash"],
-        ext: json["ext"],
-        mime: json["mime"],
-        path: json["path"],
-        width: json["width"],
-        height: json["height"],
-        size: json["size"]?.toDouble(),
-        sizeInBytes: json["sizeInBytes"],
-        url: json["url"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "name": name,
-        "hash": hash,
-        "ext": ext,
-        "mime": mime,
-        "path": path,
-        "width": width,
-        "height": height,
-        "size": size,
-        "sizeInBytes": sizeInBytes,
-        "url": url,
-      };
-}
-
-class Localizations {
-  final List<dynamic> data;
-
-  Localizations({
-    required this.data,
-  });
-
-  factory Localizations.fromJson(Map<String, dynamic> json) => Localizations(
-        data: List<dynamic>.from(json["data"].map((x) => x)),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "data": List<dynamic>.from(data.map((x) => x)),
       };
 }
 

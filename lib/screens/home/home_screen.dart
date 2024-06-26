@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
       "color": Colors.orange[700],
     },
     {
-      "imgPath": "assets/prevention/hiv.png",
+      "imgPath": "assets/imgs/hiv.png",
       "imgHeight": 140.0,
       "imgLeft": 15.0,
       "imgBottom": 0.0,
@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
       "color": Colors.lightBlue[700],
     },
     {
-      "imgPath": "assets/myths/myths.png",
+      "imgPath": "assets/imgs/myths.png",
       "tabName": "Myths",
       "imgBottom": -30.0,
       "imgLeft": 20.0,

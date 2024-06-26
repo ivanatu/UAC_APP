@@ -10,4 +10,5 @@ class Apis {
   static String videoUpdates = "${url}/api/video-updates";
   static String myths = "${url}/api/myths?populate=*";
   static String precautions = "${url}/api/precautions?populate=*";
+  static String stories = "${url}/api/stories?populate=*";
 }

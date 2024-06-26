@@ -1,4 +1,5 @@
 import '/exports/exports.dart';
+import 'precaution_details.dart';
 
 class PrecautionCardGrid extends StatefulWidget {
   @override
@@ -32,13 +33,13 @@ class _PrecautionCardGridState extends State<PrecautionCardGrid> {
               itemCount: controller.precautionList.length,
               itemBuilder: (context, index) {
                 var data = controller.precautionList.elementAt(index);
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedIndex = index;
-                    });
-                  },
-                  child: Card(
+                return Routes.animateTo(
+                  openWidget: PrecautionDetails(
+                      title: data.attributes.shortMessage,
+                      description: data.attributes.description,
+                      image:
+                          Apis.url + data.attributes.image.data.attributes.url),
+                  closedWidget: Card(
                     elevation: 0,
                     color: Colors.grey.shade50,
                     shape: RoundedRectangleBorder(
@@ -67,7 +68,6 @@ class _PrecautionCardGridState extends State<PrecautionCardGrid> {
                               width: constraint.maxWidth * 0.6,
                               height: constraint.maxHeight * 0.5,
                             ),
-
                             AutoSizeText(
                               "\n${data.attributes.shortMessage}",
                               textAlign: TextAlign.center,
@@ -83,28 +83,6 @@ class _PrecautionCardGridState extends State<PrecautionCardGrid> {
                               stepGranularity: 1,
                               group: titleGrp,
                             ),
-                            // SizedBox(
-                            //   height: 8,
-                            // ),
-                            // LimitedBox(
-                            //   maxHeight: constraint.maxHeight * 0.30,
-                            //   child: AutoSizeText(
-                            //     "${preventions[index]['desc']}",
-                            //     textAlign: TextAlign.center,
-                            //     style: TextStyle(
-                            //       fontSize: 12,
-                            //       fontFamily: "Montserrat",
-                            //       color: Colors.grey,
-                            //       fontWeight: FontWeight.w500,
-                            //     ),
-                            //     maxFontSize: 12,
-                            //     minFontSize: 9,
-                            //     group: descGrp,
-                            //     stepGranularity: 1,
-                            //     maxLines: 4,
-                            //   ),
-                            // ),
-                            // SizedBox(height: 5),
                           ],
                         ),
                       ),
