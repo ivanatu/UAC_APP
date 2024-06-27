@@ -33,7 +33,7 @@ class _NewCasesPageState extends State<NewCasesPage> {
           ),
         ],
         title: Text(
-          "HIV AIDS Burden",
+          "HIV/AIDS Burden",
           style: Theme.of(context).textTheme.bodyLarge!.apply(
                 fontWeightDelta: 2,
                 fontSizeFactor: 1.4,

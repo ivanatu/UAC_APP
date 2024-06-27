@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
     {
       "imgBottom": 10.0,
       "imgLeft": 3.0,
-      "tabName": "Virus",
+      "tabName": "About HIV",
       "imgHeight": 130.0,
       "tabDesc": "Know more about the virus",
       "imgPath": "assets/corona.png",

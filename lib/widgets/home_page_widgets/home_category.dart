@@ -44,7 +44,7 @@ class CategoryTab extends StatelessWidget {
       case ("Myths"):
         return () => Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => MythsScreen(color: color, imgPath: imgPath)));
-      case ("Virus"):
+      case ("About HIV"):
         return () => Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
                 VirusDetailsScreen(color: color, imgPath: imgPath)));
