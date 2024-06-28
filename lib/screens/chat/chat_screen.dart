@@ -252,7 +252,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
                 onPressed: () {
                   launchUrl(
-                    Uri.parse("https://www.wa.me/"),
+                    Uri.parse("https://wa.me/"),
                   );
                 },
               ),
