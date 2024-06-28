@@ -55,7 +55,7 @@ class _IndexScreenState extends State<IndexScreen> {
     {"label": "News", "icon": "livescore.svg", "un": "livescore_un.svg"},
     {"label": "Messages", "icon": "message.svg", "un": "message_un.svg"},
     {"label": "Stats", "icon": "stats.svg", "un": "stats_un.svg"},
-    {"label": "Chat", "icon": "chat.svg", "un": "chat_un.svg"},
+    {"label": "Get in touch", "icon": "chat.svg", "un": "chat_un.svg"},
   ];
   // page controller
   final PageController pageController = PageController();

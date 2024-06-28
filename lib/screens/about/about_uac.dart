@@ -15,7 +15,7 @@ class _AboutUacState extends State<AboutUac> {
         title: Text("About UAC"),
         titleTextStyle: Theme.of(context).textTheme.titleMedium!.apply(
               fontFamily: 'Montserrat',
-              fontWeightDelta: 2,
+              fontWeightDelta: 10,
             ),
       ),
       body: SafeArea(
@@ -40,10 +40,10 @@ class _AboutUacState extends State<AboutUac> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 8, 10, 0),
                   child: Text(
-                    "Our Background",
+                    "Who we are",
                     style: Theme.of(context).textTheme.titleMedium!.apply(
                           fontFamily: 'Montserrat',
-                          fontWeightDelta: 2,
+                          fontWeightDelta: 10,
                         ),
                   ),
                 ),
@@ -88,7 +88,7 @@ class _AboutUacState extends State<AboutUac> {
                           text: "\n\nOur Vision",
                           style: Theme.of(context).textTheme.bodyLarge!.apply(
                                 fontFamily: 'Montserrat',
-                                fontWeightDelta: 2,
+                                fontWeightDelta: 10,
                               ),
                         ),
                         TextSpan(
@@ -99,7 +99,7 @@ class _AboutUacState extends State<AboutUac> {
                           text: "\n\nOur Mission",
                           style: Theme.of(context).textTheme.bodyLarge!.apply(
                                 fontFamily: 'Montserrat',
-                                fontWeightDelta: 2,
+                                fontWeightDelta: 10,
                               ),
                         ),
                         TextSpan(
@@ -110,7 +110,7 @@ class _AboutUacState extends State<AboutUac> {
                           text: "\n\nOur Goal",
                           style: Theme.of(context).textTheme.bodyLarge!.apply(
                                 fontFamily: 'Montserrat',
-                                fontWeightDelta: 2,
+                                fontWeightDelta: 10,
                               ),
                         ),
                         TextSpan(
@@ -129,63 +129,63 @@ class _AboutUacState extends State<AboutUac> {
                           text: "\n\nOur Core Values",
                           style: Theme.of(context).textTheme.bodyLarge!.apply(
                                 fontFamily: 'Montserrat',
-                                fontWeightDelta: 2,
+                                fontWeightDelta: 10,
                               ),
                         ),
                         TextSpan(
-                          text: "\n\nStakeholder responsiveness",
+                          text: "\n👉🏼 Stakeholder responsiveness",
                           style: Theme.of(context).textTheme.bodyMedium!.apply(
                                 fontFamily: 'Montserrat',
-                                fontWeightDelta: 2,
+                                fontWeightDelta: 1,
                               ),
                         ),
+                        // TextSpan(
+                        //     text:
+                        //         "\nThe Commission undertakes to respond to stakeholder needs in real time and to proactively predict stakeholders’ expectations and devise measures to meet them.\n"),
                         TextSpan(
-                            text:
-                                "\nThe Commission undertakes to respond to stakeholder needs in real time and to proactively predict stakeholders’ expectations and devise measures to meet them.\n"),
-                        TextSpan(
-                          text: "\nIntegrity",
+                          text: "\n👉🏼 Integrity",
                           style: Theme.of(context).textTheme.bodyMedium!.apply(
                                 fontFamily: 'Montserrat',
-                                fontWeightDelta: 2,
+                                fontWeightDelta: 1,
                               ),
                         ),
+                        // TextSpan(
+                        //   text:
+                        //       "\nAs an organization, we strive to promote openness, trust, transparency, accountability and respect in all our undertakings.",
+                        // ),
                         TextSpan(
-                          text:
-                              "\nAs an organization, we strive to promote openness, trust, transparency, accountability and respect in all our undertakings.",
-                        ),
-                        TextSpan(
-                          text: "\n\nPartnership",
+                          text: "\n👉🏼 Partnership",
                           style: Theme.of(context).textTheme.bodyMedium!.apply(
                                 fontFamily: 'Montserrat',
-                                fontWeightDelta: 2,
+                                fontWeightDelta: 1,
                               ),
                         ),
+                        // TextSpan(
+                        //   text:
+                        //       "\nCollaboration and partnership is core to the Commission’s service delivery mechanisms.  Building and strengthening partnership is not only a core value but also a mechanism to deliver services.",
+                        // ),
                         TextSpan(
-                          text:
-                              "\nCollaboration and partnership is core to the Commission’s service delivery mechanisms.  Building and strengthening partnership is not only a core value but also a mechanism to deliver services.",
-                        ),
-                        TextSpan(
-                          text: "\n\nTeam work ",
+                          text: "\n👉🏼 Team work ",
                           style: Theme.of(context).textTheme.bodyMedium!.apply(
                                 fontFamily: 'Montserrat',
-                                fontWeightDelta: 2,
+                                fontWeightDelta: 1,
                               ),
                         ),
+                        // TextSpan(
+                        //   text:
+                        //       "\nWhereas the Commission cherishes and continues to reward individual merit, we believe in rallying individual efforts together in a manner that creates synergies.  Team work and team building is therefore central to the Commission’s core values.",
+                        // ),
                         TextSpan(
-                          text:
-                              "\nWhereas the Commission cherishes and continues to reward individual merit, we believe in rallying individual efforts together in a manner that creates synergies.  Team work and team building is therefore central to the Commission’s core values.",
-                        ),
-                        TextSpan(
-                          text: "\n\nProfessionalism",
+                          text: "\n👉🏼 Professionalism",
                           style: Theme.of(context).textTheme.bodyMedium!.apply(
                                 fontFamily: 'Montserrat',
-                                fontWeightDelta: 2,
+                                fontWeightDelta: 1,
                               ),
                         ),
-                        TextSpan(
-                          text:
-                              "\nIn whatever the Commission does, we strive for adherence to ethical codes of conduct, exercising fairness and impartially and delivery of quality service,",
-                        )
+                        // TextSpan(
+                        //   text:
+                        //       "\nIn whatever the Commission does, we strive for adherence to ethical codes of conduct, exercising fairness and impartially and delivery of quality service,",
+                        // )
                       ],
                     ),
                   ),

@@ -1,4 +1,5 @@
 import "/exports/exports.dart";
+import "controllers/national_prevalence_controller.dart";
 
 var navigatorKey = GlobalKey<NavigatorState>();
 BuildContext context = navigatorKey.currentState!.context;
@@ -50,6 +51,9 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (context) => StoriesController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => NationalPrevalenceController(),
         ),
       ],
       child: MaterialApp(

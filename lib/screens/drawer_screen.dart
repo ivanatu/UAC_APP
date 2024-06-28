@@ -113,7 +113,7 @@ class DrawerScreen extends StatelessWidget {
               leading:
                   SvgPicture.asset("assets/svgs/faqs.svg", color: Colors.white),
               title: const Text(
-                'FAQs',
+                'Presidential Questions',
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'Montserrat',

@@ -30,7 +30,7 @@ class PieWidget extends StatelessWidget {
           milliseconds: 2500,
         ),
         chartLegendSpacing: 10,
-        chartRadius: MediaQuery.of(context).size.width,
+        chartRadius: radius,
         colorList: colorList,
         initialAngleInDegree: 0,
         chartType: pie.ChartType.disc,
