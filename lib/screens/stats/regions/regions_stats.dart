@@ -96,6 +96,7 @@ class _RegionsStatsState extends State<RegionsStats> {
                           colorList: _generateColorList(snapshot.data!.length),
                           position: LegendPosition.bottom,
                           showPercentage: false,
+                          radius: constraints.maxWidth * 1.5,
                           dps: 2,
                         ));
                   }

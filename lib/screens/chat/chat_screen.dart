@@ -21,7 +21,7 @@ class _ChatScreenState extends State<ChatScreen> {
               children: [
                 TextSpan(
                   text: "\n  Get in Touch",
-                  style: Theme.of(context).textTheme.headlineLarge!.apply(
+                  style: Theme.of(context).textTheme.titleLarge!.apply(
                         fontWeightDelta: 3,
                         fontFamily: "Montserrat",
                       ),
@@ -50,10 +50,11 @@ class _ChatScreenState extends State<ChatScreen> {
                     TextSpan(
                       children: [
                         TextSpan(
-                            text: "Website:  ",
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                            )),
+                          text: "Website:  ",
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                          ),
+                        ),
                         TextSpan(
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
@@ -121,7 +122,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       ],
                     ),
                     style: Theme.of(context).textTheme.bodyLarge!.apply(
-                          fontWeightDelta: 2,
+                          fontWeightDelta: 1,
                         ),
                   ),
                 ),
@@ -150,18 +151,18 @@ class _ChatScreenState extends State<ChatScreen> {
                       children: [
                         TextSpan(
                           text: "Send Feedback",
-                          style:
-                              Theme.of(context).textTheme.headlineMedium!.apply(
-                                    fontFamily: 'Montserrat',
-                                    fontWeightDelta: 2,
-                                  ),
+                          style: Theme.of(context).textTheme.bodyLarge!.apply(
+                                fontFamily: 'Montserrat',
+                                fontWeightDelta: 4,
+                              ),
                         ),
                         TextSpan(
                             text:
                                 "\nWe would love to hear from you. Please send us your feedback, suggestions, or any issues you may have encountered while using our app.",
-                            style: Theme.of(context).textTheme.bodyLarge!.apply(
-                                  fontFamily: 'Montserrat',
-                                )),
+                            style:
+                                Theme.of(context).textTheme.bodyMedium!.apply(
+                                      fontFamily: 'Montserrat',
+                                    )),
                         TextSpan(
                           text: "\n\n  Click here to send feedback.",
                           recognizer: TapGestureRecognizer()
@@ -234,8 +235,8 @@ class _ChatScreenState extends State<ChatScreen> {
                 icon: SvgPicture.asset(
                   "assets/svgs/facebook.svg",
                   color: Colors.blue.shade900,
-                  width: 40,
-                  height: 40,
+                  width: 27,
+                  height: 27,
                 ),
                 onPressed: () {
                   launchUrl(
@@ -247,12 +248,12 @@ class _ChatScreenState extends State<ChatScreen> {
                 icon: SvgPicture.asset(
                   "assets/svgs/whatsapp.svg",
                   color: Colors.green,
-                  width: 40,
-                  height: 40,
+                  width: 27,
+                  height: 27,
                 ),
                 onPressed: () {
                   launchUrl(
-                    Uri.parse("https://wa.me/"),
+                    Uri.parse("https://wa.me/256781573930"),
                   );
                 },
               ),
@@ -260,8 +261,8 @@ class _ChatScreenState extends State<ChatScreen> {
               IconButton(
                 icon: SvgPicture.asset(
                   "assets/svgs/twitter.svg",
-                  width: 40,
-                  height: 40,
+                  width: 27,
+                  height: 27,
                 ),
                 onPressed: () {
                   launchUrl(
@@ -275,7 +276,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 icon: Icon(
                   Icons.phone,
                   color: Colors.teal.shade600,
-                  size: 40,
+                  size: 27,
                 ),
                 onPressed: () {
                   launchUrl(
@@ -288,7 +289,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 icon: Icon(
                   Icons.share,
                   color: Colors.orange.shade600,
-                  size: 40,
+                  size: 27,
                 ),
                 onPressed: () {
                   Share.share("https://www.uac.go.ug/",

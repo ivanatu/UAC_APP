@@ -1,3 +1,4 @@
+import '../../controllers/national_prevalence_controller.dart';
 import '/exports/exports.dart';
 
 class NewCasesPage extends StatefulWidget {
@@ -155,6 +156,7 @@ class _NewCasesPageState extends State<NewCasesPage> {
                         fontFamily: 'Montserrat',
                       ),
                 ),
+
                 DataTable(
                   border: TableBorder.all(
                     color: Colors.black,
@@ -227,6 +229,56 @@ class _NewCasesPageState extends State<NewCasesPage> {
                     ]),
                   ],
                 ),
+                Space(
+                  space: 0.05,
+                ),
+                Text(
+                  'National HIV Prevalence\n',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyLarge!.apply(
+                        fontWeightDelta: 3,
+                        fontFamily: 'Montserrat',
+                      ),
+                ),
+                Consumer<NationalPrevalenceController>(
+                    builder: (context, nController, x) {
+                  if (mounted) {
+                    nController.fetchNationalPrevalence();
+                  }
+                  return DataTable(
+                    border: TableBorder.all(
+                      color: Colors.black,
+                      width: 0.5,
+                    ),
+                    columns: [
+                      DataColumn(
+                        label: Text(
+                          'Population Group',
+                          style: Theme.of(context).textTheme.bodyMedium!.apply(
+                                fontWeightDelta: 3,
+                                fontFamily: 'Montserrat',
+                              ),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Year (2023)',
+                          style: Theme.of(context).textTheme.bodyMedium!.apply(
+                                fontWeightDelta: 3,
+                                fontFamily: 'Montserrat',
+                              ),
+                        ),
+                      ),
+                    ],
+                    rows: List.generate(nController.items.length, (i) {
+                      return DataRow(cells: [
+                        DataCell(Text(nController.items[i].attributes.title)),
+                        DataCell(
+                            Text("${nController.items[i].attributes.value}%")),
+                      ]);
+                    }),
+                  );
+                }),
                 Space(
                   space: 0.05,
                 ),

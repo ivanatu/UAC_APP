@@ -137,6 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       "Welcome to UAC",
                       textStyle: Theme.of(context).textTheme.bodyLarge!.apply(
                             fontWeightDelta: 4,
+                            fontFamily: "Montserrat",
                           ),
                       speed: const Duration(milliseconds: 300),
                     ),
