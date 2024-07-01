@@ -11,4 +11,5 @@ class Apis {
   static String myths = "${url}/api/myths?populate=*";
   static String precautions = "${url}/api/precautions?populate=*";
   static String stories = "${url}/api/stories?populate=*";
+  static String nationalPrevalence = "${url}/api/national-hiv-prevalances";
 }

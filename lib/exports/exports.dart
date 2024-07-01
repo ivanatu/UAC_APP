@@ -11,7 +11,7 @@ export 'package:animations/animations.dart';
 export "package:provider/provider.dart";
 export 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 export 'package:animated_text_kit/animated_text_kit.dart';
-
+export 'package:share_plus/share_plus.dart';
 // routes
 export "/routes/routes.dart";
 

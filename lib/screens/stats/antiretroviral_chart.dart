@@ -12,7 +12,7 @@ class AntiretroviralTherapyChart extends StatelessWidget {
           color: Colors.white,
         ),
         title: Text(
-          "Antiretroviral Therapy",
+          "Antiretroviral Therapy (ART)\nCoverage",
           style: Theme.of(context).textTheme.bodyLarge!.apply(
                 fontWeightDelta: 2,
                 fontSizeFactor: 1.2,

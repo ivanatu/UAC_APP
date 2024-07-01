@@ -65,7 +65,11 @@ class _ProgressOn95State extends State<ProgressOn95> {
                                 controller.items[i].attributes.title:
                                     double.parse(
                                         controller.items[i].attributes.value),
-                                'Other': 100 -
+                                i == 0
+                                    ? "Don't know HIV status"
+                                    : i == 1
+                                        ? "Not on ART"
+                                        : "Not Virally suppressed": 100 -
                                     double.parse(
                                         controller.items[i].attributes.value),
                               },

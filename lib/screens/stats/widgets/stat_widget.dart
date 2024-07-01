@@ -14,6 +14,7 @@ class StatWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var textGroup = AutoSizeGroup();
     return Routes.animateTo(
       closedWidget: Card(
         elevation: 0,
@@ -34,18 +35,20 @@ class StatWidget extends StatelessWidget {
                   Space(),
                   AutoSizeText(
                     title,
-                    maxLines: 1,
-                    group: AutoSizeGroup(),
-                    maxFontSize: 18,
+                    maxLines: 4,
+                    group: textGroup,
+                    // maxFontSize: 14,
                     minFontSize: 10,
                     style: Theme.of(context).textTheme.bodyLarge!.apply(
                           fontWeightDelta: 2,
                           fontFamily: 'Montserrat',
                           color: Colors.grey.shade800,
                         ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
+              Space(),
               Icon(
                 Icons.open_in_new_rounded,
                 color: Colors.grey.shade500,

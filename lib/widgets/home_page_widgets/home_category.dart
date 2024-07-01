@@ -33,7 +33,7 @@ class CategoryTab extends StatelessWidget {
         return () => Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
                 SymptomsScreen(color: color, imgPath: imgPath)));
-      case ("Precautions"):
+      case ("HIV Prevention"):
         return () => Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
                 PrecautionsScreen(color: color, imgPath: imgPath)));
@@ -41,7 +41,7 @@ class CategoryTab extends StatelessWidget {
       //   return () => Navigator.of(context).push(MaterialPageRoute(
       //       builder: (context) =>
       //           MessagesScreen(color: color, imgPath: imgPath)));
-      case ("Myths"):
+      case ("Myths/FAQs"):
         return () => Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => MythsScreen(color: color, imgPath: imgPath)));
       case ("About HIV"):

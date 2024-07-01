@@ -1,6 +1,6 @@
 import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
-import 'package:aids_awareness_app/controllers/faqa_controller.dart';
+import '/controllers/faqa_controller.dart';
 
 import '/exports/exports.dart';
 
@@ -31,7 +31,7 @@ class _FaqsPageState extends State<FaqsPage> {
           ),
         ),
         Text(
-          "No FAQs available",
+          "No Presidential Questions available",
           style: Theme.of(context).textTheme.titleLarge!.apply(
                 // color: Colors.grey.shade500,
                 fontFamily: 'Monospace',
@@ -56,7 +56,16 @@ class _FaqsPageState extends State<FaqsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Hero(tag: "faqs", child: Text("FAQs")),
+        title: Hero(
+          tag: "faqs",
+          child: Text(
+            "Presidential Questions",
+          ),
+        ),
+        titleTextStyle: Theme.of(context).textTheme.titleLarge!.apply(
+              fontFamily: 'Montserrat',
+              fontWeightDelta: 2,
+            ),
       ),
       body: Consumer<FaqaController>(builder: (context, faqaController, child) {
         if (faqaController.loading) {

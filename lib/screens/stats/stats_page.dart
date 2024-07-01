@@ -1,12 +1,14 @@
-import "package:aids_awareness_app/screens/stats/new_cases.dart";
-import "package:aids_awareness_app/screens/stats/regions/district_stats.dart";
-import "package:aids_awareness_app/screens/stats/regions/regions_stats.dart";
-import "package:aids_awareness_app/screens/stats/widgets/progress_95.dart";
-import "package:aids_awareness_app/screens/stats/widgets/stat_widget.dart";
+import "package:aids_awareness_app/screens/stats/national_hiv_prevalence.dart";
+
+import "/screens/stats/new_cases.dart";
+import "/screens/stats/regions/district_stats.dart";
+import "/screens/stats/regions/regions_stats.dart";
+import "/screens/stats/widgets/progress_95.dart";
+import "/screens/stats/widgets/stat_widget.dart";
 
 import "/exports/exports.dart";
 import "antiretroviral_chart.dart";
-import "stats_dashboard_screens/country_list.dart";
+// import "stats_dashboard_screens/country_list.dart";
 import "testing_and_treatment_cascade.dart";
 
 class StatsPage extends StatefulWidget {
@@ -40,14 +42,32 @@ class _StatsPageState extends State<StatsPage> {
           space: 0.043,
         ),
         StatWidget(
-          nextPage: AntiretroviralTherapyChart(),
-          title: "Antiretroviral Therapy ",
-          icon: Icons.bar_chart_rounded,
-          color: Colors.red,
+          nextPage: NewCasesPage(),
+          title: "HIV / AIDS Burden",
+          icon: Icons.pie_chart_rounded,
+          color: Colors.blue,
         ),
         StatWidget(
+          nextPage: RegionsStats(),
+          title: "Regional Prevalence Rate",
+          icon: Icons.pie_chart_rounded,
+          color: Colors.orange,
+        ),
+        StatWidget(
+          nextPage: DistrictStats(),
+          title: "District Prevalence Rate\n (15-49)",
+          icon: Icons.pie_chart_rounded,
+          color: Colors.cyan,
+        ),
+        // StatWidget(
+        //   nextPage: NationalHivPrevalence(),
+        //   title: "National HIV Prevalence Rate",
+        //   icon: Icons.pie_chart_rounded,
+        //   color: Colors.purple,
+        // ),
+        StatWidget(
           nextPage: HIVTestingAndTreatmentCascade(),
-          title: "HIV Testing & Treatment",
+          title: "HIV Testing and Treatment\n Cascade",
           icon: Icons.pie_chart_rounded,
           color: Colors.blue,
         ),
@@ -58,22 +78,10 @@ class _StatsPageState extends State<StatsPage> {
           color: Colors.green,
         ),
         StatWidget(
-          nextPage: RegionsStats(),
-          title: "Reginal Prevalence Rate",
-          icon: Icons.pie_chart_rounded,
-          color: Colors.orange,
-        ),
-        StatWidget(
-          nextPage: DistrictStats(),
-          title: "District Prevalence Rate (15-49)",
-          icon: Icons.pie_chart_rounded,
-          color: Colors.cyan,
-        ),
-        StatWidget(
-          nextPage: NewCasesPage(),
-          title: "HIV AIDS Burden",
-          icon: Icons.pie_chart_rounded,
-          color: Colors.blue,
+          nextPage: AntiretroviralTherapyChart(),
+          title: "Antiretroviral Therapy (ART)\nCoverage ",
+          icon: Icons.bar_chart_rounded,
+          color: Colors.red,
         ),
       ],
     );

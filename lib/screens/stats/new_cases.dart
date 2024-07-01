@@ -1,3 +1,4 @@
+import '../../controllers/national_prevalence_controller.dart';
 import '/exports/exports.dart';
 
 class NewCasesPage extends StatefulWidget {
@@ -33,7 +34,7 @@ class _NewCasesPageState extends State<NewCasesPage> {
           ),
         ],
         title: Text(
-          "HIV/AIDS Burden",
+          "HIV / AIDS Burden",
           style: Theme.of(context).textTheme.bodyLarge!.apply(
                 fontWeightDelta: 2,
                 fontSizeFactor: 1.4,
@@ -57,110 +58,194 @@ class _NewCasesPageState extends State<NewCasesPage> {
               ),
             ),
             ListView(
-              padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
               children: [
                 Space(),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                       "\n Number of PLHIV Disaggregated by Age Group & Sex",
-                      textAlign: TextAlign.left,
+                      textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyLarge!.apply(
                             fontWeightDelta: 3,
                             fontFamily: 'Montserrat',
                           )),
                 ),
 
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    border: TableBorder.all(
-                      color: Colors.black,
-                      width: 0.5,
-                    ),
-                    columns: [
-                      DataColumn(
-                        label: Text(
-                          'Population Group',
-                          style: Theme.of(context).textTheme.bodyMedium!.apply(
-                                fontWeightDelta: 3,
-                                fontFamily: 'Montserrat',
-                              ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Year (2023)',
-                          style: Theme.of(context).textTheme.bodyMedium!.apply(
-                                fontWeightDelta: 3,
-                                fontFamily: 'Montserrat',
-                              ),
-                        ),
-                      ),
-                    ],
-                    rows: [
-                      DataRow(cells: [
-                        DataCell(Text('Adults & Children')),
-                        DataCell(Text('1,500,000')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Adults 15+')),
-                        DataCell(Text('1,400,000')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Women 15+')),
-                        DataCell(Text('910,000')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Men 15+')),
-                        DataCell(Text('490,000')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('All Young people 15-24')),
-                        DataCell(Text('150,000')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Young Men 15-24')),
-                        DataCell(Text('40,000')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Young Women 15-24')),
-                        DataCell(Text('110,000')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('All Adolescent 10-19')),
-                        DataCell(Text('85,000')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Adolescent Women 10-19')),
-                        DataCell(Text('51,000')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Adolescent Men 10-19')),
-                        DataCell(Text('34,000')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Children 0-14')),
-                        DataCell(Text('72,000')),
-                      ]),
-                    ],
+                DataTable(
+                  border: TableBorder.all(
+                    color: Colors.black,
+                    width: 0.5,
                   ),
+                  columns: [
+                    DataColumn(
+                      label: Text(
+                        'Population Group',
+                        style: Theme.of(context).textTheme.bodyMedium!.apply(
+                              fontWeightDelta: 3,
+                              fontFamily: 'Montserrat',
+                            ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        'Year (2023)',
+                        style: Theme.of(context).textTheme.bodyMedium!.apply(
+                              fontWeightDelta: 3,
+                              fontFamily: 'Montserrat',
+                            ),
+                      ),
+                    ),
+                  ],
+                  rows: [
+                    DataRow(cells: [
+                      DataCell(Text('Adults & Children')),
+                      DataCell(Text('1,500,000')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Adults 15+')),
+                      DataCell(Text('1,400,000')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Women 15+')),
+                      DataCell(Text('910,000')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Men 15+')),
+                      DataCell(Text('490,000')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('All Young people 15-24')),
+                      DataCell(Text('150,000')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Young Men 15-24')),
+                      DataCell(Text('40,000')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Young Women 15-24')),
+                      DataCell(Text('110,000')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('All Adolescent 10-19')),
+                      DataCell(Text('85,000')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Adolescent Women 10-19')),
+                      DataCell(Text('51,000')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Adolescent Men 10-19')),
+                      DataCell(Text('34,000')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Children 0-14')),
+                      DataCell(Text('72,000')),
+                    ]),
+                  ],
                 ),
                 //
                 Space(
                   space: 0.05,
                 ),
                 Text(
-                  'Number of New Infections by Age Group and Sex',
-                  textAlign: TextAlign.left,
+                  'Number of New Infections by Age \nGroup and Sex',
+                  textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge!.apply(
                         fontWeightDelta: 3,
                         fontFamily: 'Montserrat',
                       ),
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
+
+                DataTable(
+                  border: TableBorder.all(
+                    color: Colors.black,
+                    width: 0.5,
+                  ),
+                  columns: [
+                    DataColumn(
+                      label: Text(
+                        'Population Group',
+                        style: Theme.of(context).textTheme.bodyMedium!.apply(
+                              fontWeightDelta: 3,
+                              fontFamily: 'Montserrat',
+                            ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        'Year (2023)',
+                        style: Theme.of(context).textTheme.bodyMedium!.apply(
+                              fontWeightDelta: 3,
+                              fontFamily: 'Montserrat',
+                            ),
+                      ),
+                    ),
+                  ],
+                  rows: [
+                    DataRow(cells: [
+                      DataCell(Text('Adults & Children')),
+                      DataCell(Text('38,000')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Adults 15+')),
+                      DataCell(Text('33,000')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Women 15+')),
+                      DataCell(Text('22,000')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Men 15+')),
+                      DataCell(Text('11,000')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('All Young people 15-24')),
+                      DataCell(Text('15,000')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Young Men 15-24')),
+                      DataCell(Text('3,000')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Young Women 15-24')),
+                      DataCell(Text('12,000')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('All Adolescent 10-19')),
+                      DataCell(Text('6,600')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Adolescent Women 10-19')),
+                      DataCell(Text('5,900')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Adolescent Men 10-19')),
+                      DataCell(Text('700')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Children 0-14')),
+                      DataCell(Text('4,700')),
+                    ]),
+                  ],
+                ),
+                Space(
+                  space: 0.05,
+                ),
+                Text(
+                  'National HIV Prevalence\n',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyLarge!.apply(
+                        fontWeightDelta: 3,
+                        fontFamily: 'Montserrat',
+                      ),
+                ),
+                Consumer<NationalPrevalenceController>(
+                    builder: (context, nController, x) {
+                  if (mounted) {
+                    nController.fetchNationalPrevalence();
+                  }
+                  return DataTable(
                     border: TableBorder.all(
                       color: Colors.black,
                       width: 0.5,
@@ -185,141 +270,102 @@ class _NewCasesPageState extends State<NewCasesPage> {
                         ),
                       ),
                     ],
-                    rows: [
-                      DataRow(cells: [
-                        DataCell(Text('Adults & Children')),
-                        DataCell(Text('38,000')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Adults 15+')),
-                        DataCell(Text('33,000')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Women 15+')),
-                        DataCell(Text('22,000')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Men 15+')),
-                        DataCell(Text('11,000')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('All Young people 15-24')),
-                        DataCell(Text('15,000')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Young Men 15-24')),
-                        DataCell(Text('3,000')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Young Women 15-24')),
-                        DataCell(Text('12,000')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('All Adolescent 10-19')),
-                        DataCell(Text('6,600')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Adolescent Women 10-19')),
-                        DataCell(Text('5,900')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Adolescent Men 10-19')),
-                        DataCell(Text('700')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Children 0-14')),
-                        DataCell(Text('4,700')),
-                      ]),
-                    ],
-                  ),
-                ),
+                    rows: List.generate(nController.items.length, (i) {
+                      return DataRow(cells: [
+                        DataCell(Text(nController.items[i].attributes.title)),
+                        DataCell(
+                            Text("${nController.items[i].attributes.value}%")),
+                      ]);
+                    }),
+                  );
+                }),
                 Space(
                   space: 0.05,
                 ),
                 //
                 Text(
-                  'Annual AIDS Related Deaths by Sex and Age Group\n',
-                  textAlign: TextAlign.left,
+                  'Annual AIDS Related Deaths by Sex \nand Age Group\n',
+                  textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge!.apply(
                         fontWeightDelta: 3,
                         fontFamily: 'Montserrat',
                       ),
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    border: TableBorder.all(
-                      color: Colors.black,
-                      width: 0.5,
-                    ),
-                    columns: [
-                      DataColumn(
-                        label: Text(
-                          'Population Group',
-                          style: Theme.of(context).textTheme.bodyMedium!.apply(
-                                fontWeightDelta: 3,
-                                fontFamily: 'Montserrat',
-                              ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Year (2023)',
-                          style: Theme.of(context).textTheme.bodyMedium!.apply(
-                                fontWeightDelta: 3,
-                                fontFamily: 'Montserrat',
-                              ),
-                        ),
-                      ),
-                    ],
-                    rows: [
-                      DataRow(cells: [
-                        DataCell(Text('Adults & Children')),
-                        DataCell(Text('20,000')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Adults 15+')),
-                        DataCell(Text('17,000')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Women 15+')),
-                        DataCell(Text('8,200')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Men 15+')),
-                        DataCell(Text('7,800')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('All Young people 15-24')),
-                        DataCell(Text('1,900')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Young Men 15-24')),
-                        DataCell(Text('800')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Young Women 15-24')),
-                        DataCell(Text('1,100')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('All Adolescent 10-19')),
-                        DataCell(Text('1,100')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Adolescent Women 10-19')),
-                        DataCell(Text('560')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Adolescent Men 10-19')),
-                        DataCell(Text('550')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('Children 0-14')),
-                        DataCell(Text('3,200')),
-                      ]),
-                    ],
+                DataTable(
+                  border: TableBorder.all(
+                    color: Colors.black,
+                    width: 0.5,
                   ),
+                  columns: [
+                    DataColumn(
+                      label: Text(
+                        'Population Group',
+                        style: Theme.of(context).textTheme.bodyMedium!.apply(
+                              fontWeightDelta: 3,
+                              fontFamily: 'Montserrat',
+                            ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        'Year (2023)',
+                        style: Theme.of(context).textTheme.bodyMedium!.apply(
+                              fontWeightDelta: 3,
+                              fontFamily: 'Montserrat',
+                            ),
+                      ),
+                    ),
+                  ],
+                  rows: [
+                    DataRow(cells: [
+                      DataCell(Text('Adults & Children')),
+                      DataCell(Text('20,000')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Adults 15+')),
+                      DataCell(Text('17,000')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Women 15+')),
+                      DataCell(Text('8,200')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Men 15+')),
+                      DataCell(Text('7,800')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('All Young people 15-24')),
+                      DataCell(Text('1,900')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Young Men 15-24')),
+                      DataCell(Text('800')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Young Women 15-24')),
+                      DataCell(Text('1,100')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('All Adolescent 10-19')),
+                      DataCell(Text('1,100')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Adolescent Women 10-19')),
+                      DataCell(Text('560')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Adolescent Men 10-19')),
+                      DataCell(Text('550')),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text('Children 0-14')),
+                      DataCell(Text('3,200')),
+                    ]),
+                  ],
                 ),
+                Space(
+                  space: 0.4,
+                )
               ],
             ),
           ],

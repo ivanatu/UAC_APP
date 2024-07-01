@@ -19,7 +19,7 @@ class _HIVTestingAndTreatmentCascadeState
       appBar: AppBar(
         backgroundColor: Colors.orange,
         title: Text(
-          "HIV Testing & Treatment",
+          "HIV Testing and Treatment\n Cascade",
           style: Theme.of(context).textTheme.bodyLarge!.apply(
                 fontWeightDelta: 4,
                 fontSizeFactor: 1.1,

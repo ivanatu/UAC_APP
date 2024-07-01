@@ -27,13 +27,13 @@ class _HomeScreenState extends State<HomeScreen> {
       "imgHeight": 140.0,
       "imgLeft": 15.0,
       "imgBottom": 0.0,
-      "tabName": "Precautions",
+      "tabName": "HIV Prevention",
       "tabDesc": "How to prevent being a victim",
       "color": Colors.lightBlue[700],
     },
     {
       "imgPath": "assets/imgs/myths.png",
-      "tabName": "Myths",
+      "tabName": "Myths/FAQs",
       "imgBottom": -30.0,
       "imgLeft": 20.0,
       "imgHeight": 170.0,
@@ -137,6 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       "Welcome to UAC",
                       textStyle: Theme.of(context).textTheme.bodyLarge!.apply(
                             fontWeightDelta: 4,
+                            fontFamily: "Montserrat",
                           ),
                       speed: const Duration(milliseconds: 300),
                     ),
