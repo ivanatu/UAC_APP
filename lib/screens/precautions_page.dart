@@ -60,7 +60,7 @@ class _PrecautionsScreenState extends State<PrecautionsScreen> {
                         child: SizedBox(
                           width: constraint.maxWidth * 0.55,
                           child: AutoSizeText(
-                            "Precautions",
+                            "Prevention Measures",
                             style: TextStyle(
                               color: widget.color,
                               fontFamily: "Montserrat",
