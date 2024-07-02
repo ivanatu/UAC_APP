@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
       "imgLeft": 15.0,
       "imgBottom": 0.0,
       "tabName": "HIV Prevention",
-      "tabDesc": "How to prevent being a victim",
+      "tabDesc": "How to prevent HIV",
       "color": Colors.lightBlue[700],
     },
     {
