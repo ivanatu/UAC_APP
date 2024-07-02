@@ -20,7 +20,7 @@ class HomeCategories extends StatelessWidget {
     {
       "imgBottom": 10.0,
       "imgLeft": 3.0,
-      "tabName": "Virus",
+      "tabName": "About HIV",
       "imgHeight": 130.0,
       "tabDesc": "Know more about the virus",
       "imgPath": "assets/corona.png",
@@ -59,7 +59,7 @@ class HomeCategories extends StatelessWidget {
       "imgHeight": 122.0,
       "imgPath": "assets/stats.png",
       "tabName": "Statistics",
-      "tabDesc": "See how it is affecting the world",
+      "tabDesc": "See how it is affecting Uganda",
       "color": Colors.deepPurpleAccent,
     },
     {

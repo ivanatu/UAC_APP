@@ -22,11 +22,11 @@ class VirusDetailsScreen extends StatelessWidget {
       "desc":
           "HIV is very dangerous because it weakens the immune system and makes it difficult for the body to fight off infections and diseases. If left untreated, HIV can lead to AIDS which can be fatal.",
     },
-    {
-      "detail": "Its Symptoms",
-      "desc":
-          "HIV symptoms can vary from person to person. Some people may experience flu-like symptoms within the first few weeks after contracting the virus. These symptoms may include fever, headache, muscle aches, and fatigue",
-    },
+    // {
+    //   "detail": "Its Symptoms",
+    //   "desc":
+    //       "HIV symptoms can vary from person to person. Some people may experience flu-like symptoms within the first few weeks after contracting the virus. These symptoms may include fever, headache, muscle aches, and fatigue",
+    // },
     {
       "detail": "Are there any vaccines for the virus?",
       "desc":
@@ -84,7 +84,7 @@ class VirusDetailsScreen extends StatelessWidget {
                         child: SizedBox(
                           width: constraint.maxWidth * 0.55,
                           child: AutoSizeText(
-                            "HIV AIDS",
+                            "HIV/AIDS",
                             style: TextStyle(
                               color: color,
                               fontFamily: "Montserrat",
