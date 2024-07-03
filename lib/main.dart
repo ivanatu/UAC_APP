@@ -1,3 +1,4 @@
+import "controllers/regional_controller.dart";
 import "/exports/exports.dart";
 import "controllers/national_prevalence_controller.dart";
 
@@ -54,6 +55,9 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (context) => NationalPrevalenceController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RegionalController(),
         ),
       ],
       child: MaterialApp(

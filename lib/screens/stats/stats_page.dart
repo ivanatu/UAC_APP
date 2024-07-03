@@ -9,6 +9,7 @@ import "/screens/stats/widgets/stat_widget.dart";
 import "/exports/exports.dart";
 import "antiretroviral_chart.dart";
 // import "stats_dashboard_screens/country_list.dart";
+import "regions/sample.dart";
 import "testing_and_treatment_cascade.dart";
 
 class StatsPage extends StatefulWidget {
@@ -48,7 +49,7 @@ class _StatsPageState extends State<StatsPage> {
           color: Colors.blue,
         ),
         StatWidget(
-          nextPage: RegionsStats(),
+          nextPage: UgandaMapPage(),
           title: "Regional Prevalence Rate",
           icon: Icons.pie_chart_rounded,
           color: Colors.orange,
