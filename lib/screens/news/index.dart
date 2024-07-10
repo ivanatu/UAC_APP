@@ -150,7 +150,7 @@ class _NewsPageState extends State<NewsPage> {
                           ),
                           Space(),
                           Text(
-                            "Loading newz",
+                            "Loading News",
                             style:
                                 Theme.of(context).textTheme.titleLarge!.apply(
                                       fontWeightDelta: 2,
