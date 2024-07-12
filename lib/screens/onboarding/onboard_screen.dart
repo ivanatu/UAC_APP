@@ -19,18 +19,18 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   int page = 0;
   List<Map<String, String>> _onboardingData = [
     {
-      'title': 'Welcome to the HIV Awareness App',
+      'title': 'Welcome to the HIV/AIDS Awareness App',
       'subtitle': 'Learn about HIV/AIDS and how to prevent it.',
       'image': 'assets/svgs/learn_about_hiv.svg',
     },
     {
-      'title': 'Find Testing Centers Nearby',
-      'subtitle': 'Locate clinics for HIV testing and counseling.',
-      'image': 'assets/svgs/locate.svg',
+      'title': 'News & Statistics on HIV',
+      'subtitle': 'Find the latest news and statistics on HIV in Uganda',
+      'image': 'assets/svgs/nodata.svg',
     },
     {
-      'title': 'Connect with Support Groups',
-      'subtitle': 'Join communities for HIV awareness and support.',
+      'title': 'Connect with us',
+      'subtitle': 'Contact the Uganda Aids Commission for support and unanswered questions.',
       'image': 'assets/svgs/community.svg',
     },
   ];
