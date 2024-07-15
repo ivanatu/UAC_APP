@@ -59,7 +59,7 @@ class _FaqsPageState extends State<FaqsPage> {
         title: Hero(
           tag: "faqs",
           child: Text(
-            "Presidential Questions",
+            "The President's 7 \n Questions",
           ),
         ),
         titleTextStyle: Theme.of(context).textTheme.titleLarge!.apply(
