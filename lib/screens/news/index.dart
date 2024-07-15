@@ -88,12 +88,7 @@ class _NewsPageState extends State<NewsPage> {
                                     child: Column(
                                       children: [
                                         Hero(
-                                          tag: newz[index]
-                                              .attributes
-                                              .image
-                                              .data
-                                              .attributes
-                                              .url,
+                                          tag: newz[index].image.url,
                                           child: Container(
                                             width: constraints.maxWidth,
                                             height: constraints.maxWidth * 0.65,
@@ -105,12 +100,7 @@ class _NewsPageState extends State<NewsPage> {
                                               image: DecorationImage(
                                                 image: NetworkImage(
                                                   Apis.url +
-                                                      newz[index]
-                                                          .attributes
-                                                          .image
-                                                          .data
-                                                          .attributes
-                                                          .url,
+                                                      newz[index].image.url,
                                                 ),
                                                 fit: BoxFit.cover,
                                               ),
@@ -118,11 +108,11 @@ class _NewsPageState extends State<NewsPage> {
                                           ),
                                         ),
                                         Hero(
-                                          tag: newz[index].attributes.title,
+                                          tag: newz[index].title,
                                           child: Padding(
                                             padding: const EdgeInsets.all(10.0),
                                             child: AutoSizeText(
-                                              newz[index].attributes.title,
+                                              newz[index].title,
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .titleMedium!

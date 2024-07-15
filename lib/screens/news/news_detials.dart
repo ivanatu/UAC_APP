@@ -27,15 +27,15 @@ class _NewsDetailsState extends State<NewsDetails> {
 
   @override
   Widget build(BuildContext context) {
-    print(Apis.url + widget.newz.attributes.pdf.data.attributes.url);
+    print(Apis.url + widget.newz.pdf.url);
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.newz.attributes.title),
+        title: Text(widget.newz.title),
         centerTitle: true,
       ),
       backgroundColor: Colors.grey.shade50,
       body: SfPdfViewer.network(
-        Apis.url + widget.newz.attributes.pdf.data.attributes.url,
+        Apis.url + widget.newz.pdf.url,
         // 'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
         key: _pdfViewerKey,
         controller: pdfController,

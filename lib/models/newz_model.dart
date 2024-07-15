@@ -2,7 +2,6 @@
 //
 //     final newsModel = newsModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 NewsModel newsModelFromJson(String str) => NewsModel.fromJson(json.decode(str));
@@ -31,126 +30,79 @@ class NewsModel {
 
 class Datum {
   final int id;
-  final DatumAttributes attributes;
-
-  Datum({
-    required this.id,
-    required this.attributes,
-  });
-
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-        id: json["id"],
-        attributes: DatumAttributes.fromJson(json["attributes"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "attributes": attributes.toJson(),
-      };
-}
-
-class DatumAttributes {
   final String title;
-  final String content;
+  final dynamic content;
   final DateTime createdAt;
   final DateTime updatedAt;
   final DateTime publishedAt;
+  final String newzId;
   final Image image;
   final Image pdf;
 
-  DatumAttributes({
+  Datum({
+    required this.id,
     required this.title,
     required this.content,
     required this.createdAt,
     required this.updatedAt,
     required this.publishedAt,
+    required this.newzId,
     required this.image,
     required this.pdf,
   });
 
-  factory DatumAttributes.fromJson(Map<String, dynamic> json) =>
-      DatumAttributes(
-        title: json["title"] ?? "",
-        content: json["content"] ?? "",
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+        id: json["id"],
+        title: json["title"],
+        content: json["content"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         publishedAt: DateTime.parse(json["publishedAt"]),
-        image: Image.fromJson(json["image"] ?? {}),
-        pdf: Image.fromJson(json["pdf"] ?? {}),
+        newzId: json["newz_id"],
+        image: Image.fromJson(json["image"]),
+        pdf: Image.fromJson(json["pdf"]),
       );
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "title": title,
         "content": content,
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
         "publishedAt": publishedAt.toIso8601String(),
+        "newz_id": newzId,
         "image": image.toJson(),
         "pdf": pdf.toJson(),
       };
 }
 
 class Image {
-  final Data data;
-
-  Image({
-    required this.data,
-  });
-
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
-        data: Data.fromJson(json["data"] ?? {}),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "data": data.toJson(),
-      };
-}
-
-class Data {
   final int id;
-  final DataAttributes attributes;
-
-  Data({
-    required this.id,
-    required this.attributes,
-  });
-
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-        id: json["id"],
-        attributes: DataAttributes.fromJson(json["attributes"] ?? {}),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "attributes": attributes.toJson(),
-      };
-}
-
-class DataAttributes {
   final String name;
   final dynamic alternativeText;
   final dynamic caption;
-  final int width;
-  final int height;
-  // final Formats formats;
+  final int? width;
+  final int? height;
+  final Formats? formats;
   final String hash;
-  final String ext;
-  final String mime;
+  final Ext ext;
+  final Mime mime;
   final double size;
   final String url;
   final dynamic previewUrl;
-  final String provider;
+  final Provider provider;
   final dynamic providerMetadata;
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  DataAttributes({
+  Image({
+    required this.id,
     required this.name,
     required this.alternativeText,
     required this.caption,
     required this.width,
     required this.height,
-    // required this.formats,
+    required this.formats,
     required this.hash,
     required this.ext,
     required this.mime,
@@ -163,70 +115,85 @@ class DataAttributes {
     required this.updatedAt,
   });
 
-  factory DataAttributes.fromJson(Map<String, dynamic> json) => DataAttributes(
-        name: json["name"] ?? "",
-        alternativeText: json["alternativeText"] ?? "",
-        caption: json["caption"] ?? "",
-        width: json["width"] ?? 0,
-        height: json["height"] ?? 0,
-        // formats: Formats.fromJson(json["formats"] ?? {}),
-        hash: json["hash"] ?? "",
-        ext: json["ext"] ?? "",
-        mime: json["mime"] ?? "",
+  factory Image.fromJson(Map<String, dynamic> json) => Image(
+        id: json["id"],
+        name: json["name"],
+        alternativeText: json["alternativeText"],
+        caption: json["caption"],
+        width: json["width"],
+        height: json["height"],
+        formats:
+            json["formats"] == null ? null : Formats.fromJson(json["formats"]),
+        hash: json["hash"],
+        ext: extValues.map[json["ext"]]!,
+        mime: mimeValues.map[json["mime"]]!,
         size: json["size"]?.toDouble(),
-        url: json["url"] ?? "",
-        previewUrl: json["previewUrl"] ?? "",
-        provider: json["provider"] ?? "",
+        url: json["url"],
+        previewUrl: json["previewUrl"],
+        provider: providerValues.map[json["provider"]]!,
         providerMetadata: json["provider_metadata"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
       );
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "name": name,
         "alternativeText": alternativeText,
         "caption": caption,
         "width": width,
         "height": height,
-        // "formats": formats.toJson(),
+        "formats": formats?.toJson(),
         "hash": hash,
-        "ext": ext,
-        "mime": mime,
+        "ext": extValues.reverse[ext],
+        "mime": mimeValues.reverse[mime],
         "size": size,
         "url": url,
         "previewUrl": previewUrl,
-        "provider": provider,
+        "provider": providerValues.reverse[provider],
         "provider_metadata": providerMetadata,
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
       };
 }
 
+enum Ext { PDF, PNG }
+
+final extValues = EnumValues({".pdf": Ext.PDF, ".png": Ext.PNG});
+
 class Formats {
-  final Small thumbnail;
-  final Small small;
+  final Large thumbnail;
+  final Large small;
+  final Large medium;
+  final Large large;
 
   Formats({
     required this.thumbnail,
     required this.small,
+    required this.medium,
+    required this.large,
   });
 
   factory Formats.fromJson(Map<String, dynamic> json) => Formats(
-        thumbnail: Small.fromJson(json["thumbnail"] ?? {}),
-        small: Small.fromJson(json["small"] ?? {}),
+        thumbnail: Large.fromJson(json["thumbnail"]),
+        small: Large.fromJson(json["small"]),
+        medium: Large.fromJson(json["medium"]),
+        large: Large.fromJson(json["large"]),
       );
 
   Map<String, dynamic> toJson() => {
         "thumbnail": thumbnail.toJson(),
         "small": small.toJson(),
+        "medium": medium.toJson(),
+        "large": large.toJson(),
       };
 }
 
-class Small {
+class Large {
   final String name;
   final String hash;
-  final String ext;
-  final String mime;
+  final Ext ext;
+  final Mime mime;
   final dynamic path;
   final int width;
   final int height;
@@ -234,7 +201,7 @@ class Small {
   final int sizeInBytes;
   final String url;
 
-  Small({
+  Large({
     required this.name,
     required this.hash,
     required this.ext,
@@ -247,24 +214,24 @@ class Small {
     required this.url,
   });
 
-  factory Small.fromJson(Map<String, dynamic> json) => Small(
-        name: json["name"] ?? "",
-        hash: json["hash"] ?? "",
-        ext: json["ext"] ?? "",
-        mime: json["mime"] ?? "",
-        path: json["path"] ?? "",
-        width: json["width"] ?? 0,
-        height: json["height"] ?? 0,
+  factory Large.fromJson(Map<String, dynamic> json) => Large(
+        name: json["name"],
+        hash: json["hash"],
+        ext: extValues.map[json["ext"]]!,
+        mime: mimeValues.map[json["mime"]]!,
+        path: json["path"],
+        width: json["width"],
+        height: json["height"],
         size: json["size"]?.toDouble(),
-        sizeInBytes: json["sizeInBytes"] ?? 0,
-        url: json["url"] ?? "",
+        sizeInBytes: json["sizeInBytes"],
+        url: json["url"],
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
         "hash": hash,
-        "ext": ext,
-        "mime": mime,
+        "ext": extValues.reverse[ext],
+        "mime": mimeValues.reverse[mime],
         "path": path,
         "width": width,
         "height": height,
@@ -273,6 +240,15 @@ class Small {
         "url": url,
       };
 }
+
+enum Mime { APPLICATION_PDF, IMAGE_PNG }
+
+final mimeValues = EnumValues(
+    {"application/pdf": Mime.APPLICATION_PDF, "image/png": Mime.IMAGE_PNG});
+
+enum Provider { LOCAL }
+
+final providerValues = EnumValues({"local": Provider.LOCAL});
 
 class Meta {
   final Pagination pagination;
@@ -316,4 +292,16 @@ class Pagination {
         "pageCount": pageCount,
         "total": total,
       };
+}
+
+class EnumValues<T> {
+  Map<String, T> map;
+  late Map<T, String> reverseMap;
+
+  EnumValues(this.map);
+
+  Map<T, String> get reverse {
+    reverseMap = map.map((k, v) => MapEntry(v, k));
+    return reverseMap;
+  }
 }
