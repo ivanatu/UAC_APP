@@ -1,4 +1,4 @@
-package com.example.uac;
+package com.app.uac;
 
 import io.flutter.embedding.android.FlutterActivity;
 
