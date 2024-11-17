@@ -1,31 +1,37 @@
 import 'package:aids_awareness_app/exports/exports.dart';
-import 'package:aids_awareness_app/utils/app_globals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'VideoDetails.dart';
 
 class Video extends StatefulWidget {
-  _VideoState createState() => _VideoState();
+  const Video({super.key});
+
+  @override
+  State<Video> createState() => _VideoState();
 }
 
 class _VideoState extends State<Video> {
+  final ScrollController _scrollController = ScrollController();
+
+  String getYoutubeThumbnail(String videoId) {
+    return 'https://img.youtube.com/vi/$videoId/hqdefault.jpg';
+  }
+
   @override
-  void initState() {
-    super.initState();
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade200,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: const Text(
           "AIDS Awareness Videos",
           style: TextStyle(
-            color: Colors.black,
             fontSize: 20,
             fontWeight: FontWeight.w600,
           ),
@@ -34,107 +40,154 @@ class _VideoState extends State<Video> {
         elevation: 0,
       ),
       body: Consumer<VideoUpdatesController>(
-          builder: (context, videoController, x) {
-        videoController.getVideoUpdatesList();
-        return Container(
-          child: videoController.isLoading
-              ? const Center(
-                  child: SpinKitFadingCircle(
-                    color: Colors.black,
-                    size: 30.0,
-                  ),
-                )
-              : Scrollbar(
-                  thickness: 5,
-                  child: ListView.builder(
-                    padding: const EdgeInsets.all(10.0),
-                    itemCount: videoController.videoUpdatesList.length,
-                    itemBuilder: (context, index) {
-                      final data = videoController.videoUpdatesList[index];
-                      return buildVid(
-                        data.attributes.title,
-                        data.attributes.description,
-                        data.attributes.videoLink.substring(
-                            data.attributes.videoLink.lastIndexOf("/") + 1),
-                      );
-                    },
-                  ),
+        builder: (context, videoController, _) {
+          videoController.getVideoUpdatesList();
+
+          if (videoController.isLoading) {
+            return const Center(
+              child: SpinKitFadingCircle(
+                color: Colors.black,
+                size: 30.0,
+              ),
+            );
+          }
+
+          return ListView.builder(
+            controller: _scrollController,
+            padding: const EdgeInsets.all(16.0),
+            itemCount: videoController.videoUpdatesList.length,
+            itemBuilder: (context, index) {
+              final data = videoController.videoUpdatesList[index];
+              final videoId = data.attributes.videoLink
+                  .substring(data.attributes.videoLink.lastIndexOf("/") + 1);
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: _VideoCard(
+                  title: data.attributes.title,
+                  description: data.attributes.description,
+                  videoId: videoId,
+                  thumbnailUrl: getYoutubeThumbnail(videoId),
                 ),
-        );
-      }),
+              );
+            },
+          );
+        },
+      ),
     );
   }
+}
 
-  Widget buildVid(String title, String description, String vidId) {
+class _VideoCard extends StatelessWidget {
+  final String title;
+  final String description;
+  final String videoId;
+  final String thumbnailUrl;
+
+  const _VideoCard({
+    required this.title,
+    required this.description,
+    required this.videoId,
+    required this.thumbnailUrl,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Card(
-      elevation: 0,
-      color: Colors.white,
+      elevation: 1,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-        side: BorderSide(color: Colors.grey.shade300, width: 1),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
-            ),
-            child: Hero(
-              tag: vidId,
-              child: YoutubePlayer(
-                controller: genController(vidId),
-                liveUIColor: Colors.blue,
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(
-              title,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
-                fontFamily: "Montserrat",
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(
-              description,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                fontSize: 14,
-                fontFamily: "Montserrat",
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Center(
-            child: TextButton.icon(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => VideoDetails(
-                      title: title,
-                      description: description,
-                      vidId: vidId,
+          // Thumbnail Section
+          Stack(
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(12),
+                ),
+                child: Hero(
+                  tag: videoId,
+                  child: AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: Image.network(
+                      thumbnailUrl,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          color: Colors.grey[300],
+                          child: const Center(
+                            child: Icon(Icons.error_outline),
+                          ),
+                        );
+                      },
                     ),
                   ),
-                );
-              },
-              label: Icon(Icons.open_in_new),
-              icon: Text("View Details"),
+                ),
+              ),
+              Positioned.fill(
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () => _navigateToDetails(context),
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.red.withOpacity(0.9),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.play_arrow,
+                          color: Colors.white,
+                          size: 32,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          // Content Section
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        fontWeight: FontWeight.bold,
+                        height: 1.3,
+                      ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  description,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Theme.of(context).textTheme.bodySmall!.color,
+                        height: 1.5,
+                      ),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton.icon(
+                      onPressed: () => _navigateToDetails(context),
+                      icon: const Text("View Details"),
+                      label: const Icon(Icons.arrow_forward),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ],
@@ -142,13 +195,14 @@ class _VideoState extends State<Video> {
     );
   }
 
-  YoutubePlayerController genController(String vidId) {
-    return YoutubePlayerController(
-      initialVideoId: vidId,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-        mute: false,
-        showLiveFullscreenButton: false,
+  void _navigateToDetails(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => VideoDetails(
+          title: title,
+          description: description,
+          vidId: videoId,
+        ),
       ),
     );
   }
