@@ -13,7 +13,7 @@ description: A new Flutter project.
 version: 1.0.5
 
 environment:
-  sdk: "3.5.4"
+  sdk: "3.7.0"
 
 dependencies:
   flutter:
@@ -32,7 +32,7 @@ dependencies:
   youtube_player_flutter:
   path_provider: ^2.0.11
   flutter_native_splash: ^2.3.5
-  flutter_launcher_icons: ^0.14.1
+  flutter_launcher_icons: ^0.14.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -60,10 +60,11 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-flutter_icons:
+flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/launcher/launcher_icon.png"
+  image_path: "lib/images/img.png"
+
 flutter_native_splash:
   # This package generates native code to customize Flutter's default white native splash screen
   # with background color and splash image.
