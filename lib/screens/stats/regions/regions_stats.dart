@@ -1,4 +1,4 @@
-import 'package:aids_awareness_app/screens/stats/widgets/pie_widget.dart';
+import '/screens/stats/widgets/pie_widget.dart';
 
 import "../../../models/regions_model.dart";
 import "../../../services/regions_service.dart";
@@ -24,10 +24,10 @@ class _RegionsStatsState extends State<RegionsStats> {
         title: Text(
           "Regional Prevalence Rates (%)",
           style: Theme.of(context).textTheme.titleLarge!.apply(
-                fontWeightDelta: 3,
-                // color: Colors.white,
-                fontFamily: 'Montserrat',
-              ),
+            fontWeightDelta: 3,
+            // color: Colors.white,
+            fontFamily: 'Montserrat',
+          ),
         ),
       ),
       body: Stack(
@@ -43,53 +43,48 @@ class _RegionsStatsState extends State<RegionsStats> {
             ),
           ),
           SafeArea(
-            child: LayoutBuilder(builder: (context, constraints) {
-              return FutureBuilder<List<Datum>>(
-                future: RegionService().getRegions(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: CircularProgressIndicator(
-                            strokeWidth: 10,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return FutureBuilder<List<Datum>>(
+                  future: RegionService().getRegions(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Center(
+                            child: CircularProgressIndicator(strokeWidth: 10),
+                          ),
+                          Space(space: 0.07),
+                          Text(
+                            "Loading...",
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyLarge!.apply(color: Colors.grey),
+                          ),
+                        ],
+                      );
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Card(
+                          elevation: 0,
+                          color: Colors.red.shade50,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            side: BorderSide(color: Colors.red),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "Error: ${snapshot.error}",
+                              style: TextStyle(color: Colors.red),
+                            ),
                           ),
                         ),
-                        Space(
-                          space: 0.07,
-                        ),
-                        Text(
-                          "Loading...",
-                          style: Theme.of(context).textTheme.bodyLarge!.apply(
-                                color: Colors.grey,
-                              ),
-                        ),
-                      ],
-                    );
-                  } else if (snapshot.hasError) {
-                    return Center(
-                      child: Card(
-                        elevation: 0,
-                        color: Colors.red.shade50,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          side: BorderSide(
-                            color: Colors.red,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text("Error: ${snapshot.error}",
-                              style: TextStyle(
-                                color: Colors.red,
-                              )),
-                        ),
-                      ),
-                    );
-                  } else {
-                    // pie chart to visualize the data
-                    return Padding(
+                      );
+                    } else {
+                      // pie chart to visualize the data
+                      return Padding(
                         padding: const EdgeInsets.fromLTRB(8, 15, 8, 10),
                         child: PieWidget(
                           dataMap: _generateDataMap(snapshot.data),
@@ -98,11 +93,13 @@ class _RegionsStatsState extends State<RegionsStats> {
                           showPercentage: false,
                           radius: constraints.maxWidth * 1.5,
                           dps: 2,
-                        ));
-                  }
-                },
-              );
-            }),
+                        ),
+                      );
+                    }
+                  },
+                );
+              },
+            ),
           ),
         ],
       ),

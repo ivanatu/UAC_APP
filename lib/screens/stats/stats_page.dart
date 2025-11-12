@@ -1,4 +1,4 @@
-import "package:aids_awareness_app/screens/stats/national_hiv_prevalence.dart";
+import "/screens/stats/national_hiv_prevalence.dart";
 
 import "/screens/stats/new_cases.dart";
 import "/screens/stats/regions/district_stats.dart";
@@ -31,17 +31,15 @@ class _StatsPageState extends State<StatsPage> {
               TextSpan(
                 text: " Stats",
                 style: Theme.of(context).textTheme.headlineLarge!.apply(
-                      fontWeightDelta: 10,
-                      fontFamily: 'Montserrat',
-                    ),
+                  fontWeightDelta: 10,
+                  fontFamily: 'Montserrat',
+                ),
               ),
             ],
           ),
           // Showcase antiretroviral_chart
         ),
-        Space(
-          space: 0.043,
-        ),
+        Space(space: 0.043),
         StatWidget(
           nextPage: NewCasesPage(),
           title: "HIV / AIDS Burden",

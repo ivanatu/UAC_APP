@@ -1,4 +1,4 @@
-import 'package:aids_awareness_app/controllers/national_prevalence_controller.dart';
+import '/controllers/national_prevalence_controller.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 import '/exports/exports.dart';
@@ -17,16 +17,14 @@ class _NationalHivPrevalenceState extends State<NationalHivPrevalence> {
     return Scaffold(
       backgroundColor: Colors.purple.shade50,
       appBar: AppBar(
-        leading: BackButton(
-          color: Colors.white,
-        ),
+        leading: BackButton(color: Colors.white),
         backgroundColor: Colors.purple,
         title: Text("National HIV Prevalence"),
         titleTextStyle: Theme.of(context).textTheme.titleLarge!.apply(
-              fontWeightDelta: 3,
-              color: Colors.white,
-              fontFamily: 'Montserrat',
-            ),
+          fontWeightDelta: 3,
+          color: Colors.white,
+          fontFamily: 'Montserrat',
+        ),
       ),
       body: Stack(
         children: [
@@ -41,46 +39,47 @@ class _NationalHivPrevalenceState extends State<NationalHivPrevalence> {
             ),
           ),
           Consumer<NationalPrevalenceController>(
-              builder: (context, controller, x) {
-            if (mounted) {
-              controller.fetchNationalPrevalence();
-            }
-            return controller.loading
-                ? Center(
-                    child: CircularProgressIndicator(
-                      strokeWidth: 10,
-                      valueColor: AlwaysStoppedAnimation(Colors.purple),
-                    ),
-                  )
-                : Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Prevalence in %",
-                        style: Theme.of(context).textTheme.titleLarge!.apply(
-                              fontWeightDelta: 2,
-                              color: Colors.purple,
-                              fontFamily: 'Montserrat',
-                            ),
+            builder: (context, controller, x) {
+              if (mounted) {
+                controller.fetchNationalPrevalence();
+              }
+              return controller.loading
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        strokeWidth: 10,
+                        valueColor: AlwaysStoppedAnimation(Colors.purple),
                       ),
-                      Space(
-                        space: 0.3,
-                      ),
-                      PieWidget(
-                        radius: 800,
-                        position: LegendPosition.right,
-                        colorList: _generateColorList(controller.items.length),
-                        dataMap: {
-                          for (var item in controller.items)
-                            item.attributes.title: item.attributes.value
-                        },
-                        text: "in %",
-                        showPercentage: false,
-                        dps: 2,
-                      ),
-                    ],
-                  );
-          })
+                    )
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Prevalence in %",
+                          style: Theme.of(context).textTheme.titleLarge!.apply(
+                            fontWeightDelta: 2,
+                            color: Colors.purple,
+                            fontFamily: 'Montserrat',
+                          ),
+                        ),
+                        Space(space: 0.3),
+                        PieWidget(
+                          radius: 800,
+                          position: LegendPosition.right,
+                          colorList: _generateColorList(
+                            controller.items.length,
+                          ),
+                          dataMap: {
+                            for (var item in controller.items)
+                              item.attributes.title: item.attributes.value,
+                          },
+                          text: "in %",
+                          showPercentage: false,
+                          dps: 2,
+                        ),
+                      ],
+                    );
+            },
+          ),
         ],
       ),
     );

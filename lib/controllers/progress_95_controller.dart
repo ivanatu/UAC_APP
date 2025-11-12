@@ -1,4 +1,4 @@
-import 'package:aids_awareness_app/models/progress_95_model.dart';
+import '/models/progress_95_model.dart';
 
 import '../services/progress_95_service.dart';
 import '/exports/exports.dart';

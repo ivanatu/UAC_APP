@@ -1,4 +1,4 @@
-import 'package:aids_awareness_app/values/default_country_data.dart';
+import '/values/default_country_data.dart';
 import '../../widgets/stats_widgets/country_card_details.dart';
 // import '../../network_requests/exceptions.dart';
 import '../../widgets/skeletons/country_stat_skeleton.dart';
@@ -170,9 +170,7 @@ class _CountryStatWidgetState extends State<CountryStatWidget>
                         //Number
                         _buildCasesText(),
 
-                        SizedBox(
-                          width: 10,
-                        ),
+                        SizedBox(width: 10),
 
                         //Arrow
                         Icon(
@@ -181,7 +179,7 @@ class _CountryStatWidgetState extends State<CountryStatWidget>
                               : Icons.arrow_downward,
                           color: Colors.white,
                           size: 28,
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -242,10 +240,7 @@ class _CountryStatWidgetState extends State<CountryStatWidget>
 
   Widget _buildCountryCardDetails() {
     if (defaultCountry.countryName == widget.countryName) {
-      return CountryStatLoader(
-        color: widget.color,
-        isDefault: true,
-      );
+      return CountryStatLoader(color: widget.color, isDefault: true);
     } else {
       return CountryCardDetails(
         countryName: widget.countryName,

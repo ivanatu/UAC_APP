@@ -1,4 +1,4 @@
-import 'package:aids_awareness_app/models/myth_model.dart';
+import '/models/myth_model.dart';
 
 import '/exports/exports.dart';
 

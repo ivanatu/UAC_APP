@@ -1,4 +1,4 @@
-// import 'package:aids_awareness_app/utils/app_globals.dart';
+// import '/utils/app_globals.dart';
 // import 'package:cached_network_image/cached_network_image.dart';
 // import 'package:flutter/material.dart';
 // import 'dart:convert';

@@ -1,4 +1,4 @@
-import 'package:aids_awareness_app/models/aids_info_model.dart';
+import '/models/aids_info_model.dart';
 
 import '/exports/exports.dart';
 
@@ -10,8 +10,9 @@ class AidsInfoService {
       StreamedResponse response = await request.send();
 
       if (response.statusCode == 200) {
-        return aidsInfoModelFromJson(await response.stream.bytesToString())
-            .data;
+        return aidsInfoModelFromJson(
+          await response.stream.bytesToString(),
+        ).data;
       } else {
         return Future.error(response.reasonPhrase ?? "");
       }

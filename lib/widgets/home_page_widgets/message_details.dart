@@ -1,4 +1,4 @@
-// import 'package:aids_awareness_app/models/message_model.dart';
+// import '/models/message_model.dart';
 
 import 'package:flutter_markdown/flutter_markdown.dart';
 
@@ -22,10 +22,10 @@ class _MessageDetailsState extends State<MessageDetails> {
         title: Text(
           widget.message.attributes.title,
           style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                fontFamily: "Montserrat",
-                fontWeight: FontWeight.bold,
-                // color: Colors.white,
-              ),
+            fontFamily: "Montserrat",
+            fontWeight: FontWeight.bold,
+            // color: Colors.white,
+          ),
         ),
         actions: [
           Hero(
@@ -43,7 +43,7 @@ class _MessageDetailsState extends State<MessageDetails> {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
       body: SafeArea(
@@ -51,11 +51,11 @@ class _MessageDetailsState extends State<MessageDetails> {
           data: widget.message.attributes.content,
           styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
             p: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  fontSize: 16,
-                  fontFamily: "Montserrat",
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                ),
+              fontSize: 16,
+              fontFamily: "Montserrat",
+              color: Colors.black,
+              fontWeight: FontWeight.w400,
+            ),
           ),
         ),
       ),

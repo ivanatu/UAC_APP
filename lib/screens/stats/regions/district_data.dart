@@ -1,5 +1,5 @@
-import 'package:aids_awareness_app/models/regions_model.dart';
-import 'package:aids_awareness_app/services/regions_service.dart';
+import '/models/regions_model.dart';
+import '/services/regions_service.dart';
 import 'package:pie_chart/pie_chart.dart' as p;
 import '/exports/exports.dart';
 
@@ -7,11 +7,12 @@ class DistrictData extends StatefulWidget {
   final Datum region;
   final int index;
   final Color color;
-  const DistrictData(
-      {super.key,
-      required this.region,
-      required this.color,
-      required this.index});
+  const DistrictData({
+    super.key,
+    required this.region,
+    required this.color,
+    required this.index,
+  });
 
   @override
   State<DistrictData> createState() => _DistrictDataState();
@@ -22,88 +23,89 @@ class _DistrictDataState extends State<DistrictData> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors
-          .primaries[(widget.index * 7) % Colors.primaries.length].shade50,
+          .primaries[(widget.index * 7) % Colors.primaries.length]
+          .shade50,
       appBar: AppBar(
         backgroundColor: widget.color,
-        leading: BackButton(
-          color: Colors.white,
-        ),
+        leading: BackButton(color: Colors.white),
         title: Text(
           'Prevalence rate (15-49)',
           style: Theme.of(context).textTheme.titleLarge!.apply(
-                fontWeightDelta: 3,
-                color: Colors.white,
-                fontFamily: 'Montserrat',
-              ),
+            fontWeightDelta: 3,
+            color: Colors.white,
+            fontFamily: 'Montserrat',
+          ),
         ),
         elevation: 0,
       ),
-      body: LayoutBuilder(builder: (context, constraints) {
-        return Stack(
-          children: [
-            Container(
-              width: double.infinity,
-              height: constraints.maxHeight * 0.2,
-              decoration: BoxDecoration(
-                color: widget.color,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return Stack(
+            children: [
+              Container(
+                width: double.infinity,
+                height: constraints.maxHeight * 0.2,
+                decoration: BoxDecoration(
+                  color: widget.color,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30),
+                  ),
                 ),
-              ),
-              child: Center(
-                child: AutoSizeText(
-                  widget.region.attributes.title,
-                  style: Theme.of(context).textTheme.headlineLarge!.apply(
+                child: Center(
+                  child: AutoSizeText(
+                    widget.region.attributes.title,
+                    style: Theme.of(context).textTheme.headlineLarge!.apply(
                       color: Colors.white,
                       fontWeightDelta: 20,
                       fontSizeFactor: 1.32,
-                      fontFamily: 'Montserrat'),
-                  minFontSize: 15,
-                  maxFontSize: 40,
+                      fontFamily: 'Montserrat',
+                    ),
+                    minFontSize: 15,
+                    maxFontSize: 40,
+                  ),
                 ),
               ),
-            )
-            // plot data for the region
-            ,
-            FutureBuilder(
-              future: RegionService().getDistricts(widget.region.id),
-              builder: (context, snapshot) {
-                var data = snapshot.data ?? [];
-                if (snapshot.hasData) {
-                  // plot pie chart
-                  return p.PieChart(
-                    dataMap: _generateMap(data),
-                    colorList: _generateColorList(data.length),
-                    chartType: p.ChartType.disc,
-                    ringStrokeWidth: 120,
-                    legendOptions: p.LegendOptions(
-                      showLegends: true,
-                      // legendPosition: p.LegendPosition.bottom,
-                      legendShape: BoxShape.circle,
-                      // legendTextStyle: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    chartValuesOptions: p.ChartValuesOptions(
-                      showChartValueBackground: true,
-                      showChartValues: true,
-                      showChartValuesInPercentage: false,
-                      showChartValuesOutside: false,
-                      decimalPlaces: 2,
+              // plot data for the region
+              FutureBuilder(
+                future: RegionService().getDistricts(widget.region.id),
+                builder: (context, snapshot) {
+                  var data = snapshot.data ?? [];
+                  if (snapshot.hasData) {
+                    // plot pie chart
+                    return p.PieChart(
+                      dataMap: _generateMap(data),
+                      colorList: _generateColorList(data.length),
+                      chartType: p.ChartType.disc,
+                      ringStrokeWidth: 120,
+                      legendOptions: p.LegendOptions(
+                        showLegends: true,
+                        // legendPosition: p.LegendPosition.bottom,
+                        legendShape: BoxShape.circle,
+                        // legendTextStyle: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      chartValuesOptions: p.ChartValuesOptions(
+                        showChartValueBackground: true,
+                        showChartValues: true,
+                        showChartValuesInPercentage: false,
+                        showChartValuesOutside: false,
+                        decimalPlaces: 2,
+                      ),
+                    );
+                  }
+                  return Center(
+                    child: CircularProgressIndicator(
+                      color: widget.color,
+                      strokeWidth: 10,
+                      strokeCap: StrokeCap.butt,
                     ),
                   );
-                }
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: widget.color,
-                    strokeWidth: 10,
-                    strokeCap: StrokeCap.butt,
-                  ),
-                );
-              },
-            ),
-          ],
-        );
-      }),
+                },
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 

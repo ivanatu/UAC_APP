@@ -1,5 +1,5 @@
-import 'package:aids_awareness_app/screens/about/about_uac.dart';
-import 'package:aids_awareness_app/screens/faqs/faqs_page.dart';
+import '/screens/about/about_uac.dart';
+import '/screens/faqs/faqs_page.dart';
 
 import '../controllers/drawer_controller.dart';
 import '/exports/exports.dart';
@@ -25,9 +25,7 @@ class DrawerScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Space(
-              space: 0.3,
-            ),
+            Space(space: 0.3),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -45,15 +43,13 @@ class DrawerScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Space(
-                    space: 0.041,
-                  ),
+                  Space(space: 0.041),
                   Text(
                     "(UAC)\n",
                     style: Theme.of(context).textTheme.titleMedium!.apply(
-                          color: Colors.white,
-                          fontWeightDelta: 10,
-                        ),
+                      color: Colors.white,
+                      fontWeightDelta: 10,
+                    ),
                   ),
                 ],
               ),
@@ -64,10 +60,10 @@ class DrawerScreen extends StatelessWidget {
               child: Text(
                 "UGANDA AIDS COMMISSION",
                 style: Theme.of(context).textTheme.bodyMedium!.apply(
-                      color: Colors.white,
-                      fontFamily: 'Montserrat',
-                      fontWeightDelta: 5,
-                    ),
+                  color: Colors.white,
+                  fontFamily: 'Montserrat',
+                  fontWeightDelta: 5,
+                ),
               ),
             ),
             Padding(
@@ -75,43 +71,50 @@ class DrawerScreen extends StatelessWidget {
               child: Divider(),
             ),
             ListTile(
-              leading: SvgPicture.asset("assets/bottom_navs/home.svg",
-                  color: Colors.white),
-              title: const Text('Home',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'Montserrat',
-                  )),
-              onTap: () =>
-                  Provider.of<ZDrawerController>(context, listen: false)
-                      .toggleDrawerSelected(),
+              leading: SvgPicture.asset(
+                "assets/bottom_navs/home.svg",
+                color: Colors.white,
+              ),
+              title: const Text(
+                'Home',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Montserrat',
+                ),
+              ),
+              onTap: () => Provider.of<ZDrawerController>(
+                context,
+                listen: false,
+              ).toggleDrawerSelected(),
             ),
             ListTile(
-                leading: const Icon(
-                  Icons.info,
-                  color: Colors.white,
-                ),
-                title: Hero(
-                  tag: "about_uac",
-                  child: const Text(
-                    'About',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w600,
-                    ),
+              leading: const Icon(Icons.info, color: Colors.white),
+              title: Hero(
+                tag: "about_uac",
+                child: const Text(
+                  'About',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
-                onTap: () {
-                  Provider.of<ZDrawerController>(context, listen: false)
-                      .toggleDrawerSelected();
-                  // navigate to about screen
-                  Routes.animateToPage(AboutUac());
-                }),
+              ),
+              onTap: () {
+                Provider.of<ZDrawerController>(
+                  context,
+                  listen: false,
+                ).toggleDrawerSelected();
+                // navigate to about screen
+                Routes.animateToPage(AboutUac());
+              },
+            ),
             ListTile(
-              leading:
-                  SvgPicture.asset("assets/svgs/faqs.svg", color: Colors.white),
+              leading: SvgPicture.asset(
+                "assets/svgs/faqs.svg",
+                color: Colors.white,
+              ),
               title: const Text(
                 'Presidential Questions',
                 style: TextStyle(
@@ -121,32 +124,35 @@ class DrawerScreen extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                Provider.of<ZDrawerController>(context, listen: false)
-                    .toggleDrawerSelected();
+                Provider.of<ZDrawerController>(
+                  context,
+                  listen: false,
+                ).toggleDrawerSelected();
                 // navigate to faqs screen
                 Routes.animateToPage(FaqsPage());
               },
             ),
             ListTile(
-                leading: Icon(Icons.message, color: Colors.white),
-                title: const Text(
-                  'Stories',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w600,
-                  ),
+              leading: Icon(Icons.message, color: Colors.white),
+              title: const Text(
+                'Stories',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Montserrat',
+                  fontWeight: FontWeight.w600,
                 ),
-                onTap: () {
-                  Provider.of<ZDrawerController>(context, listen: false)
-                      .toggleDrawerSelected();
+              ),
+              onTap: () {
+                Provider.of<ZDrawerController>(
+                  context,
+                  listen: false,
+                ).toggleDrawerSelected();
 
-                  // navigate to stories screen
-                  Routes.animateToPage(Stories());
-                }),
-            Spacer(
-              flex: 2,
+                // navigate to stories screen
+                Routes.animateToPage(Stories());
+              },
             ),
+            Spacer(flex: 2),
           ],
         ),
       ),

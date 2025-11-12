@@ -2,7 +2,7 @@
 
 import 'dart:async';
 
-import 'package:aids_awareness_app/services/storage_service.dart';
+import '/services/storage_service.dart';
 
 import '/exports/exports.dart';
 
@@ -30,14 +30,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     },
     {
       'title': 'Connect with us',
-      'subtitle': 'Contact the Uganda Aids Commission for support and unanswered questions.',
+      'subtitle':
+          'Contact the Uganda Aids Commission for support and unanswered questions.',
       'image': 'assets/svgs/community.svg',
     },
   ];
   @override
   void initState() {
     super.initState();
-// controlling the sliding animation
+    // controlling the sliding animation
   }
 
   void nextPage() {
@@ -80,11 +81,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               left: 10,
               child: Hero(
                 tag: "lib/images/img.png",
-                child: Image.asset(
-                  "lib/images/img.png",
-                  width: 80,
-                  height: 80,
-                ),
+                child: Image.asset("lib/images/img.png", width: 80, height: 80),
               ),
             ),
             Column(
@@ -113,16 +110,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               fit: BoxFit.cover,
                             ),
                           ),
-                          const SizedBox.square(
-                            dimension: 20,
-                          ),
+                          const SizedBox.square(dimension: 20),
                           Text(
                             _onboardingData[index]['title']!,
-                            style:
-                                Theme.of(context).textTheme.titleLarge!.apply(
-                                      fontWeightDelta: 8,
-                                      fontSizeDelta: 5,
-                                    ),
+                            style: Theme.of(context).textTheme.titleLarge!
+                                .apply(fontWeightDelta: 8, fontSizeDelta: 5),
                             textAlign: TextAlign.center,
                           ),
                           const SizedBox.square(dimension: 5),
@@ -166,9 +158,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     onPress: page >= 2
                         ? () async {
                             StorageService.saveData('new_user', 1);
-                            Routes.replacePage(
-                              const IndexScreen(),
-                            );
+                            Routes.replacePage(const IndexScreen());
                           }
                         : () => nextPage(),
                   ),

@@ -1,4 +1,4 @@
-import 'package:aids_awareness_app/exports/exports.dart';
+import '/exports/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -31,10 +31,7 @@ class _VideoState extends State<Video> {
       appBar: AppBar(
         title: const Text(
           "AIDS Awareness Videos",
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
         elevation: 0,
@@ -45,10 +42,7 @@ class _VideoState extends State<Video> {
 
           if (videoController.isLoading) {
             return const Center(
-              child: SpinKitFadingCircle(
-                color: Colors.black,
-                size: 30.0,
-              ),
+              child: SpinKitFadingCircle(color: Colors.black, size: 30.0),
             );
           }
 
@@ -58,8 +52,9 @@ class _VideoState extends State<Video> {
             itemCount: videoController.videoUpdatesList.length,
             itemBuilder: (context, index) {
               final data = videoController.videoUpdatesList[index];
-              final videoId = data.attributes.videoLink
-                  .substring(data.attributes.videoLink.lastIndexOf("/") + 1);
+              final videoId = data.attributes.videoLink.substring(
+                data.attributes.videoLink.lastIndexOf("/") + 1,
+              );
               return Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
                 child: _VideoCard(
@@ -94,9 +89,7 @@ class _VideoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 1,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -117,9 +110,7 @@ class _VideoCard extends StatelessWidget {
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
                           color: Colors.grey[300],
-                          child: const Center(
-                            child: Icon(Icons.error_outline),
-                          ),
+                          child: const Center(child: Icon(Icons.error_outline)),
                         );
                       },
                     ),
@@ -162,9 +153,9 @@ class _VideoCard extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        fontWeight: FontWeight.bold,
-                        height: 1.3,
-                      ),
+                    fontWeight: FontWeight.bold,
+                    height: 1.3,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Text(
@@ -172,9 +163,9 @@ class _VideoCard extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Theme.of(context).textTheme.bodySmall!.color,
-                        height: 1.5,
-                      ),
+                    color: Theme.of(context).textTheme.bodySmall!.color,
+                    height: 1.5,
+                  ),
                 ),
                 const SizedBox(height: 16),
                 Row(
