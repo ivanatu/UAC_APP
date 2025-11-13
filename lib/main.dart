@@ -1,5 +1,5 @@
 import "controllers/regional_controller.dart";
-import "/exports/exports.dart";
+import "exports/exports.dart";
 import "controllers/national_prevalence_controller.dart";
 
 var navigatorKey = GlobalKey<NavigatorState>();
@@ -13,52 +13,31 @@ void main() {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  SystemChrome.setEnabledSystemUIMode(
-    SystemUiMode.edgeToEdge,
-    overlays: [],
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge, overlays: []);
+  // style native ui
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.transparent,
+      systemNavigationBarIconBrightness: Brightness.dark,
+      systemNavigationBarDividerColor: Colors.transparent,
+    ),
   );
-// style native ui
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    systemNavigationBarColor: Colors.transparent,
-    systemNavigationBarIconBrightness: Brightness.dark,
-    systemNavigationBarDividerColor: Colors.transparent,
-  ));
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) => DataController(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => ZDrawerController(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => FaqaController(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => Progress95Controller(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => AidsInfoController(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => VideoUpdatesController(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => MythController(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => PrecautionController(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => StoriesController(),
-        ),
+        ChangeNotifierProvider(create: (context) => DataController()),
+        ChangeNotifierProvider(create: (context) => ZDrawerController()),
+        ChangeNotifierProvider(create: (context) => FaqaController()),
+        ChangeNotifierProvider(create: (context) => Progress95Controller()),
+        ChangeNotifierProvider(create: (context) => AidsInfoController()),
+        ChangeNotifierProvider(create: (context) => VideoUpdatesController()),
+        ChangeNotifierProvider(create: (context) => MythController()),
+        ChangeNotifierProvider(create: (context) => PrecautionController()),
+        ChangeNotifierProvider(create: (context) => StoriesController()),
         ChangeNotifierProvider(
           create: (context) => NationalPrevalenceController(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => RegionalController(),
-        ),
+        ChangeNotifierProvider(create: (context) => RegionalController()),
       ],
       child: MaterialApp(
         navigatorKey: navigatorKey,
