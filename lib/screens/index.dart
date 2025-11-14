@@ -1,8 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
-import '/controllers/drawer_controller.dart';
 import '/screens/drawer_screen.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
 import '/exports/exports.dart';
 

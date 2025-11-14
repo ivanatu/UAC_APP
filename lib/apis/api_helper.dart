@@ -22,7 +22,7 @@ class ApiHelper {
   final Duration retryDelay;
 
   ApiHelper({
-    this.baseUrl = Apis.url,
+    this.baseUrl = Apis.url + '/api',
     this.timeout = const Duration(seconds: 30),
     Map<String, String>? defaultHeaders,
     Duration cacheDuration = const Duration(minutes: 5),
