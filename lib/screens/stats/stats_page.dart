@@ -1,4 +1,4 @@
-import "/screens/stats/new_cases.dart";
+import "hiv_aids_burden.dart";
 import "/screens/stats/regions/district_stats.dart";
 import "/screens/stats/widgets/progress_95.dart";
 import "/screens/stats/widgets/stat_widget.dart";
@@ -38,7 +38,7 @@ class _StatsPageState extends State<StatsPage> {
         ),
         Space(space: 0.043),
         StatWidget(
-          nextPage: NewCasesPage(),
+          nextPage: HivAidsBurden(),
           title: "HIV / AIDS Burden",
           icon: Icons.pie_chart_rounded,
           color: Colors.blue,

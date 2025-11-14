@@ -19,14 +19,16 @@ class HivBurdenService {
   // new infections by sub-region
   Future<List<NewNumberOfInfections>> getNewInfectionsBySubRegion() async {
     var response = await _apiHelper.get(
-      'new-hiv-prevalance-infectionz?populate=*',
+      'new-number-of-infections-by-age-group-and-sexes?populate=*',
     );
     return NewNumberOfInfectionResponse.fromJson(response).data;
   }
 
   // annual new infections
   Future<List<AnnualAids>> getAnnualNewInfections() async {
-    var response = await _apiHelper.get('new-hiv-infections?populate=*');
+    var response = await _apiHelper.get(
+      'annual-ai-ds-related-deaths-by-sex-and-age-groups',
+    );
     return AnnaulAidsResponse.fromJson(response).data;
   }
 }
