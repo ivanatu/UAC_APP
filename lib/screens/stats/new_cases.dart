@@ -1,4 +1,8 @@
 import '../../controllers/national_prevalence_controller.dart';
+import '../../services/hiv_burden_service.dart';
+import '../../models/plhiv_prevalence.dart';
+import '../../models/new_number_of_infection_model.dart';
+import '../../models/annual_aids_response.dart';
 import '/exports/exports.dart';
 
 class NewCasesPage extends StatefulWidget {
@@ -9,7 +13,87 @@ class NewCasesPage extends StatefulWidget {
 }
 
 class _NewCasesPageState extends State<NewCasesPage> {
-  String year = "2010";
+  final HivBurdenService _hivBurdenService = HivBurdenService();
+
+  List<Plhiv> plhivData = [];
+  List<NewNumberOfInfections> newInfectionsData = [];
+  List<AnnualAids> annualAidsData = [];
+
+  bool isLoadingPlhiv = true;
+  bool isLoadingInfections = true;
+  bool isLoadingAids = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchAllData();
+  }
+
+  Future<void> _fetchAllData() async {
+    await Future.wait([
+      _fetchPlhivData(),
+      _fetchNewInfections(),
+      _fetchAnnualAids(),
+    ]);
+  }
+
+  Future<void> _fetchPlhivData() async {
+    try {
+      final data = await _hivBurdenService.getPlhivPrevalence();
+      if (mounted) {
+        setState(() {
+          plhivData = data;
+          isLoadingPlhiv = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          isLoadingPlhiv = false;
+        });
+      }
+      print('Error fetching PLHIV data: $e');
+    }
+  }
+
+  Future<void> _fetchNewInfections() async {
+    try {
+      final data = await _hivBurdenService.getNewInfectionsBySubRegion();
+      if (mounted) {
+        setState(() {
+          newInfectionsData = data;
+          isLoadingInfections = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          isLoadingInfections = false;
+        });
+      }
+      print('Error fetching new infections data: $e');
+    }
+  }
+
+  Future<void> _fetchAnnualAids() async {
+    try {
+      final data = await _hivBurdenService.getAnnualNewInfections();
+      if (mounted) {
+        setState(() {
+          annualAidsData = data;
+          isLoadingAids = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          isLoadingAids = false;
+        });
+      }
+      print('Error fetching annual AIDS data: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,97 +148,113 @@ class _NewCasesPageState extends State<NewCasesPage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                      "\n Number of PLHIV Disaggregated by Age Group & Sex",
+                      "Number of PLHIV Disaggregated by Age Group & Sex",
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyLarge!.apply(
                             fontWeightDelta: 3,
                             fontFamily: 'Montserrat',
                           )),
                 ),
-
-                DataTable(
-                  border: TableBorder.all(
-                    color: Colors.black,
-                    width: 0.5,
-                  ),
-                  columns: [
-                    DataColumn(
-                      label: Text(
-                        'Population Group',
-                        style: Theme.of(context).textTheme.bodyMedium!.apply(
-                              fontWeightDelta: 3,
-                              fontFamily: 'Montserrat',
+                isLoadingPlhiv
+                    ? Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
+                    : plhivData.isEmpty
+                        ? Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                'No data available',
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
                             ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Year (2023)',
-                        style: Theme.of(context).textTheme.bodyMedium!.apply(
-                              fontWeightDelta: 3,
-                              fontFamily: 'Montserrat',
+                          )
+                        : DataTable(
+                            border: TableBorder.all(
+                              color: Colors.black,
+                              width: 0.5,
                             ),
-                      ),
-                    ),
-                  ],
-                  rows: [
-                    DataRow(cells: [
-                      DataCell(Text('Adults & Children')),
-                      DataCell(Text('1,500,000')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Adults 15+')),
-                      DataCell(Text('1,400,000')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Women 15+')),
-                      DataCell(Text('910,000')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Men 15+')),
-                      DataCell(Text('490,000')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('All Young people 15-24')),
-                      DataCell(Text('150,000')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Young Men 15-24')),
-                      DataCell(Text('40,000')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Young Women 15-24')),
-                      DataCell(Text('110,000')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('All Adolescent 10-19')),
-                      DataCell(Text('85,000')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Adolescent Women 10-19')),
-                      DataCell(Text('51,000')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Adolescent Men 10-19')),
-                      DataCell(Text('34,000')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Children 0-14')),
-                      DataCell(Text('72,000')),
-                    ]),
-                  ],
-                ),
+                            columnSpacing: 20,
+                            horizontalMargin: 12,
+                            columns: [
+                              DataColumn(
+                                label: Expanded(
+                                  child: Text(
+                                    'Population Group',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .apply(
+                                          fontWeightDelta: 3,
+                                          fontFamily: 'Montserrat',
+                                        ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Expanded(
+                                  child: Text(
+                                    'Year (2023)',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .apply(
+                                          fontWeightDelta: 3,
+                                          fontFamily: 'Montserrat',
+                                        ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                            ],
+                            rows: plhivData.map((item) {
+                              return DataRow(
+                                cells: [
+                                  DataCell(
+                                    Text(
+                                      item.attributes.populationGroup,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .apply(
+                                            fontFamily: 'Montserrat',
+                                          ),
+                                    ),
+                                  ),
+                                  DataCell(
+                                    Text(
+                                      item.attributes.valueByYear,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .apply(
+                                            fontFamily: 'Montserrat',
+                                          ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }).toList(),
+                          ),
                 //
 
                 Space(
                   space: 0.05,
                 ),
-                Text(
-                  'National HIV Prevalence\n',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyLarge!.apply(
-                    fontWeightDelta: 3,
-                    fontFamily: 'Montserrat',
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'National HIV Prevalence',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyLarge!.apply(
+                      fontWeightDelta: 3,
+                      fontFamily: 'Montserrat',
+                    ),
                   ),
                 ),
                 Consumer<NationalPrevalenceController>(
@@ -162,208 +262,283 @@ class _NewCasesPageState extends State<NewCasesPage> {
                       if (mounted) {
                         nController.fetchNationalPrevalence();
                       }
-                      return DataTable(
-                        border: TableBorder.all(
-                          color: Colors.black,
-                          width: 0.5,
-                        ),
-                        columns: [
-                          DataColumn(
-                            label: Text(
-                              'Population Group',
-                              style: Theme.of(context).textTheme.bodyMedium!.apply(
-                                fontWeightDelta: 3,
-                                fontFamily: 'Montserrat',
+                      return nController.items.isEmpty
+                          ? Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: CircularProgressIndicator(),
                               ),
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'Year (2023)',
-                              style: Theme.of(context).textTheme.bodyMedium!.apply(
-                                fontWeightDelta: 3,
-                                fontFamily: 'Montserrat',
+                            )
+                          : DataTable(
+                              border: TableBorder.all(
+                                color: Colors.black,
+                                width: 0.5,
                               ),
-                            ),
-                          ),
-                        ],
-                        rows: List.generate(nController.items.length, (i) {
-                          return DataRow(cells: [
-                            DataCell(Text(nController.items[i].attributes.title)),
-                            DataCell(
-                                Text("${nController.items[i].attributes.value}%")),
-                          ]);
-                        }),
-                      );
+                              columnSpacing: 20,
+                              horizontalMargin: 12,
+                              columns: [
+                                DataColumn(
+                                  label: Expanded(
+                                    child: Text(
+                                      'Population Group',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .apply(
+                                            fontWeightDelta: 3,
+                                            fontFamily: 'Montserrat',
+                                          ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Expanded(
+                                    child: Text(
+                                      'Year (2023)',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .apply(
+                                            fontWeightDelta: 3,
+                                            fontFamily: 'Montserrat',
+                                          ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                              rows: List.generate(nController.items.length, (i) {
+                                return DataRow(
+                                  cells: [
+                                    DataCell(
+                                      Text(
+                                        nController.items[i].attributes.title,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall!
+                                            .apply(
+                                              fontFamily: 'Montserrat',
+                                            ),
+                                      ),
+                                    ),
+                                    DataCell(
+                                      Text(
+                                        "${nController.items[i].attributes.value}%",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall!
+                                            .apply(
+                                              fontFamily: 'Montserrat',
+                                            ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              }),
+                            );
                     }),
                 Space(
                   space: 0.05,
                 ),
-                Text(
-                  'Number of New Infections by Age \nGroup and Sex',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyLarge!.apply(
-                        fontWeightDelta: 3,
-                        fontFamily: 'Montserrat',
-                      ),
-                ),
-
-                DataTable(
-                  border: TableBorder.all(
-                    color: Colors.black,
-                    width: 0.5,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Number of New Infections by Age Group and Sex',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyLarge!.apply(
+                          fontWeightDelta: 3,
+                          fontFamily: 'Montserrat',
+                        ),
                   ),
-                  columns: [
-                    DataColumn(
-                      label: Text(
-                        'Population Group',
-                        style: Theme.of(context).textTheme.bodyMedium!.apply(
-                              fontWeightDelta: 3,
-                              fontFamily: 'Montserrat',
-                            ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Year (2023)',
-                        style: Theme.of(context).textTheme.bodyMedium!.apply(
-                              fontWeightDelta: 3,
-                              fontFamily: 'Montserrat',
-                            ),
-                      ),
-                    ),
-                  ],
-                  rows: [
-                    DataRow(cells: [
-                      DataCell(Text('Adults & Children')),
-                      DataCell(Text('38,000')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Adults 15+')),
-                      DataCell(Text('33,000')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Women 15+')),
-                      DataCell(Text('22,000')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Men 15+')),
-                      DataCell(Text('11,000')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('All Young people 15-24')),
-                      DataCell(Text('15,000')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Young Men 15-24')),
-                      DataCell(Text('3,000')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Young Women 15-24')),
-                      DataCell(Text('12,000')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('All Adolescent 10-19')),
-                      DataCell(Text('6,600')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Adolescent Women 10-19')),
-                      DataCell(Text('5,900')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Adolescent Men 10-19')),
-                      DataCell(Text('700')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Children 0-14')),
-                      DataCell(Text('4,700')),
-                    ]),
-                  ],
                 ),
+                isLoadingInfections
+                    ? Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
+                    : newInfectionsData.isEmpty
+                        ? Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                'No data available',
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ),
+                          )
+                        : DataTable(
+                            border: TableBorder.all(
+                              color: Colors.black,
+                              width: 0.5,
+                            ),
+                            columnSpacing: 20,
+                            horizontalMargin: 12,
+                            columns: [
+                              DataColumn(
+                                label: Expanded(
+                                  child: Text(
+                                    'Population Group',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .apply(
+                                          fontWeightDelta: 3,
+                                          fontFamily: 'Montserrat',
+                                        ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Expanded(
+                                  child: Text(
+                                    'Year (2023)',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .apply(
+                                          fontWeightDelta: 3,
+                                          fontFamily: 'Montserrat',
+                                        ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                            ],
+                            rows: newInfectionsData.map((item) {
+                              return DataRow(
+                                cells: [
+                                  DataCell(
+                                    Text(
+                                      item.attributes.populationGroup,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .apply(
+                                            fontFamily: 'Montserrat',
+                                          ),
+                                    ),
+                                  ),
+                                  DataCell(
+                                    Text(
+                                      item.attributes.year,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .apply(
+                                            fontFamily: 'Montserrat',
+                                          ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }).toList(),
+                          ),
                 Space(
                   space: 0.05,
                 ),
-                //
-                Text(
-                  'Annual AIDS Related Deaths by Sex \nand Age Group\n',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyLarge!.apply(
-                        fontWeightDelta: 3,
-                        fontFamily: 'Montserrat',
-                      ),
-                ),
-                DataTable(
-                  border: TableBorder.all(
-                    color: Colors.black,
-                    width: 0.5,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Annual AIDS Related Deaths by Sex and Age Group',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyLarge!.apply(
+                          fontWeightDelta: 3,
+                          fontFamily: 'Montserrat',
+                        ),
                   ),
-                  columns: [
-                    DataColumn(
-                      label: Text(
-                        'Population Group',
-                        style: Theme.of(context).textTheme.bodyMedium!.apply(
-                              fontWeightDelta: 3,
-                              fontFamily: 'Montserrat',
-                            ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Year (2023)',
-                        style: Theme.of(context).textTheme.bodyMedium!.apply(
-                              fontWeightDelta: 3,
-                              fontFamily: 'Montserrat',
-                            ),
-                      ),
-                    ),
-                  ],
-                  rows: [
-                    DataRow(cells: [
-                      DataCell(Text('Adults & Children')),
-                      DataCell(Text('20,000')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Adults 15+')),
-                      DataCell(Text('17,000')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Women 15+')),
-                      DataCell(Text('8,200')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Men 15+')),
-                      DataCell(Text('7,800')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('All Young people 15-24')),
-                      DataCell(Text('1,900')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Young Men 15-24')),
-                      DataCell(Text('800')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Young Women 15-24')),
-                      DataCell(Text('1,100')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('All Adolescent 10-19')),
-                      DataCell(Text('1,100')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Adolescent Women 10-19')),
-                      DataCell(Text('560')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Adolescent Men 10-19')),
-                      DataCell(Text('550')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Children 0-14')),
-                      DataCell(Text('3,200')),
-                    ]),
-                  ],
                 ),
+                isLoadingAids
+                    ? Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
+                    : annualAidsData.isEmpty
+                        ? Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                'No data available',
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ),
+                          )
+                        : DataTable(
+                            border: TableBorder.all(
+                              color: Colors.black,
+                              width: 0.5,
+                            ),
+                            columnSpacing: 20,
+                            horizontalMargin: 12,
+                            columns: [
+                              DataColumn(
+                                label: Expanded(
+                                  child: Text(
+                                    'Population Group',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .apply(
+                                          fontWeightDelta: 3,
+                                          fontFamily: 'Montserrat',
+                                        ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Expanded(
+                                  child: Text(
+                                    'Year (2023)',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .apply(
+                                          fontWeightDelta: 3,
+                                          fontFamily: 'Montserrat',
+                                        ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                            ],
+                            rows: annualAidsData.map((item) {
+                              return DataRow(
+                                cells: [
+                                  DataCell(
+                                    Text(
+                                      item.attributes.populationGroup,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .apply(
+                                            fontFamily: 'Montserrat',
+                                          ),
+                                    ),
+                                  ),
+                                  DataCell(
+                                    Text(
+                                      item.attributes.valueByYear,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .apply(
+                                            fontFamily: 'Montserrat',
+                                          ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }).toList(),
+                          ),
                 Space(
                   space: 0.4,
                 )

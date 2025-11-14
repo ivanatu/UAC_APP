@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import '/models/aids_info_model.dart';
 import '/exports/exports.dart';
 
@@ -9,56 +11,118 @@ class InfoDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => Navigator.of(context).pop(),
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-            size: 28,
-          ),
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Hero(
-            tag: Apis.url + article.attributes.image.data.attributes.url,
-            child: Image.network(
-              Apis.url + article.attributes.image.data.attributes.url,
-              errorBuilder: (context, url, error) => const Icon(Icons.error),
+      body: CustomScrollView(
+        slivers: [
+          // App bar with back button that's always visible
+          SliverAppBar(
+            expandedHeight: MediaQuery.of(context).size.height * 0.4,
+            pinned: true,
+            leading: Container(
+              margin: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.5),
+                shape: BoxShape.circle,
+              ),
+              child: BackButton(color: Colors.white),
             ),
-          ),
-          const SizedBox(height: 16.0),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              article.attributes.title,
-              style: const TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-                fontFamily: "Montserrat",
+            flexibleSpace: FlexibleSpaceBar(
+              background: Stack(
+                fit: StackFit.expand,
+                children: [
+                  // Hero image
+                  Hero(
+                    tag:
+                        Apis.url + article.attributes.image.data.attributes.url,
+                    child: Image.network(
+                      Apis.url + article.attributes.image.data.attributes.url,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, url, error) => Container(
+                        color: Colors.grey[300],
+                        child: const Icon(Icons.error, size: 48),
+                      ),
+                    ),
+                  ),
+                  // Gradient overlay for better visibility
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.black.withOpacity(0.3),
+                          Colors.transparent,
+                          Colors.white.withOpacity(0.8),
+                        ],
+                        stops: const [0.0, 0.5, 1.0],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-          const SizedBox(height: 8.0),
-          // Text(
-          //   article['title'],
-          //   style: const TextStyle(
-          //     fontSize: 16.0,
-          //     fontStyle: FontStyle.italic,
-          //   ),
-          // ),
-          const SizedBox(height: 16.0),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(article.attributes.description,
-                style: TextStyle(
-                  fontFamily: "Montserrat",
-                )),
+
+          // Content section
+          SliverToBoxAdapter(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(24),
+                  topRight: Radius.circular(24),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                  vertical: 24.0,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Title
+                    Text(
+                      article.attributes.title,
+                      style: TextStyle(
+                        fontSize: 26.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Montserrat",
+                        height: 1.3,
+                        color: Theme.of(context).textTheme.bodyLarge?.color,
+                      ),
+                    ),
+                    const SizedBox(height: 12.0),
+
+                    // Divider for visual separation
+                    Container(
+                      width: 60,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                    const SizedBox(height: 20.0),
+
+                    // Description with better readability
+                    Text(
+                      article.attributes.description,
+                      style: TextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: 16.0,
+                        height: 1.7,
+                        letterSpacing: 0.3,
+                        color: Theme.of(
+                          context,
+                        ).textTheme.bodyMedium?.color?.withOpacity(0.87),
+                      ),
+                      textAlign: TextAlign.justify,
+                    ),
+                    const SizedBox(height: 32.0),
+                  ],
+                ),
+              ),
+            ),
           ),
         ],
       ),

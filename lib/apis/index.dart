@@ -1,5 +1,6 @@
 class Apis {
-  static String url = "http://207.180.224.165:1337";
+  static const String url =
+      "http://37.60.225.220:1337"; //"http://207.180.224.165:1337";
   static String progress_95 = "${url}/api/progress-on-95-95-95s";
   static String messages = "${url}/api/messages?populate=*";
   static String regions = "${url}/api/regions?populate=*";
@@ -12,4 +13,13 @@ class Apis {
   static String precautions = "${url}/api/precautions?populate=*";
   static String stories = "${url}/api/stories?populate=*";
   static String nationalPrevalence = "${url}/api/national-hiv-prevalances";
+
+  // HIV burden
+  static String plhivDisaggregated =
+      "${url}/api/number-of-plhiv-disaggregated-by-age-group-and-sexes?populate=*";
+  // Prevalence
+  static String regionalPrevalence =
+      "${url}/api/regional-hiv-prevalance?populate=*";
+  static String newInfectionsBySubRegion =
+      "${url}/api/new-hiv-prevalance-infectionz?populate=*";
 }

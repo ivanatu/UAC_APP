@@ -1,15 +1,12 @@
-import "/screens/stats/national_hiv_prevalence.dart";
-
 import "/screens/stats/new_cases.dart";
 import "/screens/stats/regions/district_stats.dart";
-import "/screens/stats/regions/regions_stats.dart";
 import "/screens/stats/widgets/progress_95.dart";
 import "/screens/stats/widgets/stat_widget.dart";
 
 import "/exports/exports.dart";
 import "antiretroviral_chart.dart";
 // import "stats_dashboard_screens/country_list.dart";
-import "regions/sample.dart";
+import "regions/regional_prevalence_rate.dart";
 import "testing_and_treatment_cascade.dart";
 
 class StatsPage extends StatefulWidget {
@@ -47,7 +44,7 @@ class _StatsPageState extends State<StatsPage> {
           color: Colors.blue,
         ),
         StatWidget(
-          nextPage: UgandaMapPage(),
+          nextPage: RegionalPrevalenceRate(),
           title: "Regional Prevalence Rate",
           icon: Icons.pie_chart_rounded,
           color: Colors.orange,

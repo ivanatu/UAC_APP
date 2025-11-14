@@ -1,8 +1,5 @@
-import '../services/update_service.dart';
-import '/widgets/custom_dropdown.dart';
 import '../widgets/news_widgets/news_tile.dart';
 import '../widgets/news_widgets/updates_page_carousel.dart';
-import '../network_requests/exceptions.dart';
 import '../widgets/skeletons/news_list_skeleton.dart';
 import '/exports/exports.dart';
 
@@ -11,7 +8,7 @@ class UpdatesScreen extends StatefulWidget {
   final Color color;
 
   UpdatesScreen({Key? key, this.imgPath, required this.color})
-      : super(key: key);
+    : super(key: key);
 
   @override
   _UpdatesScreenState createState() => _UpdatesScreenState();
@@ -19,8 +16,6 @@ class UpdatesScreen extends StatefulWidget {
 
 class _UpdatesScreenState extends State<UpdatesScreen> {
   String dropDownValue = "publishedAt";
-
-  var _newsFuture;
 
   // refresh() async {
   //   await Future.delayed(Duration(milliseconds: 800), () {
@@ -66,9 +61,7 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 //Carousel
-                ImageCarousel(
-                  height: constraint.maxHeight * 0.26,
-                ),
+                ImageCarousel(height: constraint.maxHeight * 0.26),
 
                 //Sorting + drop down
                 Row(
@@ -101,12 +94,12 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width > 340.0 ? 10 : 7,
                     ),
+
                     // Flexible(
                     //     child: const Icon(
                     //   Icons.filter_list,
                     //   size: 20,
                     // )),
-
                     SizedBox(width: 10),
                     // custom drop down
                     // CustomDropdown(
@@ -131,27 +124,24 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
 
                 //News tiles
                 Consumer<AidsInfoController>(
-                    builder: (context, aidsController, xx) {
-                  aidsController.getAidsInfoList();
-                  return aidsController.isLoading
-                      ? Center(
-                          child: NewsListLoader(),
-                        )
-                      : Flexible(
-                          flex: 3,
-                          child: ListView.builder(
-                            physics: PageScrollPhysics(),
-                            itemCount: aidsController.aidsInfoList.length,
-                            itemBuilder: (context, index) {
-                              var data =
-                                  aidsController.aidsInfoList.elementAt(index);
-                              return NewsTile(
-                                article: data,
-                              );
-                            },
-                          ),
-                        );
-                }),
+                  builder: (context, aidsController, xx) {
+                    aidsController.getAidsInfoList();
+                    return aidsController.isLoading
+                        ? Center(child: NewsListLoader())
+                        : Flexible(
+                            flex: 3,
+                            child: ListView.builder(
+                              physics: PageScrollPhysics(),
+                              itemCount: aidsController.aidsInfoList.length,
+                              itemBuilder: (context, index) {
+                                var data = aidsController.aidsInfoList
+                                    .elementAt(index);
+                                return NewsTile(article: data);
+                              },
+                            ),
+                          );
+                  },
+                ),
               ],
             ),
           ),
