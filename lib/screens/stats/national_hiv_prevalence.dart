@@ -1,5 +1,5 @@
 import '/controllers/national_prevalence_controller.dart';
-import 'package:pie_chart/pie_chart.dart';
+// import 'package:pie_chart/pie_chart.dart';
 
 import '/exports/exports.dart';
 import 'widgets/pie_widget.dart';
@@ -62,20 +62,20 @@ class _NationalHivPrevalenceState extends State<NationalHivPrevalence> {
                           ),
                         ),
                         Space(space: 0.3),
-                        PieWidget(
-                          radius: 800,
-                          position: LegendPosition.right,
-                          colorList: _generateColorList(
-                            controller.items.length,
-                          ),
-                          dataMap: {
-                            for (var item in controller.items)
-                              item.attributes.title: item.attributes.value,
-                          },
-                          text: "in %",
-                          showPercentage: false,
-                          dps: 2,
-                        ),
+                        // PieWidget(
+                        //   radius: 800,
+                        //   // position: LegendPosition.right,
+                        //   colorList: _generateColorList(
+                        //     controller.items.length,
+                        //   ),
+                        //   dataMap: {
+                        //     for (var item in controller.items)
+                        //       item.attributes.title: item.attributes.value,
+                        //   },
+                        //   text: "in %",
+                        //   showPercentage: false,
+                        //   dps: 2,
+                        // ),
                       ],
                     );
             },
