@@ -1,7 +1,7 @@
 import "/services/news_services.dart";
 
 import "/exports/exports.dart";
-import "news_detials.dart";
+import "news_details.dart";
 
 class NewsPage extends StatefulWidget {
   const NewsPage({super.key});
@@ -15,26 +15,27 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
-      body: LayoutBuilder(builder: (context, constraints) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 8, 8, 0.0),
-              child: Text.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(
-                      text: " News",
-                      style: Theme.of(context).textTheme.headlineLarge!.apply(
-                            fontWeightDelta: 10,
-                          ),
-                    ),
-                  ],
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 8, 8, 0.0),
+                child: Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                        text: " News",
+                        style: Theme.of(
+                          context,
+                        ).textTheme.headlineLarge!.apply(fontWeightDelta: 10),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            FutureBuilder(
+              FutureBuilder(
                 future: NewzService().getNews(),
                 builder: (context, snapshot) {
                   var newz = snapshot.data ?? [];
@@ -47,9 +48,7 @@ class _NewsPageState extends State<NewsPage> {
                               Center(
                                 child: Text(
                                   "No news added yet!!",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
+                                  style: Theme.of(context).textTheme.bodyLarge!
                                       .apply(
                                         fontWeightDelta: 2,
                                         fontSizeDelta: 2,
@@ -67,9 +66,8 @@ class _NewsPageState extends State<NewsPage> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => NewsDetails(
-                                          newz: newz[index],
-                                        ),
+                                        builder: (context) =>
+                                            NewsDetails(newz: newz[index]),
                                       ),
                                     );
                                   },
@@ -116,9 +114,7 @@ class _NewsPageState extends State<NewsPage> {
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .titleMedium!
-                                                  .apply(
-                                                    fontWeightDelta: 2,
-                                                  ),
+                                                  .apply(fontWeightDelta: 2),
                                             ),
                                           ),
                                         ),
@@ -141,39 +137,40 @@ class _NewsPageState extends State<NewsPage> {
                           Space(),
                           Text(
                             "Loading News",
-                            style:
-                                Theme.of(context).textTheme.titleLarge!.apply(
-                                      fontWeightDelta: 2,
-                                    ),
-                          )
+                            style: Theme.of(
+                              context,
+                            ).textTheme.titleLarge!.apply(fontWeightDelta: 2),
+                          ),
                         ],
                       ),
                     );
                   }
-                })
-            // Expanded(
-            //   child: Column(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     crossAxisAlignment: CrossAxisAlignment.center,
-            //     children: [
-            //       AspectRatio(
-            //         aspectRatio: 1.85,
-            //         child: SvgPicture.asset(
-            //           "assets/svgs/nodata.svg",
-            //         ),
-            //       ),
-            //       Text(
-            //         "No news available",
-            //         style: Theme.of(context).textTheme.bodyLarge!.apply(
-            //               fontWeightDelta: 2,
-            //             ),
-            //       ),
-            //     ],
-            //   ),
-            // )
-          ],
-        );
-      }),
+                },
+              ),
+              // Expanded(
+              //   child: Column(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     crossAxisAlignment: CrossAxisAlignment.center,
+              //     children: [
+              //       AspectRatio(
+              //         aspectRatio: 1.85,
+              //         child: SvgPicture.asset(
+              //           "assets/svgs/nodata.svg",
+              //         ),
+              //       ),
+              //       Text(
+              //         "No news available",
+              //         style: Theme.of(context).textTheme.bodyLarge!.apply(
+              //               fontWeightDelta: 2,
+              //             ),
+              //       ),
+              //     ],
+              //   ),
+              // )
+            ],
+          );
+        },
+      ),
     );
   }
 }

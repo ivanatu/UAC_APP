@@ -1,13 +1,15 @@
+import 'package:uac/apis/api_helper.dart';
+
+import '../models/prevalence_regions.dart';
 import '../models/regions_model.dart';
 import '/exports/exports.dart';
 
 class RegionService {
+  ApiHelper apiHelper = ApiHelper();
   // function to retrieve regions p3aCe@RPC
   Future<List<Datum>> getRegions() async {
     try {
-      var response = await Client().get(
-        Uri.parse(Apis.regions),
-      );
+      var response = await Client().get(Uri.parse(Apis.regions));
       if (response.statusCode == 200) {
         String result = response.body;
         // debugPrint(result);
@@ -29,5 +31,11 @@ class RegionService {
         .attributes
         .districts!
         .data;
+  }
+
+  // modified prevalence regions function
+  Future<List<PrevalenceRegion>> getPrevalenceRegions() async {
+    var response = await apiHelper.get("prevalence-regions?populate=*");
+    return PrevalenceRegionsResponse.fromJson(response).data;
   }
 }

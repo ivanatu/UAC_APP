@@ -43,7 +43,7 @@ class _DistrictStatsState extends State<DistrictStats> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 40.0),
                 child: FutureBuilder(
-                  future: RegionService().getRegions(),
+                  future: RegionService().getPrevalenceRegions(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return GridView.builder(
@@ -113,7 +113,12 @@ class _DistrictStatsState extends State<DistrictStats> {
                     } else if (snapshot.hasError) {
                       return Center(child: Text('Error: ${snapshot.error}'));
                     }
-                    return Center(child: CircularProgressIndicator());
+                    return Center(
+                      child: CircularProgressIndicator(
+                        strokeWidth: 10,
+                        strokeCap: StrokeCap.butt,
+                      ),
+                    );
                   },
                 ),
               ),

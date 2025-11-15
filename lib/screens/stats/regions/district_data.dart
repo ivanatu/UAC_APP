@@ -1,10 +1,10 @@
+import '/models/prevalence_regions.dart' as pr;
+
 import '/models/regions_model.dart';
-import '/services/regions_service.dart';
-import 'package:pie_chart/pie_chart.dart' as p;
 import '/exports/exports.dart';
 
 class DistrictData extends StatefulWidget {
-  final Datum region;
+  final pr.PrevalenceRegion region;
   final int index;
   final Color color;
   const DistrictData({
@@ -40,7 +40,7 @@ class _DistrictDataState extends State<DistrictData> {
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
-          return Stack(
+          return Column(
             children: [
               Container(
                 width: double.infinity,
@@ -62,46 +62,69 @@ class _DistrictDataState extends State<DistrictData> {
                       fontFamily: 'Montserrat',
                     ),
                     minFontSize: 15,
-                    maxFontSize: 40,
+                    maxFontSize: 35,
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),
-              // plot data for the region
-              FutureBuilder(
-                future: RegionService().getDistricts(widget.region.id),
-                builder: (context, snapshot) {
-                  var data = snapshot.data ?? [];
-                  if (snapshot.hasData) {
-                    // plot pie chart
-                    return p.PieChart(
-                      dataMap: _generateMap(data),
-                      colorList: _generateColorList(data.length),
-                      chartType: p.ChartType.disc,
-                      ringStrokeWidth: 120,
-                      legendOptions: p.LegendOptions(
-                        showLegends: true,
-                        // legendPosition: p.LegendPosition.bottom,
-                        legendShape: BoxShape.circle,
-                        // legendTextStyle: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      chartValuesOptions: p.ChartValuesOptions(
-                        showChartValueBackground: true,
-                        showChartValues: true,
-                        showChartValuesInPercentage: false,
-                        showChartValuesOutside: false,
-                        decimalPlaces: 2,
-                      ),
-                    );
-                  }
+              SizedBox(height: constraints.maxHeight * 0.02),
+              Image.network(
+                Apis.url +
+                    '${widget.region.attributes.image.data.attributes.formats.medium!.url}',
+                height: constraints.maxHeight * 0.70,
+                width: constraints.maxWidth,
+                fit: BoxFit.contain,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
                   return Center(
                     child: CircularProgressIndicator(
                       color: widget.color,
                       strokeWidth: 10,
                       strokeCap: StrokeCap.butt,
+                      // value: loadingProgress.expectedTotalBytes != null
+                      //     ? loadingProgress.cumulativeBytesLoaded /
+                      //           loadingProgress.expectedTotalBytes!
+                      //     : null,
                     ),
                   );
                 },
               ),
+              // plot data for the region
+              // FutureBuilder(
+              //   future: RegionService().getDistricts(widget.region.id),
+              //   builder: (context, snapshot) {
+              //     var data = snapshot.data ?? [];
+              //     if (snapshot.hasData) {
+              //       // plot pie chart
+              //       return p.PieChart(
+              //         dataMap: _generateMap(data),
+              //         colorList: _generateColorList(data.length),
+              //         chartType: p.ChartType.disc,
+              //         ringStrokeWidth: 120,
+              //         legendOptions: p.LegendOptions(
+              //           showLegends: true,
+              //           // legendPosition: p.LegendPosition.bottom,
+              //           legendShape: BoxShape.circle,
+              //           // legendTextStyle: Theme.of(context).textTheme.bodyLarge,
+              //         ),
+              //         chartValuesOptions: p.ChartValuesOptions(
+              //           showChartValueBackground: true,
+              //           showChartValues: true,
+              //           showChartValuesInPercentage: false,
+              //           showChartValuesOutside: false,
+              //           decimalPlaces: 2,
+              //         ),
+              //       );
+              //     }
+              //     return Center(
+              //       child: CircularProgressIndicator(
+              //         color: widget.color,
+              //         strokeWidth: 10,
+              //         strokeCap: StrokeCap.butt,
+              //       ),
+              //     );
+              //   },
+              // ),
             ],
           );
         },
