@@ -6,8 +6,8 @@ class Themes {
     // backgroundColor: Colors.white,
   );
   static TextTheme textTheme =
-      const TextTheme(); //GoogleFonts.poppinsTextTheme();
-// light theme
+      GoogleFonts.montserratTextTheme(); //GoogleFonts.poppinsTextTheme();
+  // light theme
   static ThemeData lightTheme = ThemeData(
     drawerTheme: drawerTheme,
     textTheme: textTheme.apply(
