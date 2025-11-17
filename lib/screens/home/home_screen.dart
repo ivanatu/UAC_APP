@@ -38,6 +38,15 @@ class _HomeScreenState extends State<HomeScreen> {
       "color": Colors.redAccent[700],
     },
     {
+      "imgPath": "assets/imgs/hiv_msgs.png",
+      "tabName": "HIV Messages",
+      "imgBottom": -30.0,
+      "imgLeft": 20.0,
+      "imgHeight": 170.0,
+      "tabDesc": "Get rid of myths and misconceptions\n about HIV /AIDS",
+      "color": Colors.tealAccent[700],
+    },
+    {
       "imgBottom": -4.0,
       "imgLeft": 8.0,
       "imgPath": "assets/updates/updates.png",

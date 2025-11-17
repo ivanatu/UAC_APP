@@ -76,6 +76,10 @@ class CategoryTab extends StatelessWidget {
         return () => Navigator.of(
           context,
         ).push(MaterialPageRoute(builder: (context) => Video()));
+      case ("HIV Messages"):
+        return () => Navigator.of(
+          context,
+        ).push(MaterialPageRoute(builder: (context) => MessagesScreen()));
     }
     return () {};
   }
@@ -102,7 +106,8 @@ class CategoryTab extends StatelessWidget {
                   child: Container(
                     width: constraints.maxWidth * 0.2,
                     height: constraints.maxWidth * 0.2,
-                    margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                    padding: EdgeInsets.fromLTRB(3, 10, 0, 10),
+                    margin: EdgeInsets.fromLTRB(3, 10, 0, 10),
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage(imgPath),

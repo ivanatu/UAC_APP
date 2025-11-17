@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import '../../widgets/home_page_widgets/message_card.dart';
 import '/exports/exports.dart';
 
@@ -16,6 +14,12 @@ class _MessagesScreenState extends State<MessagesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
+      appBar: AppBar(
+        elevation: 0,
+        iconTheme: IconThemeData(
+          color: Colors.black, //change your color here
+        ),
+      ),
       body: BottomTopMoveAnimationView(
         child: Stack(
           children: [
@@ -29,10 +33,9 @@ class _MessagesScreenState extends State<MessagesScreen> {
                       children: [
                         TextSpan(
                           text: " Messages",
-                          style:
-                              Theme.of(context).textTheme.headlineLarge!.apply(
-                                    fontWeightDelta: 10,
-                                  ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.headlineLarge!.apply(fontWeightDelta: 10),
                         ),
                       ],
                     ),
@@ -40,9 +43,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                 ),
 
                 //Precaution Card Grid
-                Flexible(
-                  child: MessageCard(),
-                )
+                Flexible(child: MessageCard()),
               ],
             ),
           ],
