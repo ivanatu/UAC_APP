@@ -164,12 +164,15 @@ class _MythsScreenState extends State<MythsScreen> {
                         contentVerticalPadding: 15,
                         header: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(
+                          child: AutoSizeText(
                             data.attributes.myth,
                             style: Theme.of(context).textTheme.bodyMedium!
                                 .apply(color: Colors.white, fontWeightDelta: 6),
-                            maxLines: 2,
+                            maxLines: 6,
                             overflow: TextOverflow.ellipsis,
+                            minFontSize: 12,
+                            maxFontSize: 20,
+                            stepGranularity: 1,
                           ),
                         ),
                         content: Column(

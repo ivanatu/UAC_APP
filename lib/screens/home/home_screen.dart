@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
       "imgBottom": -30.0,
       "imgLeft": 20.0,
       "imgHeight": 170.0,
-      "tabDesc": "Get rid of myths and misconceptions\n about HIV /AIDS",
+      "tabDesc": "Messages for the community",
       "color": Colors.tealAccent[700],
     },
     {
