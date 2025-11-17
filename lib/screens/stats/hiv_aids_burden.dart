@@ -110,7 +110,6 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
                 fontWeightDelta: 2,
                 fontSizeFactor: 0.84,
                 color: Colors.white,
-                fontFamily: 'Montserrat',
               ),
             ),
           ),
@@ -121,7 +120,6 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
             fontWeightDelta: 2,
             fontSizeFactor: 1.4,
             color: Colors.white,
-            fontFamily: 'Montserrat',
           ),
         ),
       ),
@@ -149,10 +147,9 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
                     child: Text(
                       "Number of PLHIV Disaggregated by Age Group & Sex",
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyLarge!.apply(
-                        fontWeightDelta: 3,
-                        fontFamily: 'Montserrat',
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyLarge!.apply(fontWeightDelta: 3),
                     ),
                   ),
                   isLoadingPlhiv
@@ -185,10 +182,7 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
                                 child: Text(
                                   'Population Group',
                                   style: Theme.of(context).textTheme.bodyMedium!
-                                      .apply(
-                                        fontWeightDelta: 3,
-                                        fontFamily: 'Montserrat',
-                                      ),
+                                      .apply(fontWeightDelta: 3),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -198,10 +192,7 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
                                 child: Text(
                                   'Year (2023)',
                                   style: Theme.of(context).textTheme.bodyMedium!
-                                      .apply(
-                                        fontWeightDelta: 3,
-                                        fontFamily: 'Montserrat',
-                                      ),
+                                      .apply(fontWeightDelta: 3),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -241,10 +232,9 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
                     child: Text(
                       'National HIV Prevalence',
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyLarge!.apply(
-                        fontWeightDelta: 3,
-                        fontFamily: 'Montserrat',
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyLarge!.apply(fontWeightDelta: 3),
                     ),
                   ),
                   Consumer<NationalPrevalenceController>(
@@ -274,10 +264,7 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyMedium!
-                                          .apply(
-                                            fontWeightDelta: 3,
-                                            fontFamily: 'Montserrat',
-                                          ),
+                                          .apply(fontWeightDelta: 3),
                                       textAlign: TextAlign.center,
                                     ),
                                   ),
@@ -289,10 +276,7 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyMedium!
-                                          .apply(
-                                            fontWeightDelta: 3,
-                                            fontFamily: 'Montserrat',
-                                          ),
+                                          .apply(fontWeightDelta: 3),
                                       textAlign: TextAlign.center,
                                     ),
                                   ),
@@ -334,10 +318,9 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
                     child: Text(
                       'Number of New Infections by Age Group and Sex',
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyLarge!.apply(
-                        fontWeightDelta: 3,
-                        fontFamily: 'Montserrat',
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyLarge!.apply(fontWeightDelta: 3),
                     ),
                   ),
                   isLoadingInfections
@@ -370,10 +353,7 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
                                 child: Text(
                                   'Population Group',
                                   style: Theme.of(context).textTheme.bodyMedium!
-                                      .apply(
-                                        fontWeightDelta: 3,
-                                        fontFamily: 'Montserrat',
-                                      ),
+                                      .apply(fontWeightDelta: 3),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -383,10 +363,7 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
                                 child: Text(
                                   'Year (2023)',
                                   style: Theme.of(context).textTheme.bodyMedium!
-                                      .apply(
-                                        fontWeightDelta: 3,
-                                        fontFamily: 'Montserrat',
-                                      ),
+                                      .apply(fontWeightDelta: 3),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -424,10 +401,9 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
                     child: Text(
                       'Annual AIDS Related Deaths by Sex and Age Group',
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyLarge!.apply(
-                        fontWeightDelta: 3,
-                        fontFamily: 'Montserrat',
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyLarge!.apply(fontWeightDelta: 3),
                     ),
                   ),
                   isLoadingAids
@@ -460,10 +436,7 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
                                 child: Text(
                                   'Population Group',
                                   style: Theme.of(context).textTheme.bodyMedium!
-                                      .apply(
-                                        fontWeightDelta: 3,
-                                        fontFamily: 'Montserrat',
-                                      ),
+                                      .apply(fontWeightDelta: 3),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -473,10 +446,7 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
                                 child: Text(
                                   'Year (2023)',
                                   style: Theme.of(context).textTheme.bodyMedium!
-                                      .apply(
-                                        fontWeightDelta: 3,
-                                        fontFamily: 'Montserrat',
-                                      ),
+                                      .apply(fontWeightDelta: 3),
                                   textAlign: TextAlign.center,
                                 ),
                               ),

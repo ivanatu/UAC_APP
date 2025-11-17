@@ -4,11 +4,12 @@ class PrecautionDetails extends StatelessWidget {
   final String title;
   final String image;
   final String description;
-  const PrecautionDetails(
-      {super.key,
-      required this.description,
-      required this.image,
-      required this.title});
+  const PrecautionDetails({
+    super.key,
+    required this.description,
+    required this.image,
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +17,9 @@ class PrecautionDetails extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           title,
-          style: Theme.of(context).textTheme.titleLarge!.apply(
-                fontFamily: 'Montserrat',
-                fontWeightDelta: 3,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge!.apply(fontWeightDelta: 3),
         ),
       ),
       body: BottomTopMoveAnimationView(
@@ -38,22 +38,12 @@ class PrecautionDetails extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     title,
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Montserrat',
-                    ),
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    description,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'Montserrat',
-                    ),
-                  ),
+                  child: Text(description, style: TextStyle(fontSize: 16)),
                 ),
               ],
             );

@@ -5,12 +5,13 @@ class StatWidget extends StatelessWidget {
   final String title;
   final IconData icon;
   final Color color;
-  const StatWidget(
-      {super.key,
-      required this.nextPage,
-      required this.title,
-      required this.icon,
-      required this.color});
+  const StatWidget({
+    super.key,
+    required this.nextPage,
+    required this.title,
+    required this.icon,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +27,7 @@ class StatWidget extends StatelessWidget {
               Row(
                 children: [
                   CircleAvatar(
-                    child: Icon(
-                      icon,
-                      color: color,
-                    ),
+                    child: Icon(icon, color: color),
                     backgroundColor: color.withOpacity(0.15),
                   ),
                   Space(),
@@ -40,19 +38,16 @@ class StatWidget extends StatelessWidget {
                     // maxFontSize: 14,
                     minFontSize: 10,
                     style: Theme.of(context).textTheme.bodyLarge!.apply(
-                          fontWeightDelta: 2,
-                          fontFamily: 'Montserrat',
-                          color: Colors.grey.shade800,
-                        ),
+                      fontWeightDelta: 2,
+
+                      color: Colors.grey.shade800,
+                    ),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
               Space(),
-              Icon(
-                Icons.open_in_new_rounded,
-                color: Colors.grey.shade500,
-              ),
+              Icon(Icons.open_in_new_rounded, color: Colors.grey.shade500),
             ],
           ),
         ),

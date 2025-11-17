@@ -27,10 +27,9 @@ class _StatsPageState extends State<StatsPage> {
             children: [
               TextSpan(
                 text: " Stats",
-                style: Theme.of(context).textTheme.headlineLarge!.apply(
-                  fontWeightDelta: 10,
-                  fontFamily: 'Montserrat',
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.headlineLarge!.apply(fontWeightDelta: 10),
               ),
             ],
           ),

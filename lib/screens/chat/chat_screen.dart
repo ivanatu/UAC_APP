@@ -67,19 +67,16 @@ class _ChatScreenState extends State<ChatScreen> {
     return Text(
       'Get in Touch',
       style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            fontFamily: 'Montserrat',
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).primaryColor,
-          ),
+        fontWeight: FontWeight.bold,
+        color: Theme.of(context).primaryColor,
+      ),
     );
   }
 
   Widget _buildContactCard(BuildContext context) {
     return Card(
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -94,10 +91,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     width: 80,
                     child: Text(
                       '${entry.key}:',
-                      style: const TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                   Expanded(
@@ -119,7 +113,6 @@ class _ChatScreenState extends State<ChatScreen> {
     return Text(
       value,
       style: TextStyle(
-        fontFamily: 'Montserrat',
         color: isClickable ? Theme.of(context).primaryColor : null,
         decoration: isClickable ? TextDecoration.underline : null,
       ),
@@ -129,9 +122,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget _buildFeedbackCard(BuildContext context) {
     return Card(
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -139,17 +130,14 @@ class _ChatScreenState extends State<ChatScreen> {
           children: [
             Text(
               'Send Feedback',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
             Text(
               'We would love to hear from you. Please send us your feedback, suggestions, or any issues you may have encountered while using our app.',
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    fontFamily: 'Montserrat',
-                  ),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(),
             ),
             const SizedBox(height: 16),
             ElevatedButton.icon(
@@ -159,8 +147,10 @@ class _ChatScreenState extends State<ChatScreen> {
               icon: const Icon(Icons.mail_outline),
               label: const Text('Send Feedback'),
               style: ElevatedButton.styleFrom(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 12,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -180,10 +170,9 @@ class _ChatScreenState extends State<ChatScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
             'OR',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontFamily: 'Montserrat',
-                  color: Colors.grey,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: Colors.grey),
           ),
         ),
         const Expanded(child: Divider()),
@@ -197,10 +186,9 @@ class _ChatScreenState extends State<ChatScreen> {
       children: [
         Text(
           'Connect With Us',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16),
         Row(
@@ -229,22 +217,14 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Widget _buildPhoneButton() {
     return IconButton(
-      icon: Icon(
-        Icons.phone,
-        color: Colors.teal.shade600,
-        size: 32,
-      ),
+      icon: Icon(Icons.phone, color: Colors.teal.shade600, size: 32),
       onPressed: () => launchUrl(Uri.parse('tel:+256414288065')),
     );
   }
 
   Widget _buildShareButton() {
     return IconButton(
-      icon: Icon(
-        Icons.share,
-        color: Colors.orange.shade600,
-        size: 32,
-      ),
+      icon: Icon(Icons.share, color: Colors.orange.shade600, size: 32),
       onPressed: () {
         Share.share(
           'Hey, I found this amazing app that helps me stay updated with the latest news and stats on HIV/AIDS. You should check it out too. https://www.uac.go.ug/',

@@ -7,8 +7,12 @@ class BarChartWidget extends StatelessWidget {
   final List<Map<String, dynamic>> data;
   final SideTitles? sideTitles;
   final BarChartAlignment? alignment;
-  const BarChartWidget(
-      {super.key, required this.data, this.sideTitles, this.alignment});
+  const BarChartWidget({
+    super.key,
+    required this.data,
+    this.sideTitles,
+    this.alignment,
+  });
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,17 +31,17 @@ class BarChartWidget extends StatelessWidget {
                   return BarTooltipItem(
                     rod.toY.toString(),
                     Theme.of(context).textTheme.labelLarge!.apply(
-                          fontWeightDelta: 2,
-                          color: Colors.white,
-                          fontFamily: 'Montserrat',
-                        ),
+                      fontWeightDelta: 2,
+                      color: Colors.white,
+                    ),
                   );
                 },
               ),
             ),
             titlesData: FlTitlesData(
               bottomTitles: AxisTitles(
-                sideTitles: sideTitles ??
+                sideTitles:
+                    sideTitles ??
                     SideTitles(
                       interval: 20,
                       reservedSize: 25,
@@ -103,35 +107,17 @@ class BarChartWidget extends StatelessWidget {
                   showTitles: true,
                   getTitlesWidget: (value, x) {
                     if (value == 0) {
-                      return Text(
-                        '0',
-                        style: TextStyle(fontSize: 012),
-                      );
+                      return Text('0', style: TextStyle(fontSize: 012));
                     } else if (value == 20) {
-                      return Text(
-                        '20',
-                        style: TextStyle(fontSize: 012),
-                      );
+                      return Text('20', style: TextStyle(fontSize: 012));
                     } else if (value == 40) {
-                      return Text(
-                        '40',
-                        style: TextStyle(fontSize: 012),
-                      );
+                      return Text('40', style: TextStyle(fontSize: 012));
                     } else if (value == 60) {
-                      return Text(
-                        '60',
-                        style: TextStyle(fontSize: 012),
-                      );
+                      return Text('60', style: TextStyle(fontSize: 012));
                     } else if (value == 80) {
-                      return Text(
-                        '80',
-                        style: TextStyle(fontSize: 012),
-                      );
+                      return Text('80', style: TextStyle(fontSize: 012));
                     } else if (value == 100) {
-                      return Text(
-                        '100',
-                        style: TextStyle(fontSize: 012),
-                      );
+                      return Text('100', style: TextStyle(fontSize: 012));
                     } else {
                       return Text('');
                     }
@@ -139,19 +125,11 @@ class BarChartWidget extends StatelessWidget {
                 ),
               ),
               rightTitles: AxisTitles(
-                sideTitles: SideTitles(
-                  showTitles: false,
-                ),
+                sideTitles: SideTitles(showTitles: false),
               ),
-              topTitles: AxisTitles(
-                sideTitles: SideTitles(
-                  showTitles: false,
-                ),
-              ),
+              topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
             ),
-            borderData: FlBorderData(
-              show: true,
-            ),
+            borderData: FlBorderData(show: true),
             barGroups: getData(data),
           ),
         ),
@@ -172,7 +150,7 @@ class BarChartWidget extends StatelessWidget {
             toY: data[i]['value'],
             fromY: 0,
             color: data[i]['color'],
-          )
+          ),
         ],
         showingTooltipIndicators: [0, 8],
       ),

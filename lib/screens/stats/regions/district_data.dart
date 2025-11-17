@@ -33,7 +33,6 @@ class _DistrictDataState extends State<DistrictData> {
           style: Theme.of(context).textTheme.titleLarge!.apply(
             fontWeightDelta: 3,
             color: Colors.white,
-            fontFamily: 'Montserrat',
           ),
         ),
         elevation: 0,
@@ -59,7 +58,6 @@ class _DistrictDataState extends State<DistrictData> {
                       color: Colors.white,
                       fontWeightDelta: 20,
                       fontSizeFactor: 1.32,
-                      fontFamily: 'Montserrat',
                     ),
                     minFontSize: 15,
                     maxFontSize: 35,

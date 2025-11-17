@@ -70,11 +70,9 @@ class _HIVTestingAndTreatmentCascadeState
         backgroundColor: Colors.orange,
         title: Text(
           "HIV Testing and Treatment\n Cascade",
-          style: Theme.of(context).textTheme.bodyLarge!.apply(
-            fontWeightDelta: 4,
-            fontSizeFactor: 1.1,
-            fontFamily: 'Montserrat',
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyLarge!.apply(fontWeightDelta: 4, fontSizeFactor: 1.1),
         ),
       ),
       body: Stack(
@@ -166,7 +164,6 @@ class _HIVTestingAndTreatmentCascadeState
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                fontFamily: 'Montserrat',
                               ),
                             ),
                             SizedBox(height: 12),
@@ -343,11 +340,7 @@ class _HIVTestingAndTreatmentCascadeState
             Expanded(
               child: Text(
                 item.attributes.title,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: 'Montserrat',
-                ),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
               ),
             ),
             Text(
@@ -356,7 +349,6 @@ class _HIVTestingAndTreatmentCascadeState
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
                 color: color,
-                fontFamily: 'Montserrat',
               ),
             ),
           ],

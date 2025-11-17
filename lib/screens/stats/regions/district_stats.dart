@@ -19,10 +19,9 @@ class _DistrictStatsState extends State<DistrictStats> {
         backgroundColor: Colors.cyan.shade600,
         title: Text(
           'Select a region',
-          style: Theme.of(context).textTheme.titleLarge!.apply(
-            fontWeightDelta: 3,
-            fontFamily: 'Montserrat',
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge!.apply(fontWeightDelta: 3),
         ),
       ),
       // fetch all regions
@@ -98,7 +97,7 @@ class _DistrictStatsState extends State<DistrictStats> {
                                             Colors.primaries[(index * 7) %
                                                 Colors.primaries.length],
                                         fontWeight: FontWeight.bold,
-                                        fontFamily: 'Montserrat',
+
                                         fontSize: 15,
                                       ),
                                     ),

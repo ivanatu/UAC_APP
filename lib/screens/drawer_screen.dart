@@ -1,7 +1,5 @@
 import '/screens/about/about_uac.dart';
 import '/screens/faqs/faqs_page.dart';
-
-import '../controllers/drawer_controller.dart';
 import '/exports/exports.dart';
 import 'stories/stories.dart';
 
@@ -61,7 +59,7 @@ class DrawerScreen extends StatelessWidget {
                 "UGANDA AIDS COMMISSION",
                 style: Theme.of(context).textTheme.bodyMedium!.apply(
                   color: Colors.white,
-                  fontFamily: 'Montserrat',
+
                   fontWeightDelta: 5,
                 ),
               ),
@@ -80,7 +78,6 @@ class DrawerScreen extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,
-                  fontFamily: 'Montserrat',
                 ),
               ),
               onTap: () => Provider.of<ZDrawerController>(
@@ -96,7 +93,7 @@ class DrawerScreen extends StatelessWidget {
                   'About',
                   style: TextStyle(
                     color: Colors.white,
-                    fontFamily: 'Montserrat',
+
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -119,7 +116,7 @@ class DrawerScreen extends StatelessWidget {
                 'Presidential Questions',
                 style: TextStyle(
                   color: Colors.white,
-                  fontFamily: 'Montserrat',
+
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -138,7 +135,7 @@ class DrawerScreen extends StatelessWidget {
                 'Stories',
                 style: TextStyle(
                   color: Colors.white,
-                  fontFamily: 'Montserrat',
+
                   fontWeight: FontWeight.w600,
                 ),
               ),

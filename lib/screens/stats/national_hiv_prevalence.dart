@@ -20,11 +20,9 @@ class _NationalHivPrevalenceState extends State<NationalHivPrevalence> {
         leading: BackButton(color: Colors.white),
         backgroundColor: Colors.purple,
         title: Text("National HIV Prevalence"),
-        titleTextStyle: Theme.of(context).textTheme.titleLarge!.apply(
-          fontWeightDelta: 3,
-          color: Colors.white,
-          fontFamily: 'Montserrat',
-        ),
+        titleTextStyle: Theme.of(
+          context,
+        ).textTheme.titleLarge!.apply(fontWeightDelta: 3, color: Colors.white),
       ),
       body: Stack(
         children: [
@@ -58,7 +56,6 @@ class _NationalHivPrevalenceState extends State<NationalHivPrevalence> {
                           style: Theme.of(context).textTheme.titleLarge!.apply(
                             fontWeightDelta: 2,
                             color: Colors.purple,
-                            fontFamily: 'Montserrat',
                           ),
                         ),
                         Space(space: 0.3),

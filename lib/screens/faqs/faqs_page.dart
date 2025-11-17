@@ -33,20 +33,21 @@ class _FaqsPageState extends State<FaqsPage> {
         Text(
           "No Presidential Questions available",
           style: Theme.of(context).textTheme.titleLarge!.apply(
-                // color: Colors.grey.shade500,
-                fontFamily: 'Monospace',
-              ),
+            // color: Colors.grey.shade500,
+            fontFamily: 'Monospace',
+          ),
         ),
       ],
     );
   }
 
-//  loading
+  //  loading
   Widget loading() {
     return Center(
       child: CircularProgressIndicator(
-        valueColor:
-            AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
+        valueColor: AlwaysStoppedAnimation<Color>(
+          Theme.of(context).primaryColor,
+        ),
         strokeWidth: 10,
       ),
     );
@@ -56,66 +57,60 @@ class _FaqsPageState extends State<FaqsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Hero(
-          tag: "faqs",
-          child: Text(
-            "The President's 7 \n Questions",
-          ),
-        ),
-        titleTextStyle: Theme.of(context).textTheme.titleLarge!.apply(
-              fontFamily: 'Montserrat',
-              fontWeightDelta: 2,
-            ),
+        title: Hero(tag: "faqs", child: Text("The President's 7 \n Questions")),
+        titleTextStyle: Theme.of(
+          context,
+        ).textTheme.titleLarge!.apply(fontWeightDelta: 2),
       ),
-      body: Consumer<FaqaController>(builder: (context, faqaController, child) {
-        if (faqaController.loading) {
-          return loading();
-        } else if (faqaController.items.isEmpty) {
-          return noData();
-        } else {
-          return Accordion(
-            headerBorderColor: Colors.blueGrey,
-            headerBorderColorOpened: Colors.transparent,
-            // headerBorderWidth: 1,
-            headerBackgroundColorOpened: Theme.of(context).primaryColor,
-            contentBackgroundColor: Colors.white,
-            contentBorderColor: Theme.of(context).primaryColor,
-            contentBorderWidth: 1,
-            contentHorizontalPadding: 20,
-            scaleWhenAnimating: true,
-            openAndCloseAnimation: true,
-            headerPadding:
-                const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
-            sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
-            sectionClosingHapticFeedback: SectionHapticFeedback.light,
-            children: List.generate(faqaController.items.length, (index) {
-              var data = faqaController.items[index];
-              return AccordionSection(
-                isOpen: true,
-                contentVerticalPadding: 10,
-                // leftIcon:
-                //     const Icon(Icons.text_fields_rounded, color: Colors.white),
-                header: Text(
-                  data.attributes.title,
-                  style: Theme.of(context).textTheme.bodyMedium!.apply(
-                        color: Colors.white,
-                        fontFamily: 'Montserrat',
-                        fontWeightDelta: 2,
-                      ),
-                ),
-                content: Text(
-                  data.attributes.answer,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontFamily: 'Montserrat',
+      body: Consumer<FaqaController>(
+        builder: (context, faqaController, child) {
+          if (faqaController.loading) {
+            return loading();
+          } else if (faqaController.items.isEmpty) {
+            return noData();
+          } else {
+            return Accordion(
+              headerBorderColor: Colors.blueGrey,
+              headerBorderColorOpened: Colors.transparent,
+              // headerBorderWidth: 1,
+              headerBackgroundColorOpened: Theme.of(context).primaryColor,
+              contentBackgroundColor: Colors.white,
+              contentBorderColor: Theme.of(context).primaryColor,
+              contentBorderWidth: 1,
+              contentHorizontalPadding: 20,
+              scaleWhenAnimating: true,
+              openAndCloseAnimation: true,
+              headerPadding: const EdgeInsets.symmetric(
+                vertical: 7,
+                horizontal: 15,
+              ),
+              sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
+              sectionClosingHapticFeedback: SectionHapticFeedback.light,
+              children: List.generate(faqaController.items.length, (index) {
+                var data = faqaController.items[index];
+                return AccordionSection(
+                  isOpen: true,
+                  contentVerticalPadding: 10,
+                  // leftIcon:
+                  //     const Icon(Icons.text_fields_rounded, color: Colors.white),
+                  header: Text(
+                    data.attributes.title,
+                    style: Theme.of(context).textTheme.bodyMedium!.apply(
+                      color: Colors.white,
+
+                      fontWeightDelta: 2,
+                    ),
                   ),
-                ),
-              );
-            }),
-          );
-        }
-      }),
+                  content: Text(
+                    data.attributes.answer,
+                    style: TextStyle(color: Colors.black, fontSize: 16),
+                  ),
+                );
+              }),
+            );
+          }
+        },
+      ),
     );
   }
 }

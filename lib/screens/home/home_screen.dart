@@ -1,7 +1,4 @@
-// import '../../widgets/home_page_widgets/home_categories.dart';
-import "../../controllers/drawer_controller.dart";
 import "/exports/exports.dart";
-import "./widgets/health_tip_widget.dart";
 import '/widgets/home_page_widgets/home_category.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -33,31 +30,13 @@ class _HomeScreenState extends State<HomeScreen> {
     },
     {
       "imgPath": "assets/imgs/myths.png",
-      "tabName": "Myths/FAQs",
+      "tabName": "Myths & Misconceptions",
       "imgBottom": -30.0,
       "imgLeft": 20.0,
       "imgHeight": 170.0,
-      "tabDesc": "Get rid of false assumptions",
+      "tabDesc": "Get rid of myths and misconceptions\n about HIV /AIDS",
       "color": Colors.redAccent[700],
     },
-    // {
-    //   "imgPath": "assets/messages/android-message-icon-8.png",
-    //   "imgHeight": 120.0,
-    //   "imgLeft": 15.0,
-    //   "imgBottom": 2.0,
-    //   "tabName": "HIV Messages",
-    //   "tabDesc": "Messages for the community",
-    //   "color": Colors.lightGreen[700],
-    // },
-    // {
-    //   "imgLeft": 5.0,
-    //   "imgBottom": 19.0,
-    //   "imgHeight": 122.0,
-    //   "imgPath": "assets/stats.png",
-    //   "tabName": "Statistics",
-    //   "tabDesc": "See how it is affecting the world",
-    //   "color": Colors.deepPurpleAccent,
-    // },
     {
       "imgBottom": -4.0,
       "imgLeft": 8.0,
@@ -97,11 +76,6 @@ class _HomeScreenState extends State<HomeScreen> {
       return greeting;
     }
 
-    //
-    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    //   statusBarColor: Colors.transparent,
-    //   statusBarIconBrightness: Brightness.light,
-    // ));
     return Scaffold(
       body: BottomTopMoveAnimationView(
         child: ListView(
@@ -114,8 +88,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: InkWell(
                     onTap: () {
-                      Provider.of<ZDrawerController>(context, listen: false)
-                          .toggleDrawerSelected();
+                      Provider.of<ZDrawerController>(
+                        context,
+                        listen: false,
+                      ).toggleDrawerSelected();
                     },
                     child: SvgPicture.asset(
                       "assets/svgs/drawer.svg",
@@ -128,17 +104,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   animatedTexts: [
                     TypewriterAnimatedText(
                       greet(),
-                      textStyle: Theme.of(context).textTheme.bodyLarge!.apply(
-                            fontWeightDelta: 1,
-                          ),
+                      textStyle: Theme.of(
+                        context,
+                      ).textTheme.bodyLarge!.apply(fontWeightDelta: 1),
                       speed: const Duration(milliseconds: 300),
                     ),
                     TypewriterAnimatedText(
                       "Welcome to UAC",
-                      textStyle: Theme.of(context).textTheme.bodyLarge!.apply(
-                            fontWeightDelta: 4,
-                            fontFamily: "Montserrat",
-                          ),
+                      textStyle: Theme.of(
+                        context,
+                      ).textTheme.bodyLarge!.apply(fontWeightDelta: 4),
                       speed: const Duration(milliseconds: 300),
                     ),
                   ],
@@ -147,19 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   // displayFullTextOnTap: true,
                   // stopPauseOnTap: true,
                 ),
-                Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(),
-                      // TextSpan(
-                      //   text: "\n  Welcome to UAC",
-                      //   style: Theme.of(context).textTheme.titleMedium!.apply(
-                      //         fontWeightDelta: 2,
-                      //       ),
-                      // ),
-                    ],
-                  ),
-                ),
+
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Hero(
@@ -173,13 +136,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            Space(
-              space: 0.057,
-            ),
+            Space(space: 0.057),
+
             // health tip of the day
             // HealthTipWidget(),
             //
-
             ...List.generate(categoryData.length, (index) {
               var cat = categoryData[index];
               return CategoryTab(
@@ -193,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 tabName: cat["tabName"],
                 color: cat["color"],
               );
-            })
+            }),
           ],
         ),
       ),

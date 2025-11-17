@@ -16,132 +16,140 @@ class CategoryTab extends StatelessWidget {
   final String tabDesc;
   final AutoSizeGroup titleGrp, descGrp;
 
-  const CategoryTab(
-      {required this.imgPath,
-      required this.tabName,
-      required this.color,
-      required this.tabDesc,
-      this.imgHeight = 100.0,
-      this.imgLeft = 15.0,
-      this.imgBottom = -8.0,
-      required this.titleGrp,
-      required this.descGrp});
+  const CategoryTab({
+    required this.imgPath,
+    required this.tabName,
+    required this.color,
+    required this.tabDesc,
+    this.imgHeight = 100.0,
+    this.imgLeft = 15.0,
+    this.imgBottom = -8.0,
+    required this.titleGrp,
+    required this.descGrp,
+  });
 
   VoidCallback getPage(tabName, context) {
     switch (tabName) {
       case ("Symptoms"):
-        return () => Navigator.of(context).push(MaterialPageRoute(
+        return () => Navigator.of(context).push(
+          MaterialPageRoute(
             builder: (context) =>
-                SymptomsScreen(color: color, imgPath: imgPath)));
+                SymptomsScreen(color: color, imgPath: imgPath),
+          ),
+        );
       case ("HIV Prevention"):
-        return () => Navigator.of(context).push(MaterialPageRoute(
+        return () => Navigator.of(context).push(
+          MaterialPageRoute(
             builder: (context) =>
-                PrecautionsScreen(color: color, imgPath: imgPath)));
+                PrecautionsScreen(color: color, imgPath: imgPath),
+          ),
+        );
       // case ("HIV Messages"):
       //   return () => Navigator.of(context).push(MaterialPageRoute(
       //       builder: (context) =>
       //           MessagesScreen(color: color, imgPath: imgPath)));
-      case ("Myths/FAQs"):
-        return () => Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => MythsScreen(color: color, imgPath: imgPath)));
+      case ("Myths & Misconceptions"):
+        return () => Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => MythsScreen(color: color, imgPath: imgPath),
+          ),
+        );
       case ("About HIV"):
-        return () => Navigator.of(context).push(MaterialPageRoute(
+        return () => Navigator.of(context).push(
+          MaterialPageRoute(
             builder: (context) =>
-                VirusDetailsScreen(color: color, imgPath: imgPath)));
+                VirusDetailsScreen(color: color, imgPath: imgPath),
+          ),
+        );
       case ("Updates"):
-        return () => Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => UpdatesScreen(
-                  color: color,
-                  imgPath: imgPath,
-                )));
+        return () => Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => UpdatesScreen(color: color, imgPath: imgPath),
+          ),
+        );
       case ("Statistics"):
-        return () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => WorldStatScreen()));
+        return () => Navigator.of(
+          context,
+        ).push(MaterialPageRoute(builder: (context) => WorldStatScreen()));
 
       case ("Video Updates"):
-        return () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => Video()));
+        return () => Navigator.of(
+          context,
+        ).push(MaterialPageRoute(builder: (context) => Video()));
     }
     return () {};
   }
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: getPage(tabName, context),
-      child: Container(
-        margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-        height: 100,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(
-            width: 1,
-            color: color.withAlpha(40),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return InkWell(
+          onTap: getPage(tabName, context),
+          child: Container(
+            margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+            height: 100,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(width: 1, color: color.withAlpha(40)),
+              color: color.withValues(alpha: 0.13),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Hero(
+                  tag: imgPath,
+                  child: Container(
+                    width: constraints.maxWidth * 0.2,
+                    height: constraints.maxWidth * 0.2,
+                    margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(imgPath),
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                    // child: Image.asset(
+                    //   imgPath,
+                    //   // fit: BoxFit.cover,
+                    // ),
+                  ),
+                ),
+                Space(),
+                Center(
+                  child: AutoSizeText.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "$tabName\n",
+                          style: TextStyle(
+                            color: color,
+                            fontSize: constraints.maxWidth * 0.051,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        TextSpan(
+                          text: tabDesc,
+                          style: TextStyle(
+                            color: color,
+                            fontSize: constraints.maxWidth * 0.03,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    ),
+                    stepGranularity: 1,
+                    minFontSize: 10,
+                    maxFontSize: 19,
+                    maxLines: 3,
+                    group: titleGrp,
+                  ),
+                ),
+              ],
+            ),
           ),
-          color: color.withOpacity(0.13),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              width: imgHeight * 0.5,
-              height: imgHeight * 0.5,
-              margin: EdgeInsets.fromLTRB(15, 20, 5, 10),
-              child: Hero(
-                tag: imgPath,
-                child: Image.asset(
-                  imgPath,
-                  // fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            Space(),
-            Center(
-              child: AutoSizeText.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "$tabName\n",
-                      style: TextStyle(
-                        color: color,
-                        fontFamily: "Montserrat",
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    TextSpan(
-                      text: tabDesc,
-                      style: TextStyle(
-                        color: color,
-                        fontFamily: "Montserrat",
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ],
-                ),
-                stepGranularity: 1,
-                maxFontSize: 23,
-                maxLines: 3,
-                group: titleGrp,
-              ),
-            ),
-            // AutoSizeText(
-            //   "$tabDesc",
-            //   style: TextStyle(
-            //     color: color,
-            //     fontFamily: "Montserrat",
-            //     fontSize: 15,
-            //     fontWeight: FontWeight.w500,
-            //   ),
-            //   stepGranularity: 1,
-            //   maxFontSize: 19,
-            //   maxLines: 3,
-            //   group: descGrp,
-            // ),
-          ],
-        ),
-      ),
+        );
+      },
     );
   }
 }

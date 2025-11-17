@@ -13,10 +13,9 @@ class _AboutUacState extends State<AboutUac> {
     return Scaffold(
       appBar: AppBar(
         title: Text("About UAC"),
-        titleTextStyle: Theme.of(context).textTheme.titleMedium!.apply(
-              fontFamily: 'Montserrat',
-              fontWeightDelta: 10,
-            ),
+        titleTextStyle: Theme.of(
+          context,
+        ).textTheme.titleMedium!.apply(fontWeightDelta: 10),
       ),
       body: SafeArea(
         child: Stack(
@@ -41,10 +40,9 @@ class _AboutUacState extends State<AboutUac> {
                   padding: const EdgeInsets.fromLTRB(10, 8, 10, 0),
                   child: Text(
                     "Who we are",
-                    style: Theme.of(context).textTheme.titleMedium!.apply(
-                          fontFamily: 'Montserrat',
-                          fontWeightDelta: 10,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleMedium!.apply(fontWeightDelta: 10),
                   ),
                 ),
                 Padding(
@@ -57,28 +55,26 @@ class _AboutUacState extends State<AboutUac> {
                     TextSpan(
                       text:
                           "Uganda AIDS Commission (UAC) was set up by an Act of Parliament (Cap 208) in 1992. The Commission’s mandate is to coordinate and oversee the prevention and control of HIV and AIDS activities in Uganda. The Commission does not engage in direct implementation of interventions but takes strategic leadership in effective harmonization of action by the various players, within agreed policy and programs under thePrinciples of “Three Ones”:",
-                      style: Theme.of(context).textTheme.bodyMedium!.apply(
-                            fontFamily: 'Montserrat',
-                          ),
+                      style: Theme.of(context).textTheme.bodyMedium!.apply(),
                       children: [
                         TextSpan(
                           text:
                               '\n \n» One National HIV/AIDS Coordinating Authority',
-                          style: Theme.of(context).textTheme.bodyMedium!.apply(
-                                fontFamily: 'Montserrat',
-                              ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyMedium!.apply(),
                         ),
                         TextSpan(
                           text: ' \n» One Strategic Plan',
-                          style: Theme.of(context).textTheme.bodyMedium!.apply(
-                                fontFamily: 'Montserrat',
-                              ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyMedium!.apply(),
                         ),
                         TextSpan(
                           text: ' \n» One Monitoring and Evaluation Framework',
-                          style: Theme.of(context).textTheme.bodyMedium!.apply(
-                                fontFamily: 'Montserrat',
-                              ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyMedium!.apply(),
                         ),
                         TextSpan(
                           text:
@@ -86,10 +82,9 @@ class _AboutUacState extends State<AboutUac> {
                         ),
                         TextSpan(
                           text: "\n\nOur Vision",
-                          style: Theme.of(context).textTheme.bodyLarge!.apply(
-                                fontFamily: 'Montserrat',
-                                fontWeightDelta: 10,
-                              ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyLarge!.apply(fontWeightDelta: 10),
                         ),
                         TextSpan(
                           text:
@@ -97,10 +92,9 @@ class _AboutUacState extends State<AboutUac> {
                         ),
                         TextSpan(
                           text: "\n\nOur Mission",
-                          style: Theme.of(context).textTheme.bodyLarge!.apply(
-                                fontFamily: 'Montserrat',
-                                fontWeightDelta: 10,
-                              ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyLarge!.apply(fontWeightDelta: 10),
                         ),
                         TextSpan(
                           text:
@@ -108,10 +102,9 @@ class _AboutUacState extends State<AboutUac> {
                         ),
                         TextSpan(
                           text: "\n\nOur Goal",
-                          style: Theme.of(context).textTheme.bodyLarge!.apply(
-                                fontFamily: 'Montserrat',
-                                fontWeightDelta: 10,
-                              ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyLarge!.apply(fontWeightDelta: 10),
                         ),
                         TextSpan(
                           text:
@@ -127,27 +120,24 @@ class _AboutUacState extends State<AboutUac> {
                         ),
                         TextSpan(
                           text: "\n\nOur Core Values",
-                          style: Theme.of(context).textTheme.bodyLarge!.apply(
-                                fontFamily: 'Montserrat',
-                                fontWeightDelta: 10,
-                              ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyLarge!.apply(fontWeightDelta: 10),
                         ),
                         TextSpan(
                           text: "\n👉🏼 Stakeholder responsiveness",
-                          style: Theme.of(context).textTheme.bodyMedium!.apply(
-                                fontFamily: 'Montserrat',
-                                fontWeightDelta: 1,
-                              ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyMedium!.apply(fontWeightDelta: 1),
                         ),
                         // TextSpan(
                         //     text:
                         //         "\nThe Commission undertakes to respond to stakeholder needs in real time and to proactively predict stakeholders’ expectations and devise measures to meet them.\n"),
                         TextSpan(
                           text: "\n👉🏼 Integrity",
-                          style: Theme.of(context).textTheme.bodyMedium!.apply(
-                                fontFamily: 'Montserrat',
-                                fontWeightDelta: 1,
-                              ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyMedium!.apply(fontWeightDelta: 1),
                         ),
                         // TextSpan(
                         //   text:
@@ -155,10 +145,9 @@ class _AboutUacState extends State<AboutUac> {
                         // ),
                         TextSpan(
                           text: "\n👉🏼 Partnership",
-                          style: Theme.of(context).textTheme.bodyMedium!.apply(
-                                fontFamily: 'Montserrat',
-                                fontWeightDelta: 1,
-                              ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyMedium!.apply(fontWeightDelta: 1),
                         ),
                         // TextSpan(
                         //   text:
@@ -166,10 +155,9 @@ class _AboutUacState extends State<AboutUac> {
                         // ),
                         TextSpan(
                           text: "\n👉🏼 Team work ",
-                          style: Theme.of(context).textTheme.bodyMedium!.apply(
-                                fontFamily: 'Montserrat',
-                                fontWeightDelta: 1,
-                              ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyMedium!.apply(fontWeightDelta: 1),
                         ),
                         // TextSpan(
                         //   text:
@@ -177,10 +165,9 @@ class _AboutUacState extends State<AboutUac> {
                         // ),
                         TextSpan(
                           text: "\n👉🏼 Professionalism",
-                          style: Theme.of(context).textTheme.bodyMedium!.apply(
-                                fontFamily: 'Montserrat',
-                                fontWeightDelta: 1,
-                              ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyMedium!.apply(fontWeightDelta: 1),
                         ),
                         // TextSpan(
                         //   text:
@@ -193,10 +180,9 @@ class _AboutUacState extends State<AboutUac> {
                 Text(
                   "\nUAC | All rights reserved | version 1.0.3",
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.labelLarge!.apply(
-                        fontFamily: 'Montserrat',
-                        fontWeightDelta: 1,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.labelLarge!.apply(fontWeightDelta: 1),
                 ),
               ],
             ),

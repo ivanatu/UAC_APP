@@ -8,17 +8,14 @@ class AntiretroviralTherapyChart extends StatelessWidget {
       backgroundColor: Colors.red.shade50,
       appBar: AppBar(
         backgroundColor: Colors.red,
-        leading: BackButton(
-          color: Colors.white,
-        ),
+        leading: BackButton(color: Colors.white),
         title: Text(
           "Antiretroviral Therapy (ART)\nCoverage",
           style: Theme.of(context).textTheme.bodyLarge!.apply(
-                fontWeightDelta: 2,
-                fontSizeFactor: 1.2,
-                color: Colors.white,
-                fontFamily: 'Montserrat',
-              ),
+            fontWeightDelta: 2,
+            fontSizeFactor: 1.2,
+            color: Colors.white,
+          ),
         ),
       ),
       body: Stack(
