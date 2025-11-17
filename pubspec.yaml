@@ -163,7 +163,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - assets/symptoms/
+    #  - assets/symptoms/
      - assets/
      - assets/svgs/
      - assets/bottom_navs/

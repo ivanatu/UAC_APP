@@ -22,7 +22,6 @@ class _MessageDetailsState extends State<MessageDetails> {
         title: Text(
           widget.message.attributes.title,
           style: Theme.of(context).textTheme.titleLarge!.copyWith(
-            fontFamily: "Montserrat",
             fontWeight: FontWeight.bold,
             // color: Colors.white,
           ),
@@ -52,7 +51,7 @@ class _MessageDetailsState extends State<MessageDetails> {
           styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
             p: Theme.of(context).textTheme.bodyLarge!.copyWith(
               fontSize: 16,
-              fontFamily: "Montserrat",
+
               color: Colors.black,
               fontWeight: FontWeight.w400,
             ),

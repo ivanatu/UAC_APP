@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:uac/screens/hiv_triva_page.dart';
+
 import '/screens/drawer_screen.dart';
 
 import '/exports/exports.dart';
@@ -51,6 +53,7 @@ class _IndexScreenState extends State<IndexScreen> {
   List<Map<String, dynamic>> bottomNavs = [
     {"label": "Home", "icon": "home.svg", "un": "home_un.svg"},
     {"label": "News", "icon": "livescore.svg", "un": "livescore_un.svg"},
+    {"label": "HIV Trivia", "icon": "trivia.svg", "un": "trivia_un.svg"},
     {"label": "Messages", "icon": "message.svg", "un": "message_un.svg"},
     {"label": "Stats", "icon": "stats.svg", "un": "stats_un.svg"},
     {"label": "Get in touch", "icon": "chat.svg", "un": "chat_un.svg"},
@@ -62,6 +65,7 @@ class _IndexScreenState extends State<IndexScreen> {
   List<Widget> pages = [
     HomeScreen(),
     NewsPage(),
+    HivTrivaPage(),
     MessagesScreen(),
     StatsPage(),
     ChatScreen(),

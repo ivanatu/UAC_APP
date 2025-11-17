@@ -172,95 +172,104 @@ class _MessageCardState extends State<MessageCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<DataController>(builder: (context, controller, ch) {
-      if (mounted) {
-        controller.setItems();
-      }
-      return controller.items.isNotEmpty
-          ? GridView.builder(
-              physics: BouncingScrollPhysics(),
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 14.0, vertical: 20.0),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisSpacing: 10.0,
-                mainAxisSpacing: 10.0,
-                crossAxisCount: 2,
-                childAspectRatio: 0.9680,
-              ),
-              scrollDirection: Axis.vertical,
-              itemCount: controller.items.length,
-              itemBuilder: (context, index) {
-                return Routes.animateTo(
-                  openWidget: MessageDetails(
-                    message: controller.items[index],
-                  ),
-                  closedWidget: Material(
-                    borderRadius: BorderRadius.circular(15.0),
-                    child: AnimatedContainer(
-                      curve: Curves.fastOutSlowIn,
-                      duration: Duration(milliseconds: 650),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                          color: Colors.grey.shade200,
-                          width: 1.8,
+    return Consumer<DataController>(
+      builder: (context, controller, ch) {
+        if (mounted) {
+          controller.setItems();
+        }
+        return controller.items.isNotEmpty
+            ? GridView.builder(
+                physics: BouncingScrollPhysics(),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14.0,
+                  vertical: 20.0,
+                ),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisSpacing: 10.0,
+                  mainAxisSpacing: 10.0,
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.9680,
+                ),
+                scrollDirection: Axis.vertical,
+                itemCount: controller.items.length,
+                itemBuilder: (context, index) {
+                  return Routes.animateTo(
+                    openWidget: MessageDetails(
+                      message: controller.items[index],
+                    ),
+                    closedWidget: Material(
+                      borderRadius: BorderRadius.circular(15.0),
+                      child: AnimatedContainer(
+                        curve: Curves.fastOutSlowIn,
+                        duration: Duration(milliseconds: 650),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                            color: Colors.grey.shade200,
+                            width: 1.8,
+                          ),
+                          // color:
+                          //     index == selectedIndex ? Colors.teal[50] : Colors.white,
+                          borderRadius: BorderRadius.circular(10.0),
                         ),
-                        // color:
-                        //     index == selectedIndex ? Colors.teal[50] : Colors.white,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      padding: const EdgeInsets.fromLTRB(14, 20, 14, 0),
-                      child: LayoutBuilder(
-                        builder: (ctx, constraint) => SizedBox(
-                          height: constraint.maxHeight / 3.5,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: <Widget>[
-                              Hero(
-                                tag: Apis.url +
-                                    controller.items[index].attributes.image
-                                        .data.attributes.url,
-                                child: Image.network(
-                                  Apis.url +
-                                      controller.items[index].attributes.image
-                                          .data.attributes.url,
-                                  height: constraint.maxHeight * 0.746,
+                        padding: const EdgeInsets.fromLTRB(14, 20, 14, 0),
+                        child: LayoutBuilder(
+                          builder: (ctx, constraint) => SizedBox(
+                            height: constraint.maxHeight / 3.5,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                Hero(
+                                  tag:
+                                      Apis.url +
+                                      controller
+                                          .items[index]
+                                          .attributes
+                                          .image
+                                          .data
+                                          .attributes
+                                          .url,
+                                  child: Image.network(
+                                    Apis.url +
+                                        controller
+                                            .items[index]
+                                            .attributes
+                                            .image
+                                            .data
+                                            .attributes
+                                            .url,
+                                    height: constraint.maxHeight * 0.746,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              AutoSizeText(
-                                controller.items[index].attributes.title,
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge!
-                                    .copyWith(
-                                      fontSize: 13,
-                                      fontFamily: "Montserrat",
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w800,
-                                    ),
-                                maxFontSize: 13,
-                                maxLines: 1,
-                                minFontSize: 4,
-                                stepGranularity: 1,
-                                group: titleGrp,
-                              ),
-                            ],
+                                SizedBox(height: 5),
+                                AutoSizeText(
+                                  controller.items[index].attributes.title,
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.bodyLarge!
+                                      .copyWith(
+                                        fontSize: 13,
+
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                  maxFontSize: 13,
+                                  maxLines: 1,
+                                  minFontSize: 4,
+                                  stepGranularity: 1,
+                                  group: titleGrp,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                );
-              },
-            )
-          : Center(
-              child: CircularProgressIndicator(),
-            );
-    });
+                  );
+                },
+              )
+            : Center(child: CircularProgressIndicator.adaptive());
+      },
+    );
   }
 }
