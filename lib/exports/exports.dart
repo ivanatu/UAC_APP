@@ -29,7 +29,7 @@ export "/screens/onboarding/splash_screen.dart";
 export "/screens/onboarding/onboard_screen.dart";
 // --- home
 export "/screens/home/home_screen.dart";
-export "../screens/chat/get_in_touch_screen.dart";
+export "../screens/getInTouch/get_in_touch_screen.dart";
 export "/screens/messages/messages_page.dart";
 export "/screens/news/index.dart";
 export "/screens/stats/stats_page.dart";

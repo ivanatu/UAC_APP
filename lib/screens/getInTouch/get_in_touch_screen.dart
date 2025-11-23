@@ -254,7 +254,7 @@ class _GetInTouchScreenState extends State<GetInTouchScreen> {
       ),
       SocialMediaItem(
         icon: 'assets/svgs/twitter.svg',
-        color: Colors.blue,
+        color: Colors.black,
         url: "https://x.com/${data.twitter}",
       ),
     ];
@@ -286,8 +286,9 @@ class _GetInTouchScreenState extends State<GetInTouchScreen> {
       icon: SvgPicture.asset(
         item.icon,
         color: item.color,
-        width: 32,
-        height: 32,
+        width: 25,
+        height: 25,
+        fit: BoxFit.cover,
       ),
       onPressed: () => launchUrl(Uri.parse(item.url)),
     );
@@ -298,7 +299,7 @@ class _GetInTouchScreenState extends State<GetInTouchScreen> {
     final phoneUri = phone.replaceAll(' ', '').replaceAll('-', '');
 
     return IconButton(
-      icon: Icon(Icons.phone, color: Colors.teal.shade600, size: 32),
+      icon: Icon(Icons.phone, color: Colors.teal.shade600, size: 25),
       onPressed: () => launchUrl(Uri.parse('tel:$phoneUri')),
     );
   }
@@ -307,7 +308,7 @@ class _GetInTouchScreenState extends State<GetInTouchScreen> {
     final website = _controller.getInTouchModel!.attributes.website;
 
     return IconButton(
-      icon: Icon(Icons.share, color: Colors.orange.shade600, size: 32),
+      icon: Icon(Icons.share, color: Colors.orange.shade600, size: 25),
       onPressed: () {
         SharePlus.instance.share(
           ShareParams(
