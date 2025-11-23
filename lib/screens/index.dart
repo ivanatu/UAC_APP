@@ -70,7 +70,7 @@ class _IndexScreenState extends State<IndexScreen> {
     // MessagesScreen(),
     StatsPage(),
     HivTrivaPage(),
-    ChatScreen(),
+    GetInTouchScreen(),
   ];
   @override
   Widget build(BuildContext context) {

@@ -1,64 +1,101 @@
-import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '/exports/exports.dart';
+import '/controllers/get_in_touch_controller.dart';
 
-class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key});
+class GetInTouchScreen extends StatefulWidget {
+  const GetInTouchScreen({super.key});
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  State<GetInTouchScreen> createState() => _GetInTouchScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
-  // Contact information
-  final Map<String, String> contactInfo = {
-    'Website': 'https://www.uac.go.ug/',
-    'Email': 'uac@uac.go.ug',
-    'Phone': '+256 414 288065',
-    'Address': 'Plot 1-3 Salim Bay Rd, Ntinda, Kampala, Uganda',
-    'Hours': 'Mon - Fri 9:00 am - 5:00 pm',
-  };
+class _GetInTouchScreenState extends State<GetInTouchScreen> {
+  late GetInTouchController _controller;
 
-  // Social media links
-  final List<SocialMediaItem> socialMediaItems = [
-    SocialMediaItem(
-      icon: 'assets/svgs/facebook.svg',
-      color: Colors.blue.shade900,
-      url: 'https://www.facebook.com/UgandaAidsCommission',
-    ),
-    SocialMediaItem(
-      icon: 'assets/svgs/whatsapp.svg',
-      color: Colors.green,
-      url: 'https://wa.me/256770522051',
-    ),
-    SocialMediaItem(
-      icon: 'assets/svgs/twitter.svg',
-      color: Colors.blue,
-      url: 'https://x.com/aidscommission',
-    ),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    _controller = GetInTouchController();
+    _fetchData();
+    // });
+  }
+
+  Future<void> _fetchData() async {
+    await _controller.fetchGetInTouch();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildHeader(context),
-              const SizedBox(height: 24),
-              _buildContactCard(context),
-              const SizedBox(height: 16),
-              _buildFeedbackCard(context),
-              const SizedBox(height: 24),
-              _buildDivider(context),
-              const SizedBox(height: 24),
-              _buildSocialMediaSection(context),
-            ],
-          ),
-        ),
+      body: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, _) {
+          if (_controller.loading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (_controller.getInTouchModel == null) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.error_outline,
+                    size: 64,
+                    color: Colors.grey.shade400,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Failed to load contact information',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Colors.grey.shade600,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton.icon(
+                    onPressed: _fetchData,
+                    icon: const Icon(Icons.refresh),
+                    label: const Text('Retry'),
+                  ),
+                ],
+              ),
+            );
+          }
+
+          return RefreshIndicator(
+            onRefresh: _fetchData,
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 24.0,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildHeader(context),
+                    const SizedBox(height: 24),
+                    _buildContactCard(context),
+                    const SizedBox(height: 16),
+                    _buildFeedbackCard(context),
+                    const SizedBox(height: 24),
+                    _buildDivider(context),
+                    const SizedBox(height: 24),
+                    _buildSocialMediaSection(context),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -74,9 +111,22 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _buildContactCard(BuildContext context) {
+    final data = _controller.getInTouchModel!.attributes;
+
+    final contactInfo = {
+      'Website': data.website,
+      'Email': data.email,
+      'Phone': data.telephone,
+      'Address': data.address,
+      'Hours': data.hours,
+    };
+
     return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: Colors.grey.shade300),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -120,9 +170,14 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _buildFeedbackCard(BuildContext context) {
+    final email = _controller.getInTouchModel!.attributes.email;
+
     return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: Colors.grey.shade300),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -142,11 +197,12 @@ class _ChatScreenState extends State<ChatScreen> {
             const SizedBox(height: 16),
             ElevatedButton.icon(
               onPressed: () {
-                launchUrl(Uri.parse('mailto:uac@uac.go.ug?subject=Feedback'));
+                launchUrl(Uri.parse('mailto:$email?subject=Feedback'));
               },
               icon: const Icon(Icons.mail_outline),
               label: const Text('Send Feedback'),
               style: ElevatedButton.styleFrom(
+                elevation: 0,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 24,
                   vertical: 12,
@@ -154,6 +210,8 @@ class _ChatScreenState extends State<ChatScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                foregroundColor: Theme.of(context).colorScheme.onPrimary,
               ),
             ),
           ],
@@ -181,6 +239,26 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _buildSocialMediaSection(BuildContext context) {
+    final data = _controller.getInTouchModel!.attributes;
+
+    final socialMediaItems = [
+      SocialMediaItem(
+        icon: 'assets/svgs/facebook.svg',
+        color: Colors.blue.shade900,
+        url: "https://facebook.com/${data.facebook}",
+      ),
+      SocialMediaItem(
+        icon: 'assets/svgs/whatsapp.svg',
+        color: Colors.green,
+        url: "https://wa.me/${data.whatsapp}",
+      ),
+      SocialMediaItem(
+        icon: 'assets/svgs/twitter.svg',
+        color: Colors.blue,
+        url: "https://x.com/${data.twitter}",
+      ),
+    ];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -216,19 +294,27 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _buildPhoneButton() {
+    final phone = _controller.getInTouchModel!.attributes.telephone;
+    final phoneUri = phone.replaceAll(' ', '').replaceAll('-', '');
+
     return IconButton(
       icon: Icon(Icons.phone, color: Colors.teal.shade600, size: 32),
-      onPressed: () => launchUrl(Uri.parse('tel:+256414288065')),
+      onPressed: () => launchUrl(Uri.parse('tel:$phoneUri')),
     );
   }
 
   Widget _buildShareButton() {
+    final website = _controller.getInTouchModel!.attributes.website;
+
     return IconButton(
       icon: Icon(Icons.share, color: Colors.orange.shade600, size: 32),
       onPressed: () {
-        Share.share(
-          'Hey, I found this amazing app that helps me stay updated with the latest news and stats on HIV/AIDS. You should check it out too. https://www.uac.go.ug/',
-          subject: 'Check out this great app!',
+        SharePlus.instance.share(
+          ShareParams(
+            text:
+                'Hey, I found this amazing app that helps me stay updated with the latest news and stats on HIV/AIDS. You should check it out too. $website',
+            subject: 'Check out this great app!',
+          ),
         );
       },
     );
