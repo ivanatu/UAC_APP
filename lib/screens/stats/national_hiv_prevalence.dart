@@ -2,7 +2,6 @@ import '/controllers/national_prevalence_controller.dart';
 // import 'package:pie_chart/pie_chart.dart';
 
 import '/exports/exports.dart';
-import 'widgets/pie_widget.dart';
 
 class NationalHivPrevalence extends StatefulWidget {
   const NationalHivPrevalence({super.key});
@@ -82,11 +81,11 @@ class _NationalHivPrevalenceState extends State<NationalHivPrevalence> {
     );
   }
 
-  List<Color> _generateColorList(int length) {
-    List<Color> colorList = [];
-    for (int i = 0; i < length; i++) {
-      colorList.add(Colors.primaries[i * 7 % Colors.primaries.length]);
-    }
-    return colorList;
-  }
+  // List<Color> _generateColorList(int length) {
+  //   List<Color> colorList = [];
+  //   for (int i = 0; i < length; i++) {
+  //     colorList.add(Colors.primaries[i * 7 % Colors.primaries.length]);
+  //   }
+  //   return colorList;
+  // }
 }
