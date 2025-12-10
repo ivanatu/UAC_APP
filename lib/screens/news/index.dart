@@ -58,71 +58,80 @@ class _NewsPageState extends State<NewsPage> {
                             ],
                           )
                         : Expanded(
-                            child: ListView.builder(
-                              itemCount: newz.length,
-                              itemBuilder: (context, index) {
-                                return InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            NewsDetails(newz: newz[index]),
-                                      ),
-                                    );
-                                  },
-                                  child: Container(
-                                    width: constraints.maxWidth,
-                                    height: constraints.maxWidth * 0.842,
-                                    margin: const EdgeInsets.all(8.0),
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey.shade100,
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(
-                                        color: Colors.grey.shade200,
-                                        width: 2,
-                                      ),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Hero(
-                                          tag: newz[index].image.url,
-                                          child: Container(
-                                            width: constraints.maxWidth,
-                                            height: constraints.maxWidth * 0.65,
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(10),
-                                                topRight: Radius.circular(10),
-                                              ),
-                                              image: DecorationImage(
-                                                image: NetworkImage(
-                                                  Apis.url +
-                                                      newz[index].image.url,
-                                                ),
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Hero(
-                                          tag: newz[index].title,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(10.0),
-                                            child: AutoSizeText(
-                                              newz[index].title,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleMedium!
-                                                  .apply(fontWeightDelta: 2),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
+                            child: RefreshIndicator.adaptive(
+                              onRefresh: () async {
+                                setState(() {});
+                                await NewzService().getNews();
                               },
+                              child: ListView.builder(
+                                itemCount: newz.length,
+                                itemBuilder: (context, index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              NewsDetails(newz: newz[index]),
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      width: constraints.maxWidth,
+                                      height: constraints.maxWidth * 0.842,
+                                      margin: const EdgeInsets.all(8.0),
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey.shade100,
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                          color: Colors.grey.shade200,
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Hero(
+                                            tag: newz[index].image.url,
+                                            child: Container(
+                                              width: constraints.maxWidth,
+                                              height:
+                                                  constraints.maxWidth * 0.65,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(10),
+                                                  topRight: Radius.circular(10),
+                                                ),
+                                                image: DecorationImage(
+                                                  image: NetworkImage(
+                                                    Apis.url +
+                                                        newz[index].image.url,
+                                                  ),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Hero(
+                                            tag: newz[index].title,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(
+                                                10.0,
+                                              ),
+                                              child: AutoSizeText(
+                                                newz[index].title,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleMedium!
+                                                    .apply(fontWeightDelta: 2),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           );
                   } else {

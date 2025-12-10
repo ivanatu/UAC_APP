@@ -37,7 +37,9 @@ class _HivTrivaPageState extends State<HivTrivaPage>
           ),
         );
 
-    Provider.of<TriviaController>(context, listen: false).initializeTrivia();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<TriviaController>(context, listen: false).initializeTrivia();
+    });
     _pageAnimationController.forward();
   }
 
@@ -56,6 +58,16 @@ class _HivTrivaPageState extends State<HivTrivaPage>
   Widget build(BuildContext context) {
     return Consumer<TriviaController>(
       builder: (context, triviaController, child) {
+        // Show loading if questions aren't loaded yet
+        if (triviaController.questions.isEmpty) {
+          return Scaffold(
+            backgroundColor: Colors.grey.shade50,
+            body: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+
         if (triviaController.quizCompleted) {
           return TriviaResultScreen(
             result: triviaController.getResults(),
