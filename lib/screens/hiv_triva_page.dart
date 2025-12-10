@@ -26,21 +26,16 @@ class _HivTrivaPageState extends State<HivTrivaPage>
     );
 
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _pageAnimationController,
-        curve: Curves.easeIn,
-      ),
+      CurvedAnimation(parent: _pageAnimationController, curve: Curves.easeIn),
     );
 
-    _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 0.1),
-      end: Offset.zero,
-    ).animate(
-      CurvedAnimation(
-        parent: _pageAnimationController,
-        curve: Curves.easeOutCubic,
-      ),
-    );
+    _slideAnimation =
+        Tween<Offset>(begin: const Offset(0, 0.1), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: _pageAnimationController,
+            curve: Curves.easeOutCubic,
+          ),
+        );
 
     Provider.of<TriviaController>(context, listen: false).initializeTrivia();
     _pageAnimationController.forward();
@@ -69,7 +64,7 @@ class _HivTrivaPageState extends State<HivTrivaPage>
               _resetAnimation();
             },
             onExit: () {
-              Navigator.of(context).pop();
+              // Navigator.of(context).pop();
             },
           );
         }
@@ -83,9 +78,9 @@ class _HivTrivaPageState extends State<HivTrivaPage>
           appBar: AppBar(
             title: Text(
               "HIV Trivia Challenge",
-              style: Theme.of(context).textTheme.titleLarge!.apply(
-                fontWeightDelta: 2,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge!.apply(fontWeightDelta: 2),
             ),
             centerTitle: true,
             elevation: 0,
@@ -111,7 +106,8 @@ class _HivTrivaPageState extends State<HivTrivaPage>
                       padding: const EdgeInsets.all(20.0),
                       child: TriviaProgressBar(
                         progress: triviaController.progress,
-                        currentQuestion: triviaController.currentQuestionIndex + 1,
+                        currentQuestion:
+                            triviaController.currentQuestionIndex + 1,
                         totalQuestions: triviaController.questions.length,
                       ),
                     ),
@@ -130,23 +126,20 @@ class _HivTrivaPageState extends State<HivTrivaPage>
                             ),
                             const SizedBox(height: 30),
                             // Options
-                            ...List.generate(
-                              question.options.length,
-                              (index) {
-                                final optionLetters = ['A', 'B', 'C', 'D'];
-                                return TriviaOptionButton(
-                                  option: question.options[index],
-                                  index: index,
-                                  isSelected: selectedIndex == index,
-                                  isCorrect: index == question.correctAnswerIndex,
-                                  isAnswered: isAnswered,
-                                  onTap: () {
-                                    triviaController.selectAnswer(index);
-                                  },
-                                  optionLetter: optionLetters[index],
-                                );
-                              },
-                            ),
+                            ...List.generate(question.options.length, (index) {
+                              final optionLetters = ['A', 'B', 'C', 'D'];
+                              return TriviaOptionButton(
+                                option: question.options[index],
+                                index: index,
+                                isSelected: selectedIndex == index,
+                                isCorrect: index == question.correctAnswerIndex,
+                                isAnswered: isAnswered,
+                                onTap: () {
+                                  triviaController.selectAnswer(index);
+                                },
+                                optionLetter: optionLetters[index],
+                              );
+                            }),
                             // Explanation
                             if (isAnswered) ...[
                               const SizedBox(height: 20),
@@ -178,9 +171,9 @@ class _HivTrivaPageState extends State<HivTrivaPage>
                                               .textTheme
                                               .titleMedium!
                                               .copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.blue.shade700,
-                                          ),
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.blue.shade700,
+                                              ),
                                         ),
                                       ],
                                     ),
@@ -191,9 +184,9 @@ class _HivTrivaPageState extends State<HivTrivaPage>
                                           .textTheme
                                           .bodyMedium!
                                           .copyWith(
-                                        height: 1.6,
-                                        color: Colors.grey.shade800,
-                                      ),
+                                            height: 1.6,
+                                            color: Colors.grey.shade800,
+                                          ),
                                     ),
                                   ],
                                 ),
@@ -302,10 +295,7 @@ class _HivTrivaPageState extends State<HivTrivaPage>
           ),
           title: Row(
             children: [
-              Icon(
-                Icons.info,
-                color: Theme.of(context).primaryColor,
-              ),
+              Icon(Icons.info, color: Theme.of(context).primaryColor),
               const SizedBox(width: 12),
               const Text('How to Play'),
             ],
@@ -314,10 +304,7 @@ class _HivTrivaPageState extends State<HivTrivaPage>
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildInfoItem(
-                '1. Read each question carefully',
-                Icons.quiz,
-              ),
+              _buildInfoItem('1. Read each question carefully', Icons.quiz),
               const SizedBox(height: 12),
               _buildInfoItem(
                 '2. Select your answer from the options',
@@ -384,11 +371,7 @@ class _HivTrivaPageState extends State<HivTrivaPage>
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(
-          icon,
-          size: 20,
-          color: Colors.grey.shade600,
-        ),
+        Icon(icon, size: 20, color: Colors.grey.shade600),
         const SizedBox(width: 12),
         Expanded(
           child: Text(
