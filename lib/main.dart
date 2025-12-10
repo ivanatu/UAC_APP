@@ -38,6 +38,7 @@ void main() {
           create: (context) => NationalPrevalenceController(),
         ),
         ChangeNotifierProvider(create: (context) => RegionalController()),
+        ChangeNotifierProvider(create: (context) => TriviaController()),
       ],
       child: MaterialApp(
         navigatorKey: navigatorKey,

@@ -55,4 +55,5 @@ export "/controllers/faqa_controller.dart";
 export "/controllers/drawer_controller.dart";
 export "/controllers/progress_95_controller.dart";
 export "/controllers/stories_controller.dart";
+export "/controllers/trivia_controller.dart";
 // --------------- end of controllers --------------
