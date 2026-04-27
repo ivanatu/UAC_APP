@@ -10,6 +10,18 @@ class ProgressOn95 extends StatefulWidget {
 
 class _ProgressOn95State extends State<ProgressOn95> {
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      context.read<Progress95Controller>().setItems();
+    });
+  }
+
+  Future<void> _refresh() =>
+      context.read<Progress95Controller>().setItems(force: true);
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green.shade50,
@@ -39,32 +51,61 @@ class _ProgressOn95State extends State<ProgressOn95> {
           ),
           Consumer<Progress95Controller>(
             builder: (context, controller, _) {
-              controller.setItems();
-              return controller.loading
-                  ? const Center(
-                      child: CircularProgressIndicator(
-                        strokeWidth: 4,
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
-                      ),
-                    )
-                  : ListView(
-                      padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
+              if (controller.loading && controller.items.isEmpty) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 4,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                  ),
+                );
+              }
+              if (controller.error != null && controller.items.isEmpty) {
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        const SizedBox(height: 24),
-                        _buildInfoCard(),
-                        const SizedBox(height: 24),
-                        ...List.generate(controller.items.length, (i) {
-                          return _ProgressBarCard(
-                            key: ValueKey(controller.items[i].id),
-                            title: controller.items[i].attributes.title,
-                            value: double.parse(
-                              controller.items[i].attributes.value,
-                            ),
-                            index: i,
-                          );
-                        }),
+                        const Icon(Icons.error_outline,
+                            color: Colors.red, size: 48),
+                        const SizedBox(height: 12),
+                        Text(
+                          'Failed to load progress data',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        const SizedBox(height: 16),
+                        ElevatedButton(
+                          onPressed: _refresh,
+                          child: const Text('Retry'),
+                        ),
                       ],
-                    );
+                    ),
+                  ),
+                );
+              }
+              return RefreshIndicator(
+                onRefresh: _refresh,
+                child: ListView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
+                  children: [
+                    const SizedBox(height: 24),
+                    _buildInfoCard(),
+                    const SizedBox(height: 24),
+                    ...List.generate(controller.items.length, (i) {
+                      return _ProgressBarCard(
+                        key: ValueKey(controller.items[i].id),
+                        title: controller.items[i].attributes.title,
+                        value: double.tryParse(
+                              controller.items[i].attributes.value,
+                            ) ??
+                            0,
+                        index: i,
+                      );
+                    }),
+                  ],
+                ),
+              );
             },
           ),
         ],

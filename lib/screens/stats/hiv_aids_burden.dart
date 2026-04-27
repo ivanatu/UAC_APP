@@ -16,7 +16,7 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
   final HivBurdenService _hivBurdenService = HivBurdenService();
 
   List<Plhiv> plhivData = [];
-  String currentYear = "2023";
+  String currentYear = "";
   List<NewNumberOfInfections> newInfectionsData = [];
   List<AnnualAids> annualAidsData = [];
 
@@ -28,7 +28,13 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
   void initState() {
     super.initState();
     _fetchAllData();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      context.read<NationalPrevalenceController>().fetchNationalPrevalence();
+    });
   }
+
+  String get _yearLabel => currentYear.isEmpty ? 'Latest' : currentYear;
 
   Future<void> _fetchAllData() async {
     await Future.wait([
@@ -105,17 +111,18 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
         backgroundColor: Theme.of(context).primaryColor,
         leading: BackButton(color: Colors.white),
         actions: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(10, 10, 15, 5),
-            child: Text(
-              currentYear,
-              style: Theme.of(context).textTheme.titleLarge!.apply(
-                fontWeightDelta: 2,
-                fontSizeFactor: 0.84,
-                color: Colors.white,
+          if (currentYear.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 10, 15, 5),
+              child: Text(
+                currentYear,
+                style: Theme.of(context).textTheme.titleLarge!.apply(
+                  fontWeightDelta: 2,
+                  fontSizeFactor: 0.84,
+                  color: Colors.white,
+                ),
               ),
             ),
-          ),
         ],
         title: Text(
           "HIV / AIDS Burden",
@@ -197,7 +204,7 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
                               DataColumn(
                                 label: Expanded(
                                   child: Text(
-                                    "Year ($currentYear)",
+                                    "Year (${_yearLabel})",
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyMedium!
@@ -246,14 +253,25 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
                     ),
                     Consumer<NationalPrevalenceController>(
                       builder: (context, nController, x) {
-                        if (mounted) {
-                          nController.fetchNationalPrevalence();
+                        if (nController.loading && nController.items.isEmpty) {
+                          return const Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(20.0),
+                              child: CircularProgressIndicator(),
+                            ),
+                          );
                         }
                         return nController.items.isEmpty
                             ? Center(
                                 child: Padding(
                                   padding: const EdgeInsets.all(20.0),
-                                  child: CircularProgressIndicator(),
+                                  child: Text(
+                                    nController.error != null
+                                        ? 'Failed to load'
+                                        : 'No data available',
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
                                 ),
                               )
                             : DataTable(
@@ -279,7 +297,7 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
                                   DataColumn(
                                     label: Expanded(
                                       child: Text(
-                                        'Year ($currentYear)',
+                                        'Year (${_yearLabel})',
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium!
@@ -368,7 +386,7 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
                               DataColumn(
                                 label: Expanded(
                                   child: Text(
-                                    'Year ($currentYear)',
+                                    'Year (${_yearLabel})',
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyMedium!
@@ -453,7 +471,7 @@ class _HivAidsBurdenState extends State<HivAidsBurden> {
                               DataColumn(
                                 label: Expanded(
                                   child: Text(
-                                    'Year ($currentYear)',
+                                    'Year (${_yearLabel})',
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyMedium!

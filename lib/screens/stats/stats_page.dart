@@ -5,7 +5,6 @@ import "/screens/stats/widgets/stat_widget.dart";
 
 import "/exports/exports.dart";
 import "antiretroviral_chart.dart";
-// import "stats_dashboard_screens/country_list.dart";
 import "regions/regional_prevalence_rate.dart";
 import "testing_and_treatment_cascade.dart";
 
@@ -54,12 +53,6 @@ class _StatsPageState extends State<StatsPage> {
           icon: Icons.pie_chart_rounded,
           color: Colors.cyan,
         ),
-        // StatWidget(
-        //   nextPage: NationalHivPrevalence(),
-        //   title: "National HIV Prevalence Rate",
-        //   icon: Icons.pie_chart_rounded,
-        //   color: Colors.purple,
-        // ),
         StatWidget(
           nextPage: HIVTestingAndTreatmentCascade(),
           title: "HIV Testing and Treatment\n Cascade",

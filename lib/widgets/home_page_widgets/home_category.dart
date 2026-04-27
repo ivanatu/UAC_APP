@@ -6,7 +6,6 @@ import '/screens/precautions_page.dart';
 import '/screens/symptoms_page.dart';
 import '/screens/updates_page.dart';
 import '/screens/virus_details_page.dart';
-import '/screens/stats/stats_dashboard_screens/world_stat.dart';
 import '/screens/video.dart';
 
 // ignore: must_be_immutable
@@ -67,11 +66,6 @@ class CategoryTab extends StatelessWidget {
             builder: (context) => UpdatesScreen(color: color, imgPath: imgPath),
           ),
         );
-      case ("Statistics"):
-        return () => Navigator.of(
-          context,
-        ).push(MaterialPageRoute(builder: (context) => WorldStatScreen()));
-
       case ("Video Updates"):
         return () => Navigator.of(
           context,
