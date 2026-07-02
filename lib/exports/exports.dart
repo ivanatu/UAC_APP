@@ -13,7 +13,6 @@ export 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 export 'package:animated_text_kit/animated_text_kit.dart';
 export 'package:share_plus/share_plus.dart';
 export 'package:google_fonts/google_fonts.dart';
-
 // routes
 export "/routes/routes.dart";
 
