@@ -38,8 +38,10 @@ class _StoriesDetailsState extends State<StoriesDetails>
   void _scrollListener() {
     // Parallax effect and fade for image
     setState(() {
-      _opacity =
-          (1 - (_scrollController.offset / _imageHeight)).clamp(0.2, 1.0);
+      _opacity = (1 - (_scrollController.offset / _imageHeight)).clamp(
+        0.2,
+        1.0,
+      );
     });
   }
 
@@ -75,38 +77,39 @@ class _StoriesDetailsState extends State<StoriesDetails>
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: CustomScrollView(
-        controller: _scrollController,
-        slivers: [
-          // Image Section
-          SliverToBoxAdapter(
-            child: Stack(
-              children: [
-                Hero(
-                  tag: widget.image,
-                  child: AnimatedOpacity(
-                    duration: const Duration(milliseconds: 200),
-                    opacity: _opacity,
-                    child: Container(
-                      height: _imageHeight,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        image: DecorationImage(
-                          image: NetworkImage(widget.image),
-                          fit: BoxFit.cover,
+      body: SafeArea(
+        child: CustomScrollView(
+          controller: _scrollController,
+          slivers: [
+            // Image Section
+            SliverToBoxAdapter(
+              child: Stack(
+                children: [
+                  Hero(
+                    tag: widget.image,
+                    child: AnimatedOpacity(
+                      duration: const Duration(milliseconds: 200),
+                      opacity: _opacity,
+                      child: Container(
+                        height: _imageHeight,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          image: DecorationImage(
+                            image: NetworkImage(widget.image),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    height: 100,
-                    decoration: BoxDecoration(
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      height: 100,
+                      decoration: BoxDecoration(
                         // gradient: LinearGradient(
                         //   begin: Alignment.topCenter,
                         //   end: Alignment.bottomCenter,
@@ -115,117 +118,124 @@ class _StoriesDetailsState extends State<StoriesDetails>
                         //     Theme.of(context).colorScheme.background,
                         //   ],
                         // ),
-                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
 
-          // Content Section
-          SliverToBoxAdapter(
-            child: Transform.translate(
-              offset: const Offset(0, -0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.background,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+            // Content Section
+            SliverToBoxAdapter(
+              child: Transform.translate(
+                offset: const Offset(0, -0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.background,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                    ),
                   ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Title Section
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
-                      child: SlideTransition(
-                        position: Tween<Offset>(
-                          begin: const Offset(0, 0.2),
-                          end: Offset.zero,
-                        ).animate(slideAnimation),
-                        child: FadeTransition(
-                          opacity: slideAnimation,
-                          child: Hero(
-                            tag: widget.title,
-                            child: Text(
-                              widget.title,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall!
-                                  .copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onBackground,
-                                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Title Section
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
+                        child: SlideTransition(
+                          position: Tween<Offset>(
+                            begin: const Offset(0, 0.2),
+                            end: Offset.zero,
+                          ).animate(slideAnimation),
+                          child: FadeTransition(
+                            opacity: slideAnimation,
+                            child: Hero(
+                              tag: widget.title,
+                              child: Text(
+                                widget.title,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall!
+                                    .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onBackground,
+                                    ),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
 
-                    // Description Section
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
-                      child: SlideTransition(
-                        position: Tween<Offset>(
-                          begin: const Offset(0, 0.2),
-                          end: Offset.zero,
-                        ).animate(CurvedAnimation(
-                          parent: _animationController,
-                          curve:
-                              const Interval(0.2, 1.0, curve: Curves.easeOut),
-                        )),
-                        child: FadeTransition(
-                          opacity: CurvedAnimation(
-                            parent: _animationController,
-                            curve: const Interval(0.2, 1.0),
-                          ),
-                          child: _FormattedDescription(
-                            description: widget.description,
+                      // Description Section
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
+                        child: SlideTransition(
+                          position:
+                              Tween<Offset>(
+                                begin: const Offset(0, 0.2),
+                                end: Offset.zero,
+                              ).animate(
+                                CurvedAnimation(
+                                  parent: _animationController,
+                                  curve: const Interval(
+                                    0.2,
+                                    1.0,
+                                    curve: Curves.easeOut,
+                                  ),
+                                ),
+                              ),
+                          child: FadeTransition(
+                            opacity: CurvedAnimation(
+                              parent: _animationController,
+                              curve: const Interval(0.2, 1.0),
+                            ),
+                            child: _FormattedDescription(
+                              description: widget.description,
+                            ),
                           ),
                         ),
                       ),
-                    ),
 
-                    // Share and Like Buttons
-                    // Padding(
-                    //   padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
-                    //   child: FadeTransition(
-                    //     opacity: CurvedAnimation(
-                    //       parent: _animationController,
-                    //       curve: const Interval(0.4, 1.0),
-                    //     ),
-                    //     child: Row(
-                    //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //       children: [
-                    //         _ActionButton(
-                    //           icon: Icons.favorite_border,
-                    //           label: 'Like',
-                    //           onTap: () {},
-                    //         ),
-                    //         _ActionButton(
-                    //           icon: Icons.share,
-                    //           label: 'Share',
-                    //           onTap: () {},
-                    //         ),
-                    //         _ActionButton(
-                    //           icon: Icons.bookmark_border,
-                    //           label: 'Save',
-                    //           onTap: () {},
-                    //         ),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
-                  ],
+                      // Share and Like Buttons
+                      // Padding(
+                      //   padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
+                      //   child: FadeTransition(
+                      //     opacity: CurvedAnimation(
+                      //       parent: _animationController,
+                      //       curve: const Interval(0.4, 1.0),
+                      //     ),
+                      //     child: Row(
+                      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //       children: [
+                      //         _ActionButton(
+                      //           icon: Icons.favorite_border,
+                      //           label: 'Like',
+                      //           onTap: () {},
+                      //         ),
+                      //         _ActionButton(
+                      //           icon: Icons.share,
+                      //           label: 'Share',
+                      //           onTap: () {},
+                      //         ),
+                      //         _ActionButton(
+                      //           icon: Icons.bookmark_border,
+                      //           label: 'Save',
+                      //           onTap: () {},
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -241,9 +251,9 @@ class _FormattedDescription extends StatelessWidget {
     return Text(
       description,
       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-            height: 1.6,
-            color: Theme.of(context).colorScheme.onBackground.withOpacity(0.8),
-          ),
+        height: 1.6,
+        color: Theme.of(context).colorScheme.onBackground.withOpacity(0.8),
+      ),
     );
   }
 }
@@ -277,10 +287,7 @@ class _ActionButtonState extends State<_ActionButton> {
         scale: _isPressed ? 0.95 : 1.0,
         duration: const Duration(milliseconds: 100),
         child: Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 8,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surfaceVariant,
             borderRadius: BorderRadius.circular(20),
@@ -296,8 +303,8 @@ class _ActionButtonState extends State<_ActionButton> {
               Text(
                 widget.label,
                 style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
             ],
           ),
