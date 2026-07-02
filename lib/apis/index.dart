@@ -1,6 +1,5 @@
 class Apis {
-  static const String url =
-      "http://194.163.172.6:1337"; //"http://207.180.224.165:1337";
+  static const String url = "http://194.163.172.6:1337";
   static String progress_95 = "${url}/api/progress-on-95-95-95s";
   static String messages = "${url}/api/messages?populate=*";
   static String regions = "${url}/api/regions?populate=*";

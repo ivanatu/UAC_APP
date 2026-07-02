@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       speed: const Duration(milliseconds: 300),
                     ),
                     TypewriterAnimatedText(
-                      "Welcome to Uganda Aids Commission",
+                      "Welcome to \n Uganda Aids Commission",
                       textStyle: Theme.of(
                         context,
                       ).textTheme.bodyLarge!.apply(fontWeightDelta: 4),

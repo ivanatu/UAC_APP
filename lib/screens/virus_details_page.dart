@@ -1,3 +1,4 @@
+import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:uac/controllers/virus_details_controller.dart';
 import 'package:uac/exports/exports.dart';
 
@@ -41,8 +42,6 @@ class _VirusDetailsScreenState extends State<VirusDetailsScreen> {
   //   },
   // ];
 
-  // static AutoSizeGroup titleGrp = AutoSizeGroup();
-  static AutoSizeGroup descGrp = AutoSizeGroup();
   @override
   void initState() {
     super.initState();
@@ -56,7 +55,6 @@ class _VirusDetailsScreenState extends State<VirusDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double pageHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.grey[100],
       extendBodyBehindAppBar: true,
@@ -68,72 +66,108 @@ class _VirusDetailsScreenState extends State<VirusDetailsScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Container(
-        height: pageHeight,
-        child: Column(
-          children: <Widget>[
-            //image tag container
-            Container(
-              height: 220,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(25.0),
-                  bottomRight: Radius.circular(25.0),
+      body: RefreshIndicator.adaptive(
+        onRefresh: () => Provider.of<VirusDetailsController>(
+          context,
+          listen: false,
+        ).getVirusDetailsInfo(),
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Column(
+            children: <Widget>[
+              //image tag container
+              Container(
+                height: 220,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(25.0),
+                    bottomRight: Radius.circular(25.0),
+                  ),
+                  color: widget.color.withValues(alpha: 0.2),
                 ),
-                color: widget.color.withValues(alpha: 0.2),
-              ),
-              width: MediaQuery.of(context).size.width,
-              child: LayoutBuilder(
-                builder: (ctx, constraint) => Stack(
-                  children: <Widget>[
-                    //Title
-                    Positioned(
-                      top: constraint.maxHeight * 0.45,
-                      left: 20,
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: SizedBox(
-                          width: constraint.maxWidth * 0.55,
-                          child: AutoSizeText(
-                            "HIV/AIDS",
-                            style: TextStyle(
-                              color: widget.color,
-                              fontFamily: "Montserrat",
-                              fontSize: 30,
-                              fontWeight: FontWeight.w700,
-                            ),
-                            stepGranularity: 2,
-                            maxFontSize: 30,
-                            maxLines: 1,
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    //Image
-                    Positioned.fill(
-                      right: -90,
-                      bottom: -30,
-                      child: Align(
-                        alignment: Alignment.bottomRight,
-                        child: LayoutBuilder(
-                          builder: (ctx, constraint) => Hero(
-                            tag: widget.imgPath,
-                            child: Image(
-                              image: AssetImage(widget.imgPath),
-                              height: constraint.maxHeight * 0.92,
+                width: MediaQuery.of(context).size.width,
+                child: LayoutBuilder(
+                  builder: (ctx, constraint) => Stack(
+                    children: <Widget>[
+                      //Title
+                      Positioned(
+                        top: constraint.maxHeight * 0.45,
+                        left: 20,
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: SizedBox(
+                            width: constraint.maxWidth * 0.55,
+                            child: AutoSizeText(
+                              "HIV/AIDS",
+                              style: TextStyle(
+                                color: widget.color,
+                                fontFamily: "Montserrat",
+                                fontSize: 30,
+                                fontWeight: FontWeight.w700,
+                              ),
+                              stepGranularity: 2,
+                              maxFontSize: 30,
+                              maxLines: 1,
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+
+                      //Image
+                      Positioned.fill(
+                        right: -90,
+                        bottom: -30,
+                        child: Align(
+                          alignment: Alignment.bottomRight,
+                          child: LayoutBuilder(
+                            builder: (ctx, constraint) => Hero(
+                              tag: widget.imgPath,
+                              child: Image(
+                                image: AssetImage(widget.imgPath),
+                                height: constraint.maxHeight * 0.92,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
 
-            //Details List
-          ],
+              //Details List
+              Consumer<VirusDetailsController>(
+                builder: (context, controller, child) {
+                  // controller.getVirusDetailsInfo();
+                  var virusDetailsModel = controller.virusDetailsModel;
+                  if (controller.isLoading || virusDetailsModel == null) {
+                    return Center(
+                      child: CircularProgressIndicator(color: widget.color),
+                    );
+                  }
+
+                  return Markdown(
+                    data: controller
+                        .virusDetailsModel!
+                        .data
+                        .attributes
+                        .description,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context))
+                        .copyWith(
+                          p: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            fontSize: 16,
+
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

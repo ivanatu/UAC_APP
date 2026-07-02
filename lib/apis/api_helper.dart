@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:uac/exports/exports.dart';
 
 import 'index.dart';
 
@@ -42,6 +43,7 @@ class ApiHelper {
     Duration? cacheDuration,
   }) async {
     final uri = _buildUri(endpoint, queryParams);
+    // debugPrint(uri.toString());
     final cacheKey = uri.toString();
 
     // Check cache

@@ -1,4 +1,5 @@
 import "controllers/regional_controller.dart";
+import "controllers/virus_details_controller.dart";
 import "exports/exports.dart";
 import "controllers/national_prevalence_controller.dart";
 
@@ -34,6 +35,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => MythController()),
         ChangeNotifierProvider(create: (context) => PrecautionController()),
         ChangeNotifierProvider(create: (context) => StoriesController()),
+        ChangeNotifierProvider(create: (context) => VirusDetailsController()),
         ChangeNotifierProvider(
           create: (context) => NationalPrevalenceController(),
         ),
