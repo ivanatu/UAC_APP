@@ -21,7 +21,7 @@ class PrevalenceRateService {
 
   // ART coverage
   Future<HivRegionalPrevalenceResponse> getCoverageArtBySubRegion() async {
-    var response = await _apiHelper.get('art-coverage-subregion?populate=*');
+    var response = await _apiHelper.get('art-coverage-sub-region?populate=*');
     return HivRegionalPrevalenceResponse.fromJson(response);
   }
 }
