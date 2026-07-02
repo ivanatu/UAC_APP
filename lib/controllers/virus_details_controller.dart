@@ -11,11 +11,13 @@ class VirusDetailsController with ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  Future<void> getVirusDetailsInfo() async {
+  Future<void> getVirusDetailsInfo({bool forceRefresh = false}) async {
     _isLoading = true;
     notifyListeners();
     try {
-      _virusDetailsModel = await _virusDetailsService.getVirusDetailsInfo();
+      _virusDetailsModel = await _virusDetailsService.getVirusDetailsInfo(
+        useCache: !forceRefresh,
+      );
       _isLoading = false;
       notifyListeners();
     } catch (e) {

@@ -70,7 +70,7 @@ class _VirusDetailsScreenState extends State<VirusDetailsScreen> {
         onRefresh: () => Provider.of<VirusDetailsController>(
           context,
           listen: false,
-        ).getVirusDetailsInfo(),
+        ).getVirusDetailsInfo(forceRefresh: true),
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Column(
@@ -138,7 +138,6 @@ class _VirusDetailsScreenState extends State<VirusDetailsScreen> {
               //Details List
               Consumer<VirusDetailsController>(
                 builder: (context, controller, child) {
-                  // controller.getVirusDetailsInfo();
                   var virusDetailsModel = controller.virusDetailsModel;
                   if (controller.isLoading || virusDetailsModel == null) {
                     return Center(
