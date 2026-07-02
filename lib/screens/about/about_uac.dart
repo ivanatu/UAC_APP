@@ -12,7 +12,7 @@ class _AboutUacState extends State<AboutUac> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("About UAC"),
+        title: Text("About"),
         titleTextStyle: Theme.of(
           context,
         ).textTheme.titleMedium!.apply(fontWeightDelta: 10),
@@ -178,7 +178,7 @@ class _AboutUacState extends State<AboutUac> {
                   ),
                 ),
                 Text(
-                  "\nUAC | All rights reserved | version 1.0.3",
+                  "\n All rights reserved | version 1.0.7",
                   textAlign: TextAlign.center,
                   style: Theme.of(
                     context,

@@ -15,6 +15,7 @@ class _RegionalPrevalenceRateState extends State<RegionalPrevalenceRate>
   final PrevalenceRateService _service = PrevalenceRateService();
   late Future<HivRegionalPrevalenceResponse> _prevalenceData;
   late Future<HivRegionalPrevalenceResponse> _newInfectionsData;
+  late Future<HivRegionalPrevalenceResponse> _artCoverageData;
   late TabController _tabController;
 
   @override
@@ -23,6 +24,7 @@ class _RegionalPrevalenceRateState extends State<RegionalPrevalenceRate>
     _tabController = TabController(length: 2, vsync: this);
     _prevalenceData = _service.getRegionalPrevalence();
     _newInfectionsData = _service.getNewInfectionsBySubRegion();
+    _artCoverageData = _service.getCoverageArtBySubRegion();
   }
 
   @override
@@ -96,6 +98,21 @@ class _RegionalPrevalenceRateState extends State<RegionalPrevalenceRate>
                     ],
                   ),
                 ),
+                Tab(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.trending_up, size: 18),
+                      const SizedBox(width: 8),
+                      const Flexible(
+                        child: Text(
+                          'ART Coverage',
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -151,6 +168,30 @@ class _RegionalPrevalenceRateState extends State<RegionalPrevalenceRate>
 
               final data = snapshot.data!;
               return _buildMapView(data, Colors.teal);
+            },
+          ),
+          // Coverage  ART
+          FutureBuilder<HivRegionalPrevalenceResponse>(
+            future: _artCoverageData,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return _buildLoadingState();
+              }
+
+              if (snapshot.hasError) {
+                return _buildErrorState(snapshot.error.toString(), () {
+                  setState(() {
+                    _artCoverageData = _service.getCoverageArtBySubRegion();
+                  });
+                });
+              }
+
+              if (!snapshot.hasData) {
+                return _buildEmptyState();
+              }
+
+              final data = snapshot.data!;
+              return _buildMapView(data, Colors.indigoAccent);
             },
           ),
         ],

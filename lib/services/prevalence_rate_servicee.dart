@@ -18,4 +18,10 @@ class PrevalenceRateService {
     );
     return HivRegionalPrevalenceResponse.fromJson(response);
   }
+
+  // ART coverage
+  Future<HivRegionalPrevalenceResponse> getCoverageArtBySubRegion() async {
+    var response = await _apiHelper.get('art-coverage-subregion?populate=*');
+    return HivRegionalPrevalenceResponse.fromJson(response);
+  }
 }

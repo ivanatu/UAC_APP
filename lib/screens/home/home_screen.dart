@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       speed: const Duration(milliseconds: 300),
                     ),
                     TypewriterAnimatedText(
-                      "Welcome to UAC",
+                      "Welcome to Uganda Aids Commission",
                       textStyle: Theme.of(
                         context,
                       ).textTheme.bodyLarge!.apply(fontWeightDelta: 4),
@@ -128,8 +128,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                   totalRepeatCount: 4,
                   pause: const Duration(milliseconds: 400),
-                  // displayFullTextOnTap: true,
-                  // stopPauseOnTap: true,
                 ),
 
                 Padding(
