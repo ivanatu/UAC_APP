@@ -21,7 +21,7 @@ class _RegionalPrevalenceRateState extends State<RegionalPrevalenceRate>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
     _prevalenceData = _service.getRegionalPrevalence();
     _newInfectionsData = _service.getNewInfectionsBySubRegion();
     _artCoverageData = _service.getCoverageArtBySubRegion();

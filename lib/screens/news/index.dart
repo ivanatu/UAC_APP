@@ -26,7 +26,7 @@ class _NewsPageState extends State<NewsPage> {
                   TextSpan(
                     children: [
                       TextSpan(
-                        text: " News",
+                        text: " NewsLetters",
                         style: Theme.of(
                           context,
                         ).textTheme.headlineLarge!.apply(fontWeightDelta: 10),

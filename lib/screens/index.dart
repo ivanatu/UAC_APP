@@ -5,6 +5,7 @@ import 'package:uac/screens/hiv_triva_page.dart';
 import '/screens/drawer_screen.dart';
 
 import '/exports/exports.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class IndexScreen extends StatefulWidget {
   const IndexScreen({super.key});
@@ -52,7 +53,7 @@ class _IndexScreenState extends State<IndexScreen> {
   final String ext = "assets/bottom_navs/";
   List<Map<String, dynamic>> bottomNavs = [
     {"label": "Home", "icon": "home.svg", "un": "home_un.svg"},
-    {"label": "News", "icon": "livescore.svg", "un": "livescore_un.svg"},
+    {"label": "NewsLetter", "icon": "livescore.svg", "un": "livescore_un.svg"},
 
     // {"label": "Messages", "icon": "message.svg", "un": "message_un.svg"},
     {"label": "Stats", "icon": "stats.svg", "un": "stats_un.svg"},
@@ -100,28 +101,51 @@ class _IndexScreenState extends State<IndexScreen> {
           controller: pageController,
           itemBuilder: (context, page) => pages[page],
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          onTap: (index) {
-            setState(() {
-              selected = index;
-            });
-            pageController.animateToPage(
-              index,
-              duration: const Duration(milliseconds: 700),
-              curve: Curves.ease,
-            );
-          },
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: primaryColor,
-          selectedIconTheme: const IconThemeData(size: 30),
-          currentIndex: selected,
-          items: List.generate(
-            bottomNavs.length,
-            (index) => BottomNavigationBarItem(
-              label: bottomNavs[index]['label'],
-              icon: SvgPicture.asset(
-                "$ext${selected == index ? bottomNavs[index]['icon'] : bottomNavs[index]['un']}",
-                color: selected == index ? primaryColor : Colors.grey.shade400,
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 20,
+                color: Colors.black.withOpacity(.1),
+              )
+            ],
+          ),
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
+              child: GNav(
+                rippleColor: Colors.grey[300]!,
+                hoverColor: Colors.grey[100]!,
+                gap: 8,
+                activeColor: primaryColor,
+                iconSize: 24,
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+                duration: const Duration(milliseconds: 400),
+                tabBackgroundColor: primaryColor.withOpacity(0.1),
+                color: Colors.grey.shade400,
+                selectedIndex: selected,
+                onTabChange: (index) {
+                  setState(() {
+                    selected = index;
+                  });
+                  pageController.animateToPage(
+                    index,
+                    duration: const Duration(milliseconds: 700),
+                    curve: Curves.ease,
+                  );
+                },
+                tabs: List.generate(
+                  bottomNavs.length,
+                  (index) => GButton(
+                    icon: Icons.circle,
+                    leading: SvgPicture.asset(
+                      "$ext${selected == index ? bottomNavs[index]['icon'] : bottomNavs[index]['un']}",
+                      color: selected == index ? primaryColor : Colors.grey.shade400,
+                    ),
+                    text: bottomNavs[index]['label'],
+                  ),
+                ),
               ),
             ),
           ),
