@@ -49,7 +49,7 @@ class _VirusDetailsScreenState extends State<VirusDetailsScreen> {
       Provider.of<VirusDetailsController>(
         context,
         listen: false,
-      ).getVirusDetailsInfo();
+      ).getVirusDetailsInfo(forceRefresh: true);
     });
   }
 

@@ -68,86 +68,98 @@ class DrawerScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
               child: Divider(),
             ),
-            ListTile(
-              leading: SvgPicture.asset(
-                "assets/bottom_navs/home.svg",
-                color: Colors.white,
-              ),
-              title: const Text(
-                'Home',
-                style: TextStyle(
+            Material(
+              color: Colors.transparent,
+              child: ListTile(
+                leading: SvgPicture.asset(
+                  "assets/bottom_navs/home.svg",
                   color: Colors.white,
-                  fontWeight: FontWeight.w600,
                 ),
+                title: const Text(
+                  'Home',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                onTap: () => Provider.of<ZDrawerController>(
+                  context,
+                  listen: false,
+                ).toggleDrawerSelected(),
               ),
-              onTap: () => Provider.of<ZDrawerController>(
-                context,
-                listen: false,
-              ).toggleDrawerSelected(),
             ),
-            ListTile(
-              leading: const Icon(Icons.info, color: Colors.white),
-              title: Hero(
-                tag: "about_uac",
-                child: const Text(
-                  'About',
+            Material(
+              color: Colors.transparent,
+              child: ListTile(
+                leading: const Icon(Icons.info, color: Colors.white),
+                title: Hero(
+                  tag: "about_uac",
+                  child: const Text(
+                    'About',
+                    style: TextStyle(
+                      color: Colors.white,
+
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                onTap: () {
+                  Provider.of<ZDrawerController>(
+                    context,
+                    listen: false,
+                  ).toggleDrawerSelected();
+                  // navigate to about screen
+                  Routes.animateToPage(AboutUac());
+                },
+              ),
+            ),
+            Material(
+              color: Colors.transparent,
+              child: ListTile(
+                leading: SvgPicture.asset(
+                  "assets/svgs/faqs.svg",
+                  color: Colors.white,
+                ),
+                title: const Text(
+                  'Presidential Questions',
                   style: TextStyle(
                     color: Colors.white,
 
                     fontWeight: FontWeight.w600,
                   ),
                 ),
+                onTap: () {
+                  Provider.of<ZDrawerController>(
+                    context,
+                    listen: false,
+                  ).toggleDrawerSelected();
+                  // navigate to faqs screen
+                  Routes.animateToPage(FaqsPage());
+                },
               ),
-              onTap: () {
-                Provider.of<ZDrawerController>(
-                  context,
-                  listen: false,
-                ).toggleDrawerSelected();
-                // navigate to about screen
-                Routes.animateToPage(AboutUac());
-              },
             ),
-            ListTile(
-              leading: SvgPicture.asset(
-                "assets/svgs/faqs.svg",
-                color: Colors.white,
-              ),
-              title: const Text(
-                'Presidential Questions',
-                style: TextStyle(
-                  color: Colors.white,
+            Material(
+              color: Colors.transparent,
+              child: ListTile(
+                leading: Icon(Icons.message, color: Colors.white),
+                title: const Text(
+                  'Stories',
+                  style: TextStyle(
+                    color: Colors.white,
 
-                  fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-              onTap: () {
-                Provider.of<ZDrawerController>(
-                  context,
-                  listen: false,
-                ).toggleDrawerSelected();
-                // navigate to faqs screen
-                Routes.animateToPage(FaqsPage());
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.message, color: Colors.white),
-              title: const Text(
-                'Stories',
-                style: TextStyle(
-                  color: Colors.white,
+                onTap: () {
+                  Provider.of<ZDrawerController>(
+                    context,
+                    listen: false,
+                  ).toggleDrawerSelected();
 
-                  fontWeight: FontWeight.w600,
-                ),
+                  // navigate to stories screen
+                  Routes.animateToPage(Stories());
+                },
               ),
-              onTap: () {
-                Provider.of<ZDrawerController>(
-                  context,
-                  listen: false,
-                ).toggleDrawerSelected();
-
-                // navigate to stories screen
-                Routes.animateToPage(Stories());
-              },
             ),
             Spacer(flex: 2),
           ],
