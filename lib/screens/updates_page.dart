@@ -36,7 +36,7 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
     return Scaffold(
       appBar: AppBar(
         title: AutoSizeText(
-          "AIDS Info",
+          "News / Events",
           style: TextStyle(
             // color: Colors.teal[800],
             fontFamily: "Montserrat",

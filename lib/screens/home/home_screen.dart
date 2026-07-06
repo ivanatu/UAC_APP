@@ -49,11 +49,11 @@ class _HomeScreenState extends State<HomeScreen> {
     {
       "imgBottom": -4.0,
       "imgLeft": 8.0,
-      "imgPath": "assets/updates/updates.png",
-      "tabName": "News / Events",
+      "imgPath": "assets/updates/nw.png",
+      "tabName": "News/Events",
       "imgHeight": 146.0,
       "tabDesc": "View the latest news related to\n the virus",
-      "color": Colors.greenAccent[700],
+      "color": Colors.indigoAccent[700],
     },
     {
       "imgBottom": 7.0,

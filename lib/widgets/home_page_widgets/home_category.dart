@@ -60,7 +60,7 @@ class CategoryTab extends StatelessWidget {
                 VirusDetailsScreen(color: color, imgPath: imgPath),
           ),
         );
-      case ("Updates"):
+      case ("News/Events"):
         return () => Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => UpdatesScreen(color: color, imgPath: imgPath),
