@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
       "imgBottom": -4.0,
       "imgLeft": 8.0,
       "imgPath": "assets/updates/updates.png",
-      "tabName": "Updates",
+      "tabName": "News / Events",
       "imgHeight": 146.0,
       "tabDesc": "View the latest news related to\n the virus",
       "color": Colors.greenAccent[700],
